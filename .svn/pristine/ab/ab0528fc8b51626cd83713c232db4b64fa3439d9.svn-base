@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<div class="row">
+    <div class="col-lg-12">
+        <center><h3 class="page-header">
+                    <b>BÁO CÁO TÌNH HÌNH TỔN THẤT, XỬ LÝ ẤN CHỈ</b>
+            </h3>  </center>  
+    </div>    
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        
+                <form  method="POST" name="Adddocprintpayment" action="<?php echo $this->baseUrl()?>/admin/docprintpayment/printpaymenttonthatexport"> 
+                        <div class="form-group">
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="row">
+                                            <div class="form-group" id="selectionlog">
+                                                  <div  class="col-lg-2" style='margin-bottom: 20px;'>   
+                                                    <label style="margin-left: 20px;" >Tính theo</label>
+                                                  </div>
+                                                <div class="col-lg-1" id='thang'>
+                                                    Tháng</div>
+                                                <div class="col-lg-1" id='quy'>
+                                                    Quý</div>
+                                                <div class="col-lg-1" id='nam'>
+                                                    Năm</div>
+                                            </div>
+                                        </div>
+                                        <div class="row"> 
+                                          <div class="form-group" > 
+                                          </div>    
+                                       <div class="form-group" >  
+                                             <div  class="col-lg-1" id="lblThang" style="display:none">
+                                                <label style="margin-left: 20px;" >Tháng</label>
+                                            </div>
+                                            <div class="col-lg-2" id="cbbThang" style="display:none">  
+                                               <div style='float: left' id='month' name='month'>
+                                               </div>
+                                            </div>
+                                            <div  class="col-lg-1" id="lblQuy">
+                                               <label style="margin-left: 20px;" >Quý</label>
+                                            </div>
+                                            <div class="col-lg-2" id="cbbQuy" >  
+                                                <div style='float: left' id='quarter' name='quarter'>
+                                                </div>
+                                            </div></div><div class="form-group" >
+                                            <div  class="col-lg-1" id="lblNam" >
+                                                <label style="margin-left: 20px;" >Năm</label>
+                                            </div>
+                                            <div class="col-lg-2" id="cbbNam">  
+                                                <div style='float: left' id='year' name='year'>
+                                                </div>
+                                            </div> 
+                                        </div><div class="form-group" >
+                                     <input id="selectionlog" style="display: none" name="selectionlog" /> 
+                                         <div class="col-lg-1">
+                                             <button type="button" id="tonthat" name="tonthat" class="btn btn-primary">Xem</button>
+                                         </div>
+                                        <div class="col-lg-1">
+                                            <button type="submit" id="excel" name="excel" class="btn btn-success">Xuất Excel</button>
+                                         </div>
+                                    </div>
+                                </div>
+                            </div>
+                    </form> 
+        </center>
+    </div>    
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-lg-12">
+                        
+                    </div>
+                </div>
+                 <div class="row">
+                     <div class="col-lg-12">
+                            <div class="table-reponsive">
+                                <div id="jqxgrid">
+                                </div>
+                            </div>
+                     </div>
+                 </div>    
+            </div>
+        </div>
+    </div>   
+</div>
+
+<script type="text/javascript">
+        $(document).ready(function () {
+             var source =
+            {
+                datatype: "json",
+                datafields:
+                [   { name: 'id',type:'string'},
+                    { name: 'name_sys_department_id',type:'string'},
+                    { name: 'name_sys_user_id', type: 'string' }, 
+                    { name: 'name_doc_print_create', type:'string'},
+                    { name: 'master_print_id', type: 'string' },
+                    { name: 'name_print', type: 'int' },
+                    { name: 'date_payment', type: 'string' },
+                    { name: 'serial_fail', type: 'string' }, 
+                    { name: 'soluong', type: 'string' },
+                    { name: 'comment', type: 'string' },
+                ],
+                addrow: function (rowid, rowdata, position, commit) {
+                    commit(true);
+                },
+                deleterow: function (rowid, commit) {
+                    commit(true);
+                },
+                updaterow: function (rowid, newdata, commit) {                   
+                    commit(true);
+                },
+                url:"<?php echo $this->baseUrl().'/admin/docprintpayment/servicetonthat'?>",
+                sortcolumn: 'order',
+                sortdirection: 'asc'
+            };
+            var dataAdapter = new $.jqx.dataAdapter(source, {
+                loadComplete: function () {
+                }
+            });
+             $("#jqxgrid").jqxGrid(
+            {
+                width: '100%',
+                height: 350,
+                source: dataAdapter,
+                showtoolbar: true,
+                theme: 'bootstrap',
+                pageable: true,
+                showfilterrow: true,
+                filterable: true,
+                autoheight: true,
+                sortable: true,
+                altrows: true,
+                enabletooltips: true,
+                editable: true,
+                selectionmode: 'singlerow',
+                columnsResize: true,
+                rendergridrows: function (params) {
+                            return params.data;
+                        },
+                        ready: function () {
+                        },
+                rendertoolbar: function (toolbar) {
+                    var me = this;
+                    var container = $("<div style='margin: 0px;'></div>");
+                    toolbar.append(container);
+                    container.append('<center><div id="t"></div></center>');
+                },
+                columns:[     
+                            {  text: 'Số TT', sortable: false, filterable: false, editable: false,
+                                    groupable: false, draggable: false, resizable: false,
+                                    datafield: '', columntype: 'number', width: 50,
+                                    cellsrenderer: function (row, column, value) {
+                                        return "<div style='margin:4px;'>" + (value + 1) + "</div>";
+                                    }
+                            },
+                            { text: 'Họ và tên',editable: false, dataField: 'name_sys_user_id', width: '10%' }, 
+                            { text: 'Đơn vị',editable: false, dataField: 'name_sys_department_id', width: '10%' },
+                            { text: 'Ngày xảy ra T.Thất',editable: false, dataField: 'date_payment', width: '15%' },
+                            { text: 'Mã ấn chỉ', editable: false, dataField: 'master_print_id', width: '10%'},
+                            { text: 'Tên ấn chỉ', editable: false, dataField: 'name_print', width: '20%'},
+                            { text: 'Quyển số', editable: false, dataField: 'name_doc_print_create', width: '10%'},
+                            { text: 'Serial hỏng', editable: true, dataField: 'serial_fail', width: '10%'},
+                            { text: 'Số lượng', editable: true, dataField: 'soluong', width: '20%'},
+                            { text: 'Ghi chú', editable: true, dataField: 'comment', width: '20%'},
+                        ]
+            });  
+        });
+    </script>
+ <script type="text/javascript">
+      $(document).ready(function () {
+      $("#thang").jqxRadioButton({  checked: false });
+        $("#quy").jqxRadioButton({  checked: true });
+        $("#nam").jqxRadioButton({  checked: false });
+        $("#thang").on('checked', function () {
+                var lblThang = document.getElementById('lblThang');
+                var cbbThang = document.getElementById('cbbThang');
+                lblThang.style.display = 'block';
+                cbbThang.style.display = 'block';
+        
+                var lblQuy = document.getElementById('lblQuy');
+                var cbbQuy = document.getElementById('cbbQuy');
+                lblQuy.style.display = 'none';
+                cbbQuy.style.display = 'none';
+                
+                var lblNam = document.getElementById('lblNam');
+                var cbbNam = document.getElementById('cbbNam');
+                lblNam.style.display = 'block';
+                cbbNam.style.display = 'block';
+                
+                $("#actionExport").val("THANG");
+        });
+        $("#quy").on('checked', function () {
+           var lblThang = document.getElementById('lblThang');
+                var cbbThang = document.getElementById('cbbThang');
+                lblThang.style.display = 'none';
+                cbbThang.style.display = 'none';
+        
+                var lblQuy = document.getElementById('lblQuy');
+                var cbbQuy = document.getElementById('cbbQuy');
+                lblQuy.style.display = 'block';
+                cbbQuy.style.display = 'block';
+                
+                var lblNam = document.getElementById('lblNam');
+                var cbbNam = document.getElementById('cbbNam');
+                lblNam.style.display = 'block';
+                cbbNam.style.display = 'block';
+                
+                 $("#actionExport").val("QUY");
+        });
+        $("#nam").on('checked', function () {
+                var lblThang = document.getElementById('lblThang');
+                var cbbThang = document.getElementById('cbbThang');
+                lblThang.style.display = 'none';
+                cbbThang.style.display = 'none';
+        
+                var lblQuy = document.getElementById('lblQuy');
+                var cbbQuy = document.getElementById('cbbQuy');
+                lblQuy.style.display = 'none';
+                cbbQuy.style.display = 'none';
+                
+                var lblNam = document.getElementById('lblNam');
+                var cbbNam = document.getElementById('cbbNam');
+                lblNam.style.display = 'block';
+                cbbNam.style.display = 'block';
+                
+                $("#actionExport").val("NAM");
+        });
+        var y = new Date();
+        var arraymonth=new Array();
+                        for(var m=1;m<=12;m++){
+                       arraymonth[m]=m;
+                        }
+        var arrayyear=new Array();
+                        for(var j=y.getFullYear()-10;j<=y.getFullYear()+10;j++){
+                            arrayyear[j]=j;
+                        }
+       var arrayquarter=new Array();
+                        for(var q=1;q<=4;q++){
+                            if(q==1)
+                                arrayquarter[q]='I';
+                            if(q==2)
+                                arrayquarter[q]='II';
+                            if(q==3)
+                                arrayquarter[q]='III';
+                            if(q==4)
+                                arrayquarter[q]='IV';
+                        }
+        $("#quarter").jqxComboBox({ source: arrayquarter, width: '100px', height: '25px'});
+        $("#quarter").jqxComboBox('selectItem','III');
+        $("#month").jqxComboBox({ source: arraymonth, width: '100px', height: '25px'});
+        $("#month").jqxComboBox('selectItem',y.getMonth()+1);
+        $("#year").jqxComboBox({ source: arrayyear, width: '100px', height: '25px'});
+        $("#year").jqxComboBox('selectItem',y.getFullYear());
+        $('#master_print_id').multiselect({
+            includeSelectAllOption:true,
+            enableFiltering: true,
+            maxHeight: '300'
+        });
+         
+//        $(document).ready(function () {
+//             $('#nam').multiselect({
+//                    maxHeight: '300',
+//                    enableFiltering: true,
+//                    maxHeight: '300',
+//                    onChange: function(option, checked) {
+//                        if (checked) {
+//                            orderCount++;
+//                            $(option).data('order', orderCount);
+//                        }
+//                        else {
+//                            $(option).data('order', '');
+//                        }
+//                    },
+//                });
+//                $('#nam').on('change', function() {
+//                    var selected = [];
+//                    $('#nam option:selected').each(function() {
+//                        selected.push([$(this).val(), $(this).data('order')]);
+//                    });
+//
+//                    selected.sort(function(a, b) {
+//                        return a[1] - b[1];
+//                    });
+//
+//                    var text = '';
+//                    for (var i = 0; i < selected.length; i++) {
+//                        text += selected[i][0] + ', ';
+//                    }
+//                    text = text.substring(0, text.length - 2);
+//
+//                    $('#selectionlog').val(text);
+//                    $('#selectionlog').text(text);
+//                });
+//                 $('#quy').multiselect({
+//                    maxHeight: '300',
+//                    enableFiltering: true,
+//                    maxHeight: '300',
+//                    onChange: function(option, checked) {
+//                        if (checked) {
+//                            orderCount++;
+//                            $(option).data('order', orderCount);
+//                        }
+//                        else {
+//                            $(option).data('order', '');
+//                        }
+//                    },
+//                });
+//                $('#quy').on('change', function() {
+//                    var selected = [];
+//                    $('#quy option:selected').each(function() {
+//                        selected.push([$(this).val(), $(this).data('order')]);
+//                    });
+//
+//                    selected.sort(function(a, b) {
+//                        return a[1] - b[1];
+//                    });
+//
+//                    var text = '';
+//                    for (var i = 0; i < selected.length; i++) {
+//                        text += selected[i][0] + ', ';
+//                    }
+//                    text = text.substring(0, text.length - 2);
+//
+//                    $('#selectionlog').val(text);
+//                    $('#selectionlog').text(text);
+//                });
+//               
+//             $('#thang').multiselect({
+//                maxHeight: '300',
+//                enableFiltering: true,
+//                maxHeight: '300',
+//                onChange: function(option, checked) {
+//                    if (checked) {
+//                        orderCount++;
+//                        $(option).data('order', orderCount);
+//                    }
+//                    else {
+//                        $(option).data('order', '');
+//                    }
+//                },
+//            });
+//        
+//        $('#thang').on('change', function() {
+//            var selected = [];
+//            $('#thang option:selected').each(function() {
+//                selected.push([$(this).val(), $(this).data('order')]);
+//            });
+// 
+//            selected.sort(function(a, b) {
+//                return a[1] - b[1];
+//            });
+// 
+//            var text = '';
+//            for (var i = 0; i < selected.length; i++) {
+//                text += selected[i][0] + ', ';
+//            }
+//            text = text.substring(0, text.length - 2);
+// 
+//            $('#selectionlog').val(text);
+//            $('#selectionlog').text(text);
+//            
+//        });
+    });
+</script>
+<script>
+    $('#tonthat').on('click',function(){
+        var nam = $('#year').val();
+        var quy =  $('#quarter').val();
+        var thang = $('#month').val();
+        var source =
+            {
+                datatype: "json",
+                datafields:
+                [   { name: 'id',type:'string'},
+                    { name: 'name_sys_department_id',type:'string'},
+                    { name: 'name_sys_user_id', type: 'string' }, 
+                    { name: 'name_doc_print_create', type:'string'},
+                    { name: 'master_print_id', type: 'string' },
+                    { name: 'name_print', type: 'int' },
+                    { name: 'date_payment', type: 'string' },
+                    { name: 'serial_fail', type: 'string' }, 
+                    { name: 'soluong', type: 'string' },
+                    { name: 'comment', type: 'string' },
+                ],
+                addrow: function (rowid, rowdata, position, commit) {
+                    commit(true);
+                },
+                deleterow: function (rowid, commit) {
+                    commit(true);
+                },
+                updaterow: function (rowid, newdata, commit) {                   
+                    commit(true);
+                },
+                url:"<?php echo $this->baseUrl().'/admin/docprintpayment/servicetonthat/nam/'?>"+nam+"/quy/"+quy+"/thang/"+thang+"",
+                sortcolumn: 'order',
+                sortdirection: 'asc'
+            };
+            var dataAdapter = new $.jqx.dataAdapter(source, {
+                loadComplete: function () {
+                }
+            });
+            $("#jqxgrid").jqxGrid(
+            {
+                width: '100%',
+                height: 350,
+                source: dataAdapter,
+                showtoolbar: true,
+                theme: 'bootstrap',
+                pageable: true,
+                showfilterrow: true,
+                filterable: true,
+                autoheight: true,
+                sortable: true,
+                altrows: true,
+                enabletooltips: true,
+                editable: true,
+                selectionmode: 'singlerow',
+                columnsResize: true,
+                rendergridrows: function (params) {
+                            return params.data;
+                        },
+                        ready: function () {
+                        },
+                rendertoolbar: function (toolbar) {
+                    var me = this;
+                    var container = $("<div style='margin: 0px;'></div>");
+                    toolbar.append(container);
+                    container.append('<center><div id="t"></div></center>'); 
+                },
+                columns:[    
+                            {  text: 'Số TT', sortable: false, filterable: false, editable: false,
+                                    groupable: false, draggable: false, resizable: false,
+                                    datafield: '', columntype: 'number', width: 50,
+                                    cellsrenderer: function (row, column, value) {
+                                        return "<div style='margin:4px;'>" + (value + 1) + "</div>";
+                                    }
+                            },
+                            { text: 'Họ và tên',editable: false, dataField: 'name_sys_user_id', width: '10%' }, 
+                            { text: 'Đơn vị',editable: false, dataField: 'name_sys_department_id', width: '10%' },
+                            { text: 'Ngày xảy ra T.Thất',editable: false, dataField: 'date_payment', width: '15%' },
+                            { text: 'Tên ấn chỉ', editable: false, dataField: 'name_print', width: '20%'},
+                            { text: 'Mã ấn chỉ', editable: false, dataField: 'master_print_id', width: '10%'},
+                            { text: 'Quyển số', editable: false, dataField: 'name_doc_print_create', width: '10%'},
+                            { text: 'Serial hỏng', editable: true, dataField: 'serial_fail', width: '10%'},
+                            { text: 'Số lượng', editable: true, dataField: 'soluong', width: '20%'},
+                            { text: 'Ghi chú', editable: true, dataField: 'comment', width: '20%'},
+                               
+                        ]
+            });  
+    });  
+</script>

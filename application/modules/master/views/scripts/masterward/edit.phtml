@@ -1,0 +1,157 @@
+<div class="row">
+    <div class="col-lg-12">
+        <h3 class="page-header">Thêm Xã/Phường</h3>
+    </div>
+    <!-- /.col-lg-12 -->
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-lg-9">
+                        <form role="form" method="POST" name="EditMasterWard" onsubmit="return checkinput();">
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-lg-3">
+                                        <label>Tỉnh thành(*)</label>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <?php echo $this->provinceHTML; ?>                                       
+                                    </div>
+                                </div>
+                            </div>  
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-lg-3">
+                                        <label>Quận huyện(*)</label>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <?php echo $this->districtHTML; ?>                                       
+                                    </div>
+                                </div>
+                            </div>
+                               <div class="form-group">
+                                <div class="row">
+                                    <div class="col-lg-3">
+                                        <label>Mã xã phường(*)</label>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <input class="form-control" name="code_ward" id="code_ward" value="<?php echo $this->item->getCode(); ?>" readonly="true">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-lg-3">
+                                        <label>Tên xã phường(*)</label>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <input class="form-control" name="name_ward" id="name_ward" value="<?php echo $this->item->getName(); ?>">
+                                    </div>
+                                </div>
+                            </div>
+                             <div class="form-group">
+                                    <div class="row">
+                                    <div class="col-lg-3">
+                                        <label>Ghi chú</label>
+                                    </div> 
+                                        <div class="col-lg-6">
+                                            <textarea  name="comment" id="comment" type="text" class="form-control" cols="100" rows="5"><?php echo $this->item->getComment(); ?></textarea>    
+                                        </div>  
+                                    </div>                                
+                            </div> 
+                           <input id="selectionlog" style="display: none" name="selectionlog" />
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-primary">Lưu</button>
+                                <button type="reset" class="btn btn-default">Đặt lại</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>   
+</div>
+<script type="text/javascript">
+    document.forms['EditMasterWard'].name.focus();
+    function set_focus() {
+        document.forms['EditMasterWard'].name.focus();
+    }
+    var flag=true;
+    var flag1=true;
+    function checkinput(){
+        var frm = window.document.EditMasterWard;
+        if($('#master_province_id').val()=="0"){
+             bootbox.alert("Vui lòng chọn tên tỉnh thành");
+            return false;
+        }
+        if($('#master_district_id').val()=="0"){
+            bootbox.alert("Vui lòng chọn quận/huyện");
+            return false;
+        }
+//        if(isNaN(frm.code_ward.value)== false){
+//            bootbox.alert("Vui lòng nhập Mã Xã/Phường bằng chữ");
+//            return false;
+//        }  
+//        if(isNaN(frm.name_ward.value)== false){
+//            bootbox.alert("Vui lòng nhập tên Xã/Phường bằng chữ");
+//            return false;
+//        }       
+        if(frm.code_ward.value == ""){
+             bootbox.alert("Vui lòng nhập Mã xã phường");
+             return false;
+               }
+        if(frm.name_ward.value == ""){
+             bootbox.alert("Vui lòng nhập Tên xã phường");
+            return false;
+        }
+         if(isNaN(frm.name_ward.value)== false){
+            bootbox.alert("Vui lòng nhập chữ cho tên xã phường");
+            return false;
+        }
+         var ward_code= $('#code_ward').val();
+        if(ward_code !== "<?php echo $this->item->getCode(); ?>"){
+            $.ajax({
+                type:'post',
+                url:'<?php echo $this->baseUrl()?>/master/masterward/checkwardcode/ward_code/'+ward_code,
+                async:false,
+                dataType:'json',
+                success:function(data){
+                    if(data[0].code==1){
+                        flag=false;
+                    } else {
+                        flag=true;
+                    }
+                }
+            });
+        }
+        if(flag==false){
+            bootbox.alert("Mã Xã Phường này đã tồn tại. Vui lòng kiểm tra và nhập lại.");
+            return false;
+        };
+        var ward_name= $('#name_ward').val();
+        if(ward_name !== "<?php echo $this->item->getName(); ?>"){
+        $.ajax({
+            type:'post',
+            url:'<?php echo $this->baseUrl()?>/master/masterward/checkwardname/ward_name/'+ward_name,
+            async:false,
+            dataType:'json',
+            success:function(data){
+                if(data[0].code==1){
+                    flag1=false;
+                } else {
+                    flag1=true;
+                }
+            }
+        });
+        }
+        if(flag1==false){
+            bootbox.alert("Tên Xã Phường đã tồn tại.Vui lòng kiểm tra và nhập lại.");
+            return false;
+        };
+       
+        
+        return true;
+    }
+</script>

@@ -1,0 +1,257 @@
+
+<div class="row">
+    <div class="col-lg-12">
+        <h3 class="page-header">Thêm Quận Huyện</h3>
+    </div>   
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-lg-9">        
+                        <form role="form" method="POST" name="AddMasterDistrict" onsubmit="return checkinput();" id="form-upload" method="post" >
+                          <div class="form-group">
+                              <div class="row">
+                                  <div class="col-lg-3">
+                                      <label>Mã huyện(*)</label>
+                                  </div>
+                                  <div class="col-lg-6">
+                                      <input class="form-control" name="district_code" id="district_code" value="<?php echo $this->item->getCode(); ?>">
+                                  </div>
+                              </div>
+                          </div>
+                          <div class="form-group">
+                              <div class="row">
+                                  <div class="col-lg-3">
+                                      <label>Tên quận huyên(*)</label>
+                                  </div>
+                                  <div class="col-lg-6">
+                                      <input class="form-control" name="name_district" id="name_district" value="<?php echo $this->item->getName(); ?>">
+                                  </div>
+                              </div>
+                          </div>
+                          <div class="form-group">
+                              <div class="row">
+                                  <div class="col-lg-3">
+                                      <label>Thành phố(*)</label>
+                                  </div>
+                                  <div class="col-lg-6">
+                                      <?php echo GlobalLib::getComboByProvince('master_province_id', 'master_province', 'id', 'name', $this->item->getMaster_province_Id()) ?>                                       
+                                  </div>
+                              </div>
+                          </div>
+                             <div class="form-group">
+                                    <div class="row">
+                                    <div class="col-lg-3">
+                                        <label>Ghi chú</label>
+                                    </div> 
+                                        <div class="col-lg-6">
+                                            <textarea  name="comment" id="comment" type="text" class="form-control" cols="100" rows="5"><?php echo $this->item->getComment(); ?></textarea>    
+                                        </div>  
+                                    </div>                                
+                            </div> 
+          
+                          <input id="selectionlog" style="display: none" name="selectionlog" />
+                          <div class="form-group">
+                              <button type="submit" id="iimport" class="btn btn-primary" >Lưu</button>
+                              <button type="reset" id="d"class="btn btn-default">Đặt lại</button>
+                          </div>
+                      </form>
+                    </div>
+                </div> 
+                <!--Hien thi popup-->
+                <div style="visibility: hidden;" id="jqxWidget">
+                    <div id="window" hidden="true">
+                        <div>
+                            Chọn danh sách quận huyện
+                        </div>
+                        <div>
+                            
+                                <div class="row">
+                                        <form method="POST"  id="form-upload" method="post" action="<?php echo $this->baseUrl()?>/leader/masterdistrict/importagent" enctype="multipart/form-data">
+                                          <div class="form-group">
+                                              <div class="col-lg-12">
+                                               <div class="row">
+                                                  <div class="col-lg-4">
+                                                      <label>Chọn dòng bắt đầu</label>
+                                                  </div>
+                                                  <div class="col-lg-7">                                             
+                                                      <input type="text" class="form-control"name="rowbegin" id="rowbegin" value=""/>
+                                                  </div>
+                                              </div>
+                                              <div class="row">
+                                                  <div class="col-lg-4">
+                                                      <label>Chọn danh sách Quận huyện</label>
+                                                  </div>
+                                                  <div class="col-lg-7">                     
+                                                      <input class="form-control" type="file" name="my_file" id="my_file" ><button type="submit" id="import" class="btn btn-primary">Import</button> 
+                                                  </div>
+                                              </div>
+                                          </div>  
+                                          </div>    
+                                        </form> 
+                                </div>
+                            
+                      </div>
+                    </div>
+                </div>
+                <!--////-->
+            </div>
+        </div>
+    </div>   
+</div>
+<style type="text/css">
+        .big-image {
+            float: left;
+            margin-right: 15px;
+            margin-bottom: 15px;
+            border: 1px solid #999;
+            background: #fff;
+            padding: 3px;
+        }
+        .important-text {
+            font-size: 13px;
+            font-family: Verdana, Geneva, 'DejaVu Sans', sans-serif;
+        }
+        .more-text {
+            font-family: Verdana, Geneva, 'DejaVu Sans', sans-serif;
+            color: #444;
+            font-size: 11px;
+            font-style: italic;
+        }
+    </style>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#jqxWidget").css('visibility', 'visible');
+        });
+        function addEventListeners() {
+            $('#showWindowButton').mousedown(function () {
+                $('#window').jqxWindow('open');
+                $('#window').jqxWindow('focus');
+            });            
+        }
+        function createElements() {           
+            $('#window').jqxWindow({
+                //resizable: true,
+                width: 500,
+                height: 200,
+                minWidth: 500,
+                minHeight: 200,
+                resizable: false, 
+                isModal: true,
+               // modalOpacity: 0.3,                
+            });           
+        }
+        $('#showWindowButton').on('click',function(){
+            createElements("","","","","","","");
+            $('#window').jqxWindow('open');
+            $('#window').jqxWindow('focus');    
+        });
+        </script>
+<script type="text/javascript">
+    document.forms['AddMasterDistrict'].name.focus();
+    function set_focus() {
+        document.forms['AddMasterDistrict'].name.focus();
+    }
+    var flag=true;
+    var flag1=true;
+    function checkinput() {
+        var frm = window.document.AddMasterDistrict;
+        if (frm.district_code.value == "") {
+            bootbox.alert("Vui lòng nhập Mã Quận huyện");
+            return false;
+        }
+        if (frm.name_district.value == "") {
+            bootbox.alert("Vui lòng nhập tên Quận huyện");
+            return false;
+        } 
+         if(isNaN(frm.name_district.value)== false){
+            bootbox.alert("Vui lòng nhập chữ cho tên quận huyện");
+            return false;
+        }
+        if(frm.master_province_id.value==0){
+            bootbox.alert("Vui long chon tỉnh");
+            return false;
+        }
+        var district_code= $('#district_code').val();
+        $.ajax({
+            type:'post',
+            url:'<?php echo $this->baseUrl()?>/leader/masterdistrict/checkdistrictcode/district_code/'+district_code,
+            async:false,
+            dataType:'json',
+            success:function(data){
+                if(data[0].code==1){
+//                    bootbox.alert(data[0].message);
+                    flag=false;
+                } else {
+                    flag=true;
+                }
+            }
+        });
+        if(flag==false){
+            bootbox.alert("Mã Quận huyện này đã tồn tại. Vui lòng kiểm tra và nhập lại.");
+            return false;
+        };
+        var name_district= $('#name_district').val();
+        $.ajax({
+            type:'post',
+            url:'<?php echo $this->baseUrl()?>/leader/masterdistrict/checkdistrictname/district_name/'+name_district,
+            async:false,
+            dataType:'json',
+            success:function(data){
+                if(data[0].code==1){
+//                    bootbox.alert(data[0].message);
+                    flag1=false;
+                } else {
+                    flag1=true;
+                }
+            }
+        });
+        if(flag1==false){
+            bootbox.alert("Tên Quận huyện đã tồn tại.Vui lòng kiểm tra và nhập lại.");
+            return false;
+        };
+        return true;
+    }
+</script>
+<script type="text/javascript">
+     $(document).ready(function() {
+        var orderCount = 0;
+        $('#master_province_id').multiselect({
+            maxHeight: '300',
+            enableFiltering: true,
+            maxHeight: '300',
+            onChange: function(option, checked) {
+                if (checked) {
+                    orderCount++;
+                    $(option).data('order', orderCount);
+                }
+                else {
+                    $(option).data('order', '');
+                }
+            },
+        });
+        
+        $('#master_province_id').on('change', function() {
+            var selected = [];
+            $('#master_province_id option:selected').each(function() {
+                selected.push([$(this).val(), $(this).data('order')]);
+            });
+ 
+            selected.sort(function(a, b) {
+                return a[1] - b[1];
+            });
+ 
+            var text = '';
+            for (var i = 0; i < selected.length; i++) {
+                text += selected[i][0] + ', ';
+            }
+            text = text.substring(0, text.length - 2);
+ 
+            $('#selectionlog').val(text);
+            $('#selectionlog').text(text);
+        });
+        
+    });
+</script>

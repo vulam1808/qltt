@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="">
+
+        <title>Hệ thống tích điểm PVFCCo Central</title>
+        <?php
+//    <!-- Bootstrap Core CSS -->
+        $this->headLink()->appendStylesheet($this->imageUrl() . '/css/bootstrap.min.css');
+//    <!-- MetisMenu CSS -->
+        $this->headLink()->appendStylesheet($this->imageUrl() . '/css/plugins/metisMenu/metisMenu.min.css');
+//    <!-- Timeline CSS -->
+        $this->headLink()->appendStylesheet($this->imageUrl() . '/css/plugins/timeline.css');
+//    <!-- Custom CSS -->
+        $this->headLink()->appendStylesheet($this->imageUrl() . '/css/sb-admin-2.css');
+//    <!-- Morris Charts CSS -->
+        $this->headLink()->appendStylesheet($this->imageUrl() . '/css/plugins/morris.css');
+//    <!-- Custom Fonts -->
+        $this->headLink()->appendStylesheet($this->imageUrl() . '/font-awesome-4.1.0/css/font-awesome.min.css');
+        echo $this->headLink();
+        ?>
+
+    </head>
+
+    <body>
+       
+        <div class="container">
+            
+            <div class="row">
+                <img src="<?php echo $this->imageUrl()?>/image/banner_pce.png" class="img-responsive" alt="Responsive image">
+                <div class="col-md-4 col-md-offset-4">
+                    <div class="login-panel panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Đăng nhập</h3>
+                        </div>
+                        <div class="panel-body">
+                            <form id="frmlogin" name="frmlogin" method="POST" action="javascript:loginuser('<?php echo $this->baseUrl() ?>/admin/index/login')">
+                                <fieldset>
+                                    <div class="form-group">
+                                        <div class="row">
+                                            <div class="col-lg-4">
+                                                <small>Tên đăng nhập</small>
+                                            </div>
+                                            <div class="col-lg-8">
+                                                <input class="form-control"  id="username" name="username" type="username" autofocus>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="row">
+                                            <div class="col-lg-4">
+                                                <small>Mật khẩu</small>
+                                            </div>
+                                            <div class="col-lg-8">
+                                                <input class="form-control" id="password" name="password" type="password" value=""> 
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="checkbox">
+                                        <label>
+                                            <input name="remember" id="remember" type="checkbox" value="Remember Me">Ghi nhớ
+                                        </label>
+                                    </div>
+                                    <div class="form-group">
+                                        <ul id="show-error" class="show-error" style="display:none;">
+                                            <li>
+                                                Bạn vui lòng kiểm tra lại thông tin đăng nhập.
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <!-- Change this to a button or input when using this as a form -->
+                                    <input type="submit" class="btn btn-lg btn-success btn-block" href="javascript:loginuser('<?php echo $this->baseUrl() ?>/admin/index/login')" value="Đăng Nhập">
+                                </fieldset>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- jQuery Version 1.11.0 -->
+        <?php
+        $this->headScript()->appendFile($this->imageUrl() . '/js/jquery-1.11.0.js');
+//    <!-- Bootstrap Core JavaScript -->
+        $this->headScript()->appendFile($this->imageUrl() . '/js/bootstrap.min.js');
+//    <!-- Metis Menu Plugin JavaScript -->
+        $this->headScript()->appendFile($this->imageUrl() . '/js/plugins/metisMenu/metisMenu.min.js');
+//    <!-- Morris Charts JavaScript -->
+        $this->headScript()->appendFile($this->imageUrl() . '/js/plugins/morris/raphael.min.js');
+        $this->headScript()->appendFile($this->imageUrl() . '/js/plugins/morris/morris-data.js');
+        $this->headScript()->appendFile($this->imageUrl() . '/js/plugins/morris/morris.min.js');
+//    <!-- Custom Theme JavaScript -->
+        $this->headScript()->appendFile($this->imageUrl() . '/js/sb-admin-2.js');
+        $this->headScript()->appendFile($this->imageUrl() . '/js/global.js');
+        echo $this->headScript();
+        ?>
+
+    </body>
+
+</html>
+
+</style>

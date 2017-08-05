@@ -1,0 +1,691 @@
+<div class="row">
+    <div class="col-lg-12">
+        <h3 class="page-header">Danh sách quận huyện</h3>      
+    </div>    
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+             <div class="panel-heading">
+                 <div class="row">                    
+                    <div class="col-lg-10">
+                      <center>   <div class="col-lg-2" style="text-align:center;width: 10%;padding-right: 0px;">
+                         <a  href="<?php echo $this->baseUrl().'/default/masterdistrict/add/'?>">
+                             <button type="button" class="btn btn-success btn-action"><i class="fa fa-plus fa-2x"></i>
+                             </button></br>
+                             <span >Thêm Mới</span>
+                         </a>
+                     </div>
+<!--                     <div class="col-lg-2" style="text-align:center;width: 9%;padding-right: 0px;;padding-left: 1px;">
+                         <a  href="<?php // echo $this->baseUrl().'/default/infobusiness/add/type_business/'.$this->type_business?>">
+                            <button type="button" class="btn btn-info btn-action"><i class="fa fa-pencil fa-2x"></i>
+                            </button></br>
+                             <span >Chỉnh sửa</span>
+                         </a>
+                     </div>
+                      <div class="col-lg-2" style="text-align:center;width: 5%;padding-right: 0px;;padding-left: 1px;">
+                         <a  href="<?php // echo $this->baseUrl().'/default/infobusiness/add/type_business/'.$this->type_business?>">
+                            <button type="button" class="btn btn-danger btn-action"><i class="fa fa-minus fa-2x"></i>
+                            </button></br>
+                             <span >Xóa</span>
+                         </a>
+                     </div>                        -->
+                        <!--<input type="button" class ="btn btn-default" id="showWindowButton" name="showWindowButton" value="Export"/></center>-->
+                     </div>
+                 </div>
+            </div>
+            <div class="panel-body">
+                <div class="table-reponsive">
+                    <div id="jqxgrid">                        
+                    </div>
+                    <!--//-->
+                    <div style="visibility: hidden;" id="jqxWidget">
+                     <div id="window" hidden="true">
+                        <div>
+                                <b>TÙY CHỌN EXPORTS DANH SÁCH QUẬN HUYỆN</b>
+                        </div>
+                        <div>
+                            <div class="panel-body">
+                                <div class="row">
+                                        <form method="POST"  id="form-upload" method="post" action="<?php echo $this->baseUrl()?>/default/masterdistrict/excel">
+                                             <div class="form-group">
+                                                <div class="row">
+                                                <div class="col-lg-4">
+                                                    <label>Tên tỉnh thành</label>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <?php echo GlobalLib::getComboByProvince('master_province_id', 'master_province', 'id', 'name', 0, false, 'form-control', '', '', '', 'onchange="getDistrictWithProvince(\'' . $this->aConfig["site"]["url"] . '\')"');?>  
+                                                </div>
+                                                </div>
+                                            </div>  
+                                            <div class="form-group">
+                                                <div class="row">
+                                                <div class="col-lg-4">
+                                                    <label>Tên quận huyện</label>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <?php echo GlobalLib::getComboByDistrict('master_district_id', 'master_district', 'id', 'name', 0, false, 'form-control', '', 'where master_province_id=0', '', ''); ?>  
+                                                </div>
+                                                </div>
+                                            </div>
+                                             <div class="form-group">
+                                                <div class="row">
+<!--                                                <div class="col-lg-4">
+                                                    <label>Ngày tạo</label>
+                                                </div>-->
+<!--                                                <div class="col-lg-6">
+                                                      <input type="text" class="form-control"name="rowbegin" id="rowbegin" value=""/>
+                                                </div>-->
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="row">
+                                                <div class="col-lg-4">
+                                                    <label>Chọn trường hiển thị</label>
+                                                </div>                                               
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-12">
+                                            <div class="form-group">                                              
+                                                    <div class="row">
+<!--                                                      <div class="col-lg-4">
+                                                          <label>Chọn dòng bắt đầu</label>
+                                                      </div>-->
+                                                         <div class="col-lg-6">
+                                                          <div id="jqxgrid1">                        
+                                                         </div>
+                                                      </div>
+                                                         <div class="col-lg-6">
+                                                          <div id="jqxgrid12">                        
+                                                         </div>
+                                                      </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                               <div class="row">
+                                                  <div class="col-lg-4">
+                                                      <label>Chọn dòng bắt đầu</label>
+                                                  </div>
+                                                  <div class="col-lg-7">                                             
+                                                      <input type="text" class="form-control"name="rowbegin" id="rowbegin" value=""/>
+                                                  </div>
+                                              </div>
+                                              </div>  
+<!--                                             <div class="form-group">
+                                              <div class="row">
+                                                  <div class="col-lg-4">
+                                                      <label>Chọn vị trí lưu tệp tin</label>
+                                                  </div>
+                                                  <input type="file" name="file" id="file">
+                                              </div>
+                                             
+                                                </div> -->
+                                             <div class="form-group">
+                                               <div class="row">                                                  
+                                                  <div class="col-lg-7">                                             
+                                                      <input type="hidden" class="form-control" name="listcheck" id="listcheck" value=""/>
+                                                  </div>
+                                              </div>
+                                              </div>  
+                                          </div>  
+                                         <input id="selectionlog" style="display: none" name="selectionlog" />
+                                         <input id="selectionlog1" style="display: none" name="selectionlog1" />
+                                        <!--</form>--> 
+                                     <!--<form method="POST" action="<?php //echo $this->baseUrl()?>/default/district/excel">-->
+                                        <center> <button type="submit" class="btn btn-primary" name="luu1" id="luu1">Xuất Excel</button></center>
+                            </form>
+                                </div>
+                             </div>
+                      </div>
+                        </div>
+                    </div>
+                    <!--//-->
+                </div>
+            </div>
+        </div>
+</div>
+    <!--//////////-->
+   
+    <!--/////////////-->
+    <style type="text/css">
+        .big-image {
+            float: left;
+            margin-right: 15px;
+            margin-bottom: 15px;
+            border: 1px solid #999;
+            background: #fff;
+            padding: 3px;
+        }
+        .important-text {
+            font-size: 13px;
+            font-family: Verdana, Geneva, 'DejaVu Sans', sans-serif;
+        }
+        .more-text {
+            font-family: Verdana, Geneva, 'DejaVu Sans', sans-serif;
+            color: #444;
+            font-size: 11px;
+            font-style: italic;
+        }
+    </style>
+    <script type="text/javascript">
+            $(document).ready(function () {
+                $("#jqxWidget").css('visibility', 'visible');
+            });
+            function addEventListeners() {
+                $('#showWindowButton').mousedown(function () {
+                    $('#window').jqxWindow('open');
+                    $('#window').jqxWindow('focus');
+                });            
+            }
+            function createElements() {           
+                $('#window').jqxWindow({
+                    resizable: true,
+                    isModal: true,
+                    width: '100%',
+                    height: 500,
+                    minWidth: 700,
+                    minHeight: 500
+                });           
+            }
+            $('#showWindowButton').on('click',function(){
+                createElements("","","","","","","");
+                $('#window').jqxWindow('open');
+                $('#window').jqxWindow('focus');    
+            });
+    </script>
+<script type="text/javascript">
+ $(document).ready(function () {
+            // prepare the data
+            var source =
+            {
+                datatype: "json",
+                datafields:
+                [
+                    { name: 'Id',type:'int'},
+                    { name: 'DistrictCode', type: 'string' },           
+                    { name: 'DistrictName', type: 'string' },
+                    { name: 'ProvinceName', type: 'string' },
+                    { name: 'Order', type: 'int' }
+                ],
+                url:'<?php echo $this->baseUrl() ?>/default/masterdistrict/service',
+                sortcolumn: 'Order',
+                sortdirection: 'asc'               
+            };
+         var dataAdapter = new $.jqx.dataAdapter(source, {
+                loadComplete: function () {
+                }
+            });
+            $("#jqxgrid").jqxGrid(
+            {
+                width: '100%',
+                source: dataAdapter,  
+                theme: 'bootstrap',
+                pageable: true,
+                showfilterrow: true,
+                filterable: true,
+                autoheight: true,
+                sortable: true,
+                altrows: true,
+                enabletooltips: true,
+                selectionmode: 'multiplecellsadvanced',
+                columnsResize: true,
+                rendergridrows: function (params) {
+                    return params.data;
+                },
+                ready: function () {
+                    $("#jqxgrid").jqxGrid('hideColumn', 'Id');
+                },
+                columns: [
+                  {text:'Id',dataField:'Id',cellsalgin:'right',width:0},
+                   {  text: 'Số TT', sortable: false, filterable: false, editable: false,
+                      groupable: false, draggable: false, resizable: false,
+                      datafield: '', columntype: 'number', width: 50,
+                      cellsrenderer: function (row, column, value) {
+                          return "<div style='margin:7px;'>" + (value + 1) + "</div>";
+                      }
+                  },
+                   { text: 'Mã quận huyện',editable: false,align: "center", dataField: 'DistrictCode', width: '10%' },          
+                  { text: 'Tên quận huyện',editable: false,align: "center", dataField: 'DistrictName', width: '35%' },
+                  { text: 'Tỉnh thành',editable: false,align: "center", dataField: 'ProvinceName', width: '35%' },
+                  {text: 'Xóa',filtertype: 'none', cellsalign: 'center', align: "center", columnType: 'none', editable: false, sortable: false, dataField: null, cellsrenderer: function (row) {
+                          // render custom column.
+                          editrow = row;
+                          var dataRecord = $("#jqxgrid").jqxGrid('getrowdata',editrow);
+                          var url= "<div style='overflow: hidden; text-overflow: ellipsis; padding-bottom: 2px; text-align: center; margin-right: 2px; margin-left: 4px; margin-top: 4px;'><a class='fa fa-trash-o fa-lg'";
+                          url = url + "href='#' onclick='return jsdelete("+dataRecord.Id+")'></a></div>"
+                          return url;
+                      }
+              },
+              {text: 'Sửa',filtertype: 'none', cellsalign: 'right', align: "center", columnType: 'none', editable: false, sortable: false, dataField: null, cellsrenderer: function (row) {
+                          // render custom column.
+                          editrow = row;
+                          var dataRecord = $("#jqxgrid").jqxGrid('getrowdata',editrow);
+                          var url= "<div style='overflow: hidden; text-overflow: ellipsis; padding-bottom: 2px; text-align: center; margin-right: 2px; margin-left: 4px; margin-top: 4px;'><a class='fa fa-edit fa-lg'";
+                          url = url + "href='<?php echo $this->baseUrl()?>/default/masterdistrict/edit/id/"+dataRecord.Id+"'></a></div>"
+                          return url;
+                      }
+                          }
+                ]
+            });
+            });
+    </script>
+     <script type="text/javascript">
+        $(document).ready(function () {
+            // prepare the data
+            var data = new Array();
+            var firstNames =
+            [
+                "code", "name",   "province_id", "created", "created_by","modified","modified_by","order","status"
+            ];
+            var lastNames =
+            [
+                "Mã Code", "Tên quận huyện",   "Tên tỉnh", "Ngày tạo", "Tạo bỡi ai","Ngày sửa","Chỉnh sửa bỡi ai","Số thứ tự","Trạng thái"
+            ];
+           
+            for (var i = 0; i < firstNames.length; i++) {
+                var row = {};
+               
+                row["firstname"] = firstNames[i];
+                row["lastname"] = lastNames[i];
+               
+                data[i] = row;
+            }
+            var source =
+            {
+                localdata: data,
+                datatype: "array",
+                datafields:
+                [ { name: 'id', type: 'int' },
+                    { name: 'firstname', type: 'string' },
+                    { name: 'lastname', type: 'string' }                   
+                ],
+                addrow: function (rowid, rowdata, position, commit) {
+                    commit(true);
+                },
+                deleterow: function (rowid, commit) {
+                    commit(true);
+                },
+                updaterow: function (rowid, newdata, commit) {
+                    commit(true);
+                }
+            };
+            var dataAdapter = new $.jqx.dataAdapter(source);
+       
+            $("#jqxgrid1").jqxGrid(
+            {
+                width: '100%',
+                height: '250 px',
+                  filterable: true,
+                 showtoolbar: true,
+                showstatusbar: true,
+                statusbarheight: 50,
+                editable: true,
+               //  editable: true,
+                selectionmode: 'singlerow',
+              //  editmode: 'selectedrow',
+               // showaggregates: true,
+              //  selectionmode: 'singlecell',
+                showfilterrow: true,
+                source: dataAdapter,
+                columnsresize: true, rendertoolbar: function (toolbar) { 
+                     var i=0;
+                    var container = $("<div style='margin: 5px;'></div>");                   
+                    toolbar.append(container);
+                    container.append('<div><input type="button" value="add" id="add" style="float:left" /> <center><label>Danh sách các trường</label></center></div>');                    
+                    var selectedrowindex = $("#jqxgrid1").jqxGrid('getselectedrowindex');
+                    //lay gia tri cua dong do
+                    var row = $('#jqxgrid12').jqxGrid('getRowData', selectedrowindex);
+                    // var thanhtien = row.soluongtx + row.dongia;
+                    $("#jqxgrid12").jqxGrid('setcellvalue',1, 'thanhtien', '20');
+                    // create new row.
+                    $("#add").on('click', function () {
+                        //khai báo biến
+                         var datarow = new Array();
+                         var firstNames= new Array();
+                         var lastNames= new Array();
+                        
+                        //remove list12
+                        $("#listcheck").val(""); 
+                        var id = $("#jqxgrid12").jqxGrid('getrowid', 0);
+                        var rowscount = $("#jqxgrid12").jqxGrid('getdatainformation').rowscount;
+                         for (var i = id; i <= rowscount-1; i++) {
+                               var commit = $("#jqxgrid12").jqxGrid('deleterow', i);
+                         }
+                        
+                        //add filed list12
+                        var id = $("#jqxgrid1").jqxGrid('getrowid', 0); 
+                        var rowscount = $("#jqxgrid1").jqxGrid('getdatainformation').rowscount; 
+                        var  arr="";var j=0;
+                         for (var i = id; i <= rowscount-1; i++) {
+                            var row = $('#jqxgrid1').jqxGrid('getRowData', i);
+                            if(row.id == 1){
+                                  var arr1 = ""+row.firstname+";";
+                                  arr=arr+arr1;
+                                  
+                                  firstNames[j++]= row.firstname;
+                            }                                                     
+                         }
+                       $("#listcheck").val(arr); 
+                            for (var i = 0; i < firstNames.length; i++) {
+                                var row = {};
+                                row["firstname"] = firstNames[i];
+                                datarow[i] = row;
+                            }                        
+                        var commit = $("#jqxgrid12").jqxGrid('addrow', null, datarow);                     
+                        /******************************/
+                    });
+                    // delete row.
+                    $("#deleterowbutton").on('click', function () {
+                        //so dong hien taisuaWindowButton                       
+                        var selectedrowindex = $("#jqxgrid12").jqxGrid('getselectedrowindex');
+                        //lay gia tri cua dong do
+                        var row = $('#jqxgrid12').jqxGrid('getRowData', selectedrowindex);
+                        // confirm("Hello! I "+row.makho+"am an alert box!!");
+                        var rowscount = $("#jqxgrid12").jqxGrid('getdatainformation').rowscount;
+                        if (selectedrowindex >= 0 && selectedrowindex < rowscount) {                          
+                            var id = $("#jqxgrid12").jqxGrid('getrowid', selectedrowindex);                           
+                            var commit = $("#jqxgrid12").jqxGrid('deleterow', id);
+                        }              
+                    });
+                    $("#suaWindowButton").on('click', function () {                       
+                        //so dong hien taisuaWindowButton
+                        var selectedrowindex = $("#jqxgrid12").jqxGrid('getselectedrowindex');
+                        //lay gia tri cua dong do
+                        var row = $('#jqxgrid12').jqxGrid('getRowData', selectedrowindex);
+                          alert(row.ma_bp_kh);
+                          createElements(row.ma_bp_kh,row.ten_bp_kh,row.diachi);
+                         // $('#makho').disabled = "disabled";//khong lay dc du lieu
+                          $('#ma_bp_kh').prop('readonly', true);//lay dc du lieu
+                          $('#window').jqxWindow('open');
+                          $('#window').jqxWindow('focus');                   
+                        //addEventListeners();                   
+                    });
+                    $('#showWindowButton').on('click',function(){
+                         createElements("","","","","","","");
+                          $('#window').jqxWindow('open');
+                          $('#window').jqxWindow('focus');    
+                    });                  
+                   //luu
+                    $("#luu1").on('click', function () { 
+                        var id = $("#jqxgrid1").jqxGrid('getrowid', 0); 
+                        var rowscount = $("#jqxgrid1").jqxGrid('getdatainformation').rowscount; 
+                        var  arr="";
+                         for (var i = id; i <= rowscount-1; i++) {
+                            var row = $('#jqxgrid').jqxGrid('getRowData', i);                            
+                            var arr1 = ""+$("#sophieux").val()+","+row.mvt_hh+","+row.donvitinh+","+row.soluongtx+","+row.soluongyc+","+row.dongia+";";
+                             arr=arr+arr1;                           
+                         }
+                         $("#phieuxuatct").val(arr);                     
+                    });
+                    //
+                   $('#jqxgrid').on('cellvaluechanged', function (event) {
+                        var args = event.args;   var item = event.args.item;                  
+                        var columnDataField = args.datafield;
+                        var rowIndex = args.rowindex;
+                        var cellValue = args.value;
+                        var row = $('#jqxgrid').jqxGrid('getRowData', rowIndex);   
+                        $("#jqxgrid").jqxGrid('setcellvalue', rowIndex, 'thanhtien', row.soluongtx * row.dongia);                         
+                    });
+                     //LAY MA CHO TRUONG COMBOBOX (MA VAT TU HANG HOA////
+                    $("#jqxgrid").on('cellendedit', function (event) {
+                            var column = $("#jqxgrid").jqxGrid('getcolumn', event.args.datafield);
+                            if(column.text == "Mã Vật Tư/Hàng Hóa"){
+                                 $("#jqxgrid").jqxGrid('setcellvalue', event.args.rowindex, 'mvt_hh', event.args.value.value);
+                            }
+                    });
+                },
+                columns: [
+//                   {  text: 'Số TT', sortable: false, filterable: false, editable: false,
+//                      groupable: false, draggable: false, resizable: false,
+//                      datafield: '', columntype: 'number', width: 50,
+//                      cellsrenderer: function (row, column, value) {
+//                          return "<div style='margin:4px;'>" + (value + 1) + "</div>";
+//                      }
+//                  },
+                   { text: 'Chọn', datafield: 'id', columntype: 'checkbox', width: '15%' },
+                  { text: 'Tên',editable: false, datafield: 'firstname', width: '35%' },
+                  { text: 'Diễn giải',editable: false, datafield: 'lastname', width: '50%' }                 
+                ]
+            });
+        });
+    </script>
+     <script type="text/javascript">
+        $(document).ready(function () {
+            // prepare the data12
+            var data = {};
+            var source =
+            {
+                localdata: data,
+                datatype: "local",
+                datafields:
+                [
+                    { name: 'firstname', type: 'string' },                   
+                    { name: 'total', type: 'number' }
+                ],
+                addrow: function (rowid, rowdata, position, commit) {
+                    commit(true);
+                },
+                deleterow: function (rowid, commit) {
+                    commit(true);
+                },
+                updaterow: function (rowid, newdata, commit) {
+                    commit(true);
+                }
+            };
+            var dataAdapter = new $.jqx.dataAdapter(source);
+            $("#jqxgrid12").jqxGrid(
+            {
+                width: '100%',
+                height: '250 px',
+                filterable: true,
+                 showtoolbar: true,
+                showstatusbar: true,
+                statusbarheight: 50,
+                editable: true,
+               //  editable: true,
+                selectionmode: 'singlerow',
+              //  editmode: 'selectedrow',
+               // showaggregates: true,
+              //  selectionmode: 'singlecell',
+                showfilterrow: true,
+               // source: dataAdapter,              
+                 ready: function () {                       
+                        $("#jqxgrid12").jqxGrid('hideColumn', 'sophieuX');
+                        $("#jqxgrid12").jqxGrid('hideColumn', 'mvt_hh');
+                    },
+                rendertoolbar: function (toolbar) { 
+                     var i=0;
+                    var container = $("<div style='margin: 5px;'></div>");                   
+                    toolbar.append(container);
+                    container.append('<div><input type="button" value="del" id="del" style="float:left" /> <center><label>Danh sách trường cần export</label></center></div>');                    
+                    var selectedrowindex = $("#jqxgrid2").jqxGrid('getselectedrowindex');
+                    //lay gia tri cua dong do
+                    var row = $('#jqxgrid12').jqxGrid('getRowData', selectedrowindex);
+                    // var thanhtien = row.soluongtx + row.dongia;
+                    $("#jqxgrid12").jqxGrid('setcellvalue',1, 'thanhtien', '20');
+                    // create new row.
+                    $("#add").on('click', function () {
+                        var datarow = {};
+                        var commit = $("#jqxgrid12").jqxGrid('addrow', null, datarow);                     
+                       // $("#jqxgrid").jqxGrid('setcellvalue', i++, 'thanhtien', 0);
+                    });
+                    // delete row.
+                    $("#deleterowbutton").on('click', function () {
+                        //so dong hien taisuaWindowButton                       
+                        var selectedrowindex = $("#jqxgrid12").jqxGrid('getselectedrowindex');
+                        //lay gia tri cua dong do
+                        var row = $('#jqxgrid12').jqxGrid('getRowData', selectedrowindex);
+                        // confirm("Hello! I "+row.makho+"am an alert box!!");
+                        var rowscount = $("#jqxgrid12").jqxGrid('getdatainformation').rowscount;
+                        if (selectedrowindex >= 0 && selectedrowindex < rowscount) {                          
+                            var id = $("#jqxgrid12").jqxGrid('getrowid', selectedrowindex);                           
+                            var commit = $("#jqxgrid12").jqxGrid('deleterow', id);
+                        }              
+                    });
+                    $("#suaWindowButton").on('click', function () {                       
+                        //so dong hien taisuaWindowButton
+                        var selectedrowindex = $("#jqxgrid12").jqxGrid('getselectedrowindex');
+                        //lay gia tri cua dong do
+                        var row = $('#jqxgrid12').jqxGrid('getRowData', selectedrowindex);
+                          alert(row.ma_bp_kh);
+                          createElements(row.ma_bp_kh,row.ten_bp_kh,row.diachi);
+                         // $('#makho').disabled = "disabled";//khong lay dc du lieu
+                          $('#ma_bp_kh').prop('readonly', true);//lay dc du lieu
+                          $('#window').jqxWindow('open');
+                          $('#window').jqxWindow('focus');                   
+                        //addEventListeners();                   
+                    });
+                    $('#showWindowButton').on('click',function(){
+                         createElements("","","","","","","");
+                          $('#window').jqxWindow('open');
+                          $('#window').jqxWindow('focus');    
+                    });                  
+                   //luu
+                    $("#luu1").on('click', function () { 
+//                        var id = $("#jqxgrid12").jqxGrid('getrowid', 0); 
+//                        var rowscount = $("#jqxgrid12").jqxGrid('getdatainformation').rowscount;
+//                        var  arr="";
+//                         for (var i = id; i <= rowscount-1; i++) {
+//                            var row = $('#jqxgrid12').jqxGrid('getRowData', i);                            
+//                            var arr1 = ""+row.firstname+";";
+//                             arr=arr+arr1;                           
+//                         }
+                         $("#listcheck").val("arr");                     
+                    });
+                    //
+                   $('#jqxgrid').on('cellvaluechanged', function (event) {
+                        var args = event.args;   var item = event.args.item;                  
+                        var columnDataField = args.datafield;
+                        var rowIndex = args.rowindex;
+                        var cellValue = args.value;
+                        var row = $('#jqxgrid').jqxGrid('getRowData', rowIndex);   
+                        $("#jqxgrid").jqxGrid('setcellvalue', rowIndex, 'thanhtien', row.soluongtx * row.dongia);                         
+                    });
+                     //LAY MA CHO TRUONG COMBOBOX (MA VAT TU HANG HOA////
+                    $("#jqxgrid").on('cellendedit', function (event) {
+                            var column = $("#jqxgrid").jqxGrid('getcolumn', event.args.datafield);
+                            if(column.text == "Mã Vật Tư/Hàng Hóa"){
+                                 $("#jqxgrid").jqxGrid('setcellvalue', event.args.rowindex, 'mvt_hh', event.args.value.value);
+                            }
+                    });
+                },
+                columns: [
+                //cột số thứ tự
+//                  {  text: 'Số TT', sortable: false, filterable: false, editable: false,
+//                      groupable: false, draggable: false, resizable: false,
+//                      datafield: '', columntype: 'number', width: 50,
+//                      cellsrenderer: function (row, column, value) {
+//                          return "<div style='margin:4px;'>" + (value + 1) + "</div>";
+//                      }
+//                  },
+                   { text: 'Chọn', datafield: 'id', columntype: 'checkbox', width: '15%' },
+                  { text: 'Tên',editable: false, datafield: 'firstname', width: '35%' },
+                  { text: 'Diễn giải',editable: false, datafield: 'lastname', width: '50%' }  
+                
+                ]
+            }); 
+        });
+    </script>
+    <script type="text/javascript">
+        function jsdelete(id)
+        {
+            $.get("<?php echo $this->baseUrl() ?>/default/masterdistrict/confirmdelete/id/"+id,null,function(data){
+                if(data>0)
+                {
+                    bootbox.alert("Hiện có "+data+" Xã phường thuộc quận huyện này. Vui lòng chuyển các Xã Phường trên sang quận huyện khác trước!");
+                    return false;
+                }
+                else 
+                {
+                    bootbox.confirm("Bạn có chắc muốn xoá quận huyện này không?",
+                    function(result){
+                        if(result == true)
+                        {
+                           return window.location = "<?php echo $this->baseUrl() ?>/default/masterdistrict/delete/id/"+id;
+                        }
+                    });
+                }
+            });
+        }
+    </script>
+    <script type="text/javascript">
+     $(document).ready(function() {
+        var orderCount = 0;
+        $('#master_province_id').multiselect({
+            maxHeight: '300',
+            enableFiltering: true,
+            maxHeight: '300',
+            onChange: function(option, checked) {
+                if (checked) {
+                    orderCount++;
+                    $(option).data('order', orderCount);
+                }
+                else {
+                    $(option).data('order', '');
+                }
+            },
+        });
+//        
+//        $('#master_province_id').on('change', function() {
+//            var selected = [];
+//            $('#master_province_id option:selected').each(function() {
+//                selected.push([$(this).val(), $(this).data('order')]);
+//            });
+// 
+//            selected.sort(function(a, b) {
+//                return a[1] - b[1];
+//            });
+// 
+//            var text = '';
+//            for (var i = 0; i < selected.length; i++) {
+//                text += selected[i][0] + ', ';
+//            }
+//            text = text.substring(0, text.length - 2);
+// 
+//            $('#selectionlog').val(text);
+//            $('#selectionlog').text(text);
+//        });
+        
+    });
+</script>
+ <script type="text/javascript">
+     $(document).ready(function() {
+        var orderCount = 0;
+        $('#master_district_id').multiselect({
+            maxHeight: '300',
+            enableFiltering: true,
+            maxHeight: '300',
+            onChange: function(option, checked) {
+                if (checked) {
+                    orderCount++;
+                    $(option).data('order', orderCount);
+                }
+                else {
+                    $(option).data('order', '');
+                }
+            },
+        });
+        
+//        $('#master_district_id').on('change', function() {
+//            var selected = [];
+//            $('#master_district_id option:selected').each(function() {
+//                selected.push([$(this).val(), $(this).data('order')]);
+//            });
+// 
+//            selected.sort(function(a, b) {
+//                return a[1] - b[1];
+//            });
+// 
+//            var text = '';
+//            for (var i = 0; i < selected.length; i++) {
+//                text += selected[i][0] + ', ';
+//            }
+//            text = text.substring(0, text.length - 2);
+// 
+//            $('#selectionlog1').val(text);
+//            $('#selectionlog1').text(text);
+//        });
+        
+    });
+</script>

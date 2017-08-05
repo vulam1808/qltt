@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+
+<div class="row">
+    <div class="col-lg-12">
+        <h3 class="page-header">Thêm người dùng</h3>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-lg-12">
+                         <form role="form" method="POST" name="Addsysuser" onsubmit="return checkinput();">
+                             <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h4 class="panel-title">
+                                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseTree" aria-expanded="true" class=""><b>Thông tin người dùng <?php // echo GlobalLib::getNameBusiness($this->type_business) ?></b></a>
+                                    </h4>
+                                </div>
+                                <div id="collapseTree" class="panel-collapse collapse in" aria-expanded="true">
+                                    <div class="panel-body">
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <div class="row">
+                                                    <div class="col-lg-4">
+                                                        <label>Họ và tên đệm(*)</label>
+                                                    </div>
+                                                    <div class="col-lg-6">
+                                                        <input class="form-control" name="first_name" id="first_name" value="<?php echo $this->item->getFirst_Name(); ?>">
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="row">
+                                                    <div class="col-lg-4">
+                                                        <label>Tên(*)</label>
+                                                    </div>
+                                                    <div class="col-lg-6">
+                                                        <input class="form-control" name="last_name" id="last_name" value="<?php echo $this->item->getLast_Name(); ?>">
+                                                    </div>
+
+                                                </div>
+                                            </div> 
+                                            <div class="form-group">
+                                                <div class="row">
+                                                    <div class="col-lg-4">
+                                                        <label>Email(*)</label>
+                                                    </div>
+                                                    <div class="col-lg-6">
+                                                        <input class="form-control" name="email" id="email" value="<?php echo $this->item->getEmail(); ?>">
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="row">
+                                                    <div class="col-lg-4">
+                                                        <label>Số điện thoại(*)</label>
+                                                    </div>
+                                                    <div class="col-lg-6">
+                                                        <input class="form-control" name="cellphone" id="cellphone" value="<?php echo $this->item->getCellPhone() ?>">
+                                                    </div>
+
+                                                </div>
+                                            </div> 
+                                            <div class="form-group">
+                                                <div class="row">
+                                                    <div class="col-lg-4">
+                                                        <label>Ngày sinh(*)</label>
+                                                    </div>
+                                                    <div class="col-lg-7">
+                                                       <div id='jqxWidget'>
+                                                            <div style='float: left;'>
+                                                                <div style='float: left; margin-top: 3px;' id='jqxDateTimeInput'>
+                                                                </div>
+                                                                <div style='margin-left: 20px; float: left;'>
+                                                                    <div>
+                                                                        <input type="hidden" id="birthday" name="birthday">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                            <div class="row">
+                                                <div class="col-lg-4">
+                                                    <label>Phòng cấp trên(*)</label>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <div id="jqxWidget">
+                                                        <div id="dropDownButton">
+                                                            <div style="border: none;" id="jqxTree">
+                                                                <ul>
+                                                               <?php echo GlobalLib::returntree(0) ;?>
+
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <input class="form-control" type="hidden" name="sys_department_id" id="sys_department_id" value="<?php echo $this->itemdepartment->getParent_Id(); ?>">
+                                                </div>                                   
+                                            </div>                 
+                                          </div>
+                                            <div class="form-group">
+                                                <div class="row">
+                                                <div class="col-lg-4">
+                                                    <label>Lãnh đạo(*)</label>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <input type="checkbox" name="is_leader" id="is_leader" value="1" 
+                                                        <?php  echo ($this->item->getIs_Leader() == 1 ? "checked=\"checked\"" : "") ?> >
+                                                </div>
+                                                </div>
+                                            </div> 
+                                            <div class="form-group">
+                                                <div class="row">
+                                                    <div class="col-lg-4">
+                                                        <label>Tỉnh thành(*)</label>
+                                                    </div>
+                                                    <div class="col-lg-6">
+                                                        <?php echo $this->provinceHTML;?>   
+                                                    </div>                                    
+                                                </div>
+                                            </div> 
+                                            <div class="form-group">
+                                                <div class="row">
+                                                    <div class="col-lg-4">
+                                                        <label>Quận huyện(*)</label>
+                                                    </div>
+                                                    <div class="col-lg-6">
+                                                       <?php echo $this->districtHTML;?>
+                                                    </div>                                    
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="row">
+                                                    <div class="col-lg-4">
+                                                        <label>Xã phường(*)</label>
+                                                    </div>
+                                                    <div class="col-lg-6">
+                                                       <?php echo $this->wardHTML;?>
+                                                    </div>                                    
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div> 
+<!--                                //</form>-->
+                            </div>
+                        </div>
+                        <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h4 class="panel-title">
+                                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseTree1" aria-expanded="false" class=""><b>Thông tin tài khoản <?php // echo GlobalLib::getNameBusiness($this->type_business) ?></b></a>
+                                    </h4>
+                                </div>
+                                <div id="collapseTree1" class="panel-collapse collapse" aria-expanded="false">
+                                    <div class="panel-body">
+                                        <div class="form-group">
+                                            <div class="row">
+                                                <div class="col-lg-4">
+                                                    <label>Tên người dùng(*)</label>
+                                                </div>
+                                                <div class="col-lg-6">                                                                     
+                                                    <input class="form-control" name="username" id="username" value="<?php echo $this->item->getUserName(); ?>">                                        
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="row">
+                                                <div class="col-lg-4">
+                                                    <label>Mật khẩu(*)</label>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <input class="form-control" name="password" id="password" type="password" value="<?php echo $this->item->getPassword(); ?>">
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                             </div>
+                            <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <button type="submit" class="btn btn-primary">Thêm mới</button>
+                                                <button type="reset" class="btn btn-default">Đặt lại</button>
+                                        </div>
+                                    </div>
+                            </div>
+                         </form>
+                    </div>
+                </div>
+            </div>   
+        </div>
+    </div>
+</div>    
+<script type="text/javascript">
+            // When the document is ready
+            $(document).ready(function () { 
+                $("#usernames").val("");
+                $("#passwords").val("");
+                $('#jqxDateTimeInput').jqxDateTimeInput({ formatString: "dd-MM-yyyy"});
+                var formatString = $('#jqxDateTimeInput').jqxDateTimeInput('formatString');
+                $('#jqxDateTimeInput').on('valueChanged', function (event) {
+                    var date = event.args.date;
+                    var text= $('#jqxDateTimeInput').jqxDateTimeInput('getText'); 
+                     $('#birthday').val(text);
+                });
+                $('#jqxDateTimeInput').on('open', function (event) {
+                    var date = event.args.date;
+                });
+                $('#jqxDateTimeInput').on('close', function (event) {
+                    var date = event.args.date;
+                });
+                 $('#sys_user_group_id').multiselect({
+                    maxHeight: '300',
+                    enableFiltering: true,
+                    maxHeight: '300',
+                    onChange: function(option, checked) {
+                        if (checked) {
+                            orderCount++;
+                            $(option).data('order', orderCount);
+                        }
+                        else {
+                            $(option).data('order', '');
+                        }
+                    },
+                });
+
+                $('#sys_user_group_id').on('change', function() {
+                    var selected = [];
+                    $('#sys_user_group_id option:selected').each(function() {
+                        selected.push([$(this).val(), $(this).data('order')]);
+                    });
+
+                    selected.sort(function(a, b) {
+                        return a[1] - b[1];
+                    });
+
+                    var text = '';
+                    for (var i = 0; i < selected.length; i++) {
+                        text += selected[i][0] + ', ';
+                    }
+                    text = text.substring(0, text.length - 2);
+
+                    $('#selectionlog').val(text);
+                    $('#selectionlog').text(text);
+                });
+                $("#is_leader").on('mouseenter',function(data){
+//                    bootbox.alert("Tên đăng nhập đã tồn tại.Vui lòng kiểm tra và nhập lại.");
+                    var flag;
+                    var sys_department= $('#sys_department_id').val();
+                    if(sys_department == ""){
+                        bootbox.alert("Chọn phòng ban trước khi chọn trưởng phòng.");
+                    }
+                    if(sys_department != ""){
+                        $.ajax({
+                            type:'post',
+                            url:'<?php echo $this->baseUrl()?>/admin/sysuser/checkisleader/sys_department/'+sys_department,
+                            async:false,
+                            dataType:'json',
+                            success:function(data){
+                                if(data[0].code==1){
+                                    flag=false;
+                                } else {
+                                    flag=true;
+                                }
+                            }
+                        });
+                    }
+                    if(flag == false){
+                         bootbox.alert("Phòng này đã có trưởng phòng.Vui lòng kiểm tra và nhập lại.");
+//                        return false;
+                    }
+                });
+            });
+</script>
+<script type="text/javascript">
+    document.forms['Addsysuser'].name.focus();
+    function set_focus() {
+        document.forms['Addsysuser'].name.focus();
+    }
+    function checkinput() {        
+        var frm = window.document.Addsysuser;
+        var flag;
+        if (frm.last_name.value == "") {
+            bootbox.alert("Vui lòng nhập họ và tên đệm!");
+            return false;
+        }
+        if (frm.first_name.value == "") {
+            bootbox.alert("Vui lòng nhập tên!");
+            return false;
+        } 
+        
+            var user_name= $('#username').val();
+            if(user_name != ""){
+            $.ajax({
+                type:'post',
+                url:'<?php echo $this->baseUrl()?>/admin/sysuser/checkusername/username/'+user_name,
+                async:false,
+                dataType:'json',
+                success:function(data){
+                    if(data[0].code==1){
+                        flag=false;
+                    } else {
+                        flag=true;
+                    }
+                }
+            });
+            }
+        if(flag==false){
+            bootbox.alert("Tên đăng nhập đã tồn tại.Vui lòng kiểm tra và nhập lại.");
+            return false;
+        };
+        return true;
+    }
+</script>
+<script type="text/javascript">
+        $(document).ready(function () {
+            $("#dropDownButton").jqxDropDownButton({ width: 200, height: 25,theme: 'bootstrap'});
+            $('#jqxTree').on('select', function (event) {
+                var args = event.args;
+                var item = $('#jqxTree').jqxTree('getItem', args.element);
+                var dropDownContent = '<div style="position: relative; margin-left: 3px; margin-top: 5px;">' + item.label + '</div>';
+                $("#dropDownButton").jqxDropDownButton('setContent', dropDownContent);
+                 $("#sys_department_id").val(event.args.element.id);
+             
+            });
+            $("#jqxTree").jqxTree({ width: 200, height: 220,theme: 'bootstrap'});
+        });
+</script>

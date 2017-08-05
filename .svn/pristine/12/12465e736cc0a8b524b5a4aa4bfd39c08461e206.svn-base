@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<div class="row">
+    <div class="col-lg-12">
+        <h3 class="page-header">Thêm nhóm người dùng</h3>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <form role="form" method="POST" name="AddUserGroup" onsubmit="return checkinput();">                                    
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-lg-3">
+                                        <label>Tên nhóm</label>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <input class="form-control" name="group_name" id="group_name" value="<?php echo $this->item->getGroup_Name(); ?>">
+                                    </div>
+                                    
+                                </div>
+                            </div>
+<!--                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-lg-3">
+                                        <label>Thứ tự</label>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <input class="form-control" name="order_user_group" id="order_user_group" value="<?php // echo $this->item->getOrder(); ?>">
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="row">
+                                <div class="col-lg-3">
+                                    <label>Trạng thái</label>
+                                </div>
+                                <div class="col-lg-6">
+                                    <input class="form-control" name="status_user_group" id="status_user_group" value="<?php // echo $this->item->getStatus(); ?>">
+                                </div>
+                                </div>
+                            </div>-->
+                             <div class="form-group">
+                                <div class="row">
+                                <div class="col-lg-3">
+                                    <label>Ghi chú</label>
+                                </div> 
+                                    <div class="col-lg-6">
+                                        <textarea  name="comment_user_group" id="comment_user_group" type="text" class="form-control" cols="100" rows="5"><?php echo $this->item->getComment(); ?></textarea>    
+                                    </div>  
+                                </div>
+                                
+                             </div>
+<!--                            <div class="form-group">
+                                <div class="row">
+                                <div class="col-lg-3">
+                                    <label>Hiển thị</label>
+                                </div>
+                                <div class="col-lg-6">
+                                    <input type="checkbox" name="status_province" id="status_province" value="1" 
+                                        <?php //echo ($this->item->getStatus() == 1 ? "checked=\"checked\"" : "") ?> >
+                                </div>
+                                </div>
+                            </div>                          -->
+                            <div class="form-group">
+                                <center>
+                                <div class="row">
+                                <button type="submit" name="addusergroup" id="addusergroup" class="btn btn-primary">Thêm mới</button>
+                                <button type="reset" class="btn btn-default">Đặt lại</button> </                              
+                                </div> </center>   
+                                
+                            </div> 
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>   
+</div>
+
+<script type="text/javascript">
+    document.forms['AddUserGroup'].name.focus();
+    function set_focus() {
+        document.forms['AddUserGroup'].name.focus();
+    }   
+    function checkinput() {
+        var frm = window.document.AddUserGroup;
+        if(isNaN(frm.group_name.value)== false){
+            bootbox.alert("Vui lòng nhập tên nhóm bằng chữ");
+            return false;
+        }        
+        if(frm.group_name.value == ""){
+             bootbox.alert("Vui lòng nhập tên nhóm");
+            return false;
+        }
+        if((isNaN(frm.order_user_group.value)==true)&&(frm.order_user_group.value != "")){
+            bootbox.alert("Vui lòng nhập số thứ tự");
+            return false;
+        }
+        if(isNaN(frm.status_user_group.value)== false){
+            bootbox.alert("Vui lòng nhập trạng thái bằng chữ");
+            return false;
+        } 
+        if(frm.status_user_group.value == ""){
+             bootbox.alert("Vui lòng nhập trạng thái");
+            return false;
+        }
+      return true;
+    }
+</script>

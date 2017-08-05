@@ -1,0 +1,266 @@
+<div class="row">
+    <div class="col-lg-12">
+        <h3 class="page-header">Thông tin về tang vật vô chủ</h3>      
+    </div>    
+</div>
+<div class="row">
+   
+   <div class="panel panel-default">             
+            <div class="panel-heading">
+                <div class="row">
+                 <div class="row">
+                     <div class="col-lg-2" style="text-align:center;width: 9%;padding-right: 0px;">
+                         <a id ="addLink" href="<?php echo $this->baseUrl()."/leader/docviolationshandling/addownerlessgoods"?>">
+                             <button type="button" class="btn btn-success btn-action"><i class="fa fa-plus fa-2x"></i>
+                             </button></br>
+                             <span >Thêm Mới</span>
+                         </a>
+                     </div>
+                 </div>
+                </div>
+            </div>
+      <div class="panel-body">
+          <!--<div class="form-group">-->
+<!--              <form role="form" method="POST" name="Search" onsubmit="">-->
+<!--      <div class="row" id="jqxcombobox">
+        <div  class="col-lg-1">
+            <label style="margin-left: 20px;" >Tháng</label>
+        </div>
+        
+           <div style='float: left' id='month' name='month'>
+                
+            </div>
+     
+           <div  class="col-lg-1">
+            <label style="margin-left: 20px;" >Năm</label>
+        </div>
+          <div class="col-lg-2">  
+           <div style='float: left' id='year' name='year'>
+                
+            </div>
+        </div>
+        <div class="form-group">
+                <button type="submit" class="btn btn-primary">Tìm</button>
+        </div>
+      </div>  -->
+                    <!--</form>-->
+          <!--</div>-->
+          <div class="form-group" >
+       <div id="jqxTabs">
+        <ul style="margin-left: 30px;">
+         <li id="tab1">Tang vật vô chủ</li>
+         <li id="tab2">Tang vật không xác định</li>
+        </ul>
+        
+        <div id="jqxWidget">
+            <div id="jqxgrid"></div>
+        </div>
+        <div id="jqxWidget">
+            <div id="jqxgrid1"></div>
+        </div>
+    </div>       
+    <input style="display: none" id="hide"/>
+          </div>
+      </div>
+   </div>
+</div>
+ <!--<input type="button" value="Export to Excel" id='excelExport' />-->
+
+<script type="text/javascript">
+        $(document).ready(function () {    
+            $('#jqxTabs').jqxTabs({ width:'100%'});
+                var month = "<?php echo $this->month?>";
+                var year = "<?php echo $this->year?>";
+                var id = "<?php echo $this->id?>";
+                var seltab = "<?php echo $this->seltab?>";
+//                var y = new Date();
+//                var i = y.getFullYear();
+//                var arraymonth=new Array();
+//                        for(var m=1;m<=12;m++){
+//                       arraymonth[m]=m;
+//                        }
+//                function selectedmonth(){
+//                    if(month == ""){
+//                        month = y.getMonth()+1;
+//                        return month;
+//                    }
+//                    else return month;
+//                }
+//                function selectedyear(){
+//                if(year==""){
+//                    year = y.getFullYear();
+//                  return  10;
+//                    } 
+//                else {
+//                    var selectyear =  year;
+//                        selectyear = i-selectyear;
+//                        selectyear = 10-selectyear;
+//                        return selectyear;
+//                    }
+//                }
+               
+//            $("#month").jqxComboBox({ source: arraymonth,selectedIndex:selectedmonth()-1, width: '100px', height: '25px'});
+//                var arrayyear=new Array();
+//                        for(var j=i-10;j<=i+10;j++){
+//                            arrayyear[j]=j;
+//                        }
+//            $("#year").jqxComboBox({ source: arrayyear,selectedIndex:selectedyear(), width: '100px', height: '25px'});
+////                  
+//            $('#month').on('select', function (event) {
+//                    var args = event.args;
+//                    if (args != undefined) {
+//                        var item = event.args.item;
+//                            if (item != null) {
+//                                $('#month').val()=item.val();      
+//                            }
+//                    }
+//               
+//                });
+//            $('#year').on('select', function (event) {
+//                    var args = event.args;
+//                    if (args != undefined) {
+//                        var item = event.args.item;
+//                        if (item != null) {
+//                           $('#year').val() = item.value;                       
+//                        }
+//                    }
+//               
+//                });
+            loadingGrid("jqxgrid",id,'VoChu');
+            loadingGrid("jqxgrid1",id,'KhongXacDinh');
+           
+            $('#jqxTabs').on('select', function (event) {
+             var clickedItem = event.args.item; 
+                var _selTypeBusiness ="<?php echo GlobalLib::_VOCHU;?>";
+                if(clickedItem==1)
+                {
+                    _selTypeBusiness ="<?php echo GlobalLib::_KHONGXACDINH;?>";
+                }
+                
+//                document.getElementById("addLink").href="<?php 
+//                             echo $this->baseUrl()."/leader/docviolationshandling/addownerlessgoods" 
+                                 ?>////////"+_selTypeBusiness+""; 
+          }); 
+          $('#jqxTabs').val(seltab);
+            ///ham load du lieu ra luoi theo tab
+            
+            function loadingGrid(_grid,_id,_status){
+                
+            var url = "<?php echo $this->baseUrl()?>/leader/docviolationshandling/serviceownerlessgoods/status/"+_status;
+
+
+            var arrays = new Array(); 
+                arrays[0]={ name: 'idvh',type:'int'};
+                arrays[1]={ name: 'sys_department_id', type: 'string' };
+                arrays[2]={ name: 'sys_user_id', type: 'string' };
+                arrays[3]={ name: 'date_violation', type: 'string' };
+                arrays[4]={ name: 'iditems', type: 'string' };
+                arrays[5]={ name: 'master_items_id', type: 'string' };
+                arrays[6]={ name: 'master_sanction_id', type: 'string' };
+                arrays[7]={ name: 'doc_violations_handling_id', type: 'string' };
+                arrays[8]={ name: 'serial_handling', type: 'string' };
+                arrays[9]={ name: 'quantity_commodity', type:'quantity_commodity' };
+                arrays[10]={ name: 'master_unit_id', type: 'string' };
+                arrays[11]={ name: 'date_handling', type: 'string' };
+                arrays[12]={ name: 'amount', type: 'int' };
+                
+            var source =
+            {
+                datatype: "json",
+                datafields:arrays,
+                url:url
+               
+            };
+//             
+          var dataAdapter = new $.jqx.dataAdapter(source);
+                var array = new Array();
+                array[0] = {text:"idvh",datafield:'idvh',width:'0',hidden:true};
+                array[1] = {  text: 'Số TT', sortable: false, filterable: false, editable: false,
+                      groupable: false, draggable: false, resizable: false,
+                      datafield: '', columntype: 'number', width: '5%',
+                      cellsrenderer: function (row, column, value) {
+                          return "<div style='margin:7px;'>" + (value + 1-1) + "</div>";
+                      }
+                  };
+                array[2] = { text: 'Đội thực hiện',editable: false,align: "center", dataField: 'sys_department_id', width: '10%' };
+                array[3] = { text: 'sys_user_id',editable: false,align: "center", dataField: 'sys_user_id', width: '12%' };
+                array[4] = { text: 'date_violation',editable: false,align: "center", dataField: 'date_violation', width: '10%' };
+                array[5] = { text: 'iditems',editable: false,align: "center", dataField: 'iditems', width: '10%' };
+                array[6] = { text: 'Tên tang vật',editable: false,align: "center", dataField: 'master_items_id', width: '10%' };
+                array[7] = { text: 'Hình thức xử lý',editable: false,align: "center", dataField: 'master_sanction_id', width: '10%' };
+                array[8] = { text: 'doc_violations_handling_id',editable: false,align: "center", dataField: 'doc_violations_handling_id', width: '10%' };
+                array[9] = { text: 'Biên lai tịch thu htang vật', datafield: 'serial_handling',  cellsalign: 'left', width: '10%', cellsformat: 'd' };
+                array[10] = { text: 'Số lượng', datafield: 'quantity_commodity',  cellsalign: 'center', width: '10%', cellsformat: 'd' };
+                array[11] = { text: 'Đơn vị', datafield: 'master_unit_id',  cellsalign: 'center', width: '10%'};
+                array[12] = { text: 'Ngày tịch thu', datafield: 'date_handling',  cellsalign: 'center', width: '10%'};
+                 array[13] = { text: 'Số tiền đấu thầu', datafield: 'amount',  cellsalign: 'center', width: '10%'};
+                array[14] = {text: 'Xóa',filtertype: 'none', cellsalign: 'center', align: "center", columnType: 'none', editable: false, sortable: false, dataField: null, cellsrenderer: function (row) {
+                          // render custom column.
+                          editrow = row;
+                          var dataRecord = $("#"+_grid).jqxGrid('getrowdata',editrow);
+                          var url= "<div style='overflow: hidden; text-overflow: ellipsis; padding-bottom: 2px; text-align: center; margin-right: 2px; margin-left: 4px; margin-top: 4px;'><a class='fa fa-trash-o fa-lg'";
+                          url = url + "href='#' onclick='return jsdelete("+dataRecord.iditems+")'></a></div>"
+                          return url;
+                      }
+              };
+              array[15] = {text: 'Sửa',filtertype: 'none', cellsalign: 'right', align: "center", columnType: 'none', editable: false, sortable: false, dataField: null, cellsrenderer: function (row) {
+                          // render custom column.
+                          editrow = row;
+                          var dataRecord = $("#"+_grid).jqxGrid('getrowdata',editrow);
+                          var url= "<div style='overflow: hidden; text-overflow: ellipsis; padding-bottom: 2px; text-align: center; margin-right: 2px; margin-left: 4px; margin-top: 4px;'><a class='fa fa-edit fa-lg'";
+                          url = url + "href='<?php echo $this->baseUrl()?>/leader/docviolationshandling/editvochu/type/TichThuHangHoa/id/"+dataRecord.iditems+"'></a></div>"
+                          return url;
+                      }
+                      
+                          };
+//            $("#excelExport").jqxButton();
+//            $("#excelExport").click(function () {
+//                $("#jqxgrid").jqxGrid('exportdata', 'xls', 'jqxGrid');           
+//            });
+                                                                
+            $("#"+_grid).jqxGrid(
+            {
+                width: '100%',
+                source: dataAdapter,  
+                theme: 'bootstrap',
+                rowdetails: true,
+                pageable: true,
+                showfilterrow: true,
+                filterable: true,
+                autoheight: true,
+                sortable: true,
+                altrows: true,
+                enabletooltips: true,
+                selectionmode: 'multiplecellsadvanced',
+                columnsResize: true, 
+                 groupable: true,
+                rendergridrows: function (params) {
+                    return params.data;
+                }, ready: function () {
+                            $("#"+_grid).jqxGrid('hideColumn', 'doc_violations_handling_id');
+                            $("#"+_grid).jqxGrid('hideColumn', 'sys_user_id');
+                            $("#"+_grid).jqxGrid('hideColumn', 'date_violation');
+                            $("#"+_grid).jqxGrid('hideColumn', 'iditems');
+                            $("#"+_grid).jqxGrid('hideColumn', 'sys_department_id');
+                        },
+                columns: array,
+                groups: ['sys_department_id']
+            });        
+        };
+             
+    });
+    </script>
+  <script type="text/javascript">
+        function jsdelete(id)
+        {            
+                    bootbox.confirm("Bạn có chắc muốn xoá tang vật này không?",
+                    function(result){
+                        if(result == true)
+                        {
+                           return window.location = "<?php echo $this->baseUrl() ?>/leader/docviolationshandling/deletevochu/id/"+id;
+                        }
+                    });             
+        }
+    </script>
+    
+    

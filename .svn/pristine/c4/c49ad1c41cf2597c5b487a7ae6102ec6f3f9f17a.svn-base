@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<div class="row">
+                <div class="col-lg-12">
+                    <h1 class="page-header">Trang chủ</h1>
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+<div class="row">
+                <div class="col-lg-3 col-md-6">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    <i class="fa fa-bell fa-5x"></i>
+                                </div>
+                                <div class="col-xs-9 text-right">
+                                    <div class="huge">0</div>
+                                    <div>Thông báo mới!</div>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="#">
+                            <div class="panel-footer">
+                                <span class="pull-left">Xem chi tiết</span>
+                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                <div class="clearfix"></div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+<!--                    <div class="panel panel-green">-->
+ <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    <i class="fa fa-tasks fa-5x"></i>
+                                </div>
+                                <div class="col-xs-9 text-right">
+                                    <div class="huge">0</div>
+                                    <div>Doanh nghiệp mới!</div>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="#">
+                            <div class="panel-footer">
+                                <span class="pull-left">Xem chi tiết</span>
+                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                <div class="clearfix"></div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+<!--                    <div class="panel panel-yellow">-->
+ <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    <i class="fa fa-files-o fa-5x"></i>
+                                </div>
+                                <div class="col-xs-9 text-right">
+                                    <div class="huge">0</div>
+                                    <div>Hồ sơ ấn chỉ mới!</div>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="#">
+                            <div class="panel-footer">
+                                <span class="pull-left">Xem chi tiết</span>
+                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                <div class="clearfix"></div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+<!--                    <div class="panel panel-red">-->
+ <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    <i class="fa fa-bar-chart-o fa-5x"></i>
+                                </div>
+                                <div class="col-xs-9 text-right">
+                                    <div class="huge">0</div>
+                                    <div>Báo cáo!</div>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="#">
+                            <div class="panel-footer">
+                                <span class="pull-left">Xem chi tiết</span>
+                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                <div class="clearfix"></div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+<script>
+    $(document).ready(function(){
+    $('.form-control').datepicker({showAnim: 'drop', dateFormat: 'dd-mm-yy', showWeek: false, showButtonPanel: false});
+    })
+</script>
+<div class="row">  
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="row">
+                    <div class="panel-body">
+                        <div class="table-reponsive">
+                            <div id="container">
+                            </div>
+                        </div>
+                    </div>  
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function () {
+    var chart;
+    var series=[];
+    var options={
+        chart: {
+            renderTo:'container',
+            type: 'column',
+        },
+        title: {
+            text: 'Thông kế số lượng sản phẩm Đại lý bán'
+        },
+        
+        xAxis: {
+            type: 'category',
+            labels: {
+                rotation: -45,
+                style: {
+                    fontSize: '13px',
+                    fontFamily: 'Verdana, sans-serif'
+                }
+            }
+        },
+        yAxis: {
+            min: 0,
+            title: {
+                text: 'Số lượng bán được (Tấn)'
+            }
+        },
+        legend: {
+            enabled: false
+        },
+        tooltip: {
+            pointFormat: 'Số lượng bán được: <b>{point.y:.1f} Tấn</b>'
+        },
+        series: []
+    };
+
+    $.getJSON("<?php //echo $this->baseUrl() ?>/default/statistic/statisticproductbuy/", 
+            {
+                fromdate: $('#from_date').val(),
+                todate:$('#to_date').val()
+            },function (items) {
+            series.push({
+                    data:items
+            });
+            options.series = series;
+            chart = new Highcharts.Chart(options);
+        });
+        chart.render();
+});
+</script>
+<script type="text/javascript">
+$('#submit').click(function () {
+    var chart;
+    var series=[];
+    var options={
+        chart: {
+            renderTo:'container',
+            type: 'column',
+        },
+        title: {
+            text: 'Thông kế số lượng sản phẩm Đại lý bán'
+        },
+        
+        xAxis: {
+            type: 'category',
+            labels: {
+                rotation: -45,
+                style: {
+                    fontSize: '13px',
+                    fontFamily: 'Verdana, sans-serif'
+                }
+            }
+        },
+        yAxis: {
+            min: 0,
+            title: {
+                text: 'Số lượng bán được (Tấn)'
+            }
+        },
+        legend: {
+            enabled: false
+        },
+        tooltip: {
+            pointFormat: 'Số lượng bán được: <b>{point.y:.1f} Tấn</b>'
+        },
+        series: []
+    };
+
+    $.getJSON("<?php //echo $this->baseUrl() ?>/default/statistic/statisticproductbuy/", 
+            {
+                fromdate: $('#from_date').val(),
+                todate:$('#to_date').val()
+            },function (items) {
+            series.push({
+                    data:items
+            });
+            options.series = series;
+            chart = new Highcharts.Chart(options);
+        });
+        chart.render();
+});
+</script>

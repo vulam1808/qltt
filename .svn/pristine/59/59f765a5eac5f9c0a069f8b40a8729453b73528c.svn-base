@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<div class="row">
+    <div class="col-lg-12">
+        <h3 class="page-header">Thêm Tỉnh thành</h3>
+    </div>
+    <!-- /.col-lg-12 -->
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-lg-9">
+                        <form role="form" method="POST" name="AddProvince" onsubmit="return checkinput();">                                    
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-lg-3">
+                                        <label>Mã tỉnh thành(*)</label>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <input class="form-control" name="province_code" id="province_code" value="<?php echo $this->item->getCode(); ?>">
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-lg-3">
+                                        <label>Tên Tỉnh Thành(*)</label>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <input class="form-control" name="name_province" id="name_province" value="<?php echo $this->item->getName(); ?>">
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                           <div class="form-group">
+                                    <div class="row">
+                                    <div class="col-lg-3">
+                                        <label>Ghi chú</label>
+                                    </div> 
+                                        <div class="col-lg-6">
+                                            <textarea  name="comment" id="comment" type="text" class="form-control" cols="100" rows="5"><?php echo $this->item->getComment(); ?></textarea>    
+                                        </div>  
+                                    </div>                                
+                            </div>          
+                            <div class="form-group">
+                                
+                                <button type="submit" name="import" id="import" class="btn btn-primary">Thêm mới</button>
+                                <button type="reset" class="btn btn-default">Đặt lại</button>
+                               
+                            </div> 
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>   
+</div>
+
+<script type="text/javascript">
+    document.forms['AddProvince'].name.focus();
+    function set_focus() {
+        document.forms['AddProvince'].name.focus();
+    }
+    var flag=true;
+    var flag1=true;
+    function checkinput() {
+        var frm = window.document.AddProvince;
+        if (frm.province_code.value == "") {
+            bootbox.alert("Vui lòng nhập mã code");
+            return false;
+        };
+        if (frm.name_province.value == "") {
+            bootbox.alert("Vui lòng nhập tên thành phố");
+            return false;
+        };
+        if(isNaN(frm.name_province.value)== false){
+            bootbox.alert("Vui lòng nhập chữ cho tên tỉnh thành");
+            return false;
+        }
+        var province_code= $('#province_code').val();
+        $.ajax({
+            type:'post',
+            url:'<?php echo $this->baseUrl()?>/leader/masterprovince/checkprovincecode/province_code/'+province_code,
+            async:false,
+            dataType:'json',
+            success:function(data){
+                if(data[0].code==1){
+//                    bootbox.alert(data[0].message);
+                    flag=false;
+                } else {
+                    flag=true;
+                }
+            }
+        });
+        if(flag==false){
+            bootbox.alert("Mã code này đã tồn tại. Vui lòng kiểm tra và nhập lại.");
+            return false;
+        };
+//        var province_name= $('#name_province').val();
+//        $.ajax({
+//            type:'post',
+//            url:'<?php echo $this->baseUrl()?>/leader/masterprovince/checkprovincename/province_name/'+province_name,
+//            async:false,
+//            dataType:'json',
+//            success:function(data){
+//                if(data[0].code==1){
+////                    bootbox.alert(data[0].message);
+//                    flag1=false;
+//                } else {
+//                    flag1=true;
+//                }
+//            }
+//        });
+//        if(flag1==false){
+//            bootbox.alert("Tên tỉnh đã tồn tại.Vui lòng kiểm tra và nhập lại.");
+//            return false;
+//        };
+      return true;
+    }
+</script>

@@ -1,0 +1,134 @@
+
+<div class="row">
+    <div class="col-lg-12">
+        <h3 class="page-header">Thông tin vi phạm - xử lý </h3>      
+    </div>    
+</div>
+
+<div class="row">
+    <div class="col-lg-12">
+            <div class="panel-body">
+                <div class="table-reponsive">
+                    <div id="jqxgrid">
+
+                    </div>
+                </div>
+            </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+        $(document).ready(function () {
+            // prepare the data
+            var source =
+            {
+                datatype: "json",
+                datafields:
+                [
+                    { name: 'id',type:'int'},
+                    { name: 'info_business_id', type: 'string' }, 
+                    { name: 'master_violation_id', type: 'string' },
+                    { name: 'address_business', type: 'string' },
+                    { name: 'master_sanction_id', type: 'string' },
+                    { name: 'sys_department_id', type: 'string' },
+                    { name: 'doc_items_handling', type: 'string' },
+                    { name: 'sys_user_id', type: 'string' },
+                    { name: 'date_violation', type: 'string' },
+                    { name: 'amount', type: 'string' },
+                    { name: 'comment', type: 'string' },
+                    { name: 'name_province', type: 'string' },                    
+                    { name: 'order_province', type: 'int' }
+                ],
+                url:"<?php echo $this->baseUrl().'/admin/docviolationshandling/serviceprintrecords/id/'.$this->id.'/month/'.$this->month.''?>",
+                sortcolumn: 'order_province',
+                sortdirection: 'asc'
+               
+            };
+         var dataAdapter = new $.jqx.dataAdapter(source, {
+                loadComplete: function () {
+                }
+            });
+            $("#jqxgrid").jqxGrid(
+            {
+                width: '100%',
+                source: dataAdapter,  
+                theme: 'bootstrap',
+                pageable: true,
+                showfilterrow: true,
+                filterable: true,
+                autoheight: true,
+                sortable: true,
+                altrows: true,
+                enabletooltips: true,
+                selectionmode: 'multiplecellsadvanced',
+                columnsResize: true,
+                rendergridrows: function (params) {
+                    return params.data;
+                },
+                ready: function () {
+                    $("#jqxgrid").jqxGrid('hideColumn', 'Id');
+                },
+                columns: [
+                  {text:'Id',dataField:'Id',cellsalgin:'right',width:0},
+                  {  text: 'Số TT', sortable: false, filterable: false, editable: false,
+                      groupable: false, draggable: false, resizable: false,
+                      datafield: '', columntype: 'number', width: 50,
+                      cellsrenderer: function (row, column, value) {
+                          return "<div style='margin:7px;'>" + (value + 1) + "</div>";
+                      }
+                  },
+                  { text: 'Tên Doanh nghiệp',editable: false,align: "center", dataField: 'info_business_id', width: '15%' },
+                  { text: 'Địa chỉ',editable: false,align: "center", dataField: 'address_business', width: '15%' },  
+                  { text: 'Hành vi vi phạm',editable: false,align: "center", dataField: 'master_violation_id', width: '15%' },
+                  { text: 'Hình thức xử lý',editable: false,align: "center", dataField: 'master_sanction_id', width: '15%' }, 
+                  { text: 'Tịch thu hàng hóa',editable: false,align: "center", dataField: 'doc_items_handling', width: '15%' }, 
+                  { text: 'Số tiền',editable: false,align: "center", dataField: 'amount', width: '10%' }, 
+                   {text: 'Xóa',filtertype: 'none', cellsalign: 'center', align: "center", columnType: 'none', editable: false, sortable: false, dataField: null, cellsrenderer: function (row) {
+                          // render custom column.
+                          editrow = row;
+                          var dataRecord = $("#jqxgrid").jqxGrid('getrowdata',editrow);
+                          var url= "<div style='overflow: hidden; text-overflow: ellipsis; padding-bottom: 2px; text-align: center; margin-right: 2px; margin-left: 4px; margin-top: 4px;'><a class='fa fa-trash-o fa-lg'";
+                          url = url + "href='#' onclick='return jsdelete("+dataRecord.id+")'></a></div>"
+                          return url;
+                      }
+              },
+                  {text: 'Sửa',filtertype: 'none', cellsalign: 'right', align: "center", columnType: 'none', editable: false, sortable: false, dataField: null, cellsrenderer: function (row) {
+                          // render custom column.
+                          editrow = row;
+                          var dataRecord = $("#jqxgrid").jqxGrid('getrowdata',editrow);
+                          var url= "<div style='overflow: hidden; text-overflow: ellipsis; padding-bottom: 2px; text-align: center; margin-right: 2px; margin-left: 4px; margin-top: 4px;'><a class='fa fa-edit fa-lg'";
+                          url = url + "href='<?php echo $this->baseUrl()?>/admin/docviolationshandling/edit/id/"+dataRecord.id+"'></a></div>"
+                          return url;
+                      }
+                          }
+              
+             
+                ]
+            });
+           
+        });  
+    </script>
+     <script type="text/javascript">
+        function jsdelete(id)
+        {
+            $.get("<?php echo $this->baseUrl() ?>/admin/docviolationshandling/confirmdelete/id/"+id,null,function(data){
+                if(data>0)
+                {
+                    bootbox.alert("Hiện có "+data+" Xã phường thuộc quận huyện này. Vui lòng chuyển các Xã Phường trên sang quận huyện khác trước!");
+                    return false;
+                }
+                else 
+                {
+                    bootbox.confirm("Bạn có chắc muốn xoá thông tin xử lý vi phạm của doanh nghiệp này không?",
+                    function(result){
+                        if(result == true)
+                        {
+                           return window.location = "<?php echo $this->baseUrl() ?>/admin/docviolationshandling/delete/id/"+id;
+                        }
+                    });
+                }
+            });
+        }
+    </script>
+    
+    

@@ -1,0 +1,79 @@
+<div class="row">
+    <div class="col-lg-12">
+        <h3 class="page-header">Danh sách thành phố</h3>
+    </div>
+    <!-- /.col-lg-12 -->
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-lg-3">
+                        <a class="" href="<?php echo $this->url(array("action" => "add")) ?>">Thêm tỉnh thành</a>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-body">
+
+                <div class="table-reponsive">
+                    <div id="jqxgrid">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+</div>
+<script type="text/javascript">
+        $(document).ready(function () {
+            // prepare the data
+            var source =
+            {
+                datatype: "json",
+                datafields:
+                [
+                    { name: 'Id',type:'int'},
+                    { name: 'province_code',type:'string'},
+                    { name: 'name_province', type: 'string' },                    
+                    { name: 'order_province', type: 'int' }
+                ],
+                url:"<?php echo $this->baseUrl().'/master/masterprovince/service?status=1'?>",
+
+                sortcolumn: 'order_province',
+                sortdirection: 'asc'
+               
+            };
+         var dataAdapter = new $.jqx.dataAdapter(source, {
+                loadComplete: function () {
+                }
+            });
+            $("#jqxgrid").jqxGrid(
+            {
+                width: '100%',
+                source: dataAdapter,  
+                theme: 'bootstrap',
+                pageable: true,
+                showfilterrow: true,
+                filterable: true,
+                autoheight: true,
+                sortable: true,
+                altrows: true,
+                enabletooltips: true,
+                selectionmode: 'multiplecellsadvanced',
+                columnsResize: true,
+                rendergridrows: function (params) {
+                    return params.data;
+                },
+                ready: function () {
+                    $("#jqxgrid").jqxGrid('hideColumn', 'Id');
+                },
+                columns: [
+                  {text:'Id',dataField:'Id',cellsalgin:'right',width:0},
+                  {text:'Mã Code',dataField:'province_code',cellsalgin:'right',width:'40%'},
+                  { text: 'Tên thành phố',editable: false, dataField: 'name_province', width: '50%' },                 
+                  { text: 'Thứ tự', editable: false, dataField: 'order_province', width: '10%' }                  
+                ]
+            });
+           
+        });
+    </script>

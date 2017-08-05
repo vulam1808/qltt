@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<div class="row">
+    <div class="col-lg-12">
+        <h3 class="page-header">Thanh toán ấn chỉ</h3>
+    </div>    
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <form  method="POST" name="Adddocprintpayment">  
+                            <div class="form-group">
+                                <div class="row">
+                                        <div class="col-lg-2">
+                                            <label>Đơn vị(*)</label>
+                                        </div>
+                                        <div class="col-lg-3">
+                                            <div id="jqxWidget">
+                                                <div id="dropDownButton">
+                                                    <div style="border: none;" id="jqxTree">
+                                                        <ul>
+                                                        <?php echo GlobalLib::returntree(0) ;?>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <input class="form-control" type="hidden" name="sys_department_id" id="sys_department_id" value="<?php echo $this->itemdepartment->getParent_Id(); ?>">
+                                            <input type="hidden" name="name_department" id="name_department"/>
+                                        </div> 
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-lg-2">
+                                        <label>Nhân viên(*)</label>
+                                    </div>
+                                   <div class="col-lg-3">
+                                        <?php echo  GlobalLib::getComboVersatile('sys_user_id', 'sys_user', 'id', 'username,first_name', 'where sys_department_id=0', false, 'form-control', '', '', '', 'Người dùng','-','');?> 
+                                       <input type="hidden" name="name_user" id="name_user"/>
+                                   </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-lg-2">
+                                        <label>Ngày thanh toán(*)</label>
+                                    </div>
+                                    <div class="col-lg-3">
+                                       <div id='jqxWidget'>
+                                            <div style='float: left;'>
+                                                <div style='float: left; margin-top: 3px;' id='jqxDateTimeInput'>
+                                                </div>
+                                                <div style='margin-left: 20px; float: left;'>
+                                                    <div>
+                                                        <input type="hidden" id="ngaycapphat" name="ngaycapphat">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <input id="selectionlog" style="display: none" name="selectionlog" /> 
+                             <div class="row">
+                                <div class="col-lg-6">                      
+                                        <div class="form-group">
+                                            <div class="row">
+                                                 <div class="col-lg-9">
+                                                     <button type="submit" name="xoa" id="xoa"  class="btn btn-danger icon-trash" >Thanh toán</button>
+                                                 </div>   
+                                            </div>
+                                        </div> 
+                                </div>
+                             </div>
+                        </form>
+                    </div>
+                </div>
+                 <div class="row">
+                     <div class="col-lg-12">
+                         <!--<div class="panel-body">-->
+                            <div class="table-reponsive">
+                                <div id="jqxgrid">
+                                </div>
+                                <div class="row">
+                                    <center>
+                                    </center>
+                                </div>
+                            </div>
+                     </div>
+                 </div>    
+            </div>
+        </div>
+    </div>   
+</div>
+<style>
+    #t{text-align: right};
+</style>
+<script type="text/javascript">
+$(function() {
+    $('#luu').click(function() {
+         $('#soquyen').val($('#doc_print_create_id').val());
+    })
+});
+</script>
+<script type="text/javascript">
+        $(document).ready(function () {
+             var source =
+            {
+                datatype: "json",
+                datafields:
+                [   { name: 'id',type:'string'},
+                    { name: 'sys_department_id',type:'int'},
+                    { name: 'name_department', type: 'string' }, 
+                    { name: 'sys_user_id', type:'int'},
+                    { name: 'name_user', type: 'string' },
+                    { name: 'date_payment', type: 'string' },
+                    { name: 'master_print_id', type: 'int' },
+                    { name: 'name_print', type: 'int' },
+                    { name: 'doc_print_create_id', type: 'string' },
+                    { name: 'name_doc_print_create', type: 'int' },
+                    { name: 'serial_doc_print_create', type: 'string'},
+                    { name: 'serial_recovery', type: 'string' },    
+                    { name: 'serial_fail  ', type: 'string' }, 
+                    { name: 'reasons_fail', type: 'string' },
+                    { name: 'comment', type: 'string' },
+                    { name: 'dunghet', type: 'int' }
+                   
+                ],
+                addrow: function (rowid, rowdata, position, commit) {
+                    commit(true);
+                },
+                deleterow: function (rowid, commit) {
+                    commit(true);
+                },
+                updaterow: function (rowid, newdata, commit) {                   
+                    commit(true);
+                },
+                url:"<?php echo $this->baseUrl().'/master/docprintpayment/service'?>",
+                sortcolumn: 'order',
+                sortdirection: 'asc'
+            };
+            var dataAdapter = new $.jqx.dataAdapter(source, {
+                loadComplete: function () {
+                }
+            });
+             $("#jqxgrid").jqxGrid(
+            {
+                width: '100%',
+                height: 350,
+                source: dataAdapter,
+                showtoolbar: true,
+                theme: 'bootstrap',
+                pageable: true,
+                showfilterrow: true,
+                filterable: true,
+                autoheight: true,
+                sortable: true,
+                altrows: true,
+                enabletooltips: true,
+                editable: true,
+                selectionmode: 'singlerow',
+                columnsResize: true,
+                rendergridrows: function (params) {
+                            return params.data;
+                        },
+                        ready: function () {
+                            $("#jqxgrid").jqxGrid('hideColumn', 'sys_department_id');
+                            $("#jqxgrid").jqxGrid('hideColumn', 'sys_user_id');
+                            $("#jqxgrid").jqxGrid('hideColumn', 'master_print_id');
+                            $("#jqxgrid").jqxGrid('hideColumn', 'doc_print_create_id');
+                            $("#jqxgrid").jqxGrid('hideColumn', 'date_payment');
+                            $("#jqxgrid").jqxGrid('hideColumn', 'id');
+                            
+                        },
+                rendertoolbar: function (toolbar) {
+                    var me = this;
+                    var container = $("<div style='margin: 0px;'></div>");
+                    toolbar.append(container);
+                     container.append('<center><div id="t"></div></center>');                    
+                    $("#xoa").on('click', function () {
+                         $("#luu").hide();
+                        var id = $("#jqxgrid").jqxGrid('getrowid', 0); 
+                        var rowscount = $("#jqxgrid").jqxGrid('getdatainformation').rowscount; 
+                            if(checkinput()){
+                                var co =0;
+                                for (var i = id; i <= rowscount-1; i++) {
+                                    var row = $('#jqxgrid').jqxGrid('getRowData', i); 
+                                    if((row.dunghet == '1')||(row.serial_recovery)||(row.serial_fail)){
+                                        co = 1;break;
+                                    }   
+                                }
+//                              
+                            }else{
+                                return false;
+                            }
+                            if(co == 0){
+                                 bootbox.alert("Bạn chưa chọn quyển sổ nào để thanh toán. Vui lòng kiểm tra và thực hiện lại");
+                                 return false;
+                            }
+                           
+//                                for (var i = id; i <= rowscount-1; i++) {
+//                                var dem = i+1;
+//                                var row = $('#jqxgrid').jqxGrid('getRowData', i); 
+//                                var arrayseriall = arrayserial(row.serial_doc_print_create);
+////                                alert(arrayserial);
+//                                if(row.serial_fail !=""){
+//                                var arrayfail = arrayserial(row.serial_fail);}
+////                                alert(arrayfail);
+//                                if(row.serial_recovery !=""){
+//                                var arrayrecovery = arrayserial(row.serial_recovery);}
+////                               alert(arrayrecovery);
+//                                if(row.serial_recovery !=""){
+//                                    if(checkserial(arrayseriall,arrayrecovery)==1){
+//                                    bootbox.alert("Dòng thứ ("+dem+") Serial thu hồi không nằm trong serial của quyển được cấp phát. Vui long kiểm tra và nhập lại");
+//                                    return false;
+//                                    }
+//                                }
+//                                if(row.serial_fail !=""){
+//                                    if(row.serial_recovery != ""){
+//                                        if(checkserial(arrayrecovery,arrayfail)==1){
+//                                            if(checkserial(arrayseriall,arrayfail)==1){
+//                                                bootbox.alert("Dòng thứ ("+dem+") Serial hỏng không nằm trong serial của quyển được cấp phát. Vui long kiểm tra và nhập lại");
+//                                                return false;
+//                                            }
+//                                        }else{
+//                                                bootbox.alert("Dòng thứ ("+dem+") Serial hỏng trùng với Serial thu hồi. Vui long kiểm tra và nhập lại");
+//                                                return false;
+//                                        }
+//                                    }else{ 
+//                                            if(checkserial(arrayseriall,arrayfail)==1){
+//                                                 bootbox.alert("Dòng thứ ("+dem+") Serial hỏng không nằm trong serial của quyển được cấp phát. Vui long kiểm tra và nhập lại");
+//                                                 return false;
+//                                            } 
+//                                    }
+//                                }
+//                                
+//                            } 
+                           
+                            //kiem tra chon thong tin trong luoi
+                            for (var i = id; i <= rowscount-1; i++) {
+                                var row = $('#jqxgrid').jqxGrid('getRowData', i); 
+                                if((row.dunghet=="1")&&(row.serial_recovery !="")&&(row.serial_fail !="")){
+                                    bootbox.alert("Hướng dẫn:\n\
+                                                    Bạn không được nhập dữ liệu vào cột “Serial T.hồi” nếu đã chọn “dùng hết!” ");
+                                    bootbox.alert("Thông tin bạn chọn chưa đúng. Lỗi xảy ra tại dòng số ("+(i+1)+")  .Vui lòng kiểm tra và thực hiện lại");
+                                    return false;
+                                }
+                            } 
+                            //kiem tra serial nhap vao trong luoi
+                             
+                           
+                            //lay gia tri dong dc chon
+                            var doc_print_payment = new Array();
+                            for (var i = id; i <= rowscount-1; i++) {
+                                var row = $('#jqxgrid').jqxGrid('getRowData', i); 
+                                   doc_print_payment[i] = {
+                                       id:row.id,
+                                       sys_department_id:row.sys_department_id ,
+                                       sys_user_id: $('#sys_user_id').val(),
+                                       doc_print_allocation_id:row.doc_print_allocation_id,
+                                       master_print_id:row.master_print_id,
+                                       serial_recovery:row.serial_recovery,
+                                       serial_fail:row.serial_fail,
+                                       reasons_fail:row.reasons_fail,
+                                       date_payment:$('#jqxDateTimeInput').val(),
+                                       comment:row.comment,
+                                       dunghet:row.dunghet
+                                   };
+                            }
+                            $.ajax({
+                                        type:'post',
+                                        url:'<?php echo $this->baseUrl()?>/master/docprintpayment/savedocprintpayment',
+                                        data:{'datapayment':doc_print_payment},
+                                        async:false,
+                                        dataType:'json',
+                                        success:function(){
+                                        }
+                            });
+                            //xoa het luoi
+                            for (var i = 0; i <= rowscount-1; i++) {
+                                    var commit = $("#jqxgrid").jqxGrid('deleterow', i);
+                            }
+                        
+                    });
+                     // create new row.
+                    $("#jqxgrid").bind('cellbeginedit', function (event) {
+                            var column = $("#jqxgrid").jqxGrid('getcolumn', event.args.datafield);
+                            var row = event.args.rowindex;
+                            var value = $("#jqxgrid").jqxGrid('getcellvalue', row, 'dunghet');
+                            if((column.text == "Serial T.hồi")){
+                                if (value == true) {
+                                    $("#jqxgrid").jqxGrid('endcelledit', row, column, true);
+                                }
+                            }
+                    });
+                   
+                    $("#jqxgrid").bind('cellbeginedit', function (event) {
+                            var column = $("#jqxgrid").jqxGrid('getcolumn', event.args.datafield);
+                            var row = event.args.rowindex;
+                            var value = $("#jqxgrid").jqxGrid('getcellvalue', row, 'serial_recovery');
+                            if((column.text == "Dùng hết")){
+                                if (value != "") {
+                                    $("#jqxgrid").jqxGrid('setcellvalue', row, 'dunghet', 0);
+                                    $("#jqxgrid").jqxGrid('endcelledit', row, column, true);
+                                }
+                            }
+                    });
+                     $("#jqxgrid").bind('cellendedit', function (event) {
+                            var column = $("#jqxgrid").jqxGrid('getcolumn', event.args.datafield);
+                            var row = event.args.rowindex;
+                            var value = $("#jqxgrid").jqxGrid('getcellvalue', row, 'serial_recovery');
+                            if((column.text == "Dùng hết")){
+                                if (value != "") {
+                                    $("#jqxgrid").jqxGrid('setcellvalue', row, 'dunghet', 0);
+                                    $("#jqxgrid").jqxGrid('endcelledit', row, column, true);
+                                }
+                            }
+//                            alert("dsd");
+                            if((column.text == "Serial T.hồi")){
+                                var value = $("#jqxgrid").jqxGrid('getcellvalue', row, 'serial_doc_print_create');
+                                var arr = arrayserial(value);
+                                var valuerecovery = arrayserial(event.args.value);
+                                if(event.args.value ==""){
+                                    bootbox.alert("Bạn chưa nhập giá trị cho serial thu hồi. Vui long kiểm tra và nhập lại");
+                                    return false;
+                                }
+                                if(checkserial(arr,valuerecovery)==1){
+                                    bootbox.alert("Serial thu hồi không nằm trong serial của quyển được cấp phát. Vui long kiểm tra và nhập lại");
+                                    return false;
+                                }
+                                
+//                                alert(arr);
+//                                alert(valuerecovery);
+//                                alert(checkserial(arr,valuerecovery));
+                                
+                            }
+                            if((column.text == "Serial hỏng")){
+                                var value = $("#jqxgrid").jqxGrid('getcellvalue', row, 'serial_doc_print_create');
+                                var valueserialrecovery = $("#jqxgrid").jqxGrid('getcellvalue', row, 'serial_recovery');
+                                var arr = arrayserial(value);
+                                var arrayrecovery = arrayserial(valueserialrecovery);
+                                var valuefail = arrayserial(event.args.value);
+//                                alert(arrayrecovery);
+//                                alert(allarray);
+//                                alert(checkserial(arrayrecovery,valuefail));
+                                if(event.args.value ==""){
+                                    bootbox.alert("Bạn chưa nhập giá trị cho serial hỏng. Vui long kiểm tra và nhập lại");
+                                    return false;
+                                }
+                                if(valueserialrecovery !=""){
+                                    if(checkserial(arrayrecovery,valuefail)==1){
+                                        if(checkserial(arr,valuefail)==1){
+                                             bootbox.alert("Serial hỏng không nằm trong serial của quyển được cấp phát. Vui long kiểm tra và nhập lại");
+                                             return false;
+                                        } 
+                                     }else{                                    
+                                         bootbox.alert("Serial hỏng trùng với Serial thu hồi. Vui long kiểm tra và nhập lại");
+                                         return false;
+                                     }
+                                }else{
+                                     if(checkserial(arr,valuefail)==1){
+                                             bootbox.alert("Serial hỏng không nằm trong serial của quyển được cấp phát. Vui long kiểm tra và nhập lại");
+                                             return false;
+                                     }
+                                }
+                                
+//                                
+                                
+                            }
+                            
+                    });
+                },
+                columns: [    { text: 'id ',editable: false, dataField: 'id', width: '10%' },
+                              { text: 'Mã phòng ban ',editable: false, dataField: 'sys_department_id', width: '10%' },
+                              { text: 'Mã nhân viên',editable: false, dataField: 'sys_user_id', width: '10%' }, 
+                              { text: 'Ngày T.Hồi',editable: false, dataField: 'date_payment', width: '15%' },
+                              { text: 'Mã ấn chỉ', editable: false, dataField: 'master_print_id', width: '10%'},
+                              { text: 'Tên ấn chỉ', editable: false, dataField: 'name_print', width: '20%'},
+                              { text: 'Mã quyển', editable: false, dataField: 'doc_print_create_id', width: '10%'},
+                              { text: 'Số quyển', editable: false, dataField: 'name_doc_print_create', width: '10%'},
+                              { text: 'Serial', editable: false, dataField: 'serial_doc_print_create', width: '10%'},
+                              {text: 'Dùng hết',filtertype: 'none',dataField: 'dunghet', width: '10%', cellsalign: 'right', align: "center", columntype: 'checkbox', editable: true, sortable: false},
+                              { text: 'Serial T.hồi', editable: true, dataField: 'serial_recovery', width: '10%'},
+                              { text: 'Serial hỏng', editable: true, dataField: 'serial_fail', width: '10%'},
+                              { text: 'Lý do hỏng', editable: true, dataField: 'reasons_fail', width: '20%'},
+                              { text: 'Ghi chú', editable: true, dataField: 'comment', width: '20%'},
+                               
+            ]
+            });  
+        });
+    </script>
+ <script type="text/javascript">
+        $(document).ready(function () {
+            $("#luu").hide();
+            $('#doc_print_create_id').multiselect({
+                    includeSelectAllOption:true,
+                    enableFiltering: true,
+                    maxHeight: '300',
+                    buttonText: function(options) 
+                    {
+                        var retStr = "";
+                        if (options.length === 0) {
+                           retStr = "Chưa chọn";
+                        } else if(options.length <=2){
+                           var textArray = [];
+                           $.each(options,function(key,value){
+                               textArray.push($.trim($(value).html()));
+                           });
+                           retStr = "<div class='pull-left restricted'>"+textArray.join(",")+"</div>";
+                        } else {
+                           retStr = options.length+" selected";
+                        }
+                        return retStr+" <b class='caret'></b>";
+                    }  
+                });
+             $('#sys_user_id').multiselect({
+                    maxHeight: '300',
+                    enableFiltering: true,
+                    maxHeight: '300',
+                    onChange: function(option, checked) {
+                        if (checked) {
+                            orderCount++;
+                            $(option).data('order', orderCount);
+                        }
+                        else {
+                            $(option).data('order', '');
+                        }
+                    },
+                });
+
+                $('#sys_user_id').on('change', function() {
+                    var selected = [];
+                    $('#sys_user_id option:selected').each(function() {
+                        selected.push([$(this).val(), $(this).data('order')]);
+                    });
+
+                    selected.sort(function(a, b) {
+                        return a[1] - b[1];
+                    });
+
+                    var text = '';
+                    for (var i = 0; i < selected.length; i++) {
+                        text += selected[i][0] + ', ';
+                    }
+                    text = text.substring(0, text.length - 2);
+
+                    $('#selectionlog').val(text);
+                    $('#selectionlog').text(text);
+                });
+               
+             $('#master_print_id').multiselect({
+                maxHeight: '300',
+                enableFiltering: true,
+                maxHeight: '300',
+                onChange: function(option, checked) {
+                    if (checked) {
+                        orderCount++;
+                        $(option).data('order', orderCount);
+                    }
+                    else {
+                        $(option).data('order', '');
+                    }
+                },
+            });
+        
+        $('#master_print_id').on('change', function() {
+            var selected = [];
+            $('#master_print_id option:selected').each(function() {
+                selected.push([$(this).val(), $(this).data('order')]);
+            });
+ 
+            selected.sort(function(a, b) {
+                return a[1] - b[1];
+            });
+ 
+            var text = '';
+            for (var i = 0; i < selected.length; i++) {
+                text += selected[i][0] + ', ';
+            }
+            text = text.substring(0, text.length - 2);
+ 
+            $('#selectionlog').val(text);
+            $('#selectionlog').text(text);
+        });
+            $('#jqxDateTimeInput').jqxDateTimeInput({ formatString: "dd-MM-yyyy"});
+            var formatString = $('#jqxDateTimeInput').jqxDateTimeInput('formatString');
+            $('#jqxDateTimeInput').on('valueChanged', function (event) {
+                var date = event.args.date;
+                var text= $('#jqxDateTimeInput').jqxDateTimeInput('getText'); 
+                 $('#ngaycapphat').val(text);
+            });
+            $('#jqxDateTimeInput').on('open', function (event) {
+                var date = event.args.date;
+            });
+            $('#jqxDateTimeInput').on('close', function (event) {
+                var date = event.args.date;
+            });
+        });
+    </script>
+<script type="text/javascript">
+    document.forms['Adddocprintpayment'].code.focus();
+    function set_focus() {
+        document.forms['Adddocprintpayment'].code.focus();
+    }
+   
+    function checkinput() {
+        var frm = window.document.Adddocprintpayment;
+        if($("#sys_department_id").val()==""){
+            bootbox.alert("Vui lòng chọn đơn vị thanh toán");
+            return false;
+        }
+        if($("#sys_user_id").val()=="0"){
+            bootbox.alert("Vui lòng chọn nhân viên thanh toán");
+            return false;
+        }
+      return true;
+    }
+</script>
+<script>
+    $("#master_print_id").on('change',function(data){
+        var nameprint;
+        var masterprintid = $("#master_print_id").val();
+        $.ajax({
+            type:'post',
+            url:'<?php echo $this->baseUrl()?>/master/docprintallocation/nameprint/id_master_print/'+masterprintid,
+            async:false,
+            dataType:'json',
+            success:function(data){
+                if(data[0].name_print == null){
+                    $('#name_print').val("");
+                }else{
+                     $('#name_print').val(data[0].name_print);
+                }
+            }
+        }); 
+    });
+    $("#sys_user_id").on('change',function(data){
+        var nameuser;
+        var sys_user_id = $("#sys_user_id").val();
+//        alert(sys_user_id);
+        $.ajax({
+            type:'post',
+            url:'<?php echo $this->baseUrl()?>/master/docprintallocation/nameuser/sys_user_id/'+sys_user_id,
+            async:false,
+            dataType:'json',
+            success:function(data){
+                if(data[0].name_user == null){
+                    $('#name_user').val("");
+                }else{
+                     $('#name_user').val(data[0].name_user);
+                }
+            }
+        }); 
+        
+    });
+</script>
+<script type="text/javascript">
+        $(document).ready(function () {
+            $("#dropDownButton").jqxDropDownButton({ width: 150, height: 25,theme: 'bootstrap'});
+            $('#jqxTree').on('select', function (event) {
+                var args = event.args;
+                var item = $('#jqxTree').jqxTree('getItem', args.element);
+                var dropDownContent = '<div style="position: relative; margin-left: 3px; margin-top: 5px;">' + item.label + '</div>';
+                $("#dropDownButton").jqxDropDownButton('setContent', dropDownContent);
+                $("#sys_department_id").val(event.args.element.id);
+                var url = "<?php echo $this->aConfig["site"]["url"]?>";
+                getSysUserWithDepartment(url+'master/service/index');  
+                getMasterPrintWithDepartment(url+'master/service/index');
+                var sys_department_id = $("#sys_department_id").val();
+//                alert(sys_department_id);
+                $.ajax({
+                    type:'post',
+                    url:'<?php echo $this->baseUrl()?>/master/docprintallocation/namedepartment/sys_department_id/'+sys_department_id,
+                    async:false,
+                    dataType:'json',
+                    success:function(data){
+                        if(data[0].name_department == null){
+                            $('#name_department').val("");
+                        }else{
+                             $('#name_department').val(data[0].name_department);
+                        }
+                    }
+                });
+                //do du lieu ra luoi////////////////////
+                var t = $("#sys_department_id").val(event.args.element.id);
+//                alert("loi:"+sys_department_id);
+             var source =
+            {
+                datatype: "json",
+                datafields:
+                [  
+                    { name: 'id',type:'string'},
+                    { name: 'sys_department_id',type:'int'},
+                    { name: 'name_department', type: 'string' }, 
+                    { name: 'sys_user_id', type:'int'},
+                    { name: 'name_user', type: 'string' },
+                    { name: 'date_payment', type: 'string' },
+                    { name: 'master_print_id', type: 'int' },
+                    { name: 'name_print', type: 'int' },
+                    { name: 'doc_print_create_id', type: 'string' },
+                    { name: 'serial_doc_print_create', type: 'string'},
+                    { name: 'name_doc_print_create', type: 'int' },
+                    { name: 'serial_recovery', type: 'string' },    
+                    { name: 'serial_fail  ', type: 'string' }, 
+                    { name: 'reasons_fail', type: 'string' },
+                    { name: 'comment', type: 'string' },
+                    { name: 'dunghet', type: 'int' }
+                   
+                ],
+                addrow: function (rowid, rowdata, position, commit) {
+                    commit(true);
+                },
+                deleterow: function (rowid, commit) {
+                    commit(true);
+                },
+                updaterow: function (rowid, newdata, commit) {                   
+                    commit(true);
+                },
+                url:"<?php echo $this->baseUrl().'/master/docprintpayment/service/where/'?>"+sys_department_id,
+                sortcolumn: 'order',
+                sortdirection: 'asc'
+            };
+            var dataAdapter = new $.jqx.dataAdapter(source, {
+                loadComplete: function () {
+                }
+            });
+             $("#jqxgrid").jqxGrid(
+            {
+                width: '100%',
+                height: 350,
+                source: dataAdapter,
+                showtoolbar: true,
+                theme: 'bootstrap',
+                pageable: true,
+                showfilterrow: true,
+                filterable: true,
+                autoheight: true,
+                sortable: true,
+                altrows: true,
+                enabletooltips: true,
+                editable: true,
+                selectionmode: 'singlerow',
+                columnsResize: true,
+                rendergridrows: function (params) {
+                            return params.data;
+                        },
+                        ready: function () {
+                            $("#jqxgrid").jqxGrid('hideColumn', 'sys_department_id');
+                            $("#jqxgrid").jqxGrid('hideColumn', 'sys_user_id');
+                            $("#jqxgrid").jqxGrid('hideColumn', 'master_print_id');
+                            $("#jqxgrid").jqxGrid('hideColumn', 'doc_print_create_id');
+                            $("#jqxgrid").jqxGrid('hideColumn', 'date_payment');
+//                            $("#jqxgrid").jqxGrid('hideColumn', 'id');
+                            
+                        },
+                rendertoolbar: function (toolbar) {
+                    var me = this;
+                    var container = $("<div style='margin: 0px;'></div>");
+                    toolbar.append(container);
+                     container.append('<center><div id="t"></div></center>');                    
+                    $("#xoa").on('click', function () {
+//                        alert("abc");
+                         $("#luu").hide();
+                        var id = $("#jqxgrid").jqxGrid('getrowid', 0); 
+                        var rowscount = $("#jqxgrid").jqxGrid('getdatainformation').rowscount; 
+                        //lay gia tri dong dc chon
+                       
+                        
+                        var doc_print_payment = new Array();
+                        for (var i = id; i <= rowscount-1; i++) {
+                            var row = $('#jqxgrid').jqxGrid('getRowData', i); 
+                            alert(row.serial_recovery);alert(row.serial_fail);
+//                            if((row.dunghet=='0')&&(row.serial_recovery="")&&(row.serial_fail="")){
+                                doc_print_payment[i] = {
+                                   id:row.id,
+                                   sys_department_id:row.sys_department_id ,
+                                   sys_user_id: $('#sys_user_id').val(),
+                                   doc_print_allocation_id:row.doc_print_allocation_id,
+                                   master_print_id:row.master_print_id,
+                                   serial_recovery:row.serial_recovery,
+                                   serial_fail:row.serial_fail,
+                                   reasons_fail:row.reasons_fail,
+                                   date_payment:$('jqxDateTimeInput').val(),
+                                   comment:row.comment,
+                                   dunghet:row.dunghet
+                               };
+//                            }
+                               
+                        }
+                        $.ajax({
+                                    type:'post',
+                                    url:'<?php echo $this->baseUrl()?>/master/docprintpayment/savedocprintpayment',
+                                    data:{'datapayment':doc_print_payment},
+                                    async:false,
+                                    dataType:'json',
+                                    success:function(data){
+                                        alert(data[0].sys_department_id);
+                                    }
+                        });
+                    });
+                   
+                     // create new row.
+                    
+                    $("#jqxgrid").bind('cellbeginedit', function (event) {
+                           //alert(event.args.rowindex);
+                            var column = $("#jqxgrid").jqxGrid('getcolumn', event.args.datafield);
+                            var row = event.args.rowindex;
+                            //gia tri cot dùng hết
+                            var value = $("#jqxgrid").jqxGrid('getcellvalue', row, 'dunghet');
+                            // alert(value);
+                            if((column.text == "Serial T.hồi")||(column.text == "Serial hỏng")){
+                                if (value == true) {
+                                    $("#jqxgrid").jqxGrid('endcelledit', row, column, true);
+                                }
+                            }
+                            
+                    });
+                },
+                columns: [    { text: 'id ',editable: false, dataField: 'id', width: '10%' },
+                              { text: 'Mã phòng ban ',editable: false, dataField: 'sys_department_id', width: '10%' },
+                              { text: 'Mã nhân viên',editable: false, dataField: 'sys_user_id', width: '10%' }, 
+                              { text: 'Ngày T.Hồi',editable: false, dataField: 'date_payment', width: '15%' },
+                              { text: 'Mã ấn chỉ', editable: false, dataField: 'master_print_id', width: '10%'},
+                              { text: 'Tên ấn chỉ', editable: false, dataField: 'name_print', width: '20%'},
+                              { text: 'Mã quyển', editable: false, dataField: 'doc_print_create_id', width: '10%'},
+                              { text: 'Số quyển', editable: false, dataField: 'name_doc_print_create', width: '10%'},
+                              { text: 'Serial', editable: false, dataField: 'serial_doc_print_create', width: '10%'},
+                              {text: 'Dùng hết ',filtertype: 'none',dataField: 'dunghet', width: '10%', cellsalign: 'right', align: "center", columntype: 'checkbox', editable: true, sortable: false},
+                              { text: 'Serial T.hồi', editable: true, dataField: 'serial_recovery', width: '10%'},
+                              { text: 'Serial hỏng', editable: true, dataField: 'serial_fail', width: '10%'},
+                              { text: 'Lý do hỏng', editable: true, dataField: 'reasons_fail', width: '10%'},
+                              { text: 'Ghi chú', editable: true, dataField: 'comment', width: '20%'},
+                               
+            ]
+            });  
+            });
+            $("#jqxTree").jqxTree({ width: 200, height: 220,theme: 'bootstrap'});
+        });
+</script>

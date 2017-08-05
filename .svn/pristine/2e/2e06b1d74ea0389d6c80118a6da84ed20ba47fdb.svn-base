@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<div class="row">
+    <div class="col-lg-12">
+        <h3 class="page-header">Chỉnh sửa thông tin người dùng</h3>
+    </div>
+    <!-- /.col-lg-12 -->
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <form role="form" method="POST" name="AddProvince" onsubmit="return checkinput();">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    Thông tin người dùng
+                                </div>
+                                <div class="panel-body">
+                                    <div class="form-group">
+                                        <div class="row">
+                                            <div class="col-lg-2">
+                                                <label>Tên người dùng</label>
+                                            </div>
+                                            <div class="col-lg-4">                                        
+                                                <input class="form-control" name="username" id="username" value="<?php echo $this->item->getUserName() ?>" >
+                                            </div>
+                                        </div>
+                                    </div>                                                                                  
+                                    <div class="form-group">
+                                        <div class="row">
+                                            <div class="col-lg-2">
+                                                <label>Họ và tên đệm</label>
+                                            </div>
+                                            <div class="col-lg-4">
+                                                <input class="form-control" name="first_name" id="first_name" value="<?php echo $this->item->getFirst_Name(); ?>">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="row">
+                                            <div class="col-lg-2">
+                                                <label>Tên</label>
+                                            </div>
+                                            <div class="col-lg-4">
+                                                <input class="form-control" name="last_name" id="last_name" value="<?php echo $this->item->getLast_Name(); ?>">
+                                            </div>
+
+                                        </div>
+                                    </div>                                                     
+                                    <div class="form-group">
+                                        <div class="row">
+                                            <div class="col-lg-2">
+                                                <label>Thứ tự</label>
+                                            </div>
+                                            <div class="col-lg-4">
+                                                <input class="form-control" name="order" id="order" value="<?php echo $this->item->getOrder() ?>">
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <?php if($this->agentitem->getId()!=NULL) { ?>
+                            <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        Thông tin đại lý/cửa hàng
+                                    </div>
+                                    <div class="panel-body">
+                                        <div class="form-group">
+                                            <div class="row">
+                                                <div class="col-lg-2">
+                                                    <label>Tên đại lý</label>
+                                                </div>
+                                                <div class="col-lg-4">
+                                                    <input class="form-control" name="agent_name" id="agent_name" value="<?php echo $this->agentitem->getName();?>">
+                                                </div>
+                                                <div class="col-lg-2">
+                                                    <label>Vốn điều lệ (Tỷ đồng)</label>
+                                                </div>
+                                                <div class="col-lg-4">
+                                                    <input class="form-control" name="legal_capital" id="legal_capital" value="<?php echo $this->agentitem->getLegal_Capital(); ?>">
+                                                </div>
+                                            </div>
+                                        </div>  
+                                        <div class="form-group">
+                                            <div class="row">
+                                                <div class="col-lg-2">
+                                                    <label>Địa chỉ</label>
+                                                </div>
+                                                <div class="col-lg-4">
+                                                    <input class="form-control" name="agent_address" id="agent_address" value="<?php echo $this->agentitem->getAddress(); ?>">
+                                                </div>
+                                                <div class="col-lg-2">
+                                                    <label>Kinh nghiệm KD PB (Năm)</label>
+                                                </div>
+                                                <div class="col-lg-4">
+                                                    <select id="experience" name="experience" style="" class="form-control">
+                                                        <option value="0">Chưa lựa chọn</option>
+                                                       <?php 
+                                                $tmp = $this->agentitem->getExperience();
+                                                if (!($tmp > 0))
+                                                    
+                                                for ($i = 1960; $i < 2030; $i++) {
+                                                    ?>
+                                                        <option value="<?php echo $i ?>" <?php if ($tmp == $i) echo 'selected="selected"' ?> ><?php echo $i ?></option>
+                                                <?php } ?>
+                                                    </select>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="row">
+                                                 <div class="col-lg-2">
+                                                    <label>Người đại diện</label>
+                                                </div>
+                                                <div class="col-lg-4">                                          
+                                                    <input class="form-control" name="representavie" id="representavie" value="<?php echo $this->agentitem->getRepresentavie(); ?>">
+                                                </div>
+                                                <div class="col-lg-2">
+                                                            <label>Ngày sinh</label>
+                                                        </div>
+                                                <div class="col-lg-4">                                                                              
+                                                    <input id="birthday" name="birthday" type="text" class="form-control" readonly="true" value="<?php echo GlobalLib::viewDate($this->agentitem->getBirthday()) ?>"/>     
+                                                </div>
+                                               
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="row">
+                                                <div class="col-lg-2">
+                                                    <label>Số điện thoại</label>
+                                                </div>
+                                                <div class="col-lg-4">                                          
+                                                    <input class="form-control" name="phone" id="phone" value="<?php echo $this->agentitem->getPhone() ?>">
+                                                </div>
+                                                <div class="col-lg-2">
+                                                    <label>Năng lực tiêu thụ</label>
+                                                </div>
+                                                <div class="col-lg-4" >
+                                                    <input class="form-control" name="ability_sell" id="ability_sell" value="<?php echo $this->agentitem->getAbility_Sell(); ?>">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="row">
+                                                 <div class="col-lg-2">
+                                                    <label>Loại đại lý</label>
+                                                </div>
+                                                <div class="col-lg-4">                                          
+                                                    <?php echo GlobalLib::getCombo('agent_cat_id', 'agent_category', 'id', 'name', $this->agentitem->getAgent_Cat_Id(), false, '', null, 'class="form-control" disabled="true"') ?> 
+                                                </div>
+                                                <div class="col-lg-2">
+                                                    <label>Năng lực vận tải</label>
+                                                </div>
+                                                <div class="col-lg-4">
+                                                    <select class="form-control" name="ability_transport" id="ability_transport" disabled="true">
+                                                        <?php $tmpAbility = $this->agentitem->getAbility_Transport() ?>
+                                                        <option value="0" <?php if ($tmpAbility == "0") echo 'selected="selected"' ?>>Chưa Lựa Chọn</option>
+                                                        <option value="1" <?php if ($tmpAbility == "1") echo 'selected="selected"' ?>>Trung Bình</option>
+                                                        <option value="2" <?php if ($tmpAbility == "2") echo 'selected="selected"' ?>>Khá</option>
+                                                        <option value="3" <?php if ($tmpAbility == "3") echo 'selected="selected"' ?>>Tốt</option>
+                                                        <option value="4" <?php if ($tmpAbility == "4") echo 'selected="selected"' ?>>Rất Tốt</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="row">
+                                               <div class="col-lg-2">
+                                                    <label>Mã số thuế</label>
+                                                </div>
+                                                <div class="col-lg-4">                                          
+                                                    <input class="form-control" name="tax_code" id="tax_code" value="<?php echo $this->agentitem->getTax_Code(); ?>">
+                                                </div>
+                                                <div class="col-lg-2">
+                                                    <label>Số lượng CBKD (Người)</label>
+                                                </div>
+                                                <div class="col-lg-4">
+                                                    <input class="form-control" name="person" id="person" value="<?php echo $this->agentitem->getPerson(); ?>">
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="row">
+                                                
+                                                      <div class="col-lg-2">
+                                                    <label>Trạng thái</label>
+                                                </div>
+                                                <div class="col-lg-4">                                          
+                                                    <select class="form-control" id="agent_status" name="agent_status" disabled="true">
+                                                <?php $tmpAgent_status = $this->agentitem->getAgent_Status(); ?>
+                                                <option value="0" <?php if($tmpAgent_status=="0") echo 'selected="selected"' ?>>Chưa lựa chọn</option>
+                                                <option value="1" <?php if($tmpAgent_status=="1") echo 'selected="selected"' ?>>Đại lý mới</option>
+                                                <option value="2" <?php if($tmpAgent_status=="2") echo 'selected="selected"' ?>>Đang hoạt động</option>
+                                                <option value="3" <?php if($tmpAgent_status=="3") echo 'selected="selected"' ?>>Tạm ngưng hoạt động</option>
+                                            </select>
+                                                </div>
+                                                    
+                                                    <div class="col-lg-2">
+                                                        <label>Số chứng minh</label>
+                                                    </div>
+                                                    <div class="col-lg-4">                                            
+                                                        <input class="form-control" name="identity_card" id="identity_card" value="<?php echo $this->agentitem->getIdentity_Card(); ?>">                                                                               
+                                                    </div>
+
+                                                    
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="row">
+                                               <div class="col-lg-2">
+                                                    <label>Năng lực kho chứa (Tấn)</label>
+                                                </div>
+                                                <div class="col-lg-4">
+                                                    <input class="form-control" name="ability_archive" id="ability_archive" value="<?php echo $this->agentitem->getAbility_Archive(); ?>">
+
+                                                </div>
+                                            </div>
+                                        </div>   
+                                        
+                                    </div>
+                                </div>
+                        </div>
+                            <?php }?>
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-primary">Lưu</button>
+                                <button type="reset" class="btn btn-default">Đặt lại</button>
+                                <button type="button" class="btn btn-primary" id="btn-changepass">Thay đổi mật khẩu</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>   
+</div>
+<div id="myModal" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;</button>
+                <h4 class="modal-title">
+                    <center>
+                        Thay đổi mật khẩu
+                    </center>
+                </h4>
+            </div>
+            <div class="modal-body">    
+
+                <div class="row">
+                    <div class="col-lg-4">                            
+                        Mật khẩu cũ
+                    </div>
+                    <div class="col-lg-6">
+                        <input class="form-control" type="password" id="oldpassword" name="oldpassword" /></div>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-4">
+                        Mật khẩu mới</div>
+                    <div class="col-lg-6">
+                        <input class="form-control" type="password" id="password" name="password" /></div>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-4">
+                        Xác nhận mật khẩu mới</div>
+                    <div class="col-lg-6">
+                        <input class="form-control" type="password" id="repassword" name="repassword" /></div>
+                    <div class="col-lg-2">
+                        <span style="color: Red;"></span></div>
+                </div>
+            </div>                    
+            <div class="modal-footer">    
+                <center>
+                    <button id="savechange" class="btn btn-primary" type="submit" onclick="return checkpass();">
+                        Lưu
+                    </button>
+                    <button type="button" id="close" class="btn btn-default" data-dismiss="modal">
+                        Đóng
+                    </button>
+                </center>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    // When the document is ready
+    $(document).ready(function () {
+        $("#username").click(function () {
+            bootbox.alert("Không được thay đổi tên đăng nhập");
+        });
+        $("#agent_name").click(function () {
+            bootbox.alert("Không được thay đổi tên đại lý");
+        });
+        $('#birthday').datepicker({
+            dateFormat: "dd-mm-yy"
+        });
+
+        $("#btn-changepass").click(function () {
+            $("#myModal").modal('show');
+        });
+    });
+    function checkpass() {
+
+        if ($("#oldpassword").val() == "")
+        {
+            bootbox.alert("Vui lòng nhập mật khẩu cũ");
+            return false;
+        }
+        else
+        if ($("#password").val() == "")
+        {
+            bootbox.alert("Vui lòng nhập mật khẩu mới");
+            return false;
+        }
+        else
+        if ($("#repassword").val() == "")
+        {
+            bootbox.alert("Vui lòng nhập mật khẩu xác nhận");
+            return false;
+        }
+        else
+        if (calcMD5($("#oldpassword").val()) != "<?php echo $this->item->password; ?>")
+        {
+            bootbox.alert("Mật khẩu cũ không chính xác");
+            return false;
+        }
+        else if ($("#password").val() != $("#repassword").val())
+        {
+            bootbox.alert("Mật khẩu xác nhận không chính xác");
+            return false;
+        }
+        var params = {
+            id: "<?php echo $this->item->getId() ?>",
+            oldpassword: $("#oldpassword").val(),
+            password: $("#password").val()
+        };
+        $.post('<?php echo $this->baseUrl() ?>/default/login/changepassword', params, function (datas) {
+            var items = eval(datas);
+            var jItem = items[0];
+            if (jItem.html != '')
+            {
+
+                window.location = jItem.html;
+            }
+            else
+            {
+                if (errorMessage != '' && errorMessage != null) {
+                    alert(errorMessage);
+                }
+            }
+        });
+        $("#myModal").modal('hide');
+    }
+    ;
+</script>
+<script type="text/javascript">
+    document.forms['AddProvince'].name.focus();
+    function set_focus() {
+        document.forms['AddProvince'].name.focus();
+    }
+    function checkinput() {
+        var frm = window.document.AddProvince;
+        if (frm.username1.value == "" || frm.username2.value == "") {
+            bootbox.alert("Vui lòng nhập đầy đủ tên người dùng!");
+            return false;
+        }
+        if (frm.last_name.value == "") {
+            bootbox.alert("Vui lòng nhập họ và tên đệm!");
+            return false;
+        }
+        if (frm.first_name.value == "") {
+            bootbox.alert("Vui lòng nhập tên!");
+            return false;
+        }
+        if (frm.order.value == "" || isNaN(frm.order.value)) {
+            bootbox.alert("Vui lòng nhập số thứ tự");
+            return false;
+        }
+    }
+</script>
+<script type="text/javascript">
+            // When the document is ready
+            $(document).ready(function () {
+                
+                $('#birthday').datepicker({
+                    dateFormat: "dd-mm-yy"
+                });  
+                $("#legal_capital, #ability_archive, #phone, #tax_code, #person, #order, #identity_card, #ability_sell").keydown(function (e) {
+                    // Allow: backspace, delete, tab, escape, enter and .
+                    if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110, 190]) !== -1 ||
+                         // Allow: Ctrl+A
+                        (e.keyCode == 65 && e.ctrlKey === true) || 
+                         // Allow: home, end, left, right
+                        (e.keyCode >= 35 && e.keyCode <= 39)) {
+                             // let it happen, don't do anything
+                             return;
+                    }
+                    // Ensure that it is a number and stop the keypress
+                    if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
+                        e.preventDefault();
+                    }
+                });
+            
+            });
+</script>

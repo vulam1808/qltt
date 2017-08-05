@@ -1,0 +1,275 @@
+
+<script type='text/javascript'>//<![CDATA[ 
+$(window).load(function(){
+//var data = generatedata(20);
+ var source =
+            {
+                datatype: "json",
+                datafields:
+                [
+                    { name: 'Id',type:'int'},
+                    { name: 'coefficient', type: 'int' },
+                    { name: 'invoice_number',type: 'int'},
+                    { name: 'serial', type: 'string' },
+                    { name: 'code_master_print',type:'string'},
+                    { name: 'master_print_id', type: 'string' },
+                    { name: 'created_date',type:'string'},
+                    { name: 'comment',type:'string'},
+                    { name: 'status',type:'string'},
+                    { name: 'serial_recovery',type:'string'},
+                    { name: 'chon',type:'int'}
+                ],
+                addrow: function (rowid, rowdata, position, commit) {
+                    commit(true);
+                },
+                deleterow: function (rowid, commit) {
+                    commit(true);
+                },
+                updaterow: function (rowid, newdata, commit) {                   
+                    commit(true);
+                },
+                url:"<?php echo $this->baseUrl().'/default/docprintcreate/service'?>",
+                sortcolumn: 'Id',
+                sortdirection: 'DESC'
+            };
+
+ var dataAdapter = new $.jqx.dataAdapter(source);
+  $("#jqxgrid").jqxGrid(
+            {
+                width: '100%',
+                source: dataAdapter,  
+                theme: 'bootstrap',
+                pageable: false,
+                showfilterrow: true,
+                filterable: true,
+                autoheight: true,
+                sortable: true,
+                altrows: true,
+                editable: false,
+                enabletooltips: true,
+                selectionmode: 'singlerow',
+                columnsResize: true,
+                groupable: true,
+                
+                
+                rendergridrows: function (params) {
+                    return params.data;
+                },
+                ready: function () {
+                    $("#jqxgrid").jqxGrid('hideColumn', 'Id');
+                     $("#jqxgrid").jqxGrid('hideColumn', 'master_print_id');
+                },
+                rendertoolbar: function (toolbar) {
+                    var me = this;
+                    var container = $("<div style='margin: 0px;'></div>");
+                    toolbar.append(container);
+                    container.append('<center><div id="t"></div></center>'); 
+         
+    /////////////////
+                   
+                },
+                columns: [
+                  { text: 'Id',editable: false, dataField: 'Id', width: 0 },
+                  { text: 'Mã ấn chỉ',editable: false, dataField: 'code_master_print', width: '10%' }, 
+                  { text: 'Tên ấn chỉ',editable: false, dataField: 'master_print_id', width: '25%'}, 
+                  { text: 'Quyển số',editable: false, dataField: 'coefficient', width: '10%' },  
+                  { text: 'Serial',editable: false, dataField: 'serial', width: '15%' }, 
+                  { text: 'Ngày tạo',editable: false, dataField: 'created_date', width: '10%' },
+                  { text: 'Số hóa đơn',edittable:false,dataField: 'invoice_number',width:'15%'},
+                  { text: 'Trạng thái',edittable:false,dataField: 'status',width:'15%'},
+                  { text: 'Serial thu hồi',edittable:false,dataField: 'serial_recovery',width:'10%'},
+                  { text: 'Ghi chú',editable: false, dataField: 'comment', width: '10%' },
+//                  { text: 'Chọn',editable: true, dataField: 'chon',columntype: 'checkbox', width: '5%' },
+                  {text: 'Xóa',filtertype: 'none', cellsalign: 'right', align: "center", columnType: 'none', editable: false, sortable: false, dataField: null, cellsrenderer: function (row) {
+                          // render custom column.
+                          editrow = row;
+                          var dataRecord = $("#jqxgrid").jqxGrid('getrowdata',editrow);
+                          var url= "<div style='overflow: hidden; text-overflow: ellipsis; padding-bottom: 2px; text-align: center; margin-right: 2px; margin-left: 4px; margin-top: 4px;'><a class='fa fa-trash-o fa-lg'";
+                          url = url + "href='#' onclick='return jsdelete("+dataRecord.Id+")'></a></div>"
+                          return url;
+                      }
+              },
+                ],
+                 groups: ['master_print_id']
+            });
+            $("#jqxbutton").jqxButton({
+                theme: 'energyblue',
+                height: 30
+            });
+            $('#jqxbutton').click(function () {
+                  var filter = $("#jqxgrid").jqxGrid('getfilterinformation');
+                    var  condition1 = filter[1].filter.getfilters()[0].value;
+//                    alert(condition1);
+                   var datafield = filter[0].filtercolumn;
+                   var datafield1 = filter[1].filtercolumn;
+//                   alert(datafield); alert(datafield1); 
+                    var a = '"'+filter[1].filter.getfilters()[0].value.toString()+'"';
+                    var b = '"'+filter[0].filter.getfilters()[0].value.toString()+'"';
+                                   var doc_print_create = new Array();    
+//                                   doc_print_create[0]={ invoice_number:a ,created_date:b};
+                                   doc_print_create[0]={ invoice_number:filter[1].filter.getfilters()[0].value ,created_date:filter[0].filter.getfilters()[0].value};
+//                                    doc_print_create[0]={ invoice_number:"1",created_date:"26-06-2015"};
+//                                   alert("doc_print_create");                       
+                                    $.ajax({
+                                               type:'Post',
+                                               url:'<?php echo $this->baseUrl()?>/default/docprintcreate/list',
+                                               data:{'datafilter':doc_print_create},
+                                               async:false,
+                                               dataType:'json',
+                                               success:function(){
+                                               }
+                                       });
+            });
+        });
+
+</script>
+ <div class="row">
+     <div class="col-lg-12">
+        <h3 class="page-header">Danh sách nhận ấn chỉ</h3>
+    </div>  
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default">             
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <form  method="POST" name="A" action="<?php echo $this->baseUrl()?>/default/docprintcreate/printcreateexport" onsubmit="return checkinput();"> 
+                        <div class="form-group">
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="col-lg-2">
+                                            <label>Ngày nhận:</label>
+                                        </div>
+                                        <div class="col-lg-3">
+                                       <div id='jqxWidget'>
+                                            <div style='float: left;'>
+                                                <div style='float: left; margin-top: 3px;' id='jqxDateTimeInput' >
+                                                </div>
+                                                <div style='margin-left: 20px; float: left;'>
+                                                    <div>
+                                                        <input type="hidden" id="ngaycapphat" name="ngaycapphat">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                     </div>
+                                        <div class="col-lg-2">
+                                            <label>Số hóa đơn:</label>
+                                        </div>
+                                        <div class="col-lg-2">
+                                           <input type="text" name="sohd" id="sohd" class="form-control" placeholder="Số hóa đơn"/>
+                                        </div>
+                                        
+                                        <input id="selectionlog" style="display: none" name="selectionlog" /> 
+                                         <div class="col-lg-1">
+                                         </div>
+                                        <div class="col-lg-1">
+                                            <button type="submit" id="t" name="t" class="btn btn-success">Xuất Excel</button>
+                                         </div>
+                                    </div>
+                                </div>
+                            </div>
+                    </form> 
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+        <div class="panel panel-default">             
+            <div class="panel-heading">
+                 <div class="row">
+                     <div class="col-lg-2" style="text-align:center;width: 9%;padding-right: 0px;">
+                         <a href="<?php echo $this->url(array("action"=>"add")) ?>">
+                             <button type="button" class="btn btn-success btn-action"><i class="fa fa-plus fa-2x"></i>
+                             </button></br>
+                             <span >Thêm Mới</span>
+                         </a>
+                     </div>
+                     <div class="col-lg-2" style="text-align:center;width: 9%;padding-right: 0px;">
+
+                     </div>
+                 </div>
+            </div>
+            <div class="panel-body">
+                <div class="table-reponsive">
+                    <div id="jqxgrid">
+                    </div>
+                </div>
+            </div>
+        </div>
+</div>
+   
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#jqxDateTimeInput').jqxDateTimeInput({ formatString: "dd-MM-yyyy"});
+            var formatString = $('#jqxDateTimeInput').jqxDateTimeInput('formatString');
+            $('#jqxDateTimeInput').on('valueChanged', function (event) {
+                var date = event.args.date;
+                var text= $('#jqxDateTimeInput').jqxDateTimeInput('getText'); 
+                 $('#ngaycapphat').val(text);
+            });
+            $('#jqxDateTimeInput').on('open', function (event) {
+                var date = event.args.date;
+            });
+            $('#jqxDateTimeInput').on('close', function (event) {
+                var date = event.args.date;
+            });
+            $('#t').on('click',function(){
+                $('#ngaycapphat').val($('#jqxDateTimeInput').val());
+            });
+        }); 
+    </script>
+<script type="text/javascript">
+    document.forms['A'].name.focus();
+    function set_focus() {
+        document.forms['A'].name.focus();
+    }
+    function checkinput() {        
+        var frm = window.document.A;
+        var flag;
+        if ($('#jqxDateTimeInput').val()=="") {
+            bootbox.alert("Vui lòng chọn ngày!");
+            return false;
+        }
+        if (frm.sohd.value == "") {
+            bootbox.alert("Vui lòng nhập số hóa đơn!");
+            return false;
+        } 
+        return true;
+    }
+</script>
+   
+<script type="text/javascript">
+        function jsdelete(id)
+        {            
+            var flag;
+            $.ajax({
+                    type:'post',
+                    url:'<?php echo $this->baseUrl()?>/default/docprintcreate/confirmdelete/id/'+id,
+                    async:false,
+                    dataType:'json',
+                    success:function(a){
+                        if(a==1){
+                            flag=false;
+                        } else {
+                            flag=true;
+                        }
+                    }
+            });
+            if(flag==false){
+                bootbox.alert("Quyển sổ này đã được cấp phát. Không được phép xóa.");
+                return false;
+            };
+            if(flag == true){
+                bootbox.confirm("Bạn có chắc muốn xoá quyển sổ này không?",function(result){
+                    if(result == true)
+                    { 
+                        return window.location = "<?php echo $this->baseUrl() ?>/default/docprintcreate/delete/id/"+id;
+                    }
+                }); 
+            }
+            return true;
+                
+        }
+    </script>

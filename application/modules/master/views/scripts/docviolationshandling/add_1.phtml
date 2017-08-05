@@ -1,0 +1,1040 @@
+<?php  $identity = Zend_Auth::getInstance()->getIdentity();
+               if(!empty($identity)){
+//                    $this->model->setSys_Department_Id($identity->sys_department_id);
+//                    $this->model->setSys_User_Id($identity->id);
+                }
+?>
+<div class="row">
+    <div class="col-lg-12">
+        <h3 class="page-header">Tạo mới xử lý vi phạm cho <?php 
+                                                        $type = "Doanh nghiệp";
+                                                        if($this->type_business == GlobalLib::_HKD)
+                                                        {
+                                                            $type = "Hộ kinh doanh";
+                                                        }else if($this->type_business == GlobalLib::_DNNDB)
+                                                        {
+                                                             $type = "Doanh nghiệp ngoài địa bàn";
+                                                        }
+                                                        echo $type;
+                                                        ?>
+        </h3>      
+    </div>    
+</div>
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default">      
+                      <div class="panel-heading">
+                 <div class="form-group">
+                                <div class="row">
+                                    <div class="col-lg-2">
+                                        <label>Phòng xử lý: </label>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <div id="jqxWidget" >
+                                            <div id="dropDownButton">
+                                                <div style="border: none;" id="jqxTree" >
+                                                    <ul>
+                                                        <?php echo GlobalLib::returntree($identity->sys_department_id) ;?>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                         
+                                    </div>
+                                    <div class="col-lg-2">
+                                        <label>Nhân viên xử lý: </label>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <?php 
+                                       
+                                           echo GlobalLib::getComboVersatile('sys_user_id', 'sys_user', 'id', 'first_name,last_name', $identity->id, false, 'form-control', '', 'where sys_department_id="'.$identity->sys_department_id.'"', '', 'Chọn người dùng',' ','');
+                                       
+                                            ?>
+                                     
+                                           
+                                             
+                                        </div>
+                                   
+                                          
+                                    </div>   
+                   
+                 </div>
+                              <div class="form-group">
+                                <div class="row">
+                                            <div class="col-lg-2">
+                                        <label>Ngày xử lý:</label>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <div id='jqxDateTimeIndex'>
+                                                         </div>
+                                        </div>
+                                         
+                                    </div> 
+                                </div>
+                            </div>
+                      </div>
+            
+                <div class="panel-body">
+                  <div class="table-reponsive">
+                    <div id="jqxgrid">
+
+                    </div>
+                 
+                <div style="font-size: 13px; margin-top: 20px; font-family: Verdana, Geneva, 'DejaVu Sans', sans-serif;" id="eventLog"></div>
+                <!-- popup item-->
+                
+                </div>
+            </div>
+            <!-- form Số tiền nop phat -->
+                <div style="visibility: hidden;" id="jqxWidget">
+                     <div id="popupWindowAmount" hidden="true">
+                        <div>
+                                <b>Nhập Số tiền phạt !</b>
+                        </div>
+                        <div>
+                            <div class="panel-body">
+                                <div class="row">
+                                        
+                                             <div class="form-group">
+                                           
+                                            <div class="row">
+                                                <div class="col-lg-8">
+                                                     <input placeholder="Nhập số tiền phạt" type="text" class="form-control" id="amount" value=""/>
+                                                </div>
+                                            </div>
+                                            </div>  
+                                            
+                                        <!--</form>--> 
+                                     <!--<form method="POST" action="<?php //echo $this->baseUrl()?>/admin/district/excel">-->
+                                        <div class="row">
+                                             <div class="col-lg-3">
+                                                   <!-- <input style="margin-right: 5px;" type="button" id="btn_SaveAmount" value="Save" /> -->
+                                                   <button class="btn btn-primary" name="submit" id="btn_SaveAmount">Lưu</button>
+                                            </div></div>
+                     
+                                </div>
+                             </div>
+                      </div>
+                        </div>
+    </div>
+             <!-- form tich thu hàng hóa -->
+                <div style="visibility: hidden;" id="jqxWidget">
+                     <div id="popupWindowItems" hidden="true">
+                        <div>
+                                <b>Tịch thu hàng hóa !</b>
+                        </div>
+                        <div>
+                            <div class="panel panel-default">
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-lg-10">
+
+                                            <div class="form-group">
+                                                <div class="row">
+                                                     <div class="col-lg-2">
+                                                        <label>Tên hàng hóa(*)</label>
+                                                    </div>
+                                                    <div class="col-lg-3">
+                                                        <?php echo GlobalLib::getComboSeclect('master_items_id', 'master_items'
+                                                                                            , 'id', 'name', 0, false, '', '', '','Chọn hàng hóa');
+                                                        ?>
+                                                       
+                                                    </div>
+                                                     <div class="col-lg-1"></div>
+                                                    <div class="col-lg-2">
+                                                        <label>Số biên lai tịch thu hàng hóa(*)</label>
+                                                    </div>
+                                                   
+                                                    <div class="col-lg-3">
+                                                        <input  placeholder="Nhập số biên lai ..." class="form-control" id="serial_handling" value="">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="row">
+                                                     <div class="col-lg-2">
+                                                        <label>Số lượng hàng hóa bị tịch thu(*)</label>
+                                                    </div>
+                                                    <div class="col-lg-2">
+                                                        <input placeholder="Nhập số lượng hàng ..." class="form-control" id="quantity_commodity" value="">
+                                                    </div>
+                                                    <div class="col-lg-1">
+                                                         <?php echo GlobalLib::getComboSeclect('master_unit_id', 'master_unit'
+                                                                                            , 'id', 'name', 0, false, '', '', '','Chọn đơn vị');
+                                                        ?>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+
+                                              <div class="form-group">
+                                                <div class="row">
+                                                      <div class="col-lg-2">
+                                                        <label>Hình thức xử lý(*)</label>
+                                                    </div>
+                                                    
+                                                    <div class="col-lg-3">
+                                                        <?php echo GlobalLib::getComboSeclect('master_sanction_id', 'master_sanction'
+                                                                                            , 'id', 'name', 0, false, 'where type ="'.GlobalLib::_TTHH.'"', '', '','Chọn hình thức xử lý');
+                                                        ?>
+                                                    </div>
+                                                     <div class="col-lg-1"></div>
+                                                    <div class="col-lg-2">
+                                                        <label>Ngày xử lý(*)</label>
+                                                    </div>
+                                                    
+                                                    <div class="col-lg-3">
+                                                         <div id='jqxDateTimeInput'>
+                                                         </div>
+                                                    </div>       
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="row">
+                                                     <div class="col-lg-2">
+                                                        <label>Số tiền đấu thầu</label>
+                                                    </div>
+                                                    <div class="col-lg-3">
+                                                        <input placeholder="Số tiền đấu thầu ..." class="form-control" id="amountItem" value="">
+                                                    </div>
+                                                     
+<!--                                                    <div class="col-lg-2">
+                                                        <label>Đính kèm file</label>
+                                                    </div>
+                                                    <div class="col-lg-3">
+                                                         <div id="jqxFileUpload">
+                                                        </div>
+                                                    </div>       -->
+                                                    
+
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <button   id="addItems" class="btn btn-primary">Thêm</button>
+                                                 <button  id="closeItems" class="btn btn-warning">Đóng</button>
+                                            </div> 
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                            <div class="panel panel-default">
+                            <div class="panel-body">
+                                 <div id="jqxgrid_items">
+
+                                </div>
+                             </div>
+                            </div>
+                        </div>
+                        </div>
+                </div>
+             <!-- form ấn chỉ xử phạt -->
+              <div style="visibility: hidden;" id="jqxWidget">
+                        <div id="popupWindowPrint" hidden="true">
+                              <div>
+                                <b>Ấn chỉ xử lý !</b>
+                              </div>
+                             
+                                <div>
+                                    
+                                    <div class="panel panel-default">             
+                                        <div class="panel-heading">
+                                               <div class="row">
+                                             <div class="col-lg-3">
+                                                <button   id="savePrint" class="btn btn-primary">Lưu</button>
+                                            </div> 
+                                               </div>
+                                        </div>
+                                        <div class="panel-body">
+                                            <div id="jqxgrid_print">
+                                            </div> 
+                                        </div>
+                                      
+                                        
+                                    </div>
+                                </div>
+                        </div>
+                    </div>
+</div>
+    </div></div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        <?php if($identity->is_leader != 1)
+              {
+                    echo "$('#sys_user_id').attr('disabled', true);";
+              }
+            ?>
+         $("#dropDownButton").jqxDropDownButton({ width: 150, height: 29,theme: 'bootstrap'});
+            $('#jqxTree').on('select', function (event) {
+                var args = event.args;
+                var item = $('#jqxTree').jqxTree('getItem', args.element);
+                var dropDownContent = '<div style="position: relative; margin-left: 3px; margin-top: 8px;">' + item.label + '</div>';
+                $("#dropDownButton").jqxDropDownButton('setContent', dropDownContent);
+                 
+                 $("#jqxTree").jqxTree({disabled:true});
+             
+            });
+        $("#jqxTree").jqxTree({ width: 200, height: 220, theme: 'bootstrap',disabled:false});
+  
+        $('#master_items_id,#master_unit_id,#master_sanction_id,#sys_user_id').multiselect({
+             maxwidth: '100%',
+            maxHeight: '300',
+            enableFiltering: true,
+           
+        });
+         $("#jqxDateTimeInput,#jqxDateTimeIndex").jqxDateTimeInput({width: '100%', height: '34px',formatString: "dd-MM-yyyy"});
+ //         $('#jqxFileUpload').jqxFileUpload({ width: '100%', uploadUrl: 'imageUpload.php', fileInputName: 'fileToUpload' });
+          
+     });
+</script>
+<script type="text/javascript">
+$(document).ready(function () {
+            var editrow = -1;
+            var dataArray = new Array();
+            var arraySave = function (field,value,row) {
+                 //Kiểm tra có ton tai row trong dataArray
+                var valueRowId = $('#jqxgrid').jqxGrid('getrowid', row);
+                if(dataArray.hasOwnProperty(row))
+                {
+                          dataArray[row]["rowId"]=valueRowId;
+                          dataArray[row][field]=value;
+                }
+                 else
+                 {
+                     //Tạo key cho arrayData
+                     var data = {
+                         rowId: "",
+                         info_business_id: "",
+                         sanction_id: "",
+                         violation_id: "",
+                         amount: "",
+                         array_items_handling: "",
+                         array_print_handling: ""
+                        };
+                     dataArray[row] = data;
+                     dataArray[row]["rowId"]=valueRowId;
+                     dataArray[row][field]=value;
+                 }
+            } 
+            var arrayLoad = function (field,row) {
+                 //Kiểm tra có ton tai row trong dataArray
+                if(dataArray.hasOwnProperty(row))
+                {
+                          return dataArray[row][field];
+                }
+                return '';
+            } 
+            var sourceViolation = 
+            {
+                datatype: "json",
+                datafields:
+                [
+                    { name: 'violation_id', type: 'string' },
+                    { name: 'violation_name', type: 'string' },
+                ],
+                url:'<?php echo $this->baseUrl()?>/admin/docviolationshandling/servicecombobox/type/violation',
+                sortcolumn: 'name',
+                sortdirection: 'asc',
+            };
+            var dataAdapterViolation = new $.jqx.dataAdapter(sourceViolation);
+            var sourceSanction = 
+            {
+                datatype: "json",
+                datafields:
+                [
+                    { name: 'sanction_id', type: 'string' },
+                    { name: 'sanction_name', type: 'string' },
+                ],
+                url:'<?php echo $this->baseUrl()?>/admin/docviolationshandling/servicecombobox/type/sanction',
+                sortcolumn: 'name',
+                sortdirection: 'asc',
+            };
+            var dataAdapterSanction = new $.jqx.dataAdapter(sourceSanction);
+            var sourceBusiness =
+            {
+                datatype: "json",
+                datafields:
+                [
+                    { name: 'business_id', type: 'string' },
+                    { name: 'info_business_name', type: 'string' },
+                     { name: 'address_office', type: 'string' }
+                ],
+                url:'<?php echo $this->baseUrl()?>/admin/docviolationshandling/servicecombobox/type/business/type_business/<?php echo $this->type_business;?>',
+                sortcolumn: 'info_business_name',
+                sortdirection: 'asc',
+                
+            };
+            var dataAdapterBusiness = new $.jqx.dataAdapter(sourceBusiness);
+            var getSourceBusinessAdapter = function (value,row) {
+                var fields = new Array();
+                fields.push(name);
+                //var dataAdapter = new $.jqx.dataAdapter(source, { autoBind: true, autoSort: true, uniqueDataFields: fields, autoSortField: name });
+                    var dataAdapter1 = new $.jqx.dataAdapter(sourceBusiness,
+                    {
+                        beforeLoadComplete: function (records) {
+                            
+                            //var records = dataAdapter.records;
+                            // get the length of the records array.
+                            var length = records.length;
+                            // loop through the records and display them in a table.
+                           
+                            for (var i = 0; i < length; i++) {
+                                var record = records[i];
+                                if(record.business_id == value)
+                                {
+                                      $("#jqxgrid").jqxGrid('setcellvalue', row, "address_office", record.address_office);
+                                }
+                            }
+                           
+                        }
+                    });
+                            dataAdapter1.dataBind();
+            };
+        $("#jqxgrid").jqxGrid(
+            {
+                width: '100%',
+                editable: true,
+                theme: 'bootstrap',
+              
+                //selectionmode: 'singlecell',
+                //editmode: 'selectedrow',
+                //source: gridAdapter,
+                showtoolbar: true,
+                //showeverpresentrow: true,
+//                everpresentrowposition: "top",
+//                everpresentrowactions: "add reset",
+//                everpresentrowactionsmode: "columns",
+               
+                renderToolbar: function(toolBar)
+                {
+                    var toTheme = function (className) {
+                        if (theme == "") return className;
+                        return className + " " + className + "-" + theme;
+                    }
+                    // appends buttons to the status bar.
+                    var container = $("<div style='overflow: hidden; position: relative; height: 100%; width: 100%;'></div>");
+                    var buttonTemplate = "<div style='float: left; padding: 3px; margin: 2px;'><div style='margin: 4px; width: 16px; height: 16px;'></div></div>";
+                    var addButton = $(buttonTemplate);
+                    var cancelButton = $(buttonTemplate);
+                    var updateButton = $(buttonTemplate);
+                    container.append(addButton);
+                    container.append(cancelButton);
+                    container.append(updateButton);
+                    toolBar.append(container);
+                    addButton.jqxButton({cursor: "pointer", enableDefault: false,  height: 25, width: 25 });
+                    addButton.find('div:first').addClass(toTheme('jqx-icon-plus'));
+                    addButton.jqxTooltip({ position: 'bottom', content: "Add"});
+                    updateButton.jqxButton({ cursor: "pointer", disabled: false, enableDefault: false,  height: 25, width: 25 });
+                    updateButton.find('div:first').addClass(toTheme('jqx-icon-save'));
+                    updateButton.jqxTooltip({ position: 'bottom', content: "Save Changes"});
+                    cancelButton.jqxButton({ cursor: "pointer", disabled: false, enableDefault: false,  height: 25, width: 25 });
+                    cancelButton.find('div:first').addClass(toTheme('jqx-icon-cancel'));
+                    cancelButton.jqxTooltip({ position: 'bottom', content: "Clean"});
+                    var rowIndex = null;
+                    $("#jqxgrid").on('rowselect', function (event) 
+                    {
+                        // row's bound index.
+                         rowIndex = event.args.rowindex;
+                       
+                    });
+                    addButton.click(function (event) {
+                        var rows = $('#jqxgrid').jqxGrid('getdisplayrows');
+                        if(rows.length > 0)
+                        {
+                          var count = rows.length;
+                          count--;
+                          var valueBusiness = $('#jqxgrid').jqxGrid('getcellvalue', count, "business");
+                          if(!valueBusiness || valueBusiness.length === 0 || valueBusiness == 0 )
+                            {
+                                  bootbox.alert("Vui lòng chọn tên doanh nghiệp, dòng thứ "+rows.length+" trước khi thêm dòng mới ");
+                                  return false;
+                            }
+                            var valueViolation = $('#jqxgrid').jqxGrid('getcellvalue', count, "violation");
+                          if(!valueViolation || valueViolation.length === 0 || valueViolation == 0 )
+                            {
+                                  bootbox.alert("Vui lòng chọn hành vi vi phạm, dòng thứ "+rows.length+" trước khi thêm dòng mới ");
+                                  return false;
+                            }
+                            var valueSanction = $('#jqxgrid').jqxGrid('getcellvalue', count, "sanction");
+                          if(!valueSanction || valueSanction.length === 0 || valueSanction == 0 )
+                            {
+                                  bootbox.alert("Vui lòng chọn hình thức xử lý, dòng thứ "+rows.length+" trước khi thêm dòng mới ");
+                                  return false;
+                            }
+                             var valuePrintArray= arrayLoad('array_print_handling',count)
+                            if(!valuePrintArray || 0 === valuePrintArray.length)
+                            {
+                                 bootbox.alert("Vui lòng nhập serial ấn chỉ xử phạt, dòng thứ "+rows.length+" trước khi thêm dòng mới ");
+                                  return false;
+                            }
+                        }
+                            $("#jqxgrid").jqxGrid('addRow', null, {});
+                      
+                            // select the first row and clear the selection.
+                            $("#jqxgrid").jqxGrid('clearSelection');
+                            //$("#jqxgrid").jqxGrid('selectRow', 0);
+                            // edit the new row.
+                            //$("#jqxgrid").jqxGrid('beginRowEdit', 0);
+                            
+                        
+                    });
+                    cancelButton.click(function (event) {
+                        var valueRowId = $('#jqxgrid').jqxGrid('getrowid', rowIndex);
+                        for(var i = dataArray.length - 1; i >= 0; i--) {
+                                                if(dataArray[i]['rowId'] === valueRowId) {
+                                                   //delete dataPrintArray[i];
+                                                    dataArray.splice(i, 1);
+                                                }
+                                            }
+                         $("#jqxgrid").jqxGrid('deleterow', valueRowId);
+                            $("#jqxgrid").jqxGrid('addRow', null, {});
+                        
+                    });
+                    updateButton.click(function (event) {
+                         //var jsonString = JSON.stringify(dataArray);
+                        
+                         if(dataArray.length == 0)
+                         {
+                             return;
+                         }
+                        
+                         $.ajax({
+                                type:'post',
+                                url:'<?php echo $this->baseUrl()?>/admin/docviolationshandling/secvicesavehandling',
+                                data: {'data' : dataArray, 'department': $("#jqxTree").val().id, 'user': $("#sys_user_id").val(),'date': $('#jqxDateTimeIndex').val()},
+                                dataType:'json',
+                                async:true,
+                                //dataType:'json',
+                                success:function(data){
+                                    if(data[0].code==1){
+                                        bootbox.alert(data[0].message);
+                                        return false;
+                                    } else {
+                                         window.location=data[0].message;
+                                    }
+                                }
+                            });
+                    });
+                   
+                },
+//                
+                columns: [
+                    
+                    {
+                        text: 'Tên Doanh Nghiệp', datafield: 'business',displayfield: 'info_business_name', columntype: 'combobox',
+                        createeditor: function (row, value, editor) {
+                              editor.jqxComboBox({ source: dataAdapterBusiness,placeHolder: "Chọn doanh nghiệp", displayMember: 'info_business_name', valueMember: 'business_id' });
+//                              editor.on('select',function(event){
+//                                  //var value =  event.args.item.value;
+//                                    //var add = getSourceBusinessAdapter(value);
+//                                    $("#jqxgrid").jqxGrid('setcellvalue', row, 'address_office', 'value');
+//                                    });
+                               
+                        },
+                        cellvaluechanging: function (row, datafield, columntype, oldvalue, newvalue) {
+                            if(typeof(newvalue.value) != "undefined")
+                            {
+                                 arraySave("info_business_id",newvalue.value,row);
+                            }
+                            if (newvalue != oldvalue) {
+                                var office = getSourceBusinessAdapter(newvalue.value,row);
+                            };
+                        }
+                       
+                    },        
+                    { 
+                        text: 'Trụ sở chính',editable: false, datafield: 'address_office', width: '20%',columntype: 'combobox',
+                        
+                    },
+//                    { 
+//                        text: 'Hành vi vi phạm',editable: true, datafield: 'violation',displayfield: 'violation_name', width: '20%',columntype: 'combobox',
+//                        createeditor: function (row, value, editor) {
+//                            var value ;
+//                              editor.jqxComboBox({ source: dataAdapterViolation,checkboxes: true, displayMember: 'violation_name', valueMember: 'violation_id' });
+////                              editor.on('select',function(event){
+////                                var value =  event.args.item.value;
+////                                var add = getSourceBusinessAdapter(value);
+////                                editor.jqxGrid('setcellvalue', row, 'violation_name', 'value');
+////                                });
+////                               
+//                        },
+//                        cellvaluechanging: function (row, datafield, columntype, oldvalue, newvalue) {
+//                            if(typeof(newvalue.value) != "undefined")
+//                            {
+//                                arraySave("violation_id",newvalue.value,row);
+//                            }
+//                        }
+//                       
+//                    },
+                    {
+                      text: 'Hành vi vi phạm', columntype: 'template', datafield: 'violation',
+                      createeditor: function (row, cellvalue, editor, cellText, width, height) {
+                          // construct the editor. 
+                          editor.jqxDropDownList({
+                               source: dataAdapterViolation,checkboxes: true, displayMember: 'violation_name', valueMember: 'violation_id', width: width, height: height,theme: 'office', 
+                              selectionRenderer: function () {
+                                  return "Please Choose:";
+                              }
+                              
+                          });
+                      },
+                      initeditor: function (row, cellvalue, editor, cellText, pressedkey) {
+                          // set the editor's current value. The callback is called each time the editor is displayed.
+                          var items = editor.jqxDropDownList('getItems');
+                          editor.jqxDropDownList('uncheckAll');
+                          var values = cellvalue.split(/,\s*/);
+                          for (var j = 0; j < values.length; j++) {
+                              for (var i = 0; i < items.length; i++) {
+                                  if (items[i].label === values[j]) {
+                                      editor.jqxDropDownList('checkIndex', i);
+                                  }
+                              }
+                          }
+                         
+                      },
+                      geteditorvalue: function (row, cellvalue, editor) {
+                          // return the editor's value.
+                           var items = editor.jqxDropDownList('getCheckedItems'); 
+                                        var checkedItems = "";
+                                        $.each(items, function (index) {
+                                            checkedItems += this.label + ", "; 
+                                        });
+//                                         alert(editor.val());
+                                        arraySave("violation_id",editor.val(),row);
+                                        return checkedItems;
+                           
+//                          return editor.val();
+//                           return editor.text("ghf");
+                      }
+                  },
+                    { 
+                        text: 'Hình thức xử lý',editable: true, datafield: 'sanction',displayfield: 'sanction_name', width: '20%',columntype: 'combobox',
+                        createeditor: function (row, value, editor) {
+                              editor.jqxComboBox({ source: dataAdapterSanction, displayMember: 'sanction_name', valueMember: 'sanction_id' });
+//                              editor.on('select',function(event){
+//                                  //var value =  event.args.item.value;
+//                                    //var add = getSourceBusinessAdapter(value);
+//                                    $("#jqxgrid").jqxGrid('setcellvalue', row, 'address_office', 'value');
+//                                    });
+                        },
+                        cellvaluechanging: function (row, datafield, columntype, oldvalue, newvalue) {
+                            if(typeof(newvalue.value) != "undefined")
+                            {
+                                arraySave("sanction_id",newvalue.value,row);
+                            }
+                            if (newvalue.label == 'Phat tien' || newvalue.label == 'Phạt tiền' || newvalue.label == 'Phat Tien' || newvalue.label == 'Phạt Tiền') {
+                                editrow = row;
+                                var amountPhatTien = arrayLoad('amount',editrow)
+                                if(!amountPhatTien || 0 === amountPhatTien.length)
+                                {
+                                    amountPhatTien = 0;
+                                }
+                                $("#amount").val(amountPhatTien);
+                                var offset = $("#jqxgrid").offset();
+                                  $('#popupWindowAmount').jqxWindow({
+                                        showCollapseButton: true, maxHeight: 300, maxWidth: 500, minHeight: 200, minWidth: 200, height: 300, width: 500,
+                                        initContent: function () {
+                                            $('#popupWindowAmount').jqxWindow('focus');
+                                        }
+                                          });
+                                $("#popupWindowAmount").jqxWindow('open');   
+                            };
+                        }
+                    },
+                    { text: 'Tịch thu hàng hóa', datafield: 'items', columntype: 'button',width: '10%', cellsrenderer: function () {
+                            return "Hàng hóa";
+                        }, 
+                        buttonclick: function (row) {
+                            editrow = row;
+                            dataItemsArray = arrayLoad('array_items_handling',editrow)
+                            if(!dataItemsArray || 0 === dataItemsArray.length)
+                            {
+                                dataItemsArray = new Array();
+                            }
+                            //
+                            refreshDataItem(dataItemsArray);
+                            $('#popupWindowItems').jqxWindow({
+                                            showCollapseButton: true,maxHeight: 800, maxWidth: 1200,minHeight: 800, minWidth: 1200,height: 800, width: 1200,
+                                            initContent: function () {
+                                                $('#popupWindowItems').jqxWindow('focus');
+                                            }
+                                              });
+                                    $("#popupWindowItems").jqxWindow('open');  
+                        }
+                    },
+                    { text: 'Ấn chỉ', datafield: 'print', columntype: 'button',width: '10%', cellsrenderer: function () {
+                            return "Ấn chỉ";
+                        },
+                         buttonclick: function (row) {
+                            editrow = row;
+//                            dataPrintArray = arrayLoad('array_print_handling',editrow)
+//                            if(!dataPrintArray || 0 === dataPrintArray.length)
+//                            {
+//                                dataPrintArray = new Array();
+//                            }
+//                            //
+//                            refreshDataPrint(dataPrintArray);
+                            dataPrintArray = new Array();
+                            $('#popupWindowPrint').jqxWindow({
+                                            showCollapseButton: true,maxHeight: 800, maxWidth: 1200,minHeight: 800, minWidth: 1200,height: 800, width: 1200,
+                                            initContent: function () {
+                                                $('#popupWindowPrint').jqxWindow('focus');
+                                            }
+                                              });
+                                    $("#popupWindowPrint").jqxWindow('open');  
+                        }
+                    }
+                ]
+//                    
+        });
+      
+ 
+ //Get Items
+            var dataItemsArray = new Array();
+            var arrayId = 0;
+            var generatedata = function () {
+                    var valueItemId = $("#master_items_id option:selected").val();
+                    var valueSerialHandling = $("#serial_handling").val();
+                   var valueQuantity = $("#quantity_commodity").val();
+                    var valueUnit = $("#master_unit_id option:selected").val();
+                    var valueSanction = $("#master_sanction_id option:selected").val();
+                    if(!valueItemId || valueItemId.length === 0 || valueItemId == 0 )
+                    {
+                          bootbox.alert("Vui lòng chọn hàng hóa bị tịch thu! ");
+                          return false;
+                    }
+                    if(!valueSerialHandling || valueSerialHandling.length === 0 || valueSerialHandling == 0 )
+                    {
+                          bootbox.alert("Vui lòng nhập số biên lai tịch thu hàng! ");
+                          return false;
+                    }
+                    if(!valueQuantity || valueQuantity.length === 0 || valueQuantity == 0 )
+                    {
+                          bootbox.alert("Vui lòng nhập số lượng hàng bị tịch thu! ");
+                          return false;
+                    }
+                    if(!valueSanction || valueSanction.length === 0 || valueSanction == 0 )
+                    {
+                          bootbox.alert("Vui lòng chọn hình thức xử lý! ");
+                          return false;
+                    }
+//                    if((!valueUnit || valueUnit.length === 0))
+//                    {
+//                          bootbox.alert("Vui lòng chọn đơn vị! ");
+//                          return false;
+//                    }
+                var text= $('#jqxDateTimeInput').jqxDateTimeInput('getText'); 
+                dataItemsArray.push({
+                     arrayId: arrayId++,
+                     master_items_id: valueItemId,
+                     master_items_name: $("#master_items_id option:selected").text(),
+                     serial_handling: valueSerialHandling ,
+                     quantity_commodity: valueQuantity,
+                     master_unit_id: valueUnit,
+                     master_unit_name:$("#master_unit_id option:selected").text(),
+                     master_sanction_id: valueSanction,
+                     master_sanction_name: $("#master_sanction_id option:selected").text(),
+                     date_handling: text,
+                     amountItem: $("#amountItem").val(),
+                     file_upload:  ""
+                 });
+                 return true;
+        }
+        $("#closeItems").click(function () {
+              $("#popupWindowItems").jqxWindow('close'); 
+            });
+        $('#popupWindowItems').on('close', function (event) { 
+                if (editrow >= 0 && dataItemsArray.length > 0) {
+                     arraySave("array_items_handling",dataItemsArray,editrow);
+                }
+                dataItemsArray = new Array();
+        }); 
+        $("#addItems").click(function () {
+               if(generatedata())
+               {
+                    refreshDataItem(dataItemsArray);
+               }
+        });        
+        var refreshDataItem = function (data) {
+              var source = 
+                {
+                    datatype: "array",
+                    localdata: data,
+                    datafields:
+                    [
+                        { name: 'arrayId', type: 'int'},
+                        { name: 'master_items_id', type: 'string'},
+                        { name: 'master_items_name', type: 'string' },
+                        { name: 'serial_handling', type: 'string' },
+                        { name: 'quantity_commodity', type: 'string' },
+                        { name: 'master_unit_id', type: 'string' },
+                        { name: 'master_unit_name', type: 'string' },
+                        { name: 'master_sanction_id', type: 'string' },
+                        { name: 'master_sanction_name', type: 'string' },
+                        { name: 'date_handling', type: 'string' },
+                        { name: 'amountItem', type: 'string' },
+                        { name: 'file_upload', type: 'string' }
+                    ],
+
+                    //sortcolumn: 'master_items_name',
+                    //sortdirection: 'asc',
+                };
+               var dataAdapterItems = new $.jqx.dataAdapter(source);
+               $('#jqxgrid_items').jqxGrid('clear');
+                // passing "cells" to the 'updatebounddata' method will refresh only the cells values when the new rows count is equal to the previous rows count.
+               $("#jqxgrid_items").jqxGrid({ source: dataAdapterItems });
+         };
+        $("#jqxgrid_items").jqxGrid(
+            {
+                width: '100%',
+                editable: false,
+                theme: 'bootstrap',
+                
+                //selectionmode: 'singlecell',
+                //editmode: 'selectedrow',
+                //source: dataAdapterItems,
+                showtoolbar: true,
+                //showeverpresentrow: true,
+//                everpresentrowposition: "top",
+//                everpresentrowactions: "add reset",
+//                everpresentrowactionsmode: "columns",
+                ready: function () {
+                    $("#jqxgrid_items").jqxGrid('hideColumn', 'arrayId');
+                },
+                renderToolbar: function(toolBar)
+                {
+                    var toTheme = function (className) {
+                        if (theme == "") return className;
+                        return className + " " + className + "-" + theme;
+                    }
+                    // appends buttons to the status bar.
+                    var container = $("<div style='overflow: hidden; position: relative; height: 100%; width: 100%;'></div>");
+                    var buttonTemplate = "<div style='float: left; padding: 3px; margin: 2px;'><div style='margin: 4px; width: 16px; height: 16px;'></div></div>";
+                    var deleteButton = $(buttonTemplate);                   
+                    container.append(deleteButton);                   
+                    toolBar.append(container);                    
+                    deleteButton.jqxButton({ cursor: "pointer", disabled: false, enableDefault: false,  height: 25, width: 25 });
+                    deleteButton.find('div:first').addClass(toTheme('jqx-icon-delete'));
+                    deleteButton.jqxTooltip({ position: 'bottom', content: "Delete"});
+                     var rowIndex = null;
+                    $("#jqxgrid_items").on('rowselect', function (event) 
+                    {
+                        // row's bound index.
+                         rowIndex = event.args.rowindex;
+                       
+                    });
+                    deleteButton.click(function () {
+                        var valueArrayId = $('#jqxgrid_items').jqxGrid('getcellvalue', rowIndex, "arrayId");
+                            for(var i = dataItemsArray.length - 1; i >= 0; i--) {
+                                                if(dataItemsArray[i]['arrayId'] === valueArrayId) {
+                                                   //delete dataPrintArray[i];
+                                                    dataItemsArray.splice(i, 1);
+                                                }
+                                            }
+                           var valueRowId = $('#jqxgrid_items').jqxGrid('getrowid', rowIndex);
+                            $("#jqxgrid_items").jqxGrid('deleterow', valueRowId);
+                            
+                        
+                    });
+                },
+//                
+                columns: [
+                    {
+                        text: 'arrayId', datafield: 'arrayId',displayfield: 'arrayId', width: '20%'
+                      
+                    },   
+                    {
+                        text: 'Tên hàng hóa', datafield: 'master_items_id',displayfield: 'master_items_name', width: '20%'
+                      
+                    },        
+                    { 
+                        text: 'Số biên lai tịch thu hàng hóa',editable: false, datafield: 'serial_handling', width: '10%'
+                        
+                    },
+                    { 
+                        text: 'Số lượng hàng hóa bị tịch thu',editable: true, datafield: 'quantity_commodity', width: '10%'
+                      
+                        
+                    },
+                    { 
+                        text: 'Đơn vị',editable: true, datafield: 'master_unit_id',displayfield: 'master_unit_name', width: '10%'
+                      
+                        
+                    },
+                    { 
+                        text: 'Hình thức xử lý',editable: true, datafield: 'master_sanction_id',displayfield: 'master_sanction_name', width: '10%'
+                        
+                    },
+                    { 
+                        text: 'Ngày xử lý',editable: true, datafield: 'date_handling', width: '10%'
+                       
+                        
+                    },
+                    { 
+                        text: 'Số tiền đấu thầu',editable: true, datafield: 'amountItem', width: '10%'
+                    },
+//                    { 
+//                        text: 'File đính kèm',editable: true, datafield: 'file_upload', width: '10%'
+//                    }
+                ]
+//                    
+        });
+        
+ //Get Print
+         var dataPrintArray = new Array();
+         
+        $("#savePrint").click(function () {
+                if(dataPrintArray.length == 0)
+                {
+                    bootbox.alert("Vui lòng chọn serial ấn chỉ! ");
+                    return;
+                }
+                if (editrow >= 0) {
+                     arraySave("array_print_handling",dataPrintArray,editrow);
+                }
+                $("#popupWindowPrint").jqxWindow('close'); 
+        });
+        var refreshDataPrint = function (data) {
+            
+        }   
+        var sourcePrint =
+        {
+            datatype: "json",
+            datafields:
+            [
+                {name: 'print_allocation_id',type:'int'},
+                {name: 'master_print_id',type:'int'},
+                {name: 'name_print',type:'string'},
+                {name: 'serial', type:'string'}
+            ],
+
+            url:"<?php echo $this->baseUrl().'/admin/docviolationshandling/secviceserialdepartmentmasterprint/id/'?>"+$("#jqxTree").val().id,//+sys_department_id,
+                    //sortcolumn: 'order',
+                    sortdirection: 'asc'
+        };
+        var dataAdapter2 = new $.jqx.dataAdapter(sourcePrint,{ uniqueDataFields: ['master_print_id'] });
+      
+        //dataAdapter3.dataBind();
+//        var records = dataAdapter3.getGroupedRecords(['master_print_id','serial'],
+//               , 'items', 'label'
+//               [{ name: 'print_allocation_id', map: 'serial' }]);
+     
+        var getSourcePrintSerial = function (value,row) {
+//        sourcePrint['master_print_id'] = {
+//                      filtervalue: value
+//                  };
+//            var gridAdapter = new $.jqx.dataAdapter(sourcePrint);
+//           return gridAdapter;
+           
+            //fields.push(name);
+            //var dataAdapter = new $.jqx.dataAdapter(source, { autoBind: true, autoSort: true, uniqueDataFields: fields, autoSortField: name });
+                var dataAdapter3 = new $.jqx.dataAdapter(sourcePrint,
+                {
+                    autoBind: true,
+                    beforeLoadComplete: function (records) {
+                           var data = new Array();
+                        //var records = dataAdapter.records;
+                        // get the length of the records array.
+                        var length = records.length;
+                        // loop through the records and display them in a table.
+
+                        for (var i = 0; i < length; i++) {
+                            var record = records[i];
+                            if(record.master_print_id == value)
+                            {
+                                data.push({serialname : record.serial , printallocation: record.print_allocation_id});
+                            }
+                        }
+                        return data;
+                    }
+                });
+                return dataAdapter3;
+                       
+        };
+       
+        $("#jqxgrid_print").jqxGrid(
+            {
+                width: '100%',
+                
+                source: dataAdapter2,
+                theme: 'bootstrap',
+                selectionmode: 'singlecell',
+                editable: true,
+                columns: [
+                              { text: 'Tên ấn chỉ',editable: false, dataField: 'master_print_id',displayfield: 'name_print', width: '25%' }, 
+                              { text: 'Serial xử phạt',editable: true, dataField: 'serialname',displayfield: 'serialname', width: '50%', columntype: 'custom',
+                                   createeditor: function (row, cellvalue, editor, cellText, width, height) {
+                                        var valuePrint = $("#jqxgrid_print").jqxGrid('getcellvalue', row, 'master_print_id');
+                                        editor.jqxComboBox({ source: getSourcePrintSerial(valuePrint,row), width: width, height: height, displayMember: 'serialname', valueMember: 'printallocation',
+                                                                                placeHolder: "Chọn serial:",})
+                                    },
+                                    geteditorvalue: function (row, cellvalue, editor) {
+                                        // return the editor's value.
+                                        var valuePrint = $("#jqxgrid_print").jqxGrid('getcellvalue', row, 'master_print_id');
+                                        for(var i = dataPrintArray.length - 1; i >= 0; i--) {
+                                                if(dataPrintArray[i]['master_print_id'] === valuePrint) {
+                                                   //delete dataPrintArray[i];
+                                                    dataPrintArray.splice(i, 1);
+                                                }
+                                            }
+                                            
+                                             var items = editor.jqxComboBox('getSelectedItem'); 
+                                             if (items == null )
+                                             {
+                                                 return "";
+                                             }
+                                              var checkedItems = items.label;
+                                              dataPrintArray.push({
+                                                master_print_id: valuePrint,
+                                                print_allocation_id:items.value,
+                                                serialname: items.label,
+                                                
+                                            });
+//                                        var items = editor.jqxDropDownList('getCheckedItems'); 
+//                                        var checkedItems = "";
+//                                        $.each(items, function (index) {
+//                                            checkedItems += this.label + ", ";  
+//                                            dataPrintArray.push({
+//                                                master_print_id: valuePrint,
+//                                                print_allocation_id:this.value,
+//                                                serialname: this.label,
+//                                                
+//                                            });
+//                                        });
+                                        return checkedItems;
+                                    }
+                                
+
+                              }
+                              
+                          ]
+            }); 
+            $("#btn_SaveAmount").click(function () {
+                if (editrow >= 0) {
+                    var value = $("#amount").val();
+                    var reg = new RegExp('^[0-9]+$');
+                   
+                    if((!value || value.length === 0))
+                    {
+                        bootbox.alert("Vui lòng nhập số tiền phạt ! ");
+                        return;
+                    }
+//                     if(!reg.test(value))
+//                     {
+//                         bootbox.alert("Vui lòng nhập đúng kiểu số ! ");
+//                        return;
+//                     }
+                   
+                        arraySave("amount",value,editrow);
+                        //$("#amount").val("0")
+                   
+                }
+                else
+                {
+                    bootbox.alert("Không tìm thấy dòng đang chỉnh sửa. Vui lòng chọn lại dòng chỉnh sửa ! ");
+                }
+                $('#popupWindowAmount').jqxWindow('close');
+            });
+});  
+    </script> 

@@ -1,0 +1,137 @@
+<div class="row">
+     <div class="col-lg-12">
+        <h3 class="page-header">Danh sách thanh toán ấn chỉ</h3>
+    </div>  
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default">             
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="row">
+                     <div class="col-lg-2" style="text-align:center;width: 9%;padding-right: 0px;">
+                         <a href="<?php echo $this->url(array("action"=>"add")) ?>">
+                            <button type="button" class="btn btn-info btn-action"><i class="fa fa-pencil fa-2x"></i>
+                             </button></br>
+                             <span  class="">Thanh toán</span>
+                         </a>
+                     </div>
+                 </div>
+                </div>
+            </div>
+            <div class="panel-body">
+                <div class="table-reponsive">
+                    <div id="jqxgrid">
+
+                    </div>
+                </div>
+            </div>
+    </div>
+</div>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            // prepare the data
+            var source =
+            {
+                datatype: "json",
+                datafields:
+                [
+                    { name: 'id',type:'int'},
+                    { name: 'sys_department_id', type: 'string' }, 
+                    { name: 'sys_user_id', type: 'string' },
+                    { name: 'doc_print_allocation_id',type:'string'},
+                    { name: 'master_print_id', type: 'string' },
+                    { name: 'serial', type: 'string' },
+                    { name: 'serial_recovery',type:'string'},
+                    { name: 'serial_fail',type:'string'},
+                    { name: 'reasons_fail', type: 'string' },
+                    { name: 'date_payment',type:'string'},
+                    { name: 'comment',type:'string'},
+                    { name: 'status',type:'string'}
+                ],
+                url:"<?php echo $this->baseUrl().'/master/docprintpayment/servicelist'?>",
+                sortcolumn: 'code',
+                sortdirection: 'asc'
+               
+            };
+         var dataAdapter = new $.jqx.dataAdapter(source, {
+                loadComplete: function () {
+                }
+            });
+            $("#jqxgrid").jqxGrid(
+            {
+                width: '100%',
+                source: dataAdapter,  
+                theme: 'bootstrap',
+                pageable: true,
+                showfilterrow: true,
+                filterable: true,
+                autoheight: true,
+                sortable: true,
+                altrows: true,
+                enabletooltips: true,
+                selectionmode: 'singlerow',
+                //selectionmode: 'multiplecellsadvanced',
+                columnsResize: true,
+                rendergridrows: function (params) {
+                    return params.data;
+                },
+                ready: function () {
+                    $("#jqxgrid").jqxGrid('hideColumn', 'id');
+                },
+                columns: [
+                  {text:'Id',dataField:'id',cellsalgin:'right',width:0}, 
+                  {  text: 'Số TT', sortable: false, filterable: false, editable: false,
+                      groupable: false, draggable: false, resizable: false,
+                      datafield: '', columntype: 'number', width: 50,
+                      cellsrenderer: function (row, column, value) {
+                          return "<div style='margin:0px;text-align: center;'>" + (value + 1) + "</div>";
+                      }
+                  },
+                  { text: 'Đơn vị',editable: false, dataField: 'sys_department_id', width: '10%' },
+                  { text: 'Người thanh toán',editable: false, dataField: 'sys_user_id', width: '10%' },
+                  { text: 'Ngày thanh toán',editable: false, dataField: 'date_payment', width: '10%' },
+                  { text: 'Mã ấn chỉ',editable: false, dataField: 'master_print_id', width: '7%' },
+                  { text: 'Quyển số',editable: false, dataField: 'doc_print_allocation_id', width: '7%' },                  
+                  { text: 'Serial',editable: false, dataField: 'serial', width: '10%' },
+                  { text: 'Serial thu hồi',editable: false, dataField: 'serial_recovery', width: '10%' },
+                  { text: 'Serial hỏng',editable: false, dataField: 'serial_fail', width: '10%' },  
+                  { text: 'Lý do hỏng',editable: false, dataField: 'reasons_fail', width: '5%' },
+                  { text: 'Trạng thái',editable: false, dataField: 'status', width: '10%' },
+                  { text: 'Ghi chú',editable: false, dataField: 'comment', width: '10%' },
+                   {text: 'Xóa',filtertype: 'none', cellsalign: 'right', align: "center", columnType: 'none', editable: false, sortable: false, dataField: null, cellsrenderer: function (row) {
+                          // render custom column.
+                          editrow = row;
+                          var dataRecord = $("#jqxgrid").jqxGrid('getrowdata',editrow);
+                          var url= "<div style='overflow: hidden; text-overflow: ellipsis; padding-bottom: 2px; text-align: center; margin-right: 2px; margin-left: 4px; margin-top: 4px;'><a class='fa fa-trash-o fa-lg'";
+                          url = url + "href='#' onclick='return jsdelete("+dataRecord.id+")'></a></div>"
+                          return url;
+                      }
+              },
+//              {text: 'Sửa',filtertype: 'none', cellsalign: 'right', align: "center", columnType: 'none', editable: false, sortable: false, dataField: null, cellsrenderer: function (row) {
+//                          // render custom column.
+//                          editrow = row;
+//                          var dataRecord = $("#jqxgrid").jqxGrid('getrowdata',editrow);
+//                          var url= "<div style='overflow: hidden; text-overflow: ellipsis; padding-bottom: 2px; text-align: center; margin-right: 2px; margin-left: 4px; margin-top: 4px;'><a class='fa fa-edit fa-lg'";
+//                          url = url + "href='<?php echo $this->baseUrl() ?>/master/docprintpayment/edit/id/"+dataRecord.id+"'></a></div>"
+//                          return url;
+//                      }
+//                          }
+                ]
+            });
+        });
+    </script>
+
+    <script type="text/javascript">
+        function jsdelete(id)
+        {            
+                    bootbox.confirm("Bạn có chắc muốn xoá không?",
+                    function(result){
+                        if(result == true)
+                        {
+                           return window.location = "<?php echo $this->baseUrl() ?>/master/docprintpayment/delete/id/"+id;
+                        }
+                    });             
+        }
+    </script>
+

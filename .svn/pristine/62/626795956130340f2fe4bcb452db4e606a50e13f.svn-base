@@ -1,0 +1,139 @@
+<div class="row">
+    <div class="col-lg-12">
+        <h3 class="page-header">Danh sách đặt lịch</h3>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                 <div class="row">
+                     <div class="col-lg-2" style="text-align:center;width: 9%;padding-right: 0px;">
+                         <a  href="<?php echo $this->baseUrl().'/master/infoschedule/add/'?>">
+                             <button type="button" class="btn btn-success btn-action"><i class="fa fa-plus fa-2x"></i>
+                             </button></br>
+                             <span >Thêm Mới</span>
+                         </a>
+                     </div>                     
+                 </div>
+            </div>
+            <div class="panel-body">                
+               
+                <div class="table-reponsive">
+                   <div id="jqxgrid">
+                        </div>
+                </div>
+        </div>
+    </div>
+</div>
+    <div id="treeGrid">
+            </div> 
+<script type="text/javascript">
+        $(document).ready(function () {           
+            var source =
+            {
+                dataType: "json",
+                dataFields: [
+                    { name: 'id', type: 'int' },
+                    { name: 'name_schedule', type: 'string' },
+                    { name: 'date_from', type: 'string' },
+                    { name: 'date_to', type: 'string' },
+                    { name: 'sys_department_id', type: 'int' },
+                    { name: 'master_district_id', type: 'int' },
+                    { name: 'master_ward_id', type: 'int' },
+                    { name: 'status', type: 'string' }  ,
+                    { name: 'comment', type: 'string' }                  
+                ],
+                url:"<?php echo $this->baseUrl().'/master/infoschedule/service'?>",
+               
+            };
+            var dataAdapter = new $.jqx.dataAdapter(source);
+            // create Tree Grid
+            $("#jqxgrid").jqxGrid(
+            {
+                width: '100%',
+                source: dataAdapter,  
+                theme: 'bootstrap',
+                pageable: true,
+                showfilterrow: true,
+                filterable: true,
+                autoheight: true,
+                sortable: true,
+                altrows: true,
+                enabletooltips: true,
+                 selectionmode: 'singlerow',
+//                selectionmode: 'multiplecellsadvanced',
+                columnsResize: true,
+                rendergridrows: function (params) {
+                    return params.data;
+                },
+                ready: function () {
+                    $("#jqxgrid").jqxGrid('hideColumn', 'id');
+                },
+                columns: [   
+                    { text: 'id', dataField: 'id',align: "center", width: 0 },
+                    {  text: 'Số TT', sortable: false, filterable: false, editable: false,
+                     groupable: false, draggable: false, resizable: false,
+                     datafield: '', columntype: 'number', width: '6%',
+                     cellsrenderer: function (row, column, value) {
+                          return "<div style='margin:7px;'>" + (value + 1) + "</div>";
+                      }
+                    },
+                    { text: 'Tên lịch', dataField: 'name_schedule',align: "center", width: '15%' },
+                    { text: 'Từ ngày', dataField: 'date_from',align: "center", width: '10%' },
+                    { text: 'Đến ngày', dataField: 'date_to',align: "center", width: '10%' },
+                    { text: 'Đội thực hiện', dataField: 'sys_department_id',align: "center", width: '15%' },
+                    { text: 'Quận huyện', dataField: 'master_district_id',align: "center", width: '15%' },
+                    { text: 'Xã phường', dataField: 'master_ward_id',align: "center", width: '15%' },
+                    { text: 'Ghi chú', dataField: 'comment',align: "center", width: '10%' },
+                    { text: 'Trạng thái', dataField: 'status',align: "center", width: '10%' },
+                    {text: 'Xóa',filtertype: 'none', cellsalign: 'right', align: "center", columnType: 'none', editable: false, sortable: false, dataField: null, cellsrenderer: function (row) {                          
+                          editrow = row;
+                          var dataRecord = $("#jqxgrid").jqxGrid('getrowdata',editrow);
+                          var url= "<div style='overflow: hidden; text-overflow: ellipsis; padding-bottom: 2px; text-align: center; margin-right: 2px; margin-left: 4px; margin-top: 4px;'><a class='fa fa-trash-o fa-lg'";
+                          url = url + "href='#' onclick='return jsdelete("+dataRecord.id+")'></a></div>";
+                          return url;
+                      }
+                     },
+                    {text: 'Sửa',filtertype: 'none', cellsalign: 'right', align: "center", columnType: 'none', editable: false, sortable: false, dataField: null, cellsrenderer: function (row) {                        
+                          editrow = row;
+                          var dataRecord = $("#jqxgrid").jqxGrid('getrowdata',editrow);
+                          var url= "<div style='overflow: hidden; text-overflow: ellipsis; padding-bottom: 2px; text-align: center; margin-right: 2px; margin-left: 4px; margin-top: 4px;'><a class='fa fa-edit fa-lg'";
+                          url = url + "href='<?php echo $this->baseUrl() ?>/master/infoschedule/edit/id/"+dataRecord.id+"'></a></div>"
+                          return url;
+                      }
+                          }
+                        ]      
+            });           
+        });
+       
+    </script>
+    <script type="text/javascript">
+        function jsdelete(id)
+        {
+            $.get("<?php echo $this->baseUrl() ?>/master/infoschedule/confirmdelete/id/"+id,null,function(data){
+                if(data>0)
+                {
+                    bootbox.confirm("Hiện có quận huyện thuộc tỉnh thành này và quản trị viên quản lý tỉnh thành này. "
+                        +"Bạn có muốn xoá tỉnh thành này và tất cả các quận huyện trực thuộc không?",function(result){
+                            if(result == true)
+                            {
+                                return window.location = "<?php echo $this->baseUrl() ?>/leader/province/delete/id/"+id;
+                            }
+                        });
+                    return false;
+                }
+                else 
+                {
+                    bootbox.confirm("Bạn có chắc muốn xoá lịch này không?",
+                    function(result){
+                        if(result == true)
+                        {
+                           return window.location = "<?php echo $this->baseUrl() ?>/master/infoschedule/delete/id/"+id;
+                        }
+                    });
+                }
+            });
+        }
+    </script>
+   

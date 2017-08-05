@@ -1,0 +1,298 @@
+<?php $identity = Zend_Auth::getInstance()->getIdentity();
+               if(!empty($identity)){
+                }
+?>
+<div class="row">
+    <div class="col-lg-12">
+        <h3 class="page-header">Chỉnh sửa hàng hóa xử phạt</h3>
+    </div>
+</div>   
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <form role="form" method="POST" name="Editprintshandling" onsubmit="">   
+                  <div class="form-group">
+                            <div class="row">
+                                <div class="col-lg-2">
+                                    <label>Phòng ban</label>
+                                </div>
+                            <div class="col-lg-4">
+                                            <div id="dropDownButton">
+                                                <div style="border: none;" id="jqxTree">
+                                                    <ul>
+                                                   <?php echo GlobalLib::returntree($this->sysDepartmentId) ;?>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                          <input class="form-control" type="hidden" name="sys_department_id" id="sys_department_id" value="">
+                            </div> 
+                            </div>
+                    </div> 
+                    <div class="form-group">
+                           <div class="row">
+                               <div class="col-lg-2">
+                                   <label>Tên hàng hóa(*)</label>
+                               </div>
+                                <div class="col-lg-2">
+                                      <?php echo GlobalLib::getCombo("master_items_id","master_items","id","name", $this->item->getMaster_Items_Id()) ?>                                       
+                                </div>
+                               <div class="col-lg-2">
+                                      <?php echo GlobalLib::getCombo("master_unit_id","master_unit","id","name", $this->item->getMaster_Unit_Id()) ?>                                       
+                                </div>
+                           </div>
+                    </div> 
+                     <div class="form-group">
+                          <div class="row">
+                              <div class="col-lg-2">
+                                  <label>Số lượng(*)</label>
+                              </div>
+                               <div class="col-lg-2">
+                                        <input class="form-control" name="quantity_commodity" id="quantity_commodity" value="<?php echo $this->item->getQuantity_Commodity(); ?>">
+                               </div>
+                          </div>
+                    </div>
+                    <div class="form-group">
+                          <div class="row">
+                              <div class="col-lg-2">
+                                  <label>Hình thức xử lý(*)</label>
+                              </div>
+                              <div class="col-lg-2">
+                                      <?php // echo GlobalLib::getCombo("master_sanction_id","master_sanction","id","name", $this->item->getMaster_Sanction_Id()) ?>                                       
+                                   <?php echo GlobalLib::getComboSeclect('master_sanction_id', 'master_sanction'
+                                                                                            , 'id', 'name', 0, false, 'where type ="'.GlobalLib::_TTHH.'"', '', '','Chọn hình thức xử lý');
+                                                        ?>
+                              </div>
+                          </div>
+                    </div>
+                    <div class="form-group">
+                          <div class="row">
+                              <div class="col-lg-2">
+                                  <label>Số tiền đấu thầu(*)</label>
+                              </div>
+                               <div class="col-lg-2">
+                                        <input class="form-control" name="amount" id="amount" value="<?php echo $this->item->getAmount(); ?>">
+                               </div>
+                          </div>
+                    </div>
+                    <div class="form-group">
+                          <div class="row">
+                              <div class="col-lg-2">
+                                  <label>Số biên lai tịch thu hàng hóa(*)</label>
+                              </div>
+                               <div class="col-lg-2">
+                                        <input class="form-control" name="serial_handling" id="serial_handling" value="<?php echo $this->item->getSerial_handling(); ?>">
+                               </div>
+                          </div>
+                    </div>
+                    <div class="form-group">
+                                <div class="row">
+                                    <div class="col-lg-2">
+                                        <label>Ngày tịch thu</label>
+                                    </div>   
+                                          <div class="col-lg-3">
+                                        <div id='jqxWidget'>
+                                            <div style='float: left;'>
+                                                <div style='float: left; margin-top: 3px;' id='jqxDateTimeInput'>
+                                                </div>
+                                            <div style='margin-left: 20px; float: left;'>
+                                                <div>
+                                                    <input type="hidden" id="date_handling" name="date_handling" value="" readonly="">
+                                                </div>
+                                            </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                    </div>
+                    <div class="form-group">
+                                <div class="row">
+                                <div class="col-lg-2">
+                                    <label>Ghi chú</label>
+                                </div>
+                               <div class="col-lg-4">
+                                    <textarea  name="comment" id="comment" type="text" class="form-control" cols="100" rows="5"><?php echo $this->item->getComment(); ?></textarea>    
+                                </div> 
+                                </div>
+                      </div>
+                       <input id="selectionlog" style="display: none" name="selectionlog" /> 
+                       <div class="form-group">
+                                
+                           <button type="submit" name="import" id="import" class="btn btn-primary">Lưu</button>
+                                <button type="reset" class="btn btn-default">Đặt lại</button>
+                       </div> 
+                    
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $('#import').on('click',function(){
+        $('#date_handling').val($('#jqxDateTimeInput').val());
+    });
+</script>
+<script>
+    $('#master_sanction_id').on('change',function(){
+        //lay gia tri combobox
+//        alert($('#master_sanction_id :selected').text());
+        if($('#master_sanction_id :selected').text()!= 'Đấu giá'){
+            $('#amount').prop('readonly',true);
+             $('#amount').val(0);
+        }else{
+            $('#amount').prop('readonly',false);
+            
+        }
+        
+    });
+</script>
+
+<script>
+      $('#master_items_id').multiselect({
+                       maxHeight: '300',
+                       enableFiltering: true,
+                       maxHeight: '300',
+                       onChange: function(option, checked) {
+                           if (checked) {
+                               orderCount++;
+                               $(option).data('order', orderCount);
+                           }
+                           else {
+                               $(option).data('order', '');
+                           }
+                       },
+                   });
+
+               $('#master_items_id').on('change', function() {
+                   var selected = [];
+                   $('#master_items_id option:selected').each(function() {
+                       selected.push([$(this).val(), $(this).data('order')]);
+                   });
+
+                   selected.sort(function(a, b) {
+                       return a[1] - b[1];
+                   });
+
+                   var text = '';
+                   for (var i = 0; i < selected.length; i++) {
+                       text += selected[i][0] + ', ';
+                   }
+                   text = text.substring(0, text.length - 2);
+
+                   $('#selectionlog').val(text);
+                   $('#selectionlog').text(text);
+               });
+               //
+               $('#master_unit_id').multiselect({
+                       maxHeight: '300',
+                       enableFiltering: true,
+                       maxHeight: '300',
+                       onChange: function(option, checked) {
+                           if (checked) {
+                               orderCount++;
+                               $(option).data('order', orderCount);
+                           }
+                           else {
+                               $(option).data('order', '');
+                           }
+                       },
+                   });
+
+               $('#master_unit_id').on('change', function() {
+                   var selected = [];
+                   $('#master_unit_id option:selected').each(function() {
+                       selected.push([$(this).val(), $(this).data('order')]);
+                   });
+
+                   selected.sort(function(a, b) {
+                       return a[1] - b[1];
+                   });
+
+                   var text = '';
+                   for (var i = 0; i < selected.length; i++) {
+                       text += selected[i][0] + ', ';
+                   }
+                   text = text.substring(0, text.length - 2);
+
+                   $('#selectionlog').val(text);
+                   $('#selectionlog').text(text);
+               });
+               //
+               $('#master_sanction_id').multiselect({
+                       maxHeight: '300',
+                       enableFiltering: true,
+                       maxHeight: '300',
+                       onChange: function(option, checked) {
+                           if (checked) {
+                               orderCount++;
+                               $(option).data('order', orderCount);
+                           }
+                           else {
+                               $(option).data('order', '');
+                           }
+                       },
+                   });
+
+               $('#master_sanction_id').on('change', function() {
+                   var selected = [];
+                   $('#master_sanction_id option:selected').each(function() {
+                       selected.push([$(this).val(), $(this).data('order')]);
+                   });
+
+                   selected.sort(function(a, b) {
+                       return a[1] - b[1];
+                   });
+
+                   var text = '';
+                   for (var i = 0; i < selected.length; i++) {
+                       text += selected[i][0] + ', ';
+                   }
+                   text = text.substring(0, text.length - 2);
+
+                   $('#selectionlog').val(text);
+                   $('#selectionlog').text(text);
+               });
+</script>
+<script type="text/javascript">
+      $(document).ready(function () {
+              if($('#master_sanction_id :selected').text()!= 'Đấu giá'){
+                  $('#amount').prop('readonly',true);
+              }else{
+                  $('#amount').prop('readonly',false);
+              }
+          ///
+            $("#dropDownButton").jqxDropDownButton({ width: 150, height: 25,theme: 'bootstrap'});
+            $('#jqxTree').on('select', function (event) {
+                var args = event.args;
+                var item = $('#jqxTree').jqxTree('getItem', args.element);
+                var dropDownContent = '<div style="position: relative; margin-left: 3px; margin-top: 5px;">' + item.label + '</div>';
+                $("#dropDownButton").jqxDropDownButton('setContent', dropDownContent);
+                $("#sys_department_id").val(event.args.element.id);
+               
+            });
+            $("#jqxTree").jqxTree({ width: 200, height: 220,theme: 'bootstrap',disabled:false});
+            $('#info_business_id,#master_print_id,#doc_print_create_id,#info_schedule_id,#sys_user_id').multiselect({
+            enableFiltering: true,
+            maxHeight: '300'
+            });
+//            
+            //ngay tich thu
+            $('#jqxDateTimeInput').jqxDateTimeInput({ formatString: "dd-MM-yyyy"});
+                var formatString = $('#jqxDateTimeInput').jqxDateTimeInput('formatString');
+                $('#jqxDateTimeInput').on('valueChanged', function (event) {
+                    var date = event.args.date;
+                    var text= $('#jqxDateTimeInput').jqxDateTimeInput('getText'); 
+                     $('#date_handling').val(text);
+                });
+                $('#jqxDateTimeInput').on('open', function (event) {
+                    var date = event.args.date;
+                });
+                $('#jqxDateTimeInput').on('close', function (event) {
+                    var date = event.args.date;
+                });
+        });
+    
+</script>
+
+

@@ -1,0 +1,174 @@
+<?php
+include APPLICATION_PATH . "/models/Master_Sanction.php";
+/* 
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+class Leader_MasterSanctionController extends Zend_Controller_Action{
+    public function init(){       
+        $bootstrap = $this->getInvokeArg("bootstrap");
+        $this->aConfig = $bootstrap->getOptions();
+        $this->view->aConfig = $this->aConfig;
+        $this->modelMapper= new Model_Master_SanctionMapper();
+        $this->model= new Model_Master_Sanction(); 
+    }
+    public function indexAction(){      
+    }
+    public function addAction(){
+        if($this->getRequest()->isPost()){
+            $redirectUrl = $this->aConfig["site"]["url"]."leader/mastersanction/list";
+            if(isset($_POST["id"])){
+                $this->model->setId($_POST["id"]);
+            }
+            if(isset($_POST["code"])){
+                $this->model->setCode($_POST["code"]);
+            }
+            if(isset($_POST["name"])){
+                $this->model->setName($_POST["name"]);
+            }
+            if(isset($_POST["type"])){
+                $this->model->setType($_POST["type"]);
+            }
+            
+           
+            
+            
+            if(isset($_POST["order"])){
+                $this->model->setOrder($_POST["order"]);
+            }
+            if(isset($_POST["comment"])){
+                $this->model->setComment($_POST["comment"]);
+            }
+            if(isset($_POST["status"])){
+                $status=1;
+            } else {
+                $status=0;
+            }
+            $this->model->setStatus($status); 
+            $this->model->setIs_Delete(0);
+            $this->model->setCreated_date(date("Y/m/d H:i:s"));
+            $this->model->setCreated_By(GlobalLib::getLoginId());
+            $this->model->setModified_date(date("Y/m/d H:i:s"));
+            $this->model->setModified_By(GlobalLib::getLoginId());
+            $this->modelMapper->save($this->model);
+            $this->_redirect($redirectUrl);
+        }
+        $this->view->item=$this->model;
+    }
+    public function editAction(){
+        $id = $this->_getParam("id","");
+        $redirectUrl=$this->aConfig["site"]["url"]."leader/mastersanction/list";
+        if(empty($id)){
+            $this->_redirect($redirectUrl);
+        }
+        $this->modelMapper->find($id,$this->model);
+        $getId=$this->model->getId();
+        if(empty($getId)){
+            $this->_redirect($redirectUrl);
+        }
+        if($this->getRequest()->isPost()){
+            if(isset($_POST["id"])){
+                $this->model->setId($_POST["id"]);
+            }
+            if(isset($_POST["code"])){
+                $this->model->setCode($_POST["code"]);
+            }
+            if(isset($_POST["name"])){
+                $this->model->setName($_POST["name"]);
+            }
+            if(isset($_POST["type"])){
+                $this->model->setType($_POST["type"]);
+            }
+            
+//            if(strlen($_POST["decree"])){
+//                $this->model->setDecree($_POST["decree"]);
+//            }
+//            if(strlen($_POST["article"])){
+//                $this->model->setArticle($_POST["article"]);
+//            }
+//            if(strlen($_POST["clause"])){
+//                $this->model->setClause($_POST["clause"]);
+//            }
+            
+            if(isset($_POST["order"])){
+                $this->model->setOrder($_POST["order"]);
+            }
+             if(isset($_POST["comment"])){
+                $this->model->setComment($_POST["comment"]);
+            }
+            if(isset($_POST["status"])){
+                $status=1;
+            } else {
+                $status=0;
+            }
+            $this->model->setStatus($status);
+            $this->model->setModified_date(date("Y/m/d H:i:s"));
+            $this->model->setModified_By(GlobalLib::getLoginId());
+            $this->modelMapper->save($this->model);
+            $this->_redirect($redirectUrl);
+        }
+        $this->view->item=$this->model;
+    }   
+    public function listAction(){        
+    }
+    
+    public function serviceAction(){
+        $this->_helper->layout->disableLayout();
+        foreach ($this->modelMapper->fetchAll() as $items ) {
+            if($items->getType()== GlobalLib::_TTHH){
+                $type = "Tịch thu hàng hóa";
+            }else if($items->getType()== GlobalLib::_XLVP){
+                $type = "Xử lý vi phạm";
+            }else
+            {
+                $type = "Tạm giữ hàng hóa";
+            }
+            $menber[]=array(
+                'Id'=>$items->getId(),
+                'code'=>$items->getCode(),
+                'name'=>$items->getName(),
+                'type'=>$type,
+                'comment'=>$items->getComment(),
+                'order'=>$items->getOrder(),
+                'status'=>$items->getStatus()
+            );
+        }
+        echo json_encode($menber);
+        exit();
+    }
+    public  function confirmdeleteAction()
+    {
+        $id = $this->_getParam("id","0");
+        $count = 0;
+        echo $count;
+        exit();
+    }
+    public function deleteAction(){
+        $id= $this->_getParam("id","");
+        $redirectUrl=$this->aConfig["site"]["url"]."leader/mastersanction/list";               
+        $this->modelMapper->deleteMaster_Sanction($id);
+        $this->_redirect($redirectUrl);
+    }    
+    public function checkcodeAction(){
+          $this->_helper->layout()->disableLayout();
+         if($this->_request->isPost()){
+             $code= $this->_getParam("code","");
+             $id= $this->modelMapper->findidbyname('code',$code);
+             if($id !=0){
+                 $menber[]=array(
+                     'code'=>1,
+                     'message'=>'Mã code này đã tồn tại. Vui lòng kiểm tra và nhập lại'
+                         );  
+             } else {
+                  $menber[]=array(
+                     'code'=>0,
+                     'message'=>''
+                         );  
+             }
+             echo json_encode($menber);
+             exit();
+         }  
+    }
+   
+}

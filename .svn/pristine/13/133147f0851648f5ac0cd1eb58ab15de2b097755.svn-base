@@ -1,0 +1,207 @@
+
+<div class="row">
+    <div class="col-lg-12">
+        <h3 class="page-header">Chỉnh sửa thông tin xử lý vi phạm</h3>
+    </div>   
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-lg-6">                            
+                                           
+                        <form role="form" method="POST" name="EditDocViolationHandling" onsubmit="return checkinput();" id="form-upload" method="post" >
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-lg-4">
+                                        <label>Tên doanh nghiệp</label>
+                                    </div>
+                                     <div class="col-lg-6">
+                                      <?php echo GlobalLib::getComboInfoBusiness('info_business_id', 'info_business', 'id', 'name', $this->item->getInfo_Business_Id()) ?>                                       
+                                  </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-lg-4">
+                                        <label>Địa chỉ</label>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <input class="form-control" name="Address" id="Address" value="<?php echo GlobalLib::getName('info_business',$this->item->getInfo_Business_Id(),'address_office');?>" readonly="true">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-lg-4">
+                                        <label>Hành vi vi phạm</label>
+                                    </div>
+                                    <div class="col-lg-6">
+                                         <?php echo GlobalLib::getComboInfoBusiness11('master_violation_id', 'master_violation', 'id', 'name', $this->item->getMaster_Violation_Id(),'name',true,'form-control','','','','') ?>
+                                        <?php // echo GlobalLib::getCombo('master_violation_id', 'master_violation', 'id', 'name', $this->item->getMaster_Violation_Id(),true) ?>     
+                                        <input class="form-control"  type="hidden" name="master_violation_id1" id="master_violation_id1"/>
+                                    </div>
+                                </div>
+                            </div>      
+                             <div class="form-group">
+                                <div class="row">
+                                    <div class="col-lg-4">
+                                        <label>Hình thức xử lý</label>
+                                    </div>
+                                   <div class="col-lg-6">
+                                        <?php echo  GlobalLib::getComboVersatilee('master_sanction_id', 'master_sanction', 'id', 'type,name',$this->item->getMaster_Sanctions_Id(),false,'','','where type ="'.GlobalLib::_XLVP.'"','', 'Hình thức xử lý','-','');?> 
+                                    </div>
+                                </div>
+                            </div> 
+                             <div class="form-group">
+                                <div class="row">
+                                    <div class="col-lg-4">
+                                        <label>Số tiền</label>
+                                    </div>
+                                    <div class="col-lg-5">
+                                        <input class="form-control" name="amount" id="amount" value="<?php echo $this->item->getAmount();?>" >
+                                    </div>
+                                </div>
+                            </div>                                
+                             <div class="form-group">
+                                <div class="row">
+                                    <div class="col-lg-4">
+                                        <label>Ngày vi phạm</label>
+                                    </div>
+                                     <div class="col-lg-7">
+                                        <div id='jqxWidget'>
+                                            <div style='float: left;'>
+                                                <div style='float: left; margin-top: 3px;' id='jqxDateTimeInput'>
+                                                </div>
+                                            <div style='margin-left: 20px; float: left;'>
+                                                <div>
+                                                    <input type="hidden" id="date_violation" name="date_violation" value="">
+                                                </div>
+                                            </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>    
+                          
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-lg-4">
+                                        <label>Chú thích</label>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <textarea  name="comment" id="comment" type="text" class="form-control" cols="100" rows="5"><?php echo $this->item->getComment(); ?></textarea>    
+                                    </div>
+                                </div>
+                            </div>
+
+                            <input id="selectionlog" style="display: none" name="selectionlog" />
+                            <div class="form-group">
+                                <button type="submit" id="iimport" name="iimport" class="btn btn-primary" >Lưu</button>
+                                <button type="reset" id="d"class="btn btn-default">Đặt lại</button>
+                            </div>
+                        </form>
+                    </div>
+                </div> 
+              
+            </div>
+        </div>
+    </div>   
+</div>
+<style type="text/css">
+    .big-image {
+        float: left;
+        margin-right: 15px;
+        margin-bottom: 15px;
+        border: 1px solid #999;
+        background: #fff;
+        padding: 3px;
+    }
+    .important-text {
+        font-size: 13px;
+        font-family: Verdana, Geneva, 'DejaVu Sans', sans-serif;
+    }
+    .more-text {
+        font-family: Verdana, Geneva, 'DejaVu Sans', sans-serif;
+        color: #444;
+        font-size: 11px;
+        font-style: italic;
+    }
+</style>
+<script>
+    $("#iimport").on('click',function(){
+        $("#master_violation_id1").val($("#master_violation_id").val());
+    });
+</script>
+<script>
+    $('#master_sanction_id').on('change',function(){
+        //lay gia tri combobox
+//        alert($('#master_sanction_id :selected').text());
+        if($('#master_sanction_id :selected').text()!= '(Xử lý vi phạm)-Phạt tiền'){
+            $('#amount').prop('readonly',true);
+             $('#amount').val(0);
+        }else{
+            $('#amount').prop('readonly',false);
+            $('#amount').val(<?php echo $this->item->getAmount(); ?>);
+        }
+        
+    });
+</script>
+<script type="text/javascript">
+     $(document).ready(function() {
+         if($('#master_sanction_id :selected').text()!= '(Xử lý vi phạm)-Phạt tiền'){
+            $('#amount').prop('readonly',true);
+             $('#amount').val(0);
+        }else{
+            $('#amount').prop('readonly',false);
+            $('#amount').val(<?php echo $this->item->getAmount(); ?>);
+        }
+         
+         
+         
+          $('#info_business_id').on('change', function() {
+            var items = $("#info_business_id option:selected");
+            $.ajax({
+            type:'post',
+            url:'<?php echo $this->baseUrl()?>/dafault/docviolationshandling/getaddressbusiness/id_business/'+items.val(),
+            async:false,
+            dataType:'json',
+            success:function(data){
+               $('#Address').val(data);
+            }
+        });
+            
+        });
+        
+        var orderCount = 0;
+        $('#info_business_id,#master_violation_id,#master_sanction_id').multiselect({
+            maxHeight: '300',
+            enableFiltering: true,
+            maxHeight: '300',
+            onChange: function(option, checked) {
+                if (checked) {
+                    orderCount++;
+                    $(option).data('order', orderCount);
+                }
+                else {
+                    $(option).data('order', '');
+                }
+            },
+        });
+            $('#jqxDateTimeInput').jqxDateTimeInput({ formatString: "dd-MM-yyyy"});
+            <?php 
+               $ngay =  GlobalLib::viewDate($this->item->getDate_violation());
+               $arrngay = explode("-", $ngay);               
+            ?>
+            $("#jqxDateTimeInput").jqxDateTimeInput({ width: '270px', height: '25px',value: new Date(<?php echo $arrngay[2]; ?>, <?php echo ($arrngay[1]-1); ?>,<?php echo $arrngay[0];?>)});
+                var formatString = $('#jqxDateTimeInput').jqxDateTimeInput('formatString');
+                
+            $('#jqxDateTimeInput').on('valueChanged', function (event) {
+                var date = event.args.date;
+                var text= $('#jqxDateTimeInput').jqxDateTimeInput('getText'); 
+                 $('#date_violation').val(text);
+                });
+      
+    });
+</script>

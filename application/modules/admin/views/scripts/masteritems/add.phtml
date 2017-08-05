@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<div class="row">
+    <div class="col-lg-12">
+        <h3 class="page-header">Thêm mặt hàng kinh doanh</h3>
+    </div>    
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-lg-10">
+                        <form  method="POST" name="Addmasteritems" onsubmit=" return checkinput();">                                    
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-lg-3">
+                                        <label>Mã Mặt hàng KD(*)</label>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <input class="form-control" name="code_items" id="code_items" value="<?php echo $this->item->getCode(); ?>">
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-lg-3">
+                                        <label>Tên Mặt hàng(*)</label>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <input class="form-control" name="name_items" id="name_items" value="<?php echo $this->item->getName(); ?>">
+                                    </div>
+                                    
+                                </div>
+                            </div>
+<!--                             <div class="form-group">
+                                <div class="row">
+                                    <div class="col-lg-3">
+                                        <label>Loại mặt hàng</label>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <select class="form-control" name="type_commodity" id="type_commodity">
+                                            <option value="0">Chưa lựa chọn</option>
+                                            <option value="condition">Kinh doanh có điều kiện</option>
+                                            <option value="limit">Mặt hàng hạn chế kinh doanh</option>
+                                        </select>
+                                    </div>
+                                    
+                                </div>
+                            </div>-->
+                             <div class="form-group">
+                                    <div class="row">
+                                    <div class="col-lg-3">
+                                        <label>Ghi chú</label>
+                                    </div> 
+                                        <div class="col-lg-6">
+                                            <textarea  name="comment" id="comment" type="text" class="form-control" cols="100" rows="5"><?php echo $this->item->getComment(); ?></textarea>    
+                                        </div>  
+                                    </div>                                
+                                 </div>
+                             <div class="row">
+                                <div class="col-lg-6">                      
+                                        <div class="form-group">
+                                            <div class="row">
+                                                 <div class="col-lg-9">
+                                                    <button type="submit" name="import" id="import" class="btn btn-primary">Thêm mới</button>
+                                                    <button type="reset" class="btn btn-default">Đặt lại</button> 
+                                                 </div>   
+                                            </div>
+                                        </div> 
+                                </div></div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>   
+</div>
+
+<script type="text/javascript">
+    document.forms['Addmasteritems'].code.focus();
+    function set_focus() {
+        document.forms['Addmasteritems'].code.focus();
+    }
+       
+    function checkinput() {
+        var flag; 
+        var frm = window.document.Addmasteritems;
+         if (frm.code_items.value == "") {
+            bootbox.alert("Vui lòng nhập mã Mặt hàng kinh doanh");
+            return false;
+        };
+        if(isNaN(frm.code_items.value)== false){
+            bootbox.alert("Vui lòng nhập mã Mặt hàng kinh doanh bằng chữ");
+            return false;
+        }  
+        if (frm.name_items.value == "") {
+            bootbox.alert("Vui lòng nhập tên Mặt hàng kinh doanh");
+            return false;
+        };
+        if(isNaN(frm.name_items.value)== false){
+            bootbox.alert("Vui lòng nhập tên hàng kinh doanh bằng chữ");
+            return false;
+        } 
+//        if(frm.type_commodity.value==0){
+//            bootbox.alert("Vui lòng chọn loại mặt hàng");
+//            return false;
+//        }
+        var code_items= $('#code_items').val();
+        $.ajax({
+            type:'post',
+            url:'<?php echo $this->baseUrl()?>/admin/masteritems/checkitemscode/code_items/'+code_items,
+            async:false,
+            dataType:'json',
+            success:function(data){
+                if(data[0].code==1){
+                    flag=false;
+                } else {
+                    flag=true;
+                }
+            }
+        });
+        if(flag==false){
+            bootbox.alert("Mã Mặt hàng kinh doanh này đã tồn tại. Vui lòng kiểm tra và nhập lại.");
+            return false;
+        };
+        var name_items= $('#name_items').val();
+        $.ajax({
+            type:'post',
+            url:'<?php echo $this->baseUrl()?>/admin/masteritems/checkitemsname/name_items/'+name_items,
+            async:false,
+            dataType:'json',
+            success:function(data){
+                if(data[0].code==1){
+                    flag=false;
+                } else {
+                    flag=true;
+                }
+            }
+        });
+        if(flag==false){
+            bootbox.alert("Tên Mặt hàng kinh doanh này đã tồn tại. Vui lòng kiểm tra và nhập lại.");
+            return false;
+        };
+       
+      return true;
+    }
+</script>

@@ -1,0 +1,95 @@
+<div class="row">
+    <div class="col-lg-12">
+        <h3 class="page-header">Thông tin vi phạm - xử lý</h3>      
+    </div>   
+     <div id="jqxWidget">
+            <div id="jqxgrid"></div>
+        </div>
+ 
+</div>
+  
+<script type="text/javascript">
+        $(document).ready(function () {          
+            var url = "<?php echo $this->baseUrl().'/leader/docviolationshandling/servicefrominfobusiness/id/'.$this->id?>";
+            var arrays = new Array(); 
+                arrays[0]={ name: 'id',type:'int'};
+                arrays[1]={ name: 'info_business_id', type: 'string' };
+                arrays[2]={ name: 'master_violation_id', type: 'string' };
+                arrays[3]={ name: 'address_business', type: 'string' };
+                arrays[4]={ name: 'master_sanction_id', type: 'string' };
+                arrays[5]={ name: 'sys_department_id', type: 'string' };
+                arrays[6]={ name: 'doc_items_handling', type: 'string' };
+                arrays[7]={ name: 'sys_user_id', type: 'string' };
+                arrays[8]={ name: 'date_violation', type: 'date' };
+                arrays[9]={ name: 'range', map:'date_violation',type: 'date' };
+                arrays[10]={ name: 'amount', type: 'string' };
+                arrays[11]={ name: 'comment', type: 'string' };
+            var source =
+            {
+                datatype: "json",
+                datafields:arrays,
+                url:url,            
+            };         
+          var dataAdapter = new $.jqx.dataAdapter(source);     
+                var array = new Array();
+                array[0] = {text:"id",datafield:'id',width:'0',hidden:true};
+                array[1] = {  text: 'Số TT', sortable: false, filterable: false, editable: false,
+                      groupable: false, draggable: false, resizable: false,
+                      datafield: '', columntype: 'number', width: '4%',
+                      cellsrenderer: function (row, column, value) {
+                          return "<div style='margin:7px;'>" + (value + 1) + "</div>";
+                      }
+                  };
+                array[2] = { text: 'Tên Doanh nghiệp',editable: false,align: "center", dataField: 'info_business_id', width: '13%' };
+                array[3] = { text: 'Địa chỉ',editable: false,align: "center", dataField: 'address_business', width: '12%' };
+                array[4] = { text: 'Hành vi vi phạm',editable: false,align: "center", dataField: 'master_violation_id', width: '10%' };
+                array[5] = { text: 'Hình thức xử lý',editable: false,align: "center", dataField: 'master_sanction_id', width: '10%' };
+                array[6] = { text: 'Tịch thu hàng hóa',editable: false,align: "center", dataField: 'doc_items_handling', width: '10%' };
+                array[7] = { text: 'Đội xử lý',editable: false,align: "center", dataField: 'sys_department_id', width: '10%' };
+                array[8] = { text: 'Số tiền',editable: false,align: "center", dataField: 'amount', width: '10%' };
+                array[9] = { text: 'Search theo ngày tháng', datafield: 'date_violation', filtertype: 'range', cellsalign: 'left', width: '13%', cellsformat: 'd' };
+                array[10] = {text: 'Xóa',filtertype: 'none', cellsalign: 'center', align: "center", columnType: 'none', editable: false, sortable: false, dataField: null, cellsrenderer: function (row) {
+                          // render custom column.
+                          editrow = row;
+                          var dataRecord = $("#jqxgrid").jqxGrid('getrowdata',editrow);
+                          var url= "<div style='overflow: hidden; text-overflow: ellipsis; padding-bottom: 2px; text-align: center; margin-right: 2px; margin-left: 4px; margin-top: 4px;'><a class='fa fa-trash-o fa-lg'";
+                          url = url + "href='#' onclick='return jsdelete("+dataRecord.id+")'></a></div>"
+                          return url;
+                      }
+              };
+              array[11] = {text: 'Sửa',filtertype: 'none', cellsalign: 'right', align: "center", columnType: 'none', editable: false, sortable: false, dataField: null, cellsrenderer: function (row) {
+                          // render custom column.
+                          editrow = row;
+                          var dataRecord = $("#jqxgrid").jqxGrid('getrowdata',editrow);
+                          var url= "<div style='overflow: hidden; text-overflow: ellipsis; padding-bottom: 2px; text-align: center; margin-right: 2px; margin-left: 4px; margin-top: 4px;'><a class='fa fa-edit fa-lg'";
+                          url = url + "href='<?php echo $this->baseUrl()?>/leader/docviolationshandling/edit/id/"+dataRecord.id+"'></a></div>"
+                          return url;
+                      }
+                      
+                          };
+                          
+            $("#jqxgrid").jqxGrid(
+            {
+                width: '100%',
+                source: dataAdapter,  
+                theme: 'bootstrap',
+                pageable: true,
+                showfilterrow: true,
+                filterable: true,
+                autoheight: true,
+                sortable: true,
+                altrows: true,
+                enabletooltips: true,
+                selectionmode: 'multiplecellsadvanced',
+                columnsResize: true,
+                rendergridrows: function (params) {
+                    return params.data;
+                },              
+                columns: array               
+            });        
+           
+        });  
+    </script>
+
+    
+    

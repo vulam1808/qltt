@@ -1,0 +1,174 @@
+<div class="row">
+    <div class="col-lg-12">
+        <h3 class="page-header">Danh sách Phòng ban</h3>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                 <div class="row">
+                     <div class="col-lg-2" style="text-align:center;width: 9%;padding-right: 0px;">
+                         <a  href="<?php echo $this->baseUrl().'/admin/sysdepartments/add'?>">
+                             <button type="button" class="btn btn-success btn-action"><i class="fa fa-plus fa-2x"></i>
+                             </button></br>
+                             <span >Thêm Mới</span>
+                         </a>
+                     </div>
+<!--                     <div class="col-lg-2" style="text-align:center;width: 9%;padding-right: 0px;;padding-left: 1px;">
+                         <a  href="<?php echo $this->baseUrl().'/admin/infobusiness/add/type_business/'.$this->type_business?>">
+                            <button type="button" class="btn btn-info btn-action"><i class="fa fa-pencil fa-2x"></i>
+                            </button></br>
+                             <span >Chỉnh sửa</span>
+                         </a>
+                     </div>
+                      <div class="col-lg-2" style="text-align:center;width: 5%;padding-right: 0px;;padding-left: 1px;">
+                         <a  href="<?php echo $this->baseUrl().'/admin/infobusiness/add/type_business/'.$this->type_business?>">
+                            <button type="button" class="btn btn-danger btn-action"><i class="fa fa-minus fa-2x"></i>
+                            </button></br>
+                             <span >Xóa</span>
+                         </a>
+                     </div>-->
+                     
+                 </div>
+            </div>
+            <div class="panel-body">                
+               
+                <div class="table-reponsive">
+                   <div id="treeGrid">
+                        </div>
+                </div>
+        </div>
+    </div>
+</div>
+    <div id="treeGrid">
+            </div> 
+    
+<script type="text/javascript">
+        $(document).ready(function () {  
+            function getValue()
+            {
+                var data1={};
+                $.ajax({
+                    type:'get',
+                    url:'<?php echo $this->baseUrl() ?>/admin/sysdepartments/service',
+                    async:false,
+                    dataType:'json',
+                    success:function(data){                        
+                        data1 = data;
+                    }
+                });                        
+                return data1;
+            }
+            var source =
+            {
+                dataType: "json",
+                dataFields: [
+                    { name: 'ID', type: 'int' },
+                    { name: 'Code', type: 'string' },
+                    { name: 'Name', type: 'string' },
+                    { name: 'Leader', type: 'string' },
+//                    { name: 'Order', type: 'int' },
+                    { name: 'Parent_id', type: 'int' }                  
+                ],
+                hierarchy:
+                {
+                    keyDataField: { name: 'ID' },
+                    parentDataField: { name: 'Parent_id' }
+                },
+                id: 'ID',
+                localData: getValue(),
+                
+            };
+            var dataAdapter = new $.jqx.dataAdapter(source);
+            // create Tree Grid
+            $("#treeGrid").jqxTreeGrid(
+            {
+                width: '100%',
+                source: dataAdapter,
+                filterable: true,
+                filterMode: 'simple',
+                ready: function()
+                {
+                    var rows = $('#treeGrid').jqxTreeGrid('getRows');
+                    var traverseTree = function(rows)
+                    {
+                    for(var i = 0; i < rows.length; i++)
+                    {
+                    if (rows[i].records)
+                    {
+                    idValue = rows[i][idColumn];
+                    $('#treeGrid').jqxTreeGrid('expandRow',idValue);
+                    traverseTree(rows[i].records);
+                    }
+                    }
+                    };
+                    var idColumn = $('#treeGrid').jqxTreeGrid('source')._source.id;
+                    traverseTree(rows);
+                    //$("#treeGrid").jqxTreeGrid('expandAll');
+                },
+                columns: [     
+                    { text: 'Mã phòng ban', dataField: 'Code',align: "center", width: '15%' },
+                    { text: 'Tên phòng ban', dataField: 'Name',align: "center", width: '40%' },
+                    { text: 'Người đại diện', dataField: 'Leader',align: "center", width: '35%' },
+                    {text: 'Xóa',filtertype: 'none', cellsalign: 'right', align: "center",width: '5%', columnType: 'none', editable: false, sortable: false, dataField: null, cellsrenderer: function (rowId) {                          
+                          var url= "<div style='overflow: hidden; text-overflow: ellipsis; padding-bottom: 2px; text-align: center; margin-right: 2px; margin-left: 4px; margin-top: 4px;'><a class='fa fa-trash-o fa-lg'";
+                          url = url + "href='#' onclick='return jsdelete("+rowId+")'></a></div>";
+                          return url;
+                      }
+                     },
+                    {text: 'Sửa',filtertype: 'none', cellsalign: 'right', align: "center",width: '5%', columnType: 'none', editable: false, sortable: false, dataField: null, cellsrenderer: function (rowId) {                        
+                          var url= "<div style='overflow: hidden; text-overflow: ellipsis; padding-bottom: 2px; text-align: center; margin-right: 2px; margin-left: 4px; margin-top: 4px;'><a class='fa fa-edit fa-lg'";
+                          url = url + "href='<?php echo $this->baseUrl() ?>/admin/sysdepartments/edit/id/"+rowId+"'></a></div>"
+                          return url;
+                      }
+                          }
+                        ]      
+            });
+             $('#treeGrid').on('select', function (event) {
+//                var args = event.args;
+//                var item = $('#treeGrid').jqxTreeGrid('getItem', args.element);
+//                var dropDownContent = '<div style="position: relative; margin-left: 3px; margin-top: 5px;">' + item.label + '</div>';
+//                $("#dropDownButton").jqxDropDownButton('setContent', dropDownContent);
+//                 $("#parent_id").val(event.args.element.id);
+             
+            });
+            $("#jqxTree").jqxTree({ width: 200, height: 220});
+            
+        });
+       
+    </script>
+   <script type="text/javascript">
+        function jsdelete(id)
+        {            
+            var flag;
+            $.ajax({
+                    type:'post',
+                    url:'<?php echo $this->baseUrl()?>/admin/sysdepartments/confirmdelete/id/'+id,
+                    async:false,
+                    dataType:'json',
+                    success:function(a){
+                        if(a==1){
+                            flag=false;
+                        } else {
+                            flag=true;
+                        }
+                    }
+            });
+            if(flag==false){
+                bootbox.alert("Phòng ban này đã có nhân viên. Không được phép xóa.");
+                return false;
+            };
+            if(flag == true){
+                bootbox.confirm("Bạn có chắc muốn xoá phòng ban này không?",function(result){
+                    if(result == true)
+                    { 
+                        return window.location = "<?php echo $this->baseUrl() ?>/admin/sysdepartments/delete/id/"+id;
+                    }
+                }); 
+            }
+            return true;
+                
+        }
+    </script>
+   

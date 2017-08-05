@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Hệ thống quản lý thị trường</title>
+
+  <?php
+  
+    
+    
+//    <!-- Bootstrap Core CSS -->
+    $this->headLink()->appendStylesheet($this->imageUrl() . '/css/bootstrap.css');
+    $this->headLink()->appendStylesheet($this->imageUrl() . '/css/datepicker.css');
+    $this->headLink()->appendStylesheet($this->imageUrl() . '/css/jqwidgets/styles/jqx.base.css');
+    $this->headLink()->appendStylesheet($this->imageUrl() . '/css/jqwidgets/styles/jqx.bootstrap.css');
+      $this->headLink()->appendStylesheet($this->imageUrl() . '/css/jqwidgets/styles/jqx.energyblue.css');
+    $this->headLink()->appendStylesheet($this->imageUrl() . '/js/ckeditor/content.css');
+//    <!-- MetisMenu CSS -->
+    $this->headLink()->appendStylesheet($this->imageUrl() . '/css/plugins/metisMenu/metisMenu.min.css');
+//    <!-- Timeline CSS -->
+    $this->headLink()->appendStylesheet($this->imageUrl() . '/css/plugins/dataTables.bootstrap.css');
+//    <!-- Custom CSS -->
+    $this->headLink()->appendStylesheet($this->imageUrl() . '/css/bootstrap.multiselect.css');
+    $this->headLink()->appendStylesheet($this->imageUrl() . '/css/sb-admin-2.css');
+   $this->headLink()->appendStylesheet($this->imageUrl().'/css/bootstrap.datepicker.css');
+//    <!-- Morris Charts CSS -->
+    $this->headLink()->appendStylesheet($this->imageUrl() . '/css/plugins/morris.css');
+//    <!-- Custom Fonts -->
+    $this->headLink()->appendStylesheet($this->imageUrl() . '/font-awesome-4.1.0/css/font-awesome.min.css');
+    $this->headLink()->appendStylesheet($this->imageUrl() . '/js/jquery-ui-1.10.3-themes/start/jquery-ui.css');
+    echo $this->headLink();
+    ?>
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <?php
+    $this->headScript()->appendFile($this->imageUrl() . '/js/jquery-1.11.0.js');
+    $this->headScript()->appendFile($this->imageUrl() . '/js/jquery-1.11.1.min.js');
+    $this->headScript()->appendFile($this->imageUrl() . '/js/bootstrap.min.js');
+    $this->headScript()->appendFile($this->imageUrl() . '/js/bootstrap-datepicker.js');
+    $this->headScript()->appendFile($this->imageUrl() . '/js/ckeditor/ckeditor.js');
+    $this->headScript()->appendFile($this->imageUrl() . '/js/ckeditor/config.js');
+    $this->headScript()->appendFile($this->imageUrl() . '/js/plugins/metisMenu/metisMenu.min.js');
+    $this->headScript()->appendFile($this->imageUrl() . '/js/plugins/morris/raphael.min.js');
+    $this->headScript()->appendFile($this->imageUrl().'/js/bootstrap.multiselect.js');    
+    $this->headScript()->appendFile($this->imageUrl().'/js/bootstrap.datepicker.js');
+    $this->headScript()->appendFile($this->imageUrl().'/js/bootbox.js');
+    $this->headScript()->appendFile($this->imageUrl().'/js/global.js');
+    $this->headScript()->appendFile($this->imageUrl() .'/js/sb-admin-2.js');
+    $this->headScript()->appendFile($this->imageUrl().'/js/jqwidgets/jqxcore.js');
+    $this->headScript()->appendFile($this->imageUrl().'/js/jqwidgets/jqxdata.js');
+    $this->headScript()->appendFile($this->imageUrl().'/js/jqwidgets/jqxinput.js'); 
+    $this->headScript()->appendFile($this->imageUrl().'/js/jqwidgets/jqxeditor.js'); 
+    $this->headScript()->appendFile($this->imageUrl().'/js/jqwidgets/jqxtooltip.js');  
+    $this->headScript()->appendFile($this->imageUrl().'/js/jqwidgets/jqxbuttons.js');
+    $this->headScript()->appendFile($this->imageUrl().'/js/jqwidgets/jqxscrollbar.js');
+    $this->headScript()->appendFile($this->imageUrl().'/js/jqwidgets/jqxlistbox.js');
+    $this->headScript()->appendFile($this->imageUrl().'/js/jqwidgets/jqxdropdownlist.js');
+     $this->headScript()->appendFile($this->imageUrl().'/js/jqwidgets/jqxcombobox.js');
+    $this->headScript()->appendFile($this->imageUrl().'/js/jqwidgets/jqxcheckbox.js');
+    $this->headScript()->appendFile($this->imageUrl().'/js/jqwidgets/jqxmenu.js');
+    $this->headScript()->appendFile($this->imageUrl().'/js/jqwidgets/jqxgrid.js');
+    $this->headScript()->appendFile($this->imageUrl().'/js/jqwidgets/jqxgrid.filter.js');
+    $this->headScript()->appendFile($this->imageUrl().'/js/jqwidgets/jqxgrid.sort.js');
+    $this->headScript()->appendFile($this->imageUrl().'/js/jqwidgets/jqxgrid.selection.js');
+    $this->headScript()->appendFile($this->imageUrl().'/js/jqwidgets/jqxgrid.columnsresize.js');
+    $this->headScript()->appendFile($this->imageUrl().'/js/jqwidgets/jqxgrid.pager.js');
+    $this->headScript()->appendFile($this->imageUrl().'/js/jqwidgets/jqxgrid.edit.js');
+    $this->headScript()->appendFile($this->imageUrl().'/js/jqwidgets/jqxpanel.js');
+    $this->headScript()->appendFile($this->imageUrl().'/js/jqwidgets/jqxgrid.aggregates.js');
+    $this->headScript()->appendFile($this->imageUrl().'/js/jqwidgets/jqxdatatable.js');
+    $this->headScript()->appendFile($this->imageUrl().'/js/jqwidgets/globalization/globalize.js');
+     $this->headScript()->appendFile($this->imageUrl().'/js/jqwidgets/jqxgrid.grouping.js');
+    $this->headScript()->appendFile($this->imageUrl().'/js/jqwidgets/jqxfileupload.js');
+     $this->headScript()->appendFile($this->imageUrl().'/js/jqwidgets/jqxradiobutton.js');
+    $this->headScript()->appendFile($this->imageUrl().'/js/demos.js');
+    $this->headScript()->appendFile($this->imageUrl().'/js/jquery-ui-1.10.3.custom.min.js');
+    $this->headScript()->appendFile($this->imageUrl().'/js/highcharts/highcharts.js');
+    
+    $this->headScript()->appendFile($this->imageUrl().'/js/jqwidgets/jqxtreegrid.js');
+    $this->headScript()->appendFile($this->imageUrl().'/js/jqwidgets/jqxtabs.js');
+    $this->headScript()->appendFile($this->imageUrl().'/js/jqwidgets/jqwidgetstabmenu.js');
+    $this->headScript()->appendFile($this->imageUrl().'/js/jqwidgets/jqxdropdownbutton.js');
+    $this->headScript()->appendFile($this->imageUrl().'/js/jqwidgets/jqxtree.js');
+    $this->headScript()->appendFile($this->imageUrl().'/js/jqwidgets/jqxcombobox.js');
+    $this->headScript()->appendFile($this->imageUrl().'/js/jqwidgets/jqxdata.export.js');
+    $this->headScript()->appendFile($this->imageUrl().'/js/jqwidgets/jqxgrid.export.js');
+    $this->headScript()->appendFile($this->imageUrl().'/js/jqwidgets/jqxgrid.sort.js');
+    $this->headScript()->appendFile($this->imageUrl().'/js/jqwidgets/jqxdatetimeinput.js');
+    
+    $this->headScript()->appendFile($this->imageUrl().'/js/jqwidgets/jqxgrid.selection.js');
+    
+    
+    $this->headScript()->appendFile($this->imageUrl().'/js/jqwidgets-ver3.7.1/jqxcore.js');
+    $this->headScript()->appendFile($this->imageUrl().'/js/jqwidgets-ver3.7.1/jqxdatetimeinput.js');
+    $this->headScript()->appendFile($this->imageUrl().'/js/jqwidgets-ver3.7.1/jqxcalendar.js');
+    $this->headScript()->appendFile($this->imageUrl().'/js/jqwidgets-ver3.7.1/jqxtooltip.js');
+    $this->headScript()->appendFile($this->imageUrl().'/js/jqwidgets-ver3.7.1/globalization/globalize.js');
+    
+     $this->headScript()->appendFile($this->imageUrl().'/js/jqwidgets-ver3.7.1/jqwidgets/jqxdatetimeinput.js');
+     $this->headScript()->appendFile($this->imageUrl().'/js/jqwidgets-ver3.7.1/jqwidgets/jqxcalendar.js');
+
+    $this->headScript()->appendFile($this->imageUrl().'/js/jqwidgets-ver3.7.1/jqwidgets/jqxwindow.js');
+//    $this->headScript()->appendFile($this->imageUrl().'/js/jqwidgets-ver3.7.1/jqwidgets/jqxgrid.selection.js');
+//    $this->headScript()->appendFile($this->imageUrl().'/js/jqwidgets-ver3.7.1/jqwidgets/jqxgrid.aggregates.js');
+//    $this->headScript()->appendFile($this->imageUrl().'/js/jqwidgets-ver3.7.1/jqwidgets/jqxcheckbox.js');
+    
+    $this->headScript()->appendFile($this->imageUrl().'/js/jqwidgets-ver3.7.1/jqwidgets/jqxdatetimeinput.js');
+    echo $this->headScript();
+    ?>
+    <script>
+        CKEDITOR.replace(".ckeditor");
+    </script> 
+</head>
+
+<body>
+
+    <div id="wrapper">
+
+        <!-- Navigation -->
+        <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                 <a href="<?php echo $this->baseUrl()?>/admin/index/index">
+                <img src="<?php echo $this->imageUrl()?>/image/bannerQLTT2.png" style="margin-left: -5%;height: 51px"  class="img-responsive" alt="Responsive image">
+                 </a>
+            </div>
+            <!-- /.navbar-header -->
+            <?php 
+                $identity = Zend_Auth::getInstance()->getIdentity();
+                if(!empty($identity)){
+            ?>
+           
+            <ul class="nav navbar-top-links navbar-right">
+
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        <i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-user">
+                        <li><a href="#"><i class="fa fa-user fa-fw"></i><?php echo " ".$identity->username ?></a>
+                        </li>
+                        <li><a href="<?php echo $this->baseUrl() ?>/admin/sysuser/edit/id/<?php echo $identity->id ?>"><i class="fa fa-gear fa-fw"></i> Chỉnh sửa thông tin</a>
+                        </li>
+                        <li><a href="<?php echo $this->baseUrl() ?>/admin/sysuser/editpass/id/<?php echo $identity->id ?>"><i class="fa fa-gear fa-fw"></i> Đổi mật khẩu</a>
+                        </li>
+                        <li> <a href="<?php echo $this->baseUrl() ?>/Admin.pdf" ><i class="fa fa-gear fa-fw"></i> Giúp đỡ</a>
+                        </li>
+                        <li class="divider"></li>
+                        <li><a href="<?php echo $this->baseUrl() ?>/admin/index/logout"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                        </li>
+                    </ul>
+                    <!-- /.dropdown-user -->
+                </li>
+                <!-- /.dropdown -->
+            </ul>
+             <div class="nav navbar-top-links navbar-right">
+                 <a class="navbar-text" href="<?php echo $this->baseUrl() ?>/admin/sysuser/edit/id/<?php echo $identity->id ?>">Xin chào <?php echo $identity->first_name." ".$identity->last_name ?></a>
+            </div>
+               
+            <!-- /.navbar-top-links -->
+
+            <div class="navbar-default sidebar" role="navigation">
+                <div class="sidebar-nav navbar-collapse">
+                    <ul class="nav" id="side-menu">
+<!--                        <li class="sidebar-search">
+                            <div class="input-group custom-search-form">
+                                <input type="text" class="form-control" placeholder="Search...">
+                                <span class="input-group-btn">
+                                <button class="btn btn-default" type="button">
+                                    <i class="fa fa-search"></i>
+                                </button>
+                            </span>
+                            </div>
+                             /input-group 
+                        </li>-->
+
+                        <li>
+                            <a class="active" href="#"><i class="fa fa-wrench fa-fw"></i> Hệ Thống<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level collapse" aria-expanded="false">
+                                <?php // if($identity->admin_group_id==1){ ?>
+                                <li>
+                                    <a href="<?php echo $this->baseUrl() ?>/admin/masterprovince/list">Tỉnh thành</a>
+                                </li>
+                                 <li>
+                                    <a href="<?php echo $this->baseUrl() ?>/admin/masterdistrict/list">Quận huyện</a>
+                                </li>
+                                 <li>
+                                    <a href="<?php echo $this->baseUrl() ?>/admin/masterward/list">Xã/Phường</a>
+                                </li>
+                                <li>
+                                    <a href="<?php echo $this->baseUrl()?>/admin/sysdepartments/list">Phòng ban/Đội QLTT</a>
+                                </li>   
+                                <li>
+                                    <a href="<?php echo $this->baseUrl() ?>/admin/masterprint/list">Tên ấn chỉ</a>
+                                </li>   
+                                <li>
+                                    <a href="<?php echo $this->baseUrl() ?>/admin/masterbusinesstype/list">Loại hình kinh doanh</a>
+                                </li>
+                                <li>
+                                    <a href="<?php echo $this->baseUrl() ?>/admin/masteritemslimit/list">Mặt hàng hạn chế KD</a>
+                                </li>
+                                 <li>
+                                    <a href="<?php echo $this->baseUrl() ?>/admin/masteritemscondition/list">Mặt hàng KD có điều kiện</a>
+                                </li>       
+                                <li>
+                                    <a href="<?php echo $this->baseUrl() ?>/admin/masterbusinesssize/list">Quy mô doanh nghiệp</a>
+                                </li>   
+                                <li>
+                                    <a href="<?php echo $this->baseUrl() ?>/admin/masterviolation/list">Hành vi vi phạm</a>
+                                </li>
+                                 <li>
+                                    <a href="<?php echo $this->baseUrl() ?>/admin/mastersanction/list">Hình thức xử lý</a>
+                                </li>
+                                <li>
+                                    <a href="<?php echo $this->baseUrl() ?>/admin/masterunit/list">Đơn vị tính</a>
+                                </li>
+                                <li>
+                                    <a href="<?php echo $this->baseUrl() ?>/admin/masteritems/list">Hàng hóa</a>
+                                </li>
+
+                                <?php // } else {?>                               
+                                <?php // }?>
+                            </ul>
+                        </li>
+<?php // if($identity->admin_group_id==1){ ?>
+                        <li>
+                            <a href="#"><i class="fa fa-tasks fa-fw"></i> Quản Lý Kinh Doanh<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level collapse" aria-expanded="false">
+                                <li>
+                                    <a href="<?php echo $this->baseUrl() ?>/admin/infobusiness/list/type_business/DoanhNghiep">Doanh nghiệp</a>
+                                </li>
+                                <li>
+                                    <a href="<?php echo $this->baseUrl() ?>/admin/infobusiness/list/type_business/HoKinhDoanh">Hộ kinh doanh</a>
+                                </li>
+                                 <li>
+                                    <a href="<?php echo $this->baseUrl() ?>/admin/infobusiness/list/type_business/DoanhNghiepNgoaiDiaBan">Doanh nghiệp ngoài địa bàn</a>
+                                </li>
+                                                         
+                            </ul>
+                            
+                        </li>
+                        <li>
+                            <a href="tables.html"><i class="fa fa-files-o fa-fw"></i>Quản Lý Ấn Chỉ<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level collapse" aria-expanded="false">
+                              <li>
+                                    <a href="<?php echo $this->baseUrl() ?>/admin/docprintcreate/list">Nhận ấn chỉ</a>
+                              </li>    
+                                <li>
+                                    <a href="<?php echo $this->baseUrl() ?>/admin/docprintallocation/list">Cấp phát ấn chỉ</a>
+                                </li>  
+                                <li>
+                                    <a href="<?php echo $this->baseUrl() ?>/admin/docprintpayment/list">Thanh toán ấn chỉ</a>
+                                </li>    
+                                   <li>
+                                    <a href="<?php echo $this->baseUrl() ?>/admin/report/mangementprint">Theo dõi nhập xuất</a>
+                                </li>    
+                              
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="tables.html"><i class="fa fa-edit fa-fw"></i>Quản Lý Vi Phạm<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level collapse" aria-expanded="false">
+                                <li>
+                                    <a href="<?php echo $this->baseUrl() ?>/admin/docdiary/list">Nhật ký theo dõi hoạt động</a>
+                                </li> 
+                                <li>
+                                    <a href="<?php echo $this->baseUrl() ?>/admin/infoschedulecheck/list">Kiểm tra vi phạm</a>
+                                </li>  
+                                <li>
+                                    <a href="<?php echo $this->baseUrl() ?>/admin/docviolationshandling/list/type_business/DoanhNghiep">Xử phạt vi phạm</a>
+                                </li>
+                                <li>
+                                    <a href="<?php echo $this->baseUrl() ?>/admin/docviolationshandling/listownerlessgoods"> Tang vật vô chủ</a>
+                                </li> 
+                                 <li>
+                                    <a href="<?php echo $this->baseUrl() ?>/admin/docitemshandling/list">Tạm giữ tang vật</a>
+                                </li>
+                                 <li>
+                                    <a href="<?php echo $this->baseUrl() ?>/admin/docitemshandling/listtt">Tịch thu tang vật</a>
+                                </li>
+                                 <li>
+                                    <a href="<?php echo $this->baseUrl() ?>/admin/printrecordsmanagement/index">Quản lý xử phạt</a>
+                                </li> 
+                                
+                                <li>
+                                    <a href="<?php echo $this->baseUrl() ?>/admin/infoschedule/list">Đặt lịch kiểm tra</a>
+                                </li>  
+                            </ul>
+                        </li>
+                         <li>
+                            <a href="tables.html"><i class="fa fa-bar-chart-o fa-fw"></i> Báo cáo thống kê<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level collapse" aria-expanded="false">                               
+                                <li>
+                                    <a href="<?php echo $this->baseUrl() ?>/admin/docprintpayment/reporttonthat">BC tổn thất ấn chỉ</a>
+                                </li>
+                                <li>
+                                    <a href="<?php echo $this->baseUrl() ?>/admin/report/mangementuseprint">BC sử dụng ấn chỉ</a>
+                                </li>  
+                                 <li>
+                                    <a href="<?php echo $this->baseUrl() ?>/admin/report/mangementuseprintbysysdepartment">BC sử dụng ấn chỉ cho đội</a>
+                                </li>  
+                                <li>
+                                    <a href="<?php echo $this->baseUrl() ?>/admin/docviolationshandling/exportcheck">BC kiểm tra, xử lý theo quý</a>
+                                </li> 
+                                  <li>
+                                    <a href="<?php echo $this->baseUrl() ?>/admin/docviolationshandling/exportcheckall">Tổng hợp kiểm tra, xử lý</a>
+                                </li> 
+                            </ul>
+                        </li>
+                        <?php // if($identity->admin_group_id==1){ ?>
+                        <li>
+                            <a href="#"><i class="fa fa-group fa-fw"></i> Tài khoản<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level collapse" aria-expanded="false">
+                                <li>
+                                    <a href="<?php echo $this->baseUrl() ?>/admin/sysuser/list">Danh sách người dùng</a>
+                                </li>
+                                <li>
+                                    <a href="<?php echo $this->baseUrl() ?>/admin/sysusergroup/list">Phân quyền người dùng</a>
+                                </li>
+                                <li>
+                                    <a href="<?php echo $this->baseUrl() ?>/admin/sysuser/edit/id/<?php echo $identity->id ?>">Chỉnh sửa thông tin</a>
+                                </li>
+                                <li>
+                                <li>
+                                    <a href="<?php echo $this->baseUrl() ?>/admin/sysuser/editpass/id/<?php echo $identity->id ?>">Đổi mật khẩu</a>
+                                </li>
+                                </li>
+<!--                                <li>
+                                    <a href="#">Loại đặc quyền</a>
+                                </li>
+                                <li>
+                                    <a href="#">Phân quyền</a>
+                                </li>-->
+                            </ul>
+                            <!-- /.nav-second-level -->
+                        </li>
+                         <?php //}?>
+<!--                         <li>
+                            <a href="<?php echo $this->baseUrl() ?>/admin/news/list"><i class="fa fa-bell fa-fw"></i> Thông báo</a>
+                             /.nav-second-level 
+                        </li>
+                         <?php // if($identity->admin_group_id==1){ ?>
+                        <li>
+                            <a href="<?php echo $this->baseUrl() ?>/admin/feedback/list"><i class="fa fa-comments fa-fw"></i> Hỏi đáp</a>
+                             /.nav-second-level 
+                        </li>-->
+                        <?php // }}}?>
+                    </ul>
+                </div>
+                <!-- /.sidebar-collapse -->
+            </div>
+            <!-- /.navbar-static-side -->
+            
+             <?php  } else { ?>
+             <ul class="nav navbar-top-links navbar-right">
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        <i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-user">
+                        <li><a href="<?php echo $this->baseUrl() ?>/admin/index/login"><i class="fa fa-sign-in fa-fw"></i> Login</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+                <?php  } ?>
+        </nav>
+
+        <div id="page-wrapper">
+          <?php echo $this->layout()->content;?>
+        </div>
+        <!-- /#page-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+<!--<style type="text/css">
+        .big-image {
+            float: left;
+            margin-right: 15px;
+            margin-bottom: 15px;
+            border: 1px solid #999;
+            background: #fff;
+            padding: 3px;
+        }
+        .important-text {
+            font-size: 13px;
+            font-family: Verdana, Geneva, 'DejaVu Sans', sans-serif;
+        }
+        .more-text {
+            font-family: Verdana, Geneva, 'DejaVu Sans', sans-serif;
+            color: #444;
+            font-size: 11px;
+            font-style: italic;
+        }
+    </style>
+     <script type="text/javascript">
+        
+            $(document).ready(function () {
+                $("#jqxWidget1").css('visibility', 'visible');
+//                createElements();
+//                $('#window').jqxWindow('open');
+//                $('#window').jqxWindow('focus');  
+            });
+            function checkinputpass1() {        
+                var frm1 = window.document.changepass;
+                if ($("#oldpassword1").val() == "") {
+                    bootbox.alert("Vui lòng nhập mật khẩu!");
+                    return false;
+                }        
+                if ($("#newpassword1").val() == "") {
+                    bootbox.alert("Vui lòng nhập mật khẩu xác nhận!");
+                    return false;
+                }        
+                if(frm1.renewpassword.value != frm1.newpassword.value )
+                {
+                    bootbox.alert("Mật khẩu xác nhận không chính xác!");
+                    return false;
+                }
+                var oldpassword= $('#oldpassword1').val();
+                $.ajax({
+                    type:'post',
+                    url:'<?php // echo $this->baseUrl()?>/admin/sysuser/checkoldpassword/pass/'+oldpassword,
+                    async:false,
+                    dataType:'json',
+                    success:function(data){
+                        if(data[0].code==1){
+                            flag=false;
+                        } else {
+                            flag=true;
+                        }
+                    }
+                });
+                if(flag==true){
+                    bootbox.alert("Mật khẩu cũ không đúng.Vui lòng kiểm tra và nhập lại.");
+                    return false;
+                };
+                 var params = {
+                                id: <?php // echo $identity->id ?>,
+                                password: $("#newpassword1").val()
+                 }; 
+                 $.post("<?php // echo $this->baseUrl().'/admin/sysuser/changepassword'?>", params, function(datas) {                            
+                        var items = eval(datas);
+                        var jItem = items[0];
+                        if (jItem.html != '') 
+                        {
+
+                            window.location = jItem.html;
+                        } 
+                        else 
+                        {
+                            if (errorMessage != '' && errorMessage != null) {
+                                alert(errorMessage);
+                            }
+                        }
+                    }); 
+                return true;
+            }
+            function addEventListeners() {
+                $('#showWindowButton1').mousedown(function () {
+                    $('#window1').jqxWindow('open');
+                    $('#window1').jqxWindow('focus');
+                });            
+            }
+            function createElements() {           
+                $('#window1').jqxWindow({
+                    resizable: true,
+                    isModal: true,
+                    width: '100%',
+                    height: 500,
+                    minWidth: 700,
+                    minHeight: 500
+                }); 
+            }
+            $('#showWindowButton1').on('click',function(){
+                createElements();
+                $('#window1').jqxWindow('open');
+                $('#window1').jqxWindow('focus');  
+            });
+    </script> 
+        <div class="row">
+        <div class="col-lg-12">
+        <div id="jqxgrid"></div>
+        <div style="visibility: hidden;" id="jqxWidget1">
+            <div id="window1" hidden="true">
+                    <div>
+                        Thay đổi mật khẩu
+                    </div>
+                    <div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <form role="form" method="POST"  name="changepass1" onsubmit="return checkinputpass1();">
+                                        <input type="hidden" id="id1" name="id1" value="<?php // echo $this->id?>">
+                                         <div class="form-group">
+                                            <div class="row">
+                                                <div class="col-lg-4">
+                                                    <label>Mật khẩu cũ</label>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <input class="form-control" name="oldpassword1" id="oldpassword1" type="password" value="">
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                         <div class="form-group">
+                                            <div class="row">
+                                                <div class="col-lg-4">
+                                                    <label>Mật khẩu mới</label>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <input class="form-control" name="newpassword1" id="newpassword1" type="password" value="">
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="row">
+                                                <div class="col-lg-4">
+                                                    <label>Nhập lại mật khẩu mới</label>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <input class="form-control" type="password" name="renewpassword1" id="renewpassword1" value="">
+                                                </div>
+
+                                            </div>
+                                        </div> 
+                                        <div class="col-lg-12">
+                                            <div class="form-group">
+                                                <div class="row">
+                                                    <div class="col-lg-4">
+                                                            <button type="submit" class="btn btn-primary">Thêm mới</button>
+                                                    </div>
+                                                </div>    
+                                            </div>
+                                        </div> 
+                                     </form>
+                                    </div> 
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>-->
+
+    <!-- jQuery Version 1.11.0 -->   
+</body>
+</html>

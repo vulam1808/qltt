@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<div class="row">
+    <div class="col-lg-12">
+        <h3 class="page-header">Chỉnh sửa nhật ký</h3>
+    </div>    
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-lg-10">
+                        <form  method="POST" name="Editdoc_diary" onsubmit=" return checkinput();">                                    
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-lg-4">
+                                        <label>Ngày kiểm tra(*)</label>
+                                    </div>
+                                    <div class="col-lg-7">
+                                       <div id='jqxWidget'>
+                                            <div style='float: left;'>
+                                                <div style='float: left; margin-top: 3px;' id='jqxDateTimeInput'>
+                                                </div>
+                                                <div style='margin-left: 20px; float: left;'>
+                                                    <div>
+                                                        <input type="hidden" id="date_diary" name="date_diary">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-lg-4">
+                                        <label>Họ và tên KSV:(*)</label>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <input class="form-control" name="implementers" id="implementers" value="<?php echo $this->item->getImplementers(); ?>">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-lg-4">
+                                        <label>Chức danh:(*)</label>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <input class="form-control" name="position" id="position" value="<?php echo $this->item->getPosition(); ?>">
+                                    </div>
+                                </div>
+                            </div>
+                             <div class="form-group">
+                                    <div class="row">
+                                    <div class="col-lg-4">
+                                        <label>Nội dung kiểm tra:(*)</label>
+                                    </div> 
+                                        <div class="col-lg-6">
+                                            <textarea  name="content_inspection" id="content_inspection" type="text" class="form-control" cols="100" rows="5"><?php echo $this->item->getContent_Inspection(); ?></textarea>    
+                                        </div>  
+                                    </div>                                
+                             </div>
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-lg-4">
+                                        <label>Thời gian:(*)</label>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <input class="form-control" name="time_check" id="time_check" value="<?php echo $this->item->getTime_Check(); ?>">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                    <div class="row">
+                                    <div class="col-lg-4">
+                                        <label>Tình hình và kết quả kiểm tra:(*)</label>
+                                    </div> 
+                                        <div class="col-lg-6">
+                                            <textarea  name="status_and_test_results" id="status_and_test_results" type="text" class="form-control" cols="100" rows="5"><?php echo $this->item->getStatus_And_Test_Results(); ?></textarea>    
+                                        </div>  
+                                    </div>                                
+                             </div>
+                             <div class="form-group">
+                                    <div class="row">
+                                    <div class="col-lg-4">
+                                        <label>Kết quả xử lý:(*)</label>
+                                    </div> 
+                                        <div class="col-lg-6">
+                                            <textarea  name="processing_results" id="processing_results" type="text" class="form-control" cols="100" rows="5"><?php echo $this->item->getProcessing_Results(); ?></textarea>    
+                                        </div>  
+                                    </div>                                
+                             </div>
+                            <!--//////-->
+                            <!--//////-->
+                             <div class="row">
+                                <div class="col-lg-6">                      
+                                        <div class="form-group">
+                                            <div class="row">
+                                                 <div class="col-lg-9">
+                                                    <button type="submit" name="save" id="save" class="btn btn-primary">Lưu</button>
+                                                    <button type="reset" name="reset" id="reset"class="btn btn-default">Đặt lại</button> 
+                                                 </div>   
+                                            </div>
+                                        </div> 
+                                </div></div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>   
+</div>
+<script type="text/javascript">
+            $(document).ready(function () { 
+                $('#save').click(function(){
+                        $('#date_diary').val($('#jqxDateTimeInput').val());
+                       
+                });
+            });
+</script>
+<script type="text/javascript">
+    document.forms['Editdoc_diary'].implementers.focus();
+    function set_focus() {
+        document.forms['Editdoc_diary'].implementers.focus();
+    }
+    
+    function checkinput() {
+        var frm = window.document.Editdoc_diary;
+        if (frm.implementers.value == "") {
+            bootbox.alert("Vui lòng nhập tên KSV");
+            return false;
+        };
+        if(isNaN(frm.implementers.value)== false){
+            bootbox.alert("Vui lòng nhập tên KSV bằng chữ");
+            return false;
+        }  
+        
+        if (frm.position.value == "") {
+            bootbox.alert("Vui lòng nhập chức danh cho KSV");
+            return false;
+        };
+        if(isNaN(frm.position.value)== false){
+            bootbox.alert("Vui lòng nhập tên chức danh cho KSV");
+            return false;
+        }
+        
+        if (frm.content_inspection.value == "") {
+            bootbox.alert("Vui lòng nhập nội dung kiểm tra");
+            return false;
+        };
+        if(isNaN(frm.content_inspection.value)== false){
+            bootbox.alert("Vui lòng nhập nội dung kiểm tra  bằng chữ");
+            return false;
+        }
+        
+        if (frm.time_check.value == "") {
+            bootbox.alert("Vui lòng nhập thời gian kiểm tra");
+            return false;
+        };
+        if(isNaN(frm.time_check.value)== false){
+            bootbox.alert("Vui lòng nhập thời gian kiểm tra bằng chữ");
+            return false;
+        }
+        
+        if (frm.status_and_test_results.value == "") {
+            bootbox.alert("Vui lòng nhập tình hình và kết quả kiểm tra");
+            return false;
+        };
+        if(isNaN(frm.status_and_test_results.value)== false){
+            bootbox.alert("Vui lòng nhập tình hình và kết quả kiểm tra bằng chữ");
+            return false;
+        }
+        
+        if (frm.processing_results.value == "") {
+            bootbox.alert("Vui lòng nhập kết quả xử lý");
+            return false;
+        };
+        if(isNaN(frm.processing_results.value)== false){
+            bootbox.alert("Vui lòng nhập kết quả xử lý");
+            return false;
+        }
+        
+       
+      return true;
+    }
+</script>
+<script type="text/javascript">
+            // When the document is ready
+            $(document).ready(function () { 
+//                  $("#jqxDateTimeInput").jqxDateTimeInput({ width: '250px', height: '25px', formatString: 'T', showTimeButton: true, showCalendarButton: false});
+                $('#jqxDateTimeInput').jqxDateTimeInput({ formatString: "dd-MM-yyyy"});
+                <?php 
+               $ngay =  GlobalLib::viewDate($this->item->getDate_Diary());
+               $arrngay = explode("-", $ngay);               
+            ?>
+            $("#jqxDateTimeInput").jqxDateTimeInput({ width: '200px', height: '25px',value: new Date(<?php echo $arrngay[2]; ?>, <?php echo ($arrngay[1]-1); ?>,<?php echo $arrngay[0];?>)});
+                var formatString = $('#jqxDateTimeInput').jqxDateTimeInput('formatString');
+                $('#jqxDateTimeInput').on('valueChanged', function (event) {
+                    var date = event.args.date;
+                    var text= $('#jqxDateTimeInput').jqxDateTimeInput('getText'); 
+                     $('#date_diary').val(text);
+                });
+                $('#jqxDateTimeInput').on('open', function (event) {
+                    var date = event.args.date;
+                });
+                $('#jqxDateTimeInput').on('close', function (event) {
+                    var date = event.args.date;
+                });
+                 
+
+               
+               
+                });
+           
+</script>

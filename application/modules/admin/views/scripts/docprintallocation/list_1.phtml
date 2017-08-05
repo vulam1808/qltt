@@ -1,0 +1,398 @@
+<div class="row">
+     <div class="col-lg-12">
+        <h3 class="page-header">Danh cấp phát ấn chỉ</h3>
+    </div>  
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default">             
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-lg-10">
+                        <a class="" href="<?php echo $this->url(array("action"=>"add")) ?>"> <input type="button" class ="btn btn-default" id="addmasterdistrict" name="addmasterdistrict" value="Thêm cấp phát"/></a>   
+                         <input type="button" class="btn btn-default"value="Thu hồi ấn chỉ" id="showWindowButton" />  
+                         <input type="button" class="btn btn-default"value="Danh sách ấn chỉ đã thu hồi" id="listprintrecovery" />  
+                    </div>
+                </div>
+            </div>
+            <div class="panel-body">
+                <div class="table-reponsive">
+                    <div id="jqxgrid">
+                    </div>
+                </div>
+                <input type="text" name="id" id="id"class="form-control" value="">
+            </div>
+    </div>
+    <div class="row">
+                <div class="col-lg-12">
+                        <div id="jqxgrid"></div>
+                        <div style="visibility: hidden;" id="jqxWidget">
+                            
+                            <div id="window" hidden="true">
+                                    <div>
+                                        DANH SÁCH ẤN CHỈ CHƯA XỬ PHẠT()
+                                    </div>
+                                    <div>
+                                        <div class="panel-body">
+                                            <div class="row">
+                                                <div class="col-lg-12">
+                                                    <div id="jqxgrid_recovery">
+                                                    </div> <input type="text" name="id1" id="id1"class="form-control" value="">
+                                                    <input type="text" name="listserialrecovery" id="listserialrecovery" 
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                            </div>
+                        </div>
+                </div>
+            </div>                
+        </div>
+        </div>
+    </div>
+</div>
+</div>
+               
+                    <!--//-->
+ <style type="text/css">
+        .big-image {
+            float: left;
+            margin-right: 15px;
+            margin-bottom: 15px;
+            border: 1px solid #999;
+            background: #fff;
+            padding: 3px;
+        }
+        .important-text {
+            font-size: 13px;
+            font-family: Verdana, Geneva, 'DejaVu Sans', sans-serif;
+        }
+        .more-text {
+            font-family: Verdana, Geneva, 'DejaVu Sans', sans-serif;
+            color: #444;
+            font-size: 11px;
+            font-style: italic;
+        }
+    </style>
+    
+    <script type="text/javascript">
+        var nguon;
+            $(document).ready(function () {
+                $("#jqxWidget").css('visibility', 'visible');
+            });
+            function addEventListeners() {
+                $('#showWindowButton').mousedown(function () {
+                    $('#window').jqxWindow('open');
+                    $('#window').jqxWindow('focus');
+                });            
+            }
+            function createElements() {           
+                $('#window').jqxWindow({
+                    resizable: true,
+                    isModal: true,
+                    width: '100%',
+                    height: 500,
+                    minWidth: 700,
+                    minHeight: 500
+                }); 
+                $('#id1').val($('#id').val());
+            }
+            $('#showWindowButton').on('click',function(){
+                createElements();
+                $('#window').jqxWindow('open');
+                $('#window').jqxWindow('focus');  
+                /////
+                var a ;
+                if($('#id').val()== ""){
+                    a = 0;
+                }else{
+                    a =$('#id').val();
+                }
+                 var source1 =
+                    {
+                        datatype: "json",
+                        datafields:
+                        [
+                            { name: 'Id',type:'int'},
+                            {name: 'master_print_id',type:'int'},
+                            {name: 'name_print',type:'int'},
+                            { name: 'serial_allocation', type: 'string' }, 
+                            { name: 'serial_recovery' , type:'string'},
+                            {name: 'tenanchi',type:'string'}
+                        ],
+                        addrow: function (rowid, rowdata, position, commit) {
+                            commit(true);
+                        },
+                        deleterow: function (rowid, commit) {
+                            commit(true);
+                        },
+                        updaterow: function (rowid, newdata, commit) {
+                            commit(true);
+                        },
+                        url:"<?php echo $this->baseUrl().'/admin/docprintallocation/serviceprintunused/id/'?>"+a+"",
+                        sortcolumn: 'Id',
+                        sortdirection: 'DESC'
+
+                    };
+                     var dataAdapter = new $.jqx.dataAdapter(source1, {
+                            loadComplete: function () {
+                            }
+                        });
+                        $("#jqxgrid_recovery").jqxGrid(
+                        {
+                            width: '100%',
+                            source: dataAdapter,  
+                            theme: 'bootstrap',
+                            pageable: true,
+                            showfilterrow: true,
+                            filterable: true,
+                            autoheight: true,
+                            sortable: true,
+                            altrows: true,
+                            enabletooltips: true,
+                            editable: true,
+                            selectionmode: 'multiplecellsadvanced',
+                            columnsResize: true,
+                             rendertoolbar: function (toolbar) {
+                    var me = this;
+                    var container = $("<div style='margin: 5px;'></div>");
+                    toolbar.append(container);
+                    container.append('<input id="addrowbutton" type="button" value="Add New Row" />');
+                    container.append('<input style="margin-left: 5px;" id="addmultiplerowsbutton" type="button" value="Add Multiple New Rows" />');
+                    container.append('<input style="margin-left: 5px;" id="deleterowbutton" type="button" value="Delete Selected Row" />');
+                    container.append('<input style="margin-left: 5px;" id="updaterowbutton" type="button" value="Update Selected Row" />');
+                    $("#addrowbutton").jqxButton();
+                    $("#addmultiplerowsbutton").jqxButton();
+                    $("#deleterowbutton").jqxButton();
+                    $("#updaterowbutton").jqxButton();
+                    // update row.
+                    $("#updaterowbutton").on('click', function () {
+                        var datarow = generaterow();
+                        var selectedrowindex = $("#jqxgrid").jqxGrid('getselectedrowindex');
+                        var rowscount = $("#jqxgrid").jqxGrid('getdatainformation').rowscount;
+                        if (selectedrowindex >= 0 && selectedrowindex < rowscount) {
+                            var id = $("#jqxgrid").jqxGrid('getrowid', selectedrowindex);
+                            var commit = $("#jqxgrid").jqxGrid('updaterow', id, datarow);
+                            $("#jqxgrid").jqxGrid('ensurerowvisible', selectedrowindex);
+                        }
+                    });
+                    // create new row.
+                    $("#addrowbutton").on('click', function () {
+                        var datarow = generaterow();
+                        var commit = $("#jqxgrid").jqxGrid('addrow', null, datarow);
+                    });
+                    // create new rows.
+                    $("#addmultiplerowsbutton").on('click', function () {
+                        $("#jqxgrid").jqxGrid('beginupdate');
+                        for (var i = 0; i < 10; i++) {
+                            var datarow = generaterow();
+                            var commit = $("#jqxgrid").jqxGrid('addrow', null, datarow);
+                        }
+                        $("#jqxgrid").jqxGrid('endupdate');
+                    });
+                    // delete row.
+                    $("#deleterowbutton").on('click', function () {
+                        var selectedrowindex = $("#jqxgrid").jqxGrid('getselectedrowindex');
+                        var rowscount = $("#jqxgrid").jqxGrid('getdatainformation').rowscount;
+                        if (selectedrowindex >= 0 && selectedrowindex < rowscount) {
+                            var id = $("#jqxgrid").jqxGrid('getrowid', selectedrowindex);
+                            var commit = $("#jqxgrid").jqxGrid('deleterow', id);
+                        }
+                    });
+                },
+                            rendergridrows: function (params) {
+                                return params.data;
+                            },
+                            ready: function () {
+                                $("#jqxgrid_recovery").jqxGrid('hideColumn', 'Id');
+                                 $("#jqxgrid_recovery").jqxGrid('hideColumn', 'master_print_id');
+                            },
+                            columns: [
+                              { text: 'Mã Code',editable: false, dataField: 'Id', width: '15%' },
+                              { text: 'Mã cấp phát',editable: false, dataField: 'master_print_id', width: '25%' }, 
+                              { text: 'Tên ấn chỉ',editable: false, dataField: 'name_print', width: '25%' }, 
+                              { text: 'Số Serial chưa xử phạt',editable: false, dataField: 'serial_allocation', width: '20%' },
+                              { text: 'Nhập số Serial thu hồi', editable: true, dataField: 'serial_recovery', width: '25%'
+                              },
+//                              { text: 'Thu hồi',filtertype: 'none', cellsalign: 'right', align: "center", columnType: 'none', editable: false, sortable: false, dataField: null, cellsrenderer: function (row) {
+//                                      // render custom column.
+//                                      editrow = row;
+//                                      var dataRecord = $("#jqxgrid_recovery").jqxGrid('getrowdata',editrow);
+//                                      var url= "<div style='overflow: hidden; text-overflow: ellipsis; padding-bottom: 2px; text-align: center; margin-right: 2px; margin-left: 4px; margin-top: 4px;'><a class='fa fa-trash-o fa-lg'";
+//                                      url = url + "href='#' onclick='return kiemtraserialrecovery("+dataRecord.doc_print_create_id+","+dataRecord.serial_recovery+")'></a></div>"
+//                                      return url;
+//                                  }
+//                               }
+                            ]
+                        });
+                       $("#jqxgrid_recovery").on('rowselect', function (event) {
+                            var dataRecord = $("#jqxgrid_recovery").jqxGrid('getrowdata',event.args.rowindex);
+                             $("#id1").val(dataRecord.serial_allocation);
+                        });
+                      
+                /////
+            });
+    </script> 
+<script type="text/javascript">
+        $(document).ready(function () {
+          
+             var source =
+            {
+              //f  datatype: "json",
+                datatype: "json",
+                datafields:
+                [
+                    { name: 'Id',type:'int'},
+                    { name: 'master_print_id', type: 'string' }, 
+                    { name: 'nameprint', type:'string'},
+                    { name: 'sys_department_id', type: 'string' },
+                    { name: 'serial_allocation', type: 'string' }, 
+                    { name: 'namedepartment', type: 'string' },
+                    { name: 'date_allocation', type: 'string' }, 
+                    { name: 'date_recovery', type: 'string' },
+                    { name: 'comment',type:'string'},
+                    { name: 'status', type:'int'},
+                    { name: 'order', type: 'int' }
+                ],
+                addrow: function (rowid, rowdata, position, commit) {
+                    commit(true);
+                },
+                deleterow: function (rowid, commit) {
+                    commit(true);
+                },
+                updaterow: function (rowid, newdata, commit) {                   
+                    commit(true);
+                },
+                url:"<?php echo $this->baseUrl().'/admin/docprintallocation/service'?>",
+                sortcolumn: 'order',
+                sortdirection: 'asc'
+            };
+            var dataAdapter = new $.jqx.dataAdapter(source, {
+                loadComplete: function () {
+                }
+            });
+            $("#jqxgrid").jqxGrid(
+            {
+                width: '100%',
+                source: dataAdapter,  
+                theme: 'bootstrap',
+                pageable: true,
+                showfilterrow: true,
+                filterable: true,
+                autoheight: true,
+                sortable: true,
+                altrows: true,
+                enabletooltips: true,
+                showtoolbar: true,
+                showstatusbar: true,
+                selectionmode: 'singlerow',
+               
+                rendergridrows: function (params) {
+                    return params.data;
+                },
+              
+                 ready: function () {
+                        $("#jqxgrid").jqxGrid('hideColumn', 'master_print_id');
+                        $("#jqxgrid").jqxGrid('hideColumn', 'sys_department_id');
+                       
+                    },
+                
+                columns: [
+                  { text: 'Mã cấp phát',editable: false, dataField: 'master_print_id', width: '15%' },
+                  { text: 'Tên ấn chỉ',editable: false, dataField: 'nameprint', width: '15%' },
+                  { text: 'Mã phòng ban',editable: false, dataField: 'sys_department_id', width: '20%' },
+                  { text: 'Tên phòng ban',editable: false, dataField: 'namedepartment', width: '20%' },
+                  { text: 'Serial cấp phát',editable: false, dataField: 'serial_allocation', width: '30%' },
+                  { text: 'Ngày cấp phát',editable: false, dataField: 'date_allocation', width: '10%' },
+                  { text: 'Ghi chú',editable: false, dataField: 'comment', width: '10%' },
+//                  { text: 'Thứ tự', editable: false, dataField: 'order', width: '10%' },
+//                  { text: 'Hiển thị', editable: false,columntype: 'checkbox', dataField: 'status', width: '7%' },
+                  {text: 'Xóa',filtertype: 'none', cellsalign: 'right', align: "center", columnType: 'none', editable: false, sortable: false, dataField: null, cellsrenderer: function (row) {
+                          // render custom column.
+                          editrow = row;
+                          var dataRecord = $("#jqxgrid").jqxGrid('getrowdata',editrow);
+                          var url= "<div style='overflow: hidden; text-overflow: ellipsis; padding-bottom: 2px; text-align: center; margin-right: 2px; margin-left: 4px; margin-top: 4px;'><a class='fa fa-trash-o fa-lg'";
+                          url = url + "href='#' onclick='return jsdelete("+dataRecord.Id+")'></a></div>"
+                          return url;
+                      }
+              },
+              {text: 'Sửa',filtertype: 'none', cellsalign: 'right', align: "center", columnType: 'none', editable: false, sortable: false, dataField: null, cellsrenderer: function (row) {
+                          // render custom column.
+                          editrow = row;
+                          var dataRecord = $("#jqxgrid").jqxGrid('getrowdata',editrow);
+                          var url= "<div style='overflow: hidden; text-overflow: ellipsis; padding-bottom: 2px; text-align: center; margin-right: 2px; margin-left: 4px; margin-top: 4px;'><a class='fa fa-edit fa-lg'";
+                          url = url + "href='<?php echo $this->baseUrl() ?>/admin/masterprint/edit/id/"+dataRecord.Id+"'></a></div>"
+                          return url;
+                      }
+                          }
+                ],
+                groups: ['date_allocation']
+            });
+            $("#jqxgrid").on('rowselect', function (event) {
+                var dataRecord = $("#jqxgrid").jqxGrid('getrowdata',event.args.rowindex);
+                 $("#id").val(dataRecord.master_print_id);
+            });
+           
+        });
+    </script>
+    <script type="text/javascript">
+        //var flag =true;
+//         function kiemtraserialrecovery11(iddocprintcreateid,serial)
+//        {  
+//             $.get('<?php // echo $this->baseUrl() ?>/admin/docprintallocation/checkserialrecovery/iddocprintcreateid/'+iddocprintcreateid+'/serial/'+serial,null,function(data){
+//                if(data>0)
+//                {
+//                    bootbox.confirm("Hiện có quận huyện thuộc tỉnh thành này và quản trị viên quản lý tỉnh thành này. "
+//                        +"Bạn có muốn xoá tỉnh thành này và tất cả các quận huyện trực thuộc không?",function(result){
+//                            if(result == true)
+//                            {
+//                                return window.location = "<?php // echo $this->baseUrl() ?>/admin/province/delete/id/"+id;
+//                            }
+//                        });
+//                    return false;
+//                }
+//                else 
+//                {
+//                    bootbox.confirm("Bạn có chắc muốn xoá tỉnh thành này không?",
+//                    function(result){
+//                        if(result == true)
+//                        {
+//                           return window.location = "<?php // echo $this->baseUrl() ?>/admin/province/delete/id/"+id;
+//                        }
+//                    });
+//                }
+//            });
+//        }
+        function kiemtraserialrecovery(iddocprintcreateid,serial)
+        {     
+            $.ajax({
+                   type:'POST',
+                   url:'<?php echo $this->baseUrl()?>/admin/docprintallocation/checkserialrecovery/iddocprintcreateid/'+iddocprintcreateid+'/serial/'+serial,
+                   async:false,
+                   dataType:'json',
+                   success:function(data){
+                       if(data[0].code == 1){
+                           flag=false;
+                           //bootbox.alert(data[0].message); 
+                       } else {
+                           flag=true; 
+                           //bootbox.alert(data[0].message); 
+                       }
+                   }
+               });
+               if(flag == false){
+                   bootbox.alert("Serial này không hợp lệ. Vui lòng kiểm tra và nhập lại.");
+                   return false;
+               }
+//               bootbox.confirm("Bạn có chắc muốn thu hồi số ấn chỉ này không?",
+//               function(result){
+//                   if(result == true)
+//                   {
+//                      return window.location = "<?php // echo $this->baseUrl() ?>/admin/docprintallocation/serialrecovery/iddocprintcreateid/"+iddocprintcreateid+"/serial/"+serial;
+//                   }
+//               });  
+           ////
+
+           return true;
+        }
+    </script>

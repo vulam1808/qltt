@@ -1,0 +1,371 @@
+<div class="row">
+    <div class="col-lg-12">
+        <h3 class="page-header">Thông tin vi phạm - xử lý</h3>      
+    </div>    
+</div>
+<div class="row">
+   
+   <div class="panel panel-default">             
+            <div class="panel-heading">
+                <div class="row">
+                 <div class="row">
+                     <div class="col-lg-2" style="text-align:center;width: 9%;padding-right: 0px;">
+                         <a id ="addLink" href="<?php 
+                             echo $this->baseUrl()."/master/docviolationshandling/add/type_business/".GlobalLib::_DN
+                                 ?>">
+                             <button type="button" class="btn btn-success btn-action"><i class="fa fa-plus fa-2x"></i>
+                             </button></br>
+                             <span >Thêm Mới</span>
+                         </a>
+                     </div>
+                 </div>
+                </div>
+            </div>
+      <div class="panel-body">
+          <div class="form-group">
+              <form role="form" method="POST" name="Search" onsubmit="">
+      <div class="row" id="jqxcombobox">
+        <div  class="col-lg-1">
+            <label style="margin-left: 20px;" >Tháng</label>
+        </div>
+        
+           <div style='float: left' id='month' name='month'>
+                
+            </div>
+     
+           <div  class="col-lg-1">
+            <label style="margin-left: 20px;" >Năm</label>
+        </div>
+          <div class="col-lg-2">  
+           <div style='float: left' id='year' name='year'>
+                
+            </div>
+        </div>
+        <div class="form-group">
+                <button type="submit" class="btn btn-primary">Tìm</button>
+        </div>
+      </div>  
+                    </form>
+          </div>
+          <div class="form-group" >
+       <div id="jqxTabs">
+        <ul style="margin-left: 30px;">
+         <li id="tab1">Doanh Nghiệp</li>
+         <li id="tab2">Hộ kinh doanh</li>
+         <li id="tab3">DN KD ngoài địa bàn</li>
+        </ul>
+        
+        <div id="jqxWidget">
+            <div id="jqxgrid"></div>
+        </div>
+        <div id="jqxWidget">
+            <div id="jqxgrid1"></div>
+        </div>
+            <div id="jqxWidget">
+            <div id="jqxgrid2"></div>
+        </div>
+    </div>       
+    <input style="display: none" id="hide"/>
+          </div>
+      </div>
+   </div>
+</div>
+ <input type="button" value="Export to Excel" id='excelExport' />
+<script type="text/javascript">
+        $(document).ready(function () {    
+            $('#jqxTabs').jqxTabs({ width:'100%'});
+                var month = "<?php echo $this->month?>";
+                var year = "<?php echo $this->year?>";
+                var id = "<?php echo $this->id?>";
+                var seltab = "<?php echo $this->seltab?>";
+                var y = new Date();
+                var i = y.getFullYear();
+                var arraymonth=new Array();
+                        for(var m=1;m<=12;m++){
+                       arraymonth[m]=m;
+                        }
+                function selectedmonth(){
+                    if(month == ""){
+                        month = y.getMonth()+1;
+                        return month;
+                    }
+                    else return month;
+                }
+                function selectedyear(){
+                if(year==""){
+                    year = y.getFullYear();
+                  return  10;
+                    } 
+                else {
+                    var selectyear =  year;
+                        selectyear = i-selectyear;
+                        selectyear = 10-selectyear;
+                        return selectyear;
+                    }
+                }
+               
+            $("#month").jqxComboBox({ source: arraymonth,selectedIndex:selectedmonth()-1, width: '100px', height: '25px'});
+                var arrayyear=new Array();
+                        for(var j=i-10;j<=i+10;j++){
+                            arrayyear[j]=j;
+                        }
+            $("#year").jqxComboBox({ source: arrayyear,selectedIndex:selectedyear(), width: '100px', height: '25px'});
+//                  
+            $('#month').on('select', function (event) {
+                    var args = event.args;
+                    if (args != undefined) {
+                        var item = event.args.item;
+                            if (item != null) {
+                                $('#month').val()=item.val();      
+                            }
+                    }
+               
+                });
+            $('#year').on('select', function (event) {
+                    var args = event.args;
+                    if (args != undefined) {
+                        var item = event.args.item;
+                        if (item != null) {
+                           $('#year').val() = item.value;                       
+                        }
+                    }
+               
+                });
+            loadingGrid("jqxgrid",id,"DoanhNghiep",month,year);
+            loadingGrid("jqxgrid1",id,"HoKinhDoanh",month,year);
+            loadingGrid("jqxgrid2",id,"DoanhNghiepNgoaiDiaBan",month,year);
+            $('#jqxTabs').on('select', function (event) {
+             var clickedItem = event.args.item; 
+                var _selTypeBusiness ="<?php echo GlobalLib::_DN;?>";
+                if(clickedItem==1)
+                {
+                    _selTypeBusiness ="<?php echo GlobalLib::_HKD;?>";
+                }
+                else if(clickedItem==2)
+                {
+                    _selTypeBusiness ="<?php echo GlobalLib::_DNNDB;?>"; 
+                }
+                document.getElementById("addLink").href="<?php 
+                             echo $this->baseUrl()."/master/docviolationshandling/add/type_business/" 
+                                 ?>//////"+_selTypeBusiness+""; 
+          }); 
+          $('#jqxTabs').val(seltab);
+            
+            function loadingGrid(_grid,_id,_type_business,_month,_year){
+                
+            var url = "<?php echo $this->baseUrl()?>/master/docviolationshandling/service/type_business/"+_type_business+"/id/"+_id+"/month/"+_month+"/year/"+_year;
+//            var url1 = "<?php echo $this->baseUrl().'/master/docviolationshandling/service/type_business/'.GlobalLib::_HKD.'/id/'.$this->id.'/month/'.$this->month.'/year/'.$this->year.''?>";
+//            var url2 = "<?php echo $this->baseUrl().'/master/docviolationshandling/service/type_business/'.GlobalLib::_DNNDB.'/id/'.$this->id.'/month/'.$this->month.'/year/'.$this->year.''?>";
+
+            var arrays = new Array(); 
+                arrays[0]={ name: 'id',type:'int'};
+                arrays[1]={ name: 'info_business_name', type: 'string' };
+                arrays[2]={ name: 'master_violation_id', type: 'string' };
+                arrays[3]={ name: 'address_business', type: 'string' };
+                arrays[4]={ name: 'master_sanction_id', type: 'string' };
+                arrays[5]={ name: 'sys_department_id', type: 'string' };
+                arrays[6]={ name: 'doc_items_handling', type: 'string' };
+                arrays[7]={ name: 'sys_user_id', type: 'string' };
+                arrays[8]={ name: 'date_violation', type: 'date' };
+                arrays[9]={ name: 'range', map:'date_violation',type: 'date' };
+                arrays[10]={ name: 'amount', type: 'string' };
+                arrays[11]={ name: 'comment', type: 'string' };
+                arrays[12]={ name: 'info_business_id', type: 'int' };
+            var source =
+            {
+                datatype: "json",
+                datafields:arrays,
+                url:url,            
+            };
+//             
+          var dataAdapter = new $.jqx.dataAdapter(source);
+                var array = new Array();
+                array[0] = {text:"id",datafield:'id',width:'0',hidden:true};
+                array[1] = {  text: 'Số TT', sortable: false, filterable: false, editable: false,
+                      groupable: false, draggable: false, resizable: false,
+                      datafield: '', columntype: 'number', width: '4%',
+                      cellsrenderer: function (row, column, value) {
+                          return "<div style='margin:7px;'>" + (value + 1) + "</div>";
+                      }
+                  };
+                array[2] = { text: 'Tên Doanh nghiệp',editable: false,align: "center", dataField: 'info_business_name', width: '10%' };
+                array[3] = { text: 'Địa chỉ',editable: false,align: "center", dataField: 'address_business', width: '12%' };
+                array[4] = { text: 'Hành vi vi phạm',editable: false,align: "center", dataField: 'master_violation_id', width: '10%' };
+                array[5] = { text: 'Hình thức xử lý',editable: false,align: "center", dataField: 'master_sanction_id', width: '10%' };
+                array[6] = { text: 'Tịch thu hàng hóa',editable: false,align: "center", dataField: 'doc_items_handling', width: '10%' };
+                array[7] = { text: 'Đội xử lý',editable: false,align: "center", dataField: 'sys_department_id', width: '10%' };
+                array[8] = { text: 'Số tiền',editable: false,align: "center", dataField: 'amount', width: '10%' };
+                array[9] = { text: 'Search theo ngày tháng', datafield: 'date_violation', filtertype: 'range', cellsalign: 'left', width: '10%', cellsformat: 'd' };
+                array[10] = {text: 'Xóa',filtertype: 'none', cellsalign: 'center', align: "center", columnType: 'none', editable: false, sortable: false, dataField: null, cellsrenderer: function (row) {
+                          // render custom column.
+                          editrow = row;
+                          var dataRecord = $("#"+_grid).jqxGrid('getrowdata',editrow);
+                          var url= "<div style='overflow: hidden; text-overflow: ellipsis; padding-bottom: 2px; text-align: center; margin-right: 2px; margin-left: 4px; margin-top: 4px;'><a class='fa fa-trash-o fa-lg'";
+                          url = url + "href='#' onclick='return jsdelete("+dataRecord.id+")'></a></div>"
+                          return url;
+                      }
+              };
+              array[11] = {text: 'Sửa',filtertype: 'none', cellsalign: 'right', align: "center", columnType: 'none', editable: false, sortable: false, dataField: null, cellsrenderer: function (row) {
+                          // render custom column.
+                          editrow = row;
+                          var dataRecord = $("#"+_grid).jqxGrid('getrowdata',editrow);
+                          var url= "<div style='overflow: hidden; text-overflow: ellipsis; padding-bottom: 2px; text-align: center; margin-right: 2px; margin-left: 4px; margin-top: 4px;'><a class='fa fa-edit fa-lg'";
+                          url = url + "href='<?php echo $this->baseUrl()?>/master/docviolationshandling/edit/id/"+dataRecord.id+"'></a></div>"
+                          return url;
+                      }
+                      
+                          };
+            $("#excelExport").jqxButton();
+            $("#excelExport").click(function () {
+                $("#jqxgrid").jqxGrid('exportdata', 'xls', 'jqxGrid');           
+            });
+                                                                
+            $("#"+_grid).jqxGrid(
+            {
+                width: '100%',
+                source: dataAdapter,  
+                theme: 'bootstrap',
+                rowdetails: true,
+                pageable: true,
+                showfilterrow: true,
+                filterable: true,
+                autoheight: true,
+                sortable: true,
+                altrows: true,
+                enabletooltips: true,
+                selectionmode: 'multiplecellsadvanced',
+                columnsResize: true,                
+                rendergridrows: function (params) {
+                    return params.data;
+                },            
+                rowdetailstemplate: { rowdetails: '<div class="col-md-12" style="margin-top:10px; height:280px; overflow-y:scroll;"><div class="panel panel-default">'
+                                                    +'<div class="panel-heading"><div class="panel-title"><strong>Thông tin vi phạm - xử lý doanh nghiệp</strong></div></div>'                                                    
+                                                    +'<div class="panel-body">'                                                      
+                                                    +'</div>'
+                                                +'</div></div>'
+                    , rowdetailsheight: 300},
+                    ready: function (param) {                            
+                    },
+                initrowdetails: function(index, parentElement, gridElement, datarecord){
+                    var divDetail = $($(parentElement).children()[0]);
+                    var panel = $(divDetail.children()[0]);                    
+                    var panelBody = $(panel.children()[1]);                    
+                    $.getJSON('<?php echo $this->baseUrl().'/master/infobusiness/findbusinessbyid/id/'?>'+datarecord.info_business_id,{},function(result){   
+//                        console.log(datarecord.id);
+                        $.getJSON('<?php echo $this->baseUrl().'/master/docviolationshandling/getdocprinthanding/doc_violation_handing_id/'?>'+datarecord.id,{},function(result1){                               
+//                            console.log(result1);
+                            $.getJSON('<?php echo $this->baseUrl().'/master/docviolationshandling/getdocitemhanding/doc_violation_handing_id/'?>'+datarecord.id,{},function(result2){                                                                                                                     
+                                console.log(result2);
+                                var anchiHtml = "";
+                                if(result1!=0)
+                                {
+                                    anchiHtml += '<table class="table table-bordered table-hover">'
+                                +'<tr style="background:#f5f5f5"><td>Mã ấn chỉ</td><td>Tên ấn chỉ</td><td>Serial</td><td></td></tr>';
+                                for(var i = 0; i< result1.length;i++)
+                                {
+                                    anchiHtml+=
+                                            '<tr>'
+                                            +'<td>'+result1[i].code+'</td>'
+                                            +'<td>'+result1[i].name+'</td>'
+                                            +'<td>'+result1[i].serial+'</td>'
+                                            +'<td><a href="<?php echo $this->baseUrl().'/master/docviolationshandling/editprintshandling/id/'?>'+datarecord.id+'/idprint/'+result1[i].id+'">Sửa</a></td>'
+                                            +'</tr>';
+                                }
+                                anchiHtml+= '</table>';
+                                }
+                                var tichthuHtml = "";
+                                if(result2!=0)
+                                {
+                                    tichthuHtml += '<table class="table table-bordered table-hover">'
+                                +'<tr style="background:#f5f5f5"><td>Tịch thu hàng hóa</td><td>Hình thức xử lý</td><td>Số biên lai</td><td></td></tr>';
+
+                                for(var i = 0; i< result2.length;i++)
+                                {
+                                    tichthuHtml+=
+                                            '<tr>'
+                                            +'<td>'+result2[i].name+'</td>'
+                                            +'<td>'+result2[i].sanction+'</td>'
+                                            +'<td>'+result2[i].serial+'</td>'  
+                                            +'<td><a href="<?php echo $this->baseUrl().'/master/docviolationshandling/edititemshandling/id/'?>'+datarecord.id+'/iditem/'+result2[i].id+'">Sửa</a></td>'
+                                            +'</tr>';
+                                }
+                                tichthuHtml+= '</table>';
+                                }else{
+                                    ///khong co hang hoa tich thu
+                                            tichthuHtml += '<table class="table table-bordered table-hover">'
+                                       +'<tr style="background:#f5f5f5"><td>Tịch thu hàng hóa</td><td>Hình thức xử lý</td><td>Số biên lai</td><td></td></tr>';
+
+                                      
+                                           tichthuHtml+=
+                                                   '<tr>'
+                                                   +'<td colspan="4" align="center"><a href="<?php echo $this->baseUrl().'/master/docviolationshandling/additemshandling/id/'?>'+datarecord.id+'">Thêm mới</a></td>'
+                                                   +'</tr>';
+                                       
+                                       tichthuHtml+= '</table>';
+                                //////
+                                }
+                                panelBody.html( 
+                                '<div class ="col-md-12">'                                                    
+                                    +'<div class ="row">'
+                                        +'<div class ="col-md-3"><strong>[Thông tin doanh nghiệp]</strong></div>'                            
+                                    +'</div>'
+                                    +'<div class ="row">'
+                                        +'<div class ="col-md-3">Tên doanh nghiệp:</div>'
+                                        +'<div class ="col-md-9">'+datarecord.info_business_name+'</div>'
+                                    +'</div>'
+                                    +'<div class ="row">'
+                                        +'<div class ="col-md-3">Trụ sở chính:</div>'
+                                        +'<div class ="col-md-9">'+datarecord.address_business+'</div>'
+                                    +'</div>'
+                                    +'<div class ="row">'
+                                        +'<div class ="col-md-3">Ngành nghề kinh doanh:</div>'
+                                        +'<div class ="col-md-9">'+result[0].work_business+'</div>'
+                                    +'</div>'
+                                    +'<div class ="row">'
+                                        +'<div class ="col-md-3"><strong>[Thông tin xử lý]</strong></div>'                            
+                                    +'</div>'
+                                    +'<div class ="row">'
+                                        +'<div class ="col-md-3">Tháng:</div>'
+                                        +'<div class ="col-md-9">'+(datarecord.date_violation.getMonth()+1)+'/'+(datarecord.date_violation.getYear()+1900)+'</div>'
+                                    +'</div>'
+                                    +'<div class ="row">'
+                                        +'<div class ="col-md-3">Hành vi vi phạm:</div>'
+                                        +'<div class ="col-md-9">'+datarecord.master_violation_id+'</div>'
+                                    +'</div>'
+                                    +'<div class ="row">'
+                                        +'<div class ="col-md-3">Hình thức xử lý:</div>'
+                                        +'<div class ="col-md-9">'+datarecord.master_sanction_id+'</div>'
+                                    +'</div>'
+                                    +'<div class ="row">'
+                                        +'<div class ="col-md-3">Ấn chỉ:</div>'   
+                                        +'<div class ="col-md-9">'+anchiHtml+'</div>'
+                                    +'</div>'                                   
+                                    +'<div class="row">'
+                                        +'<div class="col-md-3"><strong>[Thông tin khác]</strong></div>'    
+                                        +'<div class="col-md-9">'+tichthuHtml+'</div>'
+                                    +'</div>'
+                                +'</div>'                                       
+                                );                                            
+                            });
+                        });
+                    });
+                },
+                columns: array               
+            });        
+        };
+             
+    });
+    </script>
+ <script type="text/javascript">
+     function checkinput(){
+                  //  var month = $('#month').val();
+                  var frm = window.document.Search;
+                  var month = $('#month').val();
+                  var year = $('#year').val();
+                  var id = "";
+                   
+                }
+ </script>
+
+    
+    

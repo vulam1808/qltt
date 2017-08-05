@@ -1,0 +1,147 @@
+<div class="row">
+    <div class="col-lg-12">
+        <h3 class="page-header">Danh sách xã phường</h3>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+             <div class="panel-heading">
+                 <div class="row">
+                     <div class="col-lg-2" style="text-align:center;width: 9%;padding-right: 0px;">
+                         <a  href="<?php echo $this->baseUrl().'/master/masterward/add/'?>">
+                             <button type="button" class="btn btn-success btn-action"><i class="fa fa-plus fa-2x"></i>
+                             </button></br>
+                             <span >Thêm Mới</span>
+                         </a>
+                     </div>
+<!--                     <div class="col-lg-2" style="text-align:center;width: 9%;padding-right: 0px;;padding-left: 1px;">
+                         <a  href="<?php echo $this->baseUrl().'/master/infobusiness/add/type_business/'.$this->type_business?>">
+                            <button type="button" class="btn btn-info btn-action"><i class="fa fa-pencil fa-2x"></i>
+                            </button></br>
+                             <span >Chỉnh sửa</span>
+                         </a>
+                     </div>
+                      <div class="col-lg-2" style="text-align:center;width: 5%;padding-right: 0px;;padding-left: 1px;">
+                         <a  href="<?php echo $this->baseUrl().'/master/infobusiness/add/type_business/'.$this->type_business?>">
+                            <button type="button" class="btn btn-danger btn-action"><i class="fa fa-minus fa-2x"></i>
+                            </button></br>
+                             <span >Xóa</span>
+                         </a>
+                     </div>-->
+                     
+                 </div>
+            </div>
+            <div class="panel-body">                
+               
+                <div class="table-reponsive">
+                    <div id="jqxgrid">                        
+                    </div>
+                </div>
+        </div>
+    </div>
+</div>
+    
+<script type="text/javascript">
+ $(document).ready(function () {
+            // prepare the data
+            var source =
+            {
+                datatype: "json",
+                datafields:
+                [
+                    { name: 'id',type:'int'},  
+                    { name: 'code',type:'string'},
+                    { name: 'name', type: 'string' },
+                    { name: 'district_id', type: 'string' },
+                    { name: 'district_id_province', type: 'string' },
+                    { name:'status',type:'int'},
+                    { name: 'order', type: 'int' }
+                ],
+                url:'<?php echo $this->baseUrl() ?>/master/masterward/service',
+                sortcolumn: 'order',
+                sortdirection: 'asc'               
+            };
+         var dataAdapter = new $.jqx.dataAdapter(source, {
+                loadComplete: function () {
+                }
+            });
+            $("#jqxgrid").jqxGrid(
+            {
+                  width: '100%',
+                source: dataAdapter,  
+                theme: 'bootstrap',
+                pageable: true,
+                showfilterrow: true,
+                filterable: true,
+                autoheight: true,
+                sortable: true,
+                altrows: true,
+                enabletooltips: true,
+                selectionmode: 'multiplecellsadvanced',
+                columnsResize: true,
+                rendergridrows: function (params) {
+                    return params.data;
+                },
+                ready: function () {
+                    $("#jqxgrid").jqxGrid('hideColumn', 'id');
+                },
+                columns: [
+                  {text:'Id',dataField:'id',cellsalgin:'right',width:0}, 
+//                  cột số thứ tự
+                  {  text: 'Số TT', sortable: false, filterable: false, editable: false,
+                      groupable: false, draggable: false, resizable: false,
+                      datafield: '', columntype: 'number', width: 50,
+                      cellsrenderer: function (row, column, value) {
+                          return "<div style='margin:7px;'>" + (value + 1) + "</div>";
+                      }
+                  },
+                  { text: 'Mã xã/phường',editable: false,align: "center", dataField: 'code', width: '15%' },
+                  { text: 'Tên xã/phường',editable: false,align: "center", dataField: 'name', width: '25%' },
+                  { text: 'Quận huyện',editable: false,align: "center", dataField: 'district_id', width: '20%' },
+                  { text: 'Tỉnh thành',editable: false,align: "center", dataField: 'district_id_province', width: '20%' },
+                  {text: 'Xóa',filtertype: 'none', cellsalign: 'center', align: "center", columnType: 'none', editable: false, sortable: false, dataField: null, cellsrenderer: function (row) {
+                          // render custom column.
+                          editrow = row;
+                          var dataRecord = $("#jqxgrid").jqxGrid('getrowdata',editrow);
+                          var url= "<div style='overflow: hidden; text-overflow: ellipsis; padding-bottom: 2px; text-align: center; margin-right: 2px; margin-left: 4px; margin-top: 4px;'><a class='fa fa-trash-o fa-lg'";
+                          url = url + "href='#' onclick='return jsdelete("+dataRecord.id+")'></a></div>"
+                          return url;
+                      }
+              },
+              {text: 'Sửa',filtertype: 'none', cellsalign: 'right', align: "center", columnType: 'none', editable: false, sortable: false, dataField: null, cellsrenderer: function (row) {
+                          // render custom column.
+                          editrow = row;
+                          var dataRecord = $("#jqxgrid").jqxGrid('getrowdata',editrow);
+                          var url= "<div style='overflow: hidden; text-overflow: ellipsis; padding-bottom: 2px; text-align: center; margin-right: 2px; margin-left: 4px; margin-top: 4px;'><a class='fa fa-edit fa-lg'";
+                          url = url + "href='<?php echo $this->baseUrl()?>/master/masterward/edit/id/"+dataRecord.id+"'></a></div>"
+                          return url;
+                      }
+                          }
+                ]
+            });
+            });
+    </script>
+    <script type="text/javascript">
+        function jsdelete(id)
+        {
+            $.get("<?php echo $this->baseUrl() ?>/master/masterward/confirmdelete/id/"+id,null,function(data){
+                if(data>0)
+                {
+                    bootbox.alert("Hiện có "+data+" đại lý thuộc Xã phường này. Vui lòng chuyển các đại lý trên sang Xã phường khác trước!");
+                    return false;
+                }
+                else 
+                {
+                    bootbox.confirm("Bạn có chắc muốn xoá Xã phường này không?",
+                    function(result){
+                        if(result == true)
+                        {
+                           return window.location = "<?php echo $this->baseUrl() ?>/master/masterward/delete/id/"+id;
+                        }
+                    });
+                }
+            });
+        }
+    </script>

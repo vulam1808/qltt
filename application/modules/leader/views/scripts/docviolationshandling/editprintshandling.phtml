@@ -1,0 +1,244 @@
+<?php $identity = Zend_Auth::getInstance()->getIdentity();
+               if(!empty($identity)){
+//                    $this->model->setSys_Department_Id($identity->sys_department_id);
+//                    $this->model->setSys_User_Id($identity->id);
+                }
+?>
+<div class="row">
+    <div class="col-lg-12">
+        <h3 class="page-header">Chỉnh sửa ấn chỉ xử phạt</h3>
+    </div>
+</div>   
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <form role="form" method="POST" name="Editprintshandling" onsubmit="">   
+                  <div class="form-group">
+                            <div class="row">
+                                <div class="col-lg-2">
+                                    <label>Phòng ban</label>
+                                </div>
+                            <div class="col-lg-4">
+                                            <div id="dropDownButton">
+                                                <div style="border: none;" id="jqxTree">
+                                                    <ul>
+                                                   <?php echo GlobalLib::returntree($this->sysDepartmentId) ;?>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                          <input class="form-control" type="hidden" name="sys_department_id" id="sys_department_id" value="">
+                            </div> 
+                            </div>
+                    </div> 
+                    <div class="form-group">
+                           <div class="row">
+                               <div class="col-lg-2">
+                                   <label>Ấn chỉ</label>
+                               </div>
+                               <div class="col-lg-4">
+                                     <?php echo GlobalLib::getCombo('master_print_id', 'master_print', 'id', 'code',$this->sysMasterPrint,false, 'where id in(select distinct master_print_id from doc_print_allocation where sys_department_id='.$this->sysDepartmentId.' and status ="DOING" and is_delete ="0")', '', '') ?>                                       
+                                 </div>
+
+                           </div>
+                    </div> 
+                    <div class="form-group">
+                          <div class="row">
+                              <div class="col-lg-2">
+                                  <label>Serial</label>
+                              </div>
+                          <div class="col-lg-4">
+                              <div id="abc">
+                                  
+                              </div>   
+                              <input class="form-control" type="hidden" name="doc_print_allocation_id" id="doc_print_allocation_id" value="">      
+                          </div>
+                          </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="row">
+                         <div id="a"> 
+                         </div>   
+                            <input class="form-control" name="serial_check" id="serial_check" type="hidden">
+                            <input class="form-control" name="serial" id="serial" type="hidden">
+                            
+                        </div>
+                    </div>
+<!--                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-lg-2">
+                                <label>Nhân viên</label>
+                            </div>   
+                                 <div class="col-lg-4">
+                                  <?php // echo GlobalLib::getCombo('sys_user_id', 'sys_user', 'id', 'username',  $this->sysDepartmentI,'', 'where sys_department_id=0', '', '') ?>                                       
+
+                                 </div>
+
+                        </div>
+                    </div>-->
+                     
+                       <input id="selectionlog" style="display: none" name="selectionlog" /> 
+                       <div class="form-group">
+                                
+                           <button type="submit" name="import" id="import" class="btn btn-primary">Lưu</button>
+                                <button type="reset" class="btn btn-default">Đặt lại</button>
+                       </div> 
+                    
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $('#import').on('click',function(){
+        $('#doc_print_allocation_id').val($('#cobo_id').val());
+    });
+</script>
+<script>
+    $('#master_print_id').on('change',function(){
+         var dataarray = new Array();var defaultserial;
+         if($('#master_print_id').val()== <?php echo $this->sysMasterPrint;?>){
+             defaultserial = <?php echo $this->serialHanding;?>
+         }else{
+             defaultserial = 0;
+         }
+                    dataarray[0]={master_print_id:$('#master_print_id').val(),sys_department_id:$('#sys_department_id').val(),defaultserial:defaultserial};
+                var combobox = new Array();
+                $.ajax({
+                    type:'post',
+                    url:'<?php echo $this->baseUrl()?>/leader/docviolationshandling/arrayserialcheck',
+                    data:{'data':dataarray},
+                    async:false,
+                    dataType:'json',
+                    success:function(data){
+                        combobox = data;
+                    }
+                });
+//                alert(combobox);
+                $('#abc').html(combobox);
+                $('#cobo_id').multiselect({
+                       maxHeight: '300',
+                       enableFiltering: true,
+                       maxHeight: '300',
+                       onChange: function(option, checked) {
+                           if (checked) {
+                               orderCount++;
+                               $(option).data('order', orderCount);
+                           }
+                           else {
+                               $(option).data('order', '');
+                           }
+                       },
+                   });
+
+               $('#cobo_id').on('change', function() {
+                   var selected = [];
+                   $('#cobo_id option:selected').each(function() {
+                       selected.push([$(this).val(), $(this).data('order')]);
+                   });
+
+                   selected.sort(function(a, b) {
+                       return a[1] - b[1];
+                   });
+
+                   var text = '';
+                   for (var i = 0; i < selected.length; i++) {
+                       text += selected[i][0] + ', ';
+                   }
+                   text = text.substring(0, text.length - 2);
+
+                   $('#selectionlog').val(text);
+                   $('#selectionlog').text(text);
+               });
+    });
+</script>
+<script type="text/javascript">
+      $(document).ready(function () {
+            $("#dropDownButton").jqxDropDownButton({ width: 150, height: 25,theme: 'bootstrap'});
+            $('#jqxTree').on('select', function (event) {
+                var args = event.args;
+                var item = $('#jqxTree').jqxTree('getItem', args.element);
+                var dropDownContent = '<div style="position: relative; margin-left: 3px; margin-top: 5px;">' + item.label + '</div>';
+                $("#dropDownButton").jqxDropDownButton('setContent', dropDownContent);
+                $("#sys_department_id").val(event.args.element.id);
+                var url = "<?php echo $this->aConfig["site"]["url"]?>";
+                var dataarray = new Array();var defaultmasterprint;
+                
+                if($('#master_print_id').val()== 0){
+                    defaultmasterprint = <?php echo $this->sysMasterPrint;?>
+                }else{
+                    defaultmasterprint = $('#master_print_id').val();
+                }
+                    dataarray[0]={master_print_id:defaultmasterprint,sys_department_id:$('#sys_department_id').val(),defaultserial:<?php echo $this->serialHanding;?>};
+                var combobox = new Array();
+                $("#jqxTree").jqxTree({disabled:true});
+                $.ajax({
+                    type:'post',
+                    url:'<?php echo $this->baseUrl()?>/leader/docviolationshandling/arrayserialcheck',
+                    data:{'data':dataarray},
+                    async:false,
+                    dataType:'json',
+                    success:function(data){
+                        combobox = data;
+                    }
+                });
+               // alert(combobox);
+                $('#abc').html(combobox);
+                $('#cobo_id').multiselect({
+                       maxHeight: '300',
+                       enableFiltering: true,
+                       maxHeight: '300',
+                       onChange: function(option, checked) {
+                           if (checked) {
+                               orderCount++;
+                               $(option).data('order', orderCount);
+                           }
+                           else {
+                               $(option).data('order', '');
+                           }
+                       },
+                   });
+
+               $('#cobo_id').on('change', function() {
+                   var selected = [];
+                   $('#cobo_id option:selected').each(function() {
+                       selected.push([$(this).val(), $(this).data('order')]);
+                   });
+
+                   selected.sort(function(a, b) {
+                       return a[1] - b[1];
+                   });
+
+                   var text = '';
+                   for (var i = 0; i < selected.length; i++) {
+                       text += selected[i][0] + ', ';
+                   }
+                   text = text.substring(0, text.length - 2);
+
+                   $('#selectionlog').val(text);
+                   $('#selectionlog').text(text);
+               });
+                getMasterPrintWithDepartmentcbd(url+'leader/service/index',0,<?php echo $this->sysMasterPrint;?>);
+                $('#a').hide();
+            });
+            $("#jqxTree").jqxTree({ width: 200, height: 220,theme: 'bootstrap',disabled:false});
+            $('#info_business_id,#master_print_id,#doc_print_create_id,#info_schedule_id,#sys_user_id').multiselect({
+            enableFiltering: true,
+            maxHeight: '300'
+            });
+            $('#jqxDateTimeInput').jqxDateTimeInput({ formatString: "dd-MM-yyyy"});
+                var formatString = $('#jqxDateTimeInput').jqxDateTimeInput('formatString');
+                $('#jqxDateTimeInput').on('valueChanged', function (event) {
+                    var date = event.args.date;
+                    var text= $('#jqxDateTimeInput').jqxDateTimeInput('getText'); 
+                     $('#date_check').val(text);
+                });
+            $('#doc_print_create_id').on('change', function (event) {
+                $('#doc_print_allocation_id').val($('#doc_print_create_id').val());
+            });
+            
+        });
+    
+</script>
+
+

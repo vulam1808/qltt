@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<div class="row">
+    <div class="col-lg-12">
+        <h3 class="page-header">Thêm nhóm người dùng</h3>
+    </div>
+    <!-- /.col-lg-12 -->
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <form role="form" method="POST" name="AddUserGroup" onsubmit="return checkinput(); ">                                    
+                            <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-lg-4">
+                                            <label>Nhóm người dùng</label>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <?php echo GlobalLib::getCombo('sys_user_group_id', 'sys_user_group', 'id', 'group_name', $this->itemUser->getSys_User_Group_Id()) ?>
+                                        </div>
+                                    </div>
+                            </div> 
+                            <div class="form-group">
+                                <center>
+                                <div class="row">
+                                <button type="submit" name="addusergroup" id="addusergroup" class="btn btn-primary">Thêm mới</button>
+                                <button type="reset" class="btn btn-default">Đặt lại</button> </                              
+                                </div> </center>   
+                                
+                            </div> 
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>   
+</div>
+
+<script type="text/javascript">
+    document.forms['AddUserGroup'].name.focus();
+    function set_focus() {
+        document.forms['AddUserGroup'].name.focus();
+    }   
+    function checkinput() {
+        var frm = window.document.AddUserGroup;
+        if(isNaN(frm.group_name.value)== false){
+            bootbox.alert("Vui lòng nhập tên nhóm bằng chữ");
+            return false;
+        }        
+        if(frm.group_name.value == ""){
+             bootbox.alert("Vui lòng nhập tên nhóm");
+            return false;
+        }
+//        if((isNaN(frm.order_user_group.value)==true)&&(frm.order_user_group.value != "")){
+//            bootbox.alert("Vui lòng nhập số thứ tự");
+//            return false;
+//        }
+//        if(isNaN(frm.status_user_group.value)== false){
+//            bootbox.alert("Vui lòng nhập trạng thái bằng chữ");
+//            return false;
+//        } 
+//        if(frm.status_user_group.value == ""){
+//             bootbox.alert("Vui lòng nhập trạng thái");
+//            return false;
+//        }
+      return true;
+    }
+</script>

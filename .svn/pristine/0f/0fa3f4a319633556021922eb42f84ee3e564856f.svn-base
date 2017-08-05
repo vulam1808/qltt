@@ -1,0 +1,141 @@
+<div class="row">
+    <div class="col-lg-12">
+        <h3 class="page-header">Danh sách người dùng</h3>
+    </div>
+    <!-- /.col-lg-12 -->
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default">            
+            <div class="panel-heading">
+                <div class="row">
+                     <div class="col-lg-2" style="text-align:center;width: 9%;padding-right: 0px;">
+                         <a href="<?php echo $this->url(array("action"=>"add")) ?>">
+                             <button type="button" class="btn btn-success btn-action"><i class="fa fa-plus fa-2x"></i>
+                             </button></br>
+                             <span >Thêm Mới</span>
+                         </a>
+                     </div>
+                 </div>
+            </div>
+            <div class="panel-body">
+                <div class="table-reponsive">
+                    <div id="jqxgrid">
+
+                    </div>
+                </div>
+            </div>
+    </div>
+</div>
+<script type="text/javascript">
+        $(document).ready(function () {
+            // prepare the data
+            var source =
+            {
+                datatype: "json",
+                datafields:
+                [
+                    { name: 'id',type:'int'},     
+                      { name: 'username', type: 'string' },
+                    { name: 'hovaten', type: 'string' },
+                    {name: 'email',type:'string'},
+                    { name: 'cellphone', type: 'string' },
+                    { name: 'birthday', type: 'string' },
+                    { name: 'sys_department_id', type: 'string' },
+                ],
+                url:'<?php echo $this->baseUrl()?>/master/sysuser/service/where/""',
+                sortcolumn: 'id',
+                sortdirection: 'asc'
+               
+            };
+         var dataAdapter = new $.jqx.dataAdapter(source, {
+                loadComplete: function () {
+                }
+            });
+            $("#jqxgrid").jqxGrid(
+            {
+               
+            width: '100%',
+                source: dataAdapter,  
+                theme: 'bootstrap',
+                pageable: true,
+                showfilterrow: true,
+                filterable: true,
+                autoheight: true,
+                sortable: true,
+                altrows: true,
+                enabletooltips: true,
+                selectionmode: 'singlerow',
+                columnsResize: true,
+                rendergridrows: function (params) {
+                    return params.data;
+                },
+                ready: function () {
+                    $("#jqxgrid").jqxGrid('hideColumn', 'id');
+                },
+                columns: [
+                  {text:'id',dataField:'id',cellsalgin:'right',width:0},
+                   { text: 'Tài khoản', editable: false, dataField: 'username', width: '20%' },
+                  { text: 'Họ và tên', editable: false, dataField: 'hovaten', width: '30%' },
+                   { text: 'Phòng ban', editable: false, dataField: 'sys_department_id', width: '20%' },
+                 // { text: 'Tên', editable: false, dataField: 'last_name', width: '10%' },
+                  { text: 'Ngày sinh', editable: false, dataField: 'birthday', width: '10%' },
+                  { text: 'Số điện thoại', editable: false, dataField: 'cellphone', width: '10%' },
+                 
+                  {text: 'Xóa',width:'5%',filtertype: 'none', cellsalign: 'right', align: "center", columnType: 'none', editable: false, sortable: false, dataField: null, cellsrenderer: function (row) {
+                          // render custom column.
+                          editrow = row;
+                          var dataRecord = $("#jqxgrid").jqxGrid('getrowdata',editrow);
+                          var url= "<div style='overflow: hidden; text-overflow: ellipsis; padding-bottom: 2px; text-align: center; margin-right: 2px; margin-left: 4px; margin-top: 4px;'><a class='fa fa-trash-o fa-lg'";
+                          url = url + "href='#' onclick='return jsdelete("+dataRecord.id+")'></a></div>"
+                          return url;
+                      }
+              },
+              {text: 'Sửa',width:'5%',filtertype: 'none', cellsalign: 'right', align: "center", columnType: 'none', editable: false, sortable: false, dataField: null, cellsrenderer: function (row) {
+                          // render custom column.
+                          editrow = row;
+                          var dataRecord = $("#jqxgrid").jqxGrid('getrowdata',editrow);
+                          var url= "<div style='overflow: hidden; text-overflow: ellipsis; padding-bottom: 2px; text-align: center; margin-right: 2px; margin-left: 4px; margin-top: 4px;'><a class='fa fa-edit fa-lg'";
+                          url = url + "href='<?php echo $this->baseUrl() ?>/master/sysuser/edit/id/"+dataRecord.id+"'></a></div>"
+                          return url;
+                      }
+                          }
+                ]
+            });
+           
+        });
+    </script>
+    <script type="text/javascript">
+        function jsdelete(id)
+        {      
+            alert("abc");
+            var flag;
+            $.ajax({
+                    type:'post',
+                    url:'<?php echo $this->baseUrl()?>/master/sysuser/confirmdelete/id/'+id,
+                    async:false,
+                    dataType:'json',
+                    success:function(a){
+                        if(a==1){
+                            flag=false;
+                        } else {
+                            flag=true;
+                        }
+                    }
+            }); 
+            if(flag==false){
+                bootbox.alert("Người dùng này đã được phân công nghiệm vụ. Không được phép xóa.");
+                return false;
+            };
+            if(flag == true){
+                bootbox.confirm("Bạn có chắc muốn xoá người dùng này không?",function(result){
+                    if(result == true)
+                    { 
+                        return window.location = "<?php echo $this->baseUrl() ?>/master/sysuser/delete/id/"+id;
+                    }
+                }); 
+            }
+            return true;
+                
+        }
+    </script>

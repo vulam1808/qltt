@@ -1,0 +1,111 @@
+<div class="row">
+     <div class="col-lg-12">
+        <h3 class="page-header">Danh sách đơn vị</h3>
+    </div>  
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default">             
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-lg-2" style="text-align:center;width: 9%;padding-right: 0px;">
+                         <a  href="<?php echo $this->baseUrl().'/admin/masterunit/add/'?>">
+                             <button type="button" class="btn btn-success btn-action"><i class="fa fa-plus fa-2x"></i>
+                             </button></br>
+                             <span >Thêm Mới</span>
+                         </a>
+                     </div>
+                </div>
+            </div>
+            <div class="panel-body">
+                <div class="table-reponsive">
+                    <div id="jqxgrid">
+
+                    </div>
+                </div>
+            </div>
+    </div>
+</div>
+   
+<script type="text/javascript">
+        $(document).ready(function () {
+            // prepare the data
+            var source =
+            {
+                datatype: "json",
+                datafields:
+                [
+                    { name: 'Id',type:'int'},
+                    { name: 'code', type: 'string' }, 
+                    { name: 'name', type: 'string' },                    
+//                    { name: 'order', type: 'int' }
+                ],
+                url:"<?php echo $this->baseUrl().'/admin/masterunit/service'?>",
+                sortcolumn: 'code',
+                sortdirection: 'asc'
+               
+            };
+         var dataAdapter = new $.jqx.dataAdapter(source, {
+                loadComplete: function () {
+                }
+            });
+            $("#jqxgrid").jqxGrid(
+            {
+                width: '100%',
+                source: dataAdapter,  
+                theme: 'bootstrap',
+                pageable: true,
+                showfilterrow: true,
+                filterable: true,
+                autoheight: true,
+                sortable: true,
+                altrows: true,
+                enabletooltips: true,
+                selectionmode: 'singlerow',
+                columnsResize: true,
+                rendergridrows: function (params) {
+                    return params.data;
+                },
+                ready: function () {
+                    $("#jqxgrid").jqxGrid('hideColumn', 'Id');
+                },
+                columns: [
+                  {text:'Id',dataField:'Id',cellsalgin:'right',width:0},
+                  { text: 'Mã Code',editable: false, dataField: 'code', width: '10%' },
+                  { text: 'Tên đơn vị',editable: false, dataField: 'name', width: '40%' },                 
+//                  { text: 'Thứ tự', editable: false, dataField: 'order', width: '10%' },
+                  {text: 'Xóa',filtertype: 'none', cellsalign: 'right', align: "center", columnType: 'none', editable: false, sortable: false, dataField: null, cellsrenderer: function (row) {
+                          // render custom column.
+                          editrow = row;
+                          var dataRecord = $("#jqxgrid").jqxGrid('getrowdata',editrow);
+                          var url= "<div style='overflow: hidden; text-overflow: ellipsis; padding-bottom: 2px; text-align: center; margin-right: 2px; margin-left: 4px; margin-top: 4px;'><a class='fa fa-trash-o fa-lg'";
+                          url = url + "href='#' onclick='return jsdelete("+dataRecord.Id+")'></a></div>"
+                          return url;
+                      }
+              },
+              {text: 'Sửa',filtertype: 'none', cellsalign: 'right', align: "center", columnType: 'none', editable: false, sortable: false, dataField: null, cellsrenderer: function (row) {
+                          // render custom column.
+                          editrow = row;
+                          var dataRecord = $("#jqxgrid").jqxGrid('getrowdata',editrow);
+                          var url= "<div style='overflow: hidden; text-overflow: ellipsis; padding-bottom: 2px; text-align: center; margin-right: 2px; margin-left: 4px; margin-top: 4px;'><a class='fa fa-edit fa-lg'";
+                          url = url + "href='<?php echo $this->baseUrl() ?>/admin/masterunit/edit/id/"+dataRecord.Id+"'></a></div>"
+                          return url;
+                      }
+                          }
+                ]
+            });
+           
+        });
+    </script>
+    <script type="text/javascript">
+        function jsdelete(id)
+        {            
+                    bootbox.confirm("Bạn có chắc muốn xoá đơn vị?",
+                    function(result){
+                        if(result == true)
+                        {
+                           return window.location = "<?php echo $this->baseUrl() ?>/admin/masterunit/delete/id/"+id;
+                        }
+                    });             
+        }
+    </script>

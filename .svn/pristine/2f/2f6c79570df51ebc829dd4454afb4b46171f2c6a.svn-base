@@ -1,0 +1,147 @@
+
+<div class="row">
+    <div class="col-lg-12">
+        <h3 class="page-header">Danh sách Tỉnh thành </h3>      
+    </div>    
+</div>
+ 
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default">             
+           <div class="panel-heading">
+                 <div class="row">
+                     <div class="col-lg-2" style="text-align:center;width: 9%;padding-right: 0px;">
+                         <a  href="<?php echo $this->baseUrl().'/default/masterprovince/add/'?>">
+                             <button type="button" class="btn btn-success btn-action"><i class="fa fa-plus fa-2x"></i>
+                             </button></br>
+                             <span >Thêm Mới</span>
+                         </a>
+                     </div>
+<!--                     <div class="col-lg-2" style="text-align:center;width: 9%;padding-right: 0px;;padding-left: 1px;">
+                         <a  href="<?php echo $this->baseUrl().'/default/infobusiness/add/type_business/'.$this->type_business?>">
+                            <button type="button" class="btn btn-info btn-action"><i class="fa fa-pencil fa-2x"></i>
+                            </button></br>
+                             <span >Chỉnh sửa</span>
+                         </a>
+                     </div>
+                      <div class="col-lg-2" style="text-align:center;width: 5%;padding-right: 0px;;padding-left: 1px;">
+                         <a  href="<?php echo $this->baseUrl().'/default/infobusiness/add/type_business/'.$this->type_business?>">
+                            <button type="button" class="btn btn-danger btn-action"><i class="fa fa-minus fa-2x"></i>
+                            </button></br>
+                             <span >Xóa</span>
+                         </a>
+                     </div>-->
+                     
+                 </div>
+            </div>
+            <div class="panel-body">
+                <div class="table-reponsive">
+                    <div id="jqxgrid">
+
+                    </div>
+                </div>
+            </div>
+    </div>
+</div>
+<script type="text/javascript">
+        $(document).ready(function () {
+            // prepare the data
+            var source =
+            {
+                datatype: "json",
+                datafields:
+                [
+                    { name: 'Id',type:'int'},
+                    { name: 'province_code', type: 'string' }, 
+                    { name: 'name_province', type: 'string' },                    
+                    { name: 'order_province', type: 'int' }
+                ],
+                url:"<?php echo $this->baseUrl().'/default/masterprovince/service'?>",
+                sortcolumn: 'order_province',
+                sortdirection: 'asc'
+               
+            };
+         var dataAdapter = new $.jqx.dataAdapter(source, {
+                loadComplete: function () {
+                }
+            });
+            $("#jqxgrid").jqxGrid(
+            {
+                width: '100%',
+                source: dataAdapter,  
+                theme: 'bootstrap',
+                pageable: true,
+                showfilterrow: true,
+                filterable: true,
+                autoheight: true,
+                sortable: true,
+                altrows: true,
+                enabletooltips: true,
+                 selectionmode: 'singlerow',
+//                selectionmode: 'multiplecellsadvanced',
+                columnsResize: true,
+                rendergridrows: function (params) {
+                    return params.data;
+                },
+                ready: function () {
+                    $("#jqxgrid").jqxGrid('hideColumn', 'Id');
+                },
+                columns: [
+                  {text:'Id',dataField:'Id',cellsalgin:'right',width:0},
+                   {  text: 'Số TT', sortable: false, filterable: false, editable: false,
+                      groupable: false, draggable: false, resizable: false,
+                      datafield: '', columntype: 'number', width: 50,
+                      cellsrenderer: function (row, column, value) {
+                          return "<div style='margin:7px;'>" + (value + 1) + "</div>";
+                      }
+                  },
+                  { text: 'Mã thỉnh thành',editable: false,align: "center", dataField: 'province_code', width: '15%' },
+                  { text: 'Tên tỉnh thành',editable: false,align: "center", dataField: 'name_province', width: '65%' },               
+                  {text: 'Xóa',filtertype: 'none', cellsalign: 'right', align: "center", columnType: 'none', editable: false, sortable: false, dataField: null, cellsrenderer: function (row) {
+                          // render custom column.
+                          editrow = row;
+                          var dataRecord = $("#jqxgrid").jqxGrid('getrowdata',editrow);
+                          var url= "<div style='overflow: hidden; text-overflow: ellipsis; padding-bottom: 2px; text-align: center; margin-right: 2px; margin-left: 4px; margin-top: 4px;'><a class='fa fa-trash-o fa-lg'";
+                          url = url + "href='#' onclick='return jsdelete("+dataRecord.Id+")'></a></div>"
+                          return url;
+                      }
+              },
+              {text: 'Sửa',filtertype: 'none', cellsalign: 'right', align: "center", columnType: 'none', editable: false, sortable: false, dataField: null, cellsrenderer: function (row) {
+                          // render custom column.
+                          editrow = row;
+                          var dataRecord = $("#jqxgrid").jqxGrid('getrowdata',editrow);
+                          var url= "<div style='overflow: hidden; text-overflow: ellipsis; padding-bottom: 2px; text-align: center; margin-right: 2px; margin-left: 4px; margin-top: 4px;'><a class='fa fa-edit fa-lg'";
+                          url = url + "href='<?php echo $this->baseUrl() ?>/default/masterprovince/edit/id/"+dataRecord.Id+"'></a></div>"
+                          return url;
+                      }
+                          }
+                ]
+            });
+           
+        });
+    </script>
+    <script type="text/javascript">
+      
+           function jsdelete(id)
+        {
+            $.get("<?php echo $this->baseUrl() ?>/default/masterprovince/confirmdelete/id/"+id,null,function(data){
+                if(data>0)
+                {
+                    bootbox.alert("Hiện có "+data+" Quận huyện thuộc Tỉnh thành này. Vui lòng chuyển các Quận huyện trên sang Tỉnh thành khác trước!");
+                    return false;
+                }
+                else 
+                {
+                    bootbox.confirm("Bạn có chắc muốn xoá Tỉnh thành này không?",
+                    function(result){
+                        if(result == true)
+                        {
+                           return window.location = "<?php echo $this->baseUrl() ?>/default/masterprovince/delete/id/"+id;
+                        }
+                    });
+                }
+            });
+        
+        }
+    </script>

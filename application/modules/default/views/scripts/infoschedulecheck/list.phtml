@@ -1,0 +1,209 @@
+<?php $identity = Zend_Auth::getInstance()->getIdentity();
+               if(!empty($identity)){
+//                    $this->model->setSys_Department_Id($identity->sys_department_id);
+//                    $this->model->setSys_User_Id($identity->id);
+                }
+?>
+<div class="row">
+    <div class="col-lg-12">
+        <h3 class="page-header">Danh sách kiểm tra kinh doanh</h3>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                 <div class="row">
+                     <div class="col-lg-2" style="text-align:center;width: 9%;padding-right: 0px;">
+                         <a  href="<?php echo $this->baseUrl().'/default/infoschedulecheck/add/'?>">
+                             <button type="button" class="btn btn-success btn-action"><i class="fa fa-plus fa-2x"></i>
+                             </button></br>
+                             <span >Thêm Mới</span>
+                         </a>
+                     </div>                     
+                 </div>
+            </div>
+            <div class="panel-body">                
+               
+                <div class="table-reponsive">
+                   <div id="jqxgrid">
+                        </div>
+                </div>
+        </div>
+    </div>
+</div>
+    <div id="treeGrid">
+            </div> 
+    
+<script type="text/javascript">
+        $(document).ready(function () {           
+            var source =
+            {
+                dataType: "json",
+                dataFields: [
+                    { name: 'id', type: 'int' },
+                    { name: 'info_schedule_id', type: 'string' },
+                    { name: 'info_business_id', type: 'string' },
+                    { name: 'doc_print_create_id', type: 'string' },
+                    { name: 'master_print_id', type: 'string' },
+                    { name: 'serial_check', type: 'string' },
+                    { name: 'staff_check', type: 'string' },
+                    { name: 'date_check', type: 'string' },
+                    { name: 'sys_department_id', type: 'string' },
+                    { name: 'doc_violations_handling_id', type: 'string' },
+                    { name: 'comment', type: 'int' } 
+                ],
+                url:"<?php echo $this->baseUrl().'/default/infoschedulecheck/service/sys_department_id/'.$identity->sys_department_id?>",
+               sortcolumn: 'id',
+                sortdirection: 'DESC'
+            };
+            var initrowdetail = function(index, parentElement, gridElement, datarecord){                  
+                    var panelBody = null;
+                        panelBody = $($(parentElement).children()[0]);  
+                        panelBody.html('<div class="col-md-12" style="margin-top:10px; height:300px; overflow-y:scroll;">'
+                                       +'<div id="jqxgrid2" ></div>'
+                                       +'</div>');
+             var source2 = 
+                {
+                dataType: "json",
+                dataFields: [
+                    { name: 'id', type: 'int' },
+                    { name: 'address_business', type: 'string' } ,
+                    { name: 'master_violation_id', type: 'string' } ,
+                    { name: 'master_sanction_id', type: 'string' } ,
+                    { name: 'sys_department_id', type: 'string' } ,
+                    { name: 'amount', type: 'string' } ,
+                   
+                ],
+                url:"<?php echo $this->baseUrl().'/default/docviolationshandling/serviceinfoschedulecheck/id/'?>"+datarecord.doc_violations_handling_id,
+               sortcolumn: 'id',
+                sortdirection: 'DESC'
+                };
+                 var dataAdapter2 = new $.jqx.dataAdapter(source2);
+                  $("#jqxgrid2").jqxGrid(
+                    {
+                    width: '100%',
+                    theme: 'bootstrap',
+                    source: dataAdapter2, 
+                    rowdetails: true,
+                    filterable: true,
+                    autoheight: true,
+                    columnsResize: true,                                 
+                     ready: function (param) {                            
+                        },
+                    columns: [   
+                    { text: 'id', dataField: 'id',align: "center", width: 0,hidden:true },
+                    {  text: 'Số TT', sortable: false, filterable: false, editable: false,
+                     groupable: false, draggable: false, resizable: false,
+                     datafield: '', columntype: 'number', width: '5%',
+                     cellsrenderer: function (row, column, value) {
+                          return "<div style='margin:7px;'>" + (value + 1) + "</div>";
+                      }
+                    },
+                    { text: 'Địa chỉ', dataField:'address_business',align: "center", width: '15%' },
+                    { text: 'Hành vi vi phạm', dataField:'master_violation_id',align: "center", width: '25%' },
+                    { text: 'Hình thức xử lý', dataField:'master_sanction_id',align: "center", width: '15%' },
+                    { text: 'Đội xử lý', dataField:'sys_department_id',align: "center", width: '20%' },
+                    { text: 'Số tiền', dataField:'amount',align: "center", width: '15%' },
+                        ]      
+                     });  
+                };
+            var dataAdapter = new $.jqx.dataAdapter(source);
+            $("#jqxgrid").jqxGrid(
+            {
+                width: '100%',
+                source: dataAdapter,  
+                theme: 'bootstrap',
+                rowdetails: true,
+                pageable: true,
+                showfilterrow: true,
+                filterable: true,
+                autoheight: true,
+                sortable: true,
+                altrows: true,
+                enabletooltips: true,
+                selectionmode: 'multiplecellsadvanced',
+                columnsResize: true,      
+                rendergridrows: function (params) {
+                    return params.data;
+                },
+                rowdetailstemplate: { rowdetails: '<div class="col-md-12" style="margin-top:10px; height:280px; overflow-y:scroll;"><div class="panel panel-default">'
+                                                    +'<div class="panel-heading"><div class="panel-title"><strong>Danh sách kiểm tra</strong></div></div>'                                                    
+                                                    +'<div class="panel-body">'                                                      
+                                                    +'</div>'
+                                                +'</div></div>'
+                    , rowdetailsheight: 300},
+                ready: function () {
+                    $("#jqxgrid").jqxGrid('hideColumn', 'id');
+                },
+                initrowdetails: initrowdetail,
+                columns: [   
+                    { text: 'id', dataField: 'id',align: "center", width: '0%' },
+                    {  text: 'Số TT', sortable: false, filterable: false, editable: false,
+                     groupable: false, draggable: false, resizable: false,
+                     datafield: '', columntype: 'number',align: "center", width: '5%',
+                     cellsrenderer: function (row, column, value) {
+                          return "<div style='margin:7px;'>" + (value + 1) + "</div>";
+                      }
+                    },
+                    { text: 'Tên doanh nghiệp', dataField: 'info_business_id',align: "center", width: '15%' },
+                    { text: 'Tên lịch', dataField: 'info_schedule_id',align: "center", width: '10%' },
+                    { text: 'Ấn chỉ', dataField: 'master_print_id',align: "center", width: '10%' },
+                    { text: 'Số cuốn', dataField: 'doc_print_create_id',align: "center", width: '5%' },
+                    { text: 'Người thực hiện', dataField: 'staff_check',align: "center", width: '15%' },
+                    { text: 'Serial', dataField: 'serial_check',align: "center", width: '10%' },
+                    { text: 'Ngày', dataField: 'date_check',align: "center", width: '10%' },
+                    {text: 'Xóa',filtertype: 'none', cellsalign: 'right', align: "center", columnType: 'none', editable: false, sortable: false, dataField: null, cellsrenderer: function (row) {                          
+                          editrow = row;
+                          var dataRecord = $("#jqxgrid").jqxGrid('getrowdata',editrow);
+                          var url= "<div style='overflow: hidden; text-overflow: ellipsis; padding-bottom: 2px; text-align: center; margin-right: 2px; margin-left: 4px; margin-top: 4px;'><a class='fa fa-trash-o fa-lg'";
+                          url = url + "href='#' onclick='return jsdelete("+dataRecord.id+")'></a></div>";
+                          return url;
+                      }
+                     },
+                    {text: 'Sửa',filtertype: 'none', cellsalign: 'right', align: "center", columnType: 'none', editable: false, sortable: false, dataField: null, cellsrenderer: function (row) {                        
+                          editrow = row;
+                          var dataRecord = $("#jqxgrid").jqxGrid('getrowdata',editrow);
+                          var url= "<div style='overflow: hidden; text-overflow: ellipsis; padding-bottom: 2px; text-align: center; margin-right: 2px; margin-left: 4px; margin-top: 4px;'><a class='fa fa-edit fa-lg'";
+                          url = url + "href='<?php echo $this->baseUrl() ?>/default/infoschedulecheck/edit/id/"+dataRecord.id+"'></a></div>"
+                          return url;
+                      }
+                          }
+                        ]      
+            });           
+        });
+       
+    </script>
+   <script type="text/javascript">
+        function jsdelete(id)
+        {            
+            var flag;
+            $.ajax({
+                    type:'post',
+                    url:'<?php echo $this->baseUrl()?>/default/infoschedulecheck/confirmdelete/id/'+id,
+                    async:false,
+                    dataType:'json',
+                    success:function(a){
+                        if(a==1){
+                            flag=false;
+                        } else {
+                            flag=true;
+                        }
+                    }
+            });
+            if(flag==false){
+                bootbox.alert("Thông tin kiểm tra này không được phép xóa.");
+                return false;
+            };
+            if(flag == true){
+                bootbox.confirm("Bạn có chắc muốn xoá thông tin kiểm tra này không?",function(result){
+                    if(result == true)
+                    { 
+                        return window.location = "<?php echo $this->baseUrl() ?>/default/infoschedulecheck/delete/id/"+id;
+                    }
+                }); 
+            }
+            return true;
+                
+        }
+    </script>

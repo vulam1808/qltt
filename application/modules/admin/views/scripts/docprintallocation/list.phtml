@@ -1,0 +1,538 @@
+<div class="row">
+     <div class="col-lg-12">
+        <h3 class="page-header">Danh cấp phát ấn chỉ</h3>
+    </div>  
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default">             
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <form  method="POST" name="Ad" action="<?php echo $this->baseUrl()?>/admin/docprintallocation/printallocationexport" onsubmit="return checkinput();"> 
+                        <div class="form-group">
+                            <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="col-lg-2">
+                                            <label>Phòng ban:</label>
+                                        </div>
+                                        <div class="col-lg-3">
+                                            <div id="jqxWidget">
+                                                <div id="dropDownButton">
+                                                    <div style="border: none;" id="jqxTree">
+                                                        <ul>
+                                                        <?php echo GlobalLib::returntree(0) ;?>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <input class="form-control" type="hidden" name="sys_department_id" id="sys_department_id" value="<?php echo $this->itemdepartment->getParent_Id(); ?>">
+                                            <input type="hidden" name="name_department" id="name_department"/>
+                                        </div> 
+                                        <div class="col-lg-2">
+                                            <label>Nhân viên:</label>
+                                        </div>
+                                        <div class="col-lg-3">
+                                            <?php echo  GlobalLib::getComboVersatile('sys_user_id', 'sys_user', 'id', 'username,first_name,last_name', 'where sys_department_id=0',false, 'form-control', '', '', '', 'Người dùng','-','');?> 
+                                        </div>
+                                    </div>
+                            </div></br>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="col-lg-2">
+                                        <label>Ngày cấp phát:</label>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <div id='jqxWidget'>
+                                            <div style='float: left;'>
+                                                <div style='float: left; margin-top: 3px;' id='jqxDateTimeInput'>
+                                                </div>
+                                                <div style='margin-left: 20px; float: left;'>
+                                                    <div>
+                                                        <input type="hidden" id="ngaycapphat" name="ngaycapphat">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-2">
+                                        <label>Giấy đề nghị cấp số:</label>
+                                    </div>
+                                    <div class="col-lg-2">
+                                       <input type="text" name="sohd" id="sohd" class="form-control" placeholder="Số hóa đơn"/>
+                                    </div>
+                                    <input id="selectionlog" style="display: none" name="selectionlog" /> 
+                                    <div class="col-lg-1">
+                                        <button type="submit" id="t" name="t" class="btn btn-success">Xuất Excel</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form> 
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-default">             
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-lg-2" style="text-align:center;width: 9%;padding-right: 0px;">
+                         <a  href="<?php echo $this->baseUrl().'/admin/docprintallocation/add'?>">
+                             <button type="button" class="btn btn-success btn-action"><i class="fa fa-plus fa-2x"></i>
+                             </button></br>
+                             <span >Thêm Mới</span>
+                         </a>
+                     </div>
+                </div>
+            </div>
+            <div class="panel-body">
+                <div class="table-reponsive">
+                    <div id="jqxgrid">
+                    </div>
+                </div>
+                <input type="hidden" name="id" id="id" class="form-control" >
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+        $(document).ready(function () {
+              var source =
+            {
+                datatype: "json",
+                datafields:
+                [
+                    { name: 'sys_department_id',type:'int'},
+                    { name: 'name_sys_department_id', type: 'string' }, 
+                    { name: 'sys_user_id', type:'string'},
+                    { name: 'name_user', type: 'string' },
+                    { name: 'data_allocation', type: 'string' },
+                    { name: 'master_print_id', type: 'int' },
+                    { name: 'name_print', type: 'string' },
+                    { name: 'doc_print_create_id', type: 'string' },
+                    { name: 'name_doc_print_create', type: 'int' },
+                    { name: 'date_allocation', type: 'string' },
+                    { name: 'request_number', type: 'int' }, 
+                    { name: 'anchithuhoi', type: 'string' },
+                    { name: 'anchihuhong', type: 'string' },
+                    { name: 'serial_print',type: 'string'},
+                    { name: 'status', type: 'string' },
+                    { name: 'comment', type: 'string' },
+                    
+                ],
+                addrow: function (rowid, rowdata, position, commit) {
+                    commit(true);
+                },
+                deleterow: function (rowid, commit) {
+                    commit(true);
+                },
+                updaterow: function (rowid, newdata, commit) {                   
+                    commit(true);
+                },
+                url:"<?php echo $this->baseUrl().'/admin/docprintallocation/service'?>",
+                sortcolumn: 'date_allocation',
+                sortdirection: 'desc'
+            };
+            var dataAdapter = new $.jqx.dataAdapter(source, {
+                loadComplete: function () {
+                }
+            });
+             $("#jqxgrid").jqxGrid(
+            {
+                width: '100%',
+                height: 350,
+                source: dataAdapter,
+                showtoolbar: true,
+                theme: 'bootstrap',
+                pageable: false,
+                showfilterrow: true,
+                filterable: true,
+                autoheight: true,
+                sortable: true,
+                altrows: true,
+                enabletooltips: true,
+                editable: true,
+                selectionmode: 'singlerow',
+                 groupable: true,
+                columnsResize: true,
+                rendergridrows: function (params) {
+                            return params.data;
+                        },
+                        ready: function () {
+                            $("#jqxgrid").jqxGrid('hideColumn', 'sys_department_id');
+                             $("#jqxgrid").jqxGrid('hideColumn', 'name_sys_department_id');
+                            $("#jqxgrid").jqxGrid('hideColumn', 'sys_user_id');
+                            $("#jqxgrid").jqxGrid('hideColumn', 'master_print_id');
+                            $("#jqxgrid").jqxGrid('hideColumn', 'doc_print_create_id');
+                            
+                        },
+                rendertoolbar: function (toolbar) {
+                    var me = this;
+                    var container = $("<div style='margin: 0px;'></div>");
+                    toolbar.append(container);
+                     container.append('<center><div id="t"></div></center>');                    
+                    $("#xoa").on('click', function () {
+                        var selectedrowindex = $("#jqxgrid").jqxGrid('getselectedrowindex');
+                        var rowscount = $("#jqxgrid").jqxGrid('getdatainformation').rowscount;
+                        if (selectedrowindex >= 0 && selectedrowindex < rowscount) {
+                            var id = $("#jqxgrid").jqxGrid('getrowid', selectedrowindex);
+                            var commit = $("#jqxgrid").jqxGrid('deleterow', id);
+                        }
+                        for (var i = 0; i <= rowscount-1; i++) {
+                            var row = $('#jqxgrid').jqxGrid('getRowData', i); 
+                            if(row.chon==1){
+//                                alert(row.chon);
+                                var id = $("#jqxgrid").jqxGrid('getrowid', i);
+                                var commit = $("#jqxgrid").jqxGrid('deleterow', id);
+                            }
+                        }
+                    });
+                   
+                     // create new row.
+                    $("#add").on('click', function () {
+                            //kiem tra thong tin voi du lieu co trong csdl
+                        $("#soquyen").val($("#doc_print_create_id").val());
+                         var doc_print_create_id = $("#soquyen").val();
+                         $.ajax({
+                             type:'post',
+                             url:'<?php echo $this->baseUrl()?>/admin/docprintallocation/nameprintcreate/doc_print_create_id/'+doc_print_create_id,
+                             async:false,
+                             dataType:'json',
+                             success:function(data){
+                                 if(data[0].name_printcreate == null){
+                                     $("#name_doc_print_create").val("");
+                                 }else{
+                                      $("#name_doc_print_create").val(data[0].name_printcreate);
+                                 }
+                             }
+                         }); 
+                         ///
+                         if( $("#jqxgrid").jqxGrid('getdatainformation').rowscount == -1){
+                              $("#luu").hide();
+                         }else{
+                              $("#luu").show();
+                         }
+                         if(checkinput()){
+                            var flag =0;
+                            var id = $("#jqxgrid").jqxGrid('getrowid', 0); 
+                            var rowscount = $("#jqxgrid").jqxGrid('getdatainformation').rowscount; 
+                            if(rowscount == 0){
+                                //kiem tra so quyen nhap vao voi csdl
+                                //kiem tra serial nhap vao voi csdl
+                                var datarow = {};
+                                datarow["sys_department_id"] =$('#sys_department_id').val() ;
+                                datarow["name_department"] =$('#name_department').val() ;
+                                datarow["sys_user_id"] = $('#sys_user_id').val();
+                                datarow["name_user"] = $('#name_user').val();
+                                datarow["data_allocation"] = $('#jqxDateTimeInput').val();
+                                datarow["master_print_id"] = $('#master_print_id').val();
+                                datarow["name_print"] = $('#name_print').val();
+                                datarow["doc_print_create_id"] = $('#doc_print_create_id').val();
+                                datarow["name_doc_print_create"] = $('#name_doc_print_create').val();
+    //                            datarow["soquyen"] = $('#soquyen').val();
+                                datarow["request_number"] = $('#request_number').val();
+                                datarow["comment"] = $('#comment').val();
+                                var commit = $("#jqxgrid").jqxGrid('addrow', null, datarow);
+                            }else{
+                                 //kiem tra ma an chi khong dc trung trong bang luu tam
+                                for (var i = id; i <= rowscount-1; i++) {
+                                    var row = $('#jqxgrid').jqxGrid('getRowData', i); 
+                                    if($('#master_print_id').val() == row.master_print_id){
+                                        flag = 1;break;
+                                    }
+                                }
+                                if(flag == 0){
+                                   var datarow = {};
+                                    datarow["sys_department_id"] =$('#sys_department_id').val() ;
+                                    datarow["name_department"] =$('#name_department').val() ;
+                                    datarow["sys_user_id"] = $('#sys_user_id').val();
+                                    datarow["name_user"] = $('#name_user').val();
+                                    datarow["data_allocation"] = $('#jqxDateTimeInput').val();
+                                    datarow["master_print_id"] = $('#master_print_id').val();
+                                    datarow["name_print"] = $('#name_print').val();
+                                    datarow["doc_print_create_id"] = $('#doc_print_create_id').val();
+                                    datarow["name_doc_print_create"] = $('#name_doc_print_create').val();
+        //                            datarow["soquyen"] = $('#soquyen').val();
+                                    datarow["request_number"] = $('#request_number').val();
+                                    datarow["comment"] = $('#comment').val();
+                                    var commit = $("#jqxgrid").jqxGrid('addrow', null, datarow);
+                                }else{
+                                    bootbox.alert("Trùng ấn chỉ. Vui lòng kiểm tra và nhập lại");
+                                }
+                            }
+                        }
+                    });
+                    //Thu hồi
+                    $("#luu").on('click', function () { 
+                        $("#luu").hide();
+                        var id = $("#jqxgrid").jqxGrid('getrowid', 0); 
+                        var rowscount = $("#jqxgrid").jqxGrid('getdatainformation').rowscount; 
+                        var doc_print_allocation = new Array();
+                        for (var i = id; i <= rowscount-1; i++) {
+                            var row = $('#jqxgrid').jqxGrid('getRowData', i); 
+                            var date = '"'+row.data_allocation.toString()+'"';
+                                alert(date);
+                               doc_print_allocation[i] = { sys_department_id:row.sys_department_id , sys_user_id: row.sys_user_id,data_allocation:date,master_print_id:row.master_print_id,doc_print_create_id:row.doc_print_create_id,request_number:row.request_number,comment:row.comment};
+                        }
+                        $.ajax({
+                                    type:'post',
+                                    url:'<?php echo $this->baseUrl()?>/admin/docprintallocation/savedocprintallocation',
+                                    data:{'dataallocation':doc_print_allocation},
+                                    async:false,
+                                    dataType:'json',
+                                    success:function(data){
+                                        alert(data[0].sys_department_id);
+                                    }
+                        });
+                        //xoa danh het noi dung trong luoi
+                        for (var i = 0; i <= rowscount-1; i++) {
+                            
+                            var commit = $("#jqxgrid").jqxGrid('deleterow', i);
+                        }
+                    });
+                },
+                columns: [
+                              { text: 'Mã phòng ban ',editable: false, dataField: 'sys_department_id', width: '10%' },
+                              { text: 'Tên phòng ban',editable: false, dataField: 'name_sys_department_id', width: '10%' }, 
+                              { text: 'Mã nhân viên',editable: false, dataField: 'sys_user_id', width: '10%' }, 
+                              { text: 'Tên nhân viên',editable: false, dataField: 'name_user', width: '15%' }, 
+                             
+                              { text: 'Mã ấn chỉ', editable: false, dataField: 'master_print_id', width: '10%'},
+                               { text:'Ngày cấp',editable: false, dataField: 'date_allocation', width: '10%' },
+                              { text: 'Mã ấn chỉ', editable: false, dataField: 'name_print', width: '10%'},
+                              
+                              { text: 'Mã quyển', editable: false, dataField: 'doc_print_create_id', width: '10%'},
+                              { text: 'Quyển số', editable: false, dataField: 'name_doc_print_create', width: '7%'},
+                               { text: 'Serial', editable: false, dataField: 'serial_print', width: '15%'},
+                              { text: 'Chứng từ', editable: false, dataField: 'request_number', width: '10%'},
+                              { text: 'Trạng thái', editable: false, dataField: 'status', width: '10%'},
+                              { text: 'Ấn chỉ thu hồi', editable: false, dataField: 'anchithuhoi', width: '10%'},
+                              { text: 'Ấn chỉ hu hỏng', editable: false, dataField: 'anchihuhong', width: '10%'},
+                              { text: 'Ghi chú', editable: false, dataField: 'comment', width: '25%'},
+//                               {text: '  ',filtertype: 'none', cellsalign: 'right', align: "center", columntype: 'checkbox', editable: true, sortable: false, dataField: 'chon', cellsrenderer: function (row) {
+//                         
+//                      }
+//              }
+            ],
+                 groups: ['name_sys_department_id']
+            });  
+            $("#jqxgrid").on('rowselect', function (event) {
+                var dataRecord = $("#jqxgrid").jqxGrid('getrowdata',event.args.rowindex);
+                 $("#id").val(dataRecord.master_print_id);
+            });
+           
+        });
+    </script> 
+    <script type="text/javascript">
+    $(document).ready(function () {
+     $('#jqxDateTimeInput').jqxDateTimeInput({ formatString: "dd-MM-yyyy"});
+            var formatString = $('#jqxDateTimeInput').jqxDateTimeInput('formatString');
+            $('#jqxDateTimeInput').on('valueChanged', function (event) {
+                var date = event.args.date;
+                var text= $('#jqxDateTimeInput').jqxDateTimeInput('getText'); 
+                 $('#ngaycapphat').val(text);
+            });
+            $('#jqxDateTimeInput').on('open', function (event) {
+                var date = event.args.date;
+            });
+            $('#jqxDateTimeInput').on('close', function (event) {
+                var date = event.args.date;
+            });
+            $('#t').on('click',function(){
+                $('#ngaycapphat').val($('#jqxDateTimeInput').val());
+            });
+            }); 
+    </script>
+    <script type="text/javascript">
+        function checkserialrecovery() {
+        var flag; var value;   
+        var frm = window.document.AddRecovery;
+        var string = frm.listserialrecovery.value 
+        
+        if ((string.substr(0,1) == ";")||(string.substr(0,1) == "")) {
+            bootbox.alert("Bạn chưa có nhập serial để thu hồi");
+            return false;
+        };
+        var idmasterprintid = $('#listmasterprintid').val();
+        var serial = $('#listserialrecovery').val();
+        alert($('#listmasterprintid').val());
+        //var error ="";
+        $.ajax({
+            type:'post',
+            url:'<?php echo $this->baseUrl()?>/admin/docprintallocation/checkserialrecovery/idmasterprint/'+idmasterprintid+'/serial/'+serial,
+            async:false,
+            dataType:'json',
+            success:function(data){
+                if(data[0].code==1){
+                    flag=false;
+                } else {
+                    flag=true;value = data[0].value;
+                }
+            }
+        });
+        if(flag==true){
+            bootbox.alert("Serial: "+value+" này không hợp lệ (không được cấp phát). Vui lòng kiểm tra và nhập lại.");
+            return false;
+        };
+        //thuc hien thu hoi 
+         $.ajax({
+            type:'post',
+            url:'<?php echo $this->baseUrl()?>/admin/docprintallocation/serialrecovery/id_master_print/'+idmasterprintid+'/serial/'+serial,
+            async:false,
+            dataType:'json',
+            success:function(data){
+            }
+         });
+      return true;
+    }
+    </script>
+     
+     <script type="text/javascript">
+        function jsdeletedocprintallocation(id,serial_allocation)
+        {          
+//            alert(String(serial_allocation));
+//             alert(id);
+            var serial_allocation1 = String(serial_allocation);
+            var flag;
+            $.ajax({
+                    type:'post',
+                    url:'<?php echo $this->baseUrl()?>/admin/docprintallocation/confirmdelete/id_master_print/'+id+'/serial_allocation/'+serial_allocation1,
+                    async:false,
+                    dataType:'json',
+                    success:function(a){
+                        if(a==1){
+                            flag=false;
+                        } else {
+                            flag=true;
+                        }
+                    }
+            });
+            if(flag==false){
+                bootbox.alert("Dãy Serial này đã được xử phạt. Không được phép xóa.");
+                return false;
+            };
+            if(flag == true){
+                bootbox.confirm("Bạn có chắc muốn xoá ấn chỉ này không?",function(result){
+                    if(result == true)
+                    { 
+                        return window.location = "<?php echo $this->baseUrl() ?>/admin/docprintallocation/delete/id_master_print/"+id+"/serial_allocation/"+serial_allocation1;
+                    }
+                }); 
+            }
+            return true;
+        }
+    </script>
+    <script type="text/javascript">
+        function checkmasterprintidexcel(){
+             var frm = window.document.AddExcel;
+             var id_master_print;
+             if($("#list").val()==""){
+                 id_master_print = 0;
+             }else{
+                 id_master_print = $("#list").val();
+             }
+             return true;
+        }
+//        $("#xuatexcel").on('click',function(data){
+//            $("#list").val("thu");
+//        });
+    </script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+           $("#dropDownButton").jqxDropDownButton({ width: 150, height: 25,theme: 'bootstrap'});
+            $('#jqxTree').on('select', function (event) {
+                var args = event.args;
+                var item = $('#jqxTree').jqxTree('getItem', args.element);
+                var dropDownContent = '<div style="position: relative; margin-left: 3px; margin-top: 5px;">' + item.label + '</div>';
+                $("#dropDownButton").jqxDropDownButton('setContent', dropDownContent);
+                $("#sys_department_id").val(event.args.element.id);
+                var url = "<?php echo $this->aConfig["site"]["url"]?>";
+                getSysUserWithDepartment1(url+'admin/service/index');  
+//                getMasterPrintWithDepartment(url);
+                var sys_department_id = $("#sys_department_id").val();
+//                alert(sys_department_id);
+                $.ajax({
+                    type:'post',
+                    url:'<?php echo $this->baseUrl()?>/admin/docprintallocation/namedepartment/sys_department_id/'+sys_department_id,
+                    async:false,
+                    dataType:'json',
+                    success:function(data){
+                        if(data[0].name_department == null){
+                            $('#name_department').val("");
+                        }else{
+                             $('#name_department').val(data[0].name_department);
+                        }
+                    }
+                });
+                
+                
+            });
+           $("#jqxTree").jqxTree({ width: 200, height: 220,theme: 'bootstrap'});
+            $('#sys_user_id').multiselect({
+            maxHeight: '300',
+            enableFiltering: true,
+            maxHeight: '300',
+            onChange: function(option, checked) {
+                if (checked) {
+                    orderCount++;
+                    $(option).data('order', orderCount);
+                }
+                else {
+                    $(option).data('order', '');
+                }
+            },
+        });
+        
+        $('#sys_user_id').on('change', function() {
+            var selected = [];
+            $('#sys_user_id option:selected').each(function() {
+                selected.push([$(this).val(), $(this).data('order')]);
+            });
+ 
+            selected.sort(function(a, b) {
+                return a[1] - b[1];
+            });
+ 
+            var text = '';
+            for (var i = 0; i < selected.length; i++) {
+                text += selected[i][0] + ', ';
+            }
+            text = text.substring(0, text.length - 2);
+ 
+            $('#selectionlog').val(text);
+            $('#selectionlog').text(text);
+        });
+        $('#excel').on('click',function(){
+            $('#ngaycapphat').val($('#jqxDateTimeInput').val());
+        });
+        });
+</script>
+<script type="text/javascript">
+    document.forms['Ad'].name.focus();
+    function set_focus() {
+        document.forms['Ad'].name.focus();
+    }
+    function checkinput() {        
+        var frm = window.document.Ad;
+        var flag;
+        
+        if ($('#sys_department_id').val()=="") {
+            bootbox.alert("Vui lòng chọn phòng ban!");
+            return false;
+        }
+        if ($('#sys_user_id').val()=="0") {
+            bootbox.alert("Vui lòng chọn nhân viên!");
+            return false;
+        }
+        if ($('#jqxDateTimeInput').val()=="") {
+            bootbox.alert("Vui lòng chọn ngày!");
+            return false;
+        }
+        if (frm.sohd.value == "") {
+            bootbox.alert("Vui lòng nhập số hóa đơn!");
+            return false;
+        } 
+        
+        return true;
+    }
+</script>

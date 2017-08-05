@@ -1,0 +1,346 @@
+
+<div class="row">
+    <div class="col-lg-12">
+        <center><h3 class="page-header">
+                    <b>NHẬT KÝ THEO DÕI HOẠT ĐỘNG KIỂM TRA KIỂM SOÁT THỊ TRƯỜNG</b>
+                </h3>
+                <form  method="POST" name="diary" onsubmit = "return checkinput()" action="<?php echo $this->baseUrl()?>/default/docdiary/printpaymenttonthatexport"> 
+                            <div class="form-group">
+                                <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="col-lg-1"></div>
+                                    <div class="col-lg-3">
+                                        <label><i>Từ ngày:</i></label>
+                                    </div>
+                                    <div class="col-lg-2">
+                                        <div id='jqxWidget1'>
+                                            <div style='float: left;'>
+                                                <div style='float: left; margin-top: 3px;' id='jqxDateTimeInput1'>
+                                                </div>
+                                                <div style='margin-left: 20px; float: left;'>
+                                                    <div>
+                                                        <input type="hidden" id="tungay" name="tungay">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-2">
+                                    </div> 
+                                    <input id="selectionlog" style="display: none" name="selectionlog" /> 
+                                     <div class="col-lg-1">
+                                             <button type="button" id="xem" name="xem" class="btn btn-primary">Xem</button>
+                                         </div>
+                                    <div class="col-lg-1">
+                                        <button type="submit" id="xuatexcel" name="xuatexcel" class="btn btn-success">Xuất Excel</button>
+                                    </div>
+                                </div>
+                            </div>
+                             <div class="row">
+                                <div class="col-lg-12">
+                                     <div class="col-lg-1"></div>
+                                   <div class="col-lg-3">
+                                        <label><i>Đến ngày:</i></label>
+                                    </div>
+                                    <div class="col-lg-2">
+                                        <div id='jqxWidget2'>
+                                            <div style='float: left;'>
+                                                <div style='float: left; margin-top: 3px;' id='jqxDateTimeInput2'>
+                                                </div>
+                                                <div style='margin-left: 20px; float: left;'>
+                                                    <div>
+                                                        <input type="hidden" id="denngay" name="denngay">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                        <div class="col-lg-2">
+                                        
+                                    </div> <div class="col-lg-3">
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                            </div>
+                    </form> 
+        </center>
+    </div>    
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default">             
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="row">
+                     <div class="col-lg-2" style="text-align:center;width: 9%;padding-right: 0px;">
+                         <a href="<?php echo $this->url(array("action"=>"add")) ?>">
+                             <button type="button" class="btn btn-success btn-action"><i class="fa fa-plus fa-2x"></i>
+                             </button></br>
+                             <span >Thêm Mới</span>
+                         </a>
+                     </div>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-body">
+                <div class="table-reponsive">
+                    <div id="jqxgrid">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    document.forms['diary'].tungay.focus();
+    function set_focus() {
+        document.forms['diary'].tungay.focus();
+    }
+    function parseDate(str) {
+            var mdy = str.split('-');
+            return new Date(mdy[2], mdy[1], mdy[0]);
+        }
+    function checkinput() {
+        var frm = window.document.diary;
+        var stringstartDate =$('#jqxDateTimeInput1').val()
+         var stringendDate =$('#jqxDateTimeInput2').val();
+        var startDate = parseDate(stringstartDate).getTime();
+        var endDate = parseDate(stringendDate).getTime();
+        if (startDate > endDate){
+            bootbox.alert("Ngày sau phải lớn (hoặc bằng) ngày trước!");
+            return false;
+        }
+       
+      return true;
+    }
+</script>
+<script>
+    $('#xuatexcel').on('click',function(){
+        $('#tungay').val($('#jqxDateTimeInput1').val());
+        $('#denngay').val($('#jqxDateTimeInput2').val());
+    });
+</script>
+<script>
+    $('#xem').on('click',function(){
+        var tungay = $('#jqxDateTimeInput1').val();
+        var denngay =  $('#jqxDateTimeInput2').val();
+       if( checkinput()){
+           var source =
+            {
+                datatype: "json",
+                datafields:
+                [
+                    { name: 'Id',type:'int'},
+                    { name: 'date_diary', type: 'string' }, 
+                    { name: 'implementers', type: 'string' },
+                    { name: 'position',type:'string'},
+                    { name: 'content_inspection', type: 'string' },
+                    { name: 'time_check',type:'string'},
+                    { name: 'status_and_test_results', type: 'string' },
+                    { name: 'processing_results',type:'string'}
+                ],
+                url:"<?php echo $this->baseUrl().'/default/docdiary/servicetungaydenngay/tungay/'?>"+tungay+"/denngay/"+denngay,
+//                sortcolumn: 'code',
+                sortdirection: 'asc'
+               
+            };
+         var dataAdapter = new $.jqx.dataAdapter(source, {
+                loadComplete: function () {
+                }
+            });
+            $("#jqxgrid").jqxGrid(
+            {
+                 width: '100%',
+                source: dataAdapter,  
+                theme: 'bootstrap',
+                rowdetails: true,
+                pageable: true,
+                showfilterrow: true,
+                filterable: true,
+                autoheight: true,
+                sortable: true,
+                altrows: true,
+                enabletooltips: true,
+                selectionmode: 'multiplecellsadvanced',
+                columnsResize: true,              
+                rendergridrows: function (params) {
+                    return params.data;
+                },
+                ready: function () {
+                    $("#jqxgrid").jqxGrid('hideColumn', 'Id');
+                },
+                columns: [
+                  {text:'Id',dataField:'Id',cellsalgin:'right',width:0}, 
+                  {  text: 'Số TT', sortable: false, filterable: false, editable: false,
+                      groupable: false, draggable: false, resizable: false,
+                      datafield: '', columntype: 'number', width: 50,
+                      cellsrenderer: function (row, column, value) {
+                          return "<div style='margin:0px;text-align: center;'>" + (value + 1) + "</div>";
+                      }
+                  },
+                  { text: 'Ngày tháng kiểm tra',editable: false, dataField: 'date_diary', width: '10%' },
+                  { text: 'Họ và tên KSV',editable: false, dataField: 'implementers', width: '10%' },                 
+                  { text: 'Chức danh KSV',editable: false, dataField: 'position', width: '10%' },
+                  { text: 'Đối tượng địa bàn,nội dung kiểm tra',editable: false, dataField: 'content_inspection', width: '15%' },
+                  { text: 'Thời gian kiểm tra',editable: false, dataField: 'time_check', width: '10%' },
+                  { text: 'Tình hình và kết quả kiểm tra',editable: false, dataField: 'status_and_test_results', width: '15%' },
+                  { text: 'Kết quả xử lý',editable: false, dataField: 'processing_results', width: '15%' },
+                   {text: 'Xóa',filtertype: 'none', cellsalign: 'right', align: "center", columnType: 'none', editable: false, sortable: false, dataField: null, cellsrenderer: function (row) {
+                          // render custom column.
+                          editrow = row;
+                          var dataRecord = $("#jqxgrid").jqxGrid('getrowdata',editrow);
+                          var url= "<div style='overflow: hidden; text-overflow: ellipsis; padding-bottom: 2px; text-align: center; margin-right: 2px; margin-left: 4px; margin-top: 4px;'><a class='fa fa-trash-o fa-lg'";
+                          url = url + "href='#' onclick='return jsdelete("+dataRecord.Id+")'></a></div>"
+                          return url;
+                      }
+              },
+              {text: 'Sửa',filtertype: 'none', cellsalign: 'right', align: "center", columnType: 'none', editable: false, sortable: false, dataField: null, cellsrenderer: function (row) {
+                          // render custom column.
+                          editrow = row;
+                          var dataRecord = $("#jqxgrid").jqxGrid('getrowdata',editrow);
+                          var url= "<div style='overflow: hidden; text-overflow: ellipsis; padding-bottom: 2px; text-align: center; margin-right: 2px; margin-left: 4px; margin-top: 4px;'><a class='fa fa-edit fa-lg'";
+                          url = url + "href='<?php echo $this->baseUrl() ?>/default/docdiary/edit/id/"+dataRecord.Id+"'></a></div>"
+                          return url;
+                      }
+                          }
+                ]
+            });
+       }
+        
+    });  
+</script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            // prepare the data
+            var source =
+            {
+                datatype: "json",
+                datafields:
+                [
+                    { name: 'Id',type:'int'},
+                    { name: 'date_diary', type: 'string' }, 
+                    { name: 'implementers', type: 'string' },
+                    { name: 'position',type:'string'},
+                    { name: 'content_inspection', type: 'string' },
+                    { name: 'time_check',type:'string'},
+                    { name: 'status_and_test_results', type: 'string' },
+                    { name: 'processing_results',type:'string'}
+                ],
+                url:"<?php echo $this->baseUrl().'/default/docdiary/service'?>",
+                sortcolumn: 'code',
+                sortdirection: 'asc'
+               
+            };
+         var dataAdapter = new $.jqx.dataAdapter(source, {
+                loadComplete: function () {
+                }
+            });
+            $("#jqxgrid").jqxGrid(
+            {
+                width: '100%',
+                source: dataAdapter,  
+                theme: 'bootstrap',
+                pageable: true,
+                showfilterrow: true,
+                filterable: true,
+                autoheight: true,
+                sortable: true,
+                altrows: true,
+                enabletooltips: true,
+                selectionmode: 'singlerow',
+                columnsResize: true,
+                rendergridrows: function (params) {
+                    return params.data;
+                },
+                ready: function () {
+                    $("#jqxgrid").jqxGrid('hideColumn', 'Id');
+                },
+                columns: [
+                  {text:'Id',dataField:'Id',cellsalgin:'right',width:0}, 
+                  {  text: 'Số TT', sortable: false, filterable: false, editable: false,
+                      groupable: false, draggable: false, resizable: false,
+                      datafield: '', columntype: 'number', width: 50,
+                      cellsrenderer: function (row, column, value) {
+                          return "<div style='margin:0px;text-align: center;'>" + (value + 1) + "</div>";
+                      }
+                  },
+                  { text: 'Ngày tháng kiểm tra',editable: false, dataField: 'date_diary', width: '10%' },
+                  { text: 'Họ và tên KSV',editable: false, dataField: 'implementers', width: '10%' },                 
+                  { text: 'Chức danh KSV',editable: false, dataField: 'position', width: '10%' },
+                  { text: 'Đối tượng địa bàn,nội dung kiểm tra',editable: false, dataField: 'content_inspection', width: '15%' },
+                  { text: 'Thời gian kiểm tra',editable: false, dataField: 'time_check', width: '10%' },
+                  { text: 'Tình hình và kết quả kiểm tra',editable: false, dataField: 'status_and_test_results', width: '15%' },
+                  { text: 'Kết quả xử lý',editable: false, dataField: 'processing_results', width: '10%' },
+                   {text: 'Xóa',filtertype: 'none', cellsalign: 'right', align: "center", columnType: 'none', editable: false, sortable: false, dataField: null, cellsrenderer: function (row) {
+                          // render custom column.
+                          editrow = row;
+                          var dataRecord = $("#jqxgrid").jqxGrid('getrowdata',editrow);
+                          var url= "<div style='overflow: hidden; text-overflow: ellipsis; padding-bottom: 2px; text-align: center; margin-right: 2px; margin-left: 4px; margin-top: 4px;'><a class='fa fa-trash-o fa-lg'";
+                          url = url + "href='#' onclick='return jsdelete("+dataRecord.Id+")'></a></div>"
+                          return url;
+                      }
+              },
+              {text: 'Sửa',filtertype: 'none', cellsalign: 'right', align: "center", columnType: 'none', editable: false, sortable: false, dataField: null, cellsrenderer: function (row) {
+                          // render custom column.
+                          editrow = row;
+                          var dataRecord = $("#jqxgrid").jqxGrid('getrowdata',editrow);
+                          var url= "<div style='overflow: hidden; text-overflow: ellipsis; padding-bottom: 2px; text-align: center; margin-right: 2px; margin-left: 4px; margin-top: 4px;'><a class='fa fa-edit fa-lg'";
+                          url = url + "href='<?php echo $this->baseUrl() ?>/default/docdiary/edit/id/"+dataRecord.Id+"'></a></div>"
+                          return url;
+                      }
+                          }
+                ]
+            });
+        });
+    </script>
+    <script type="text/javascript">
+          $(document).ready(function () { 
+                 $('#jqxDateTimeInput1').jqxDateTimeInput({ formatString: "dd-MM-yyyy"});
+                var formatString2 = $('#jqxDateTimeInput1').jqxDateTimeInput('formatString');
+                $('#jqxDateTimeInput1').on('valueChanged', function (event) {
+                    var date = event.args.date;
+                    var text= $('#jqxDateTimeInput1').jqxDateTimeInput('getText'); 
+                     $('#tungay').val(text);
+                });
+                $('#jqxDateTimeInput1').on('open', function (event) {
+                    var date = event.args.date;
+                });
+                $('#jqxDateTimeInput1').on('close', function (event) {
+                    var date = event.args.date;
+                });
+                 
+                ///
+                 $('#jqxDateTimeInput2').jqxDateTimeInput({ formatString: "dd-MM-yyyy"});
+                var formatString2 = $('#jqxDateTimeInput2').jqxDateTimeInput('formatString');
+                $('#jqxDateTimeInput2').on('valueChanged', function (event2) {
+                    var date2 = event2.args.date;
+                    var text2= $('#jqxDateTimeInput2').jqxDateTimeInput('getText'); 
+                     $('#denngay').val(text2);
+                });
+                $('#jqxDateTimeInput2').on('open', function (event2) {
+                    var date2 = event2.args.date;
+                });
+                $('#jqxDateTimeInput2').on('close', function (event2) {
+                    var date2 = event2.args.date;
+                });
+//               
+               
+            });
+    </script>
+
+     <script type="text/javascript">
+        function jsdelete(id)
+        {            
+                    bootbox.confirm("Bạn có chắc muốn xoá nhật ký theo dõi này không?",
+                    function(result){
+                        if(result == true)
+                        {
+                           return window.location = "<?php echo $this->baseUrl() ?>/default/docdiary/delete/id/"+id;
+                        }
+                    });             
+        }
+    </script>
+    

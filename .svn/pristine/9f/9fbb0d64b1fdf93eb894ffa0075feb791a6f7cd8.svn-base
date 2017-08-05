@@ -1,0 +1,139 @@
+<div class="row">
+    <div class="col-lg-12">
+        <h3 class="page-header">Danh sách nhóm người dùng </h3>
+    </div>
+    <!-- /.col-lg-12 -->
+</div>
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default">            
+            <div class="panel-heading">
+                 <div class="row">
+                     <div class="col-lg-2" style="text-align:center;width: 9%;padding-right: 0px;">
+                         <a href="<?php echo $this->baseUrl()?>/master/sysuser/addgroup">
+                             <button type="button" class="btn btn-success btn-action"><i class="fa fa-plus fa-2x"></i>
+                             </button></br>
+                             <span >Thêm Mới</span>
+                         </a>
+                     </div>
+<!--                     <div class="col-lg-2" style="text-align:center;width: 9%;padding-right: 0px;;padding-left: 1px;">
+                          <a  href="<?php echo $this->baseUrl()?>.'/master/sysusergroup/edit'">
+                            <button type="button" class="btn btn-info btn-action"><i class="fa fa-pencil fa-2x"></i>
+                            </button></br>
+                             <span >Chỉnh sửa</span>
+                         </a>
+                     </div>-->
+<!--                      <div class="col-lg-2" style="text-align:center;width: 5%;padding-right: 0px;;padding-left: 1px;">
+                          <a  href="<?php echo $this->baseUrl()?>.'/master/sysusergroup/delete'">
+                            <button type="button" class="btn btn-danger btn-action"><i class="fa fa-minus fa-2x"></i>
+                            </button></br>
+                             <span >Xóa</span>
+                         </a>
+                     </div>-->
+                     
+                 </div>
+            </div>
+            <div class="panel-body">
+                <div class="table-reponsive">
+                    <div id="jqxgrid">
+
+                    </div>
+                </div>
+            </div>
+    </div>
+</div>
+<!--    <style>
+        body, html {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+</style>-->
+<script type="text/javascript">
+        $(document).ready(function () {
+            // prepare the data
+            var source =
+            {
+                datatype: "json",
+                datafields:
+                [
+                    { name: 'id',type:'int'},
+                    { name: 'username', type: 'string' },                    
+                    { name: 'hovaten', type: 'string' },
+                    {name:  'email',type:'string'},
+                    { name: 'cellphone', type: 'string' },
+                    { name: 'birthday', type: 'string' },
+                    { name: 'sys_department_id', type: 'string' },
+                    { name: 'sys_user_group_id', type: 'string' }
+                ],
+                url:'<?php echo $this->baseUrl()?>/master/sysuser/service/where/'+"and username !='NULL'",
+                sortcolumn: 'id',
+                sortdirection: 'asc'
+               
+            };
+         var dataAdapter = new $.jqx.dataAdapter(source, {
+                loadComplete: function () {
+                }
+            });
+            $("#jqxgrid").jqxGrid(
+            {
+                width: '100%',
+                source: dataAdapter,  
+                theme: 'bootstrap',
+                pageable: true,
+                showfilterrow: true,
+                filterable: true,
+                autoheight: true,
+                sortable: true,
+                altrows: true,
+                enabletooltips: true,
+                selectionmode: 'singlerow',
+                columnsResize: true,
+                rendergridrows: function (params) {
+                    return params.data;
+                },
+                ready: function () {
+                    $("#jqxgrid").jqxGrid('hideColumn', 'id');
+                },
+                columns: [
+                  {text:'id',dataField:'id',cellsalgin:'right',width:0},
+                  { text: 'Tên đăng nhập',editable: false, dataField: 'username', width: '30%' },
+                  { text: 'Họ và tên', editable: false, dataField: 'hovaten', width: '25%' },
+                  { text: 'Nhóm người dùng', editable: false, dataField: 'sys_user_group_id', width: '15%' },
+                  { text: 'Phòng ban', editable: false, dataField: 'sys_department_id', width: '20%' },
+                  {text: 'Xóa',width:'5%',filtertype: 'none', cellsalign: 'right', align: "center", columnType: 'none', editable: false, sortable: false, dataField: null, cellsrenderer: function (row) {
+                          // render custom column.
+                          editrow = row;
+                          var dataRecord = $("#jqxgrid").jqxGrid('getrowdata',editrow);
+                          var url= "<div style='overflow: hidden; text-overflow: ellipsis; padding-bottom: 2px; text-align: center; margin-right: 2px; margin-left: 4px; margin-top: 4px;'><a class='fa fa-trash-o fa-lg'";
+                          url = url + "href='#' onclick='return jsdelete("+dataRecord.id+")'></a></div>"
+                          return url;
+                      }
+              },
+              {text: 'Sửa',width:'5%',filtertype: 'none', cellsalign: 'right', align: "center", columnType: 'none', editable: false, sortable: false, dataField: null, cellsrenderer: function (row) {
+                          // render custom column.
+                          editrow = row;
+                          var dataRecord = $("#jqxgrid").jqxGrid('getrowdata',editrow);
+                          var url= "<div style='overflow: hidden; text-overflow: ellipsis; padding-bottom: 2px; text-align: center; margin-right: 2px; margin-left: 4px; margin-top: 4px;'><a class='fa fa-edit fa-lg'";
+                          url = url + "href='<?php echo $this->baseUrl() ?>/master/sysuser/editgroup/id/"+dataRecord.id+"'></a></div>"
+                          return url;
+                      }
+                          }
+                ]
+            });
+           
+        });
+    </script>
+    <script type="text/javascript">
+        function jsdelete(id)
+        {            
+                    bootbox.confirm("Bạn có chắc muốn xoá tài khoản người dùng này không?",
+                    function(result){
+                        if(result == true)
+                        {
+                           return window.location = "<?php echo $this->baseUrl() ?>/master/sysuser/delete/id/"+id;
+                        }
+                    });             
+        }
+    </script>

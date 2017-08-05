@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<div class="row">
+    <div class="col-lg-12">
+        <h3 class="page-header">Thêm hành vi vi phạm</h3>
+    </div>    
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-lg-9">
+                        <form  method="POST" name="Addmasterviolation" onsubmit=" return checkinput();">                                    
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-lg-3">
+                                        <label>Mã Code(*)</label>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <input class="form-control" name="code" id="code" value="<?php echo $this->item->getCode(); ?>">
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-lg-3">
+                                        <label>Tên hành vi vi phạm(*)</label>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <input class="form-control" name="name" id="name" value="<?php echo $this->item->getName(); ?>">
+                                    </div>
+                                    
+                                </div>
+                            </div> <div class="form-group">
+                                <div class="row">
+                                    <div class="col-lg-3">
+                                        <label>Nghị định(*)</label>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <input class="form-control" name="decree" id="decree" value="<?php echo $this->item->getDecree(); ?>">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-lg-3">
+                                        <label>Điều(*)</label>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <input class="form-control" name="article" id="article" value="<?php echo $this->item->getArticle(); ?>">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-lg-3">
+                                        <label>Khoản(*)</label>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <input class="form-control" name="clause" id="clause" value="<?php echo $this->item->getClause(); ?>">
+                                    </div>
+                                </div>
+                            </div>
+                             <div class="form-group">
+                                    <div class="row">
+                                    <div class="col-lg-3">
+                                        <label>Ghi chú</label>
+                                    </div> 
+                                        <div class="col-lg-6">
+                                            <textarea  name="comment" id="comment" type="text" class="form-control" cols="100" rows="5"><?php echo $this->item->getComment(); ?></textarea>    
+                                        </div>  
+                                    </div>                                
+                                 </div>
+<!--                             <div class="form-group">
+                                <div class="row">
+                                    <div class="col-lg-3">
+                                        <label>Hiển thị</label>
+                                    </div>
+                                     <div class="col-lg-6">
+                                    <input type="checkbox" name="status" id="status_province" value="1" 
+                                        <?php //echo ($this->item->getStatus() == 1 ? "checked=\"checked\"" : "") ?> >
+                                    </div>
+                                    
+                                </div>
+                            </div>-->
+                             <div class="row">
+                                <div class="col-lg-6">                      
+                                        <div class="form-group">
+                                            <div class="row">
+                                                 <div class="col-lg-9">
+                                                    <button type="submit" name="import" id="import" class="btn btn-primary">Thêm mới</button>
+                                                    <button type="reset" class="btn btn-default">Đặt lại</button> 
+                                                 </div>   
+                                            </div>
+                                        </div> 
+                                </div></div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>   
+</div>
+
+<script type="text/javascript">
+    document.forms['Addmasterviolation'].code.focus();
+    function set_focus() {
+        document.forms['Addmasterviolation'].code.focus();
+    }
+    var flag=true;
+    var flag1=true;
+    function checkinput() {
+        var frm = window.document.Addmasterviolation;
+         if (frm.code.value == "") {
+            bootbox.alert("Vui lòng nhập mã code");
+            return false;
+        };
+        if(isNaN(frm.code.value)== false){
+            bootbox.alert("Vui lòng nhập mã code bằng chữ");
+            return false;
+        }  
+        if (frm.name.value == "") {
+            bootbox.alert("Vui lòng nhập tên hành vi vi phạm");
+            return false;
+        };
+        if(isNaN(frm.name.value)== false){
+            bootbox.alert("Vui lòng nhập tên hành vi vi phạm bằng chữ");
+            return false;
+        }   if (frm.decree.value == "") {
+            bootbox.alert("Vui lòng nhập tên nghị định");
+            return false;
+        };
+        if(isNaN(frm.decree.value)== false){
+            bootbox.alert("Vui lòng nhập tên nghị định bằng chữ");
+            return false;
+        }  
+        
+         if (frm.article.value == "") {
+            bootbox.alert("Vui lòng nhập thông tin về điều luật");
+            return false;
+        };
+        if(isNaN(frm.article.value)== false){
+            bootbox.alert("Vui lòng nhập thông tin về điều luật bằng chữ");
+            return false;
+        }  
+        
+        if (frm.clause.value == "") {
+            bootbox.alert("Vui lòng nhập thông tin về khoản");
+            return false;
+        };
+        if(isNaN(frm.clause.value)== false){
+            bootbox.alert("Vui lòng nhập thông tin về khoản bằng chữ");
+            return false;
+        }  
+        var code= $('#code').val();
+        $.ajax({
+            type:'post',
+            url:'<?php echo $this->baseUrl()?>/admin/masterviolation/checkcode/code/'+code,
+            async:false,
+            dataType:'json',
+            success:function(data){
+                if(data[0].code==1){
+                    flag=false;
+                } else {
+                    flag=true;
+                }
+            }
+        });
+        if(flag==false){
+            bootbox.alert("Mã code này đã tồn tại. Vui lòng kiểm tra và nhập lại.");
+            return false;
+        };
+       
+      return true;
+    }
+</script>

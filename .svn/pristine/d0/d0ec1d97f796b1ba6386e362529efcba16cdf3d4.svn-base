@@ -1,0 +1,174 @@
+<div class="row">
+    <div class="col-lg-12">
+        <h3 class="page-header">Chỉnh sửa Quận Huyện</h3>
+    </div>
+    <!-- /.col-lg-12 -->
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-lg-9">
+                        <form role="form" method="POST" name="EditDistrict" onsubmit="return checkinput();">
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-lg-3">
+                                        <label>Mã quận huyên(*)</label>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <input class="form-control" name="district_code" id="district_code" value="<?php echo $this->item->getCode(); ?>" readonly="true">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-lg-3">
+                                        <label>Tên quận huyên(*)</label>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <input class="form-control" name="name_district" id="name_district" value="<?php echo $this->item->getName(); ?>">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-lg-3">
+                                        <label>Thành phố(*)</label>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <?php echo GlobalLib::getCombo('master_province_id', 'master_province', 'id', 'name', $this->item->getMaster_province_Id()) ?>
+                                    </div>
+                                </div>
+                            </div>
+                   
+                            <div class="form-group">
+                                    <div class="row">
+                                    <div class="col-lg-3">
+                                        <label>Ghi chú</label>
+                                    </div> 
+                                        <div class="col-lg-6">
+                                            <textarea  name="comment" id="comment" type="text" class="form-control" cols="100" rows="5"><?php echo $this->item->getComment(); ?></textarea>    
+                                        </div>  
+                                    </div>                                
+                            </div>   
+                                                
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-primary">Lưu</button>
+                                <button type="reset" class="btn btn-default">Đặt lại</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>   
+</div>
+<script type="text/javascript">
+ document.forms['EditDistrict'].name.focus();
+    function set_focus() {
+        document.forms['EditDistrict'].name.focus();
+    }
+    var flag=true;
+    var flag1=true;
+    function checkinput() {
+        var frm = window.document.EditDistrict;
+        if (frm.district_code.value == "") {
+            bootbox.alert("Vui lòng nhập mã Quận huyện");
+            return false;
+        };
+        if (frm.name_district.value == "") {
+            bootbox.alert("Vui lòng nhập tên Quận huyện");
+            return false;
+        };
+        if(isNaN(frm.name_district.value)== false){
+            bootbox.alert("Vui lòng nhập chữ cho tên quận huyện");
+            return false;
+        }
+        if(frm.master_province_id.value==0){
+            bootbox.alert("Vui long chon tỉnh");
+            return false;
+        }
+        var district_code= $('#district_code').val();
+        if(district_code !== "<?php echo $this->item->getCode(); ?>"){
+            $.ajax({
+                type:'post',
+                url:'<?php echo $this->baseUrl()?>/master/masterdistrict/checkdistrictcode/district_code/'+district_code,
+                async:false,
+                dataType:'json',
+                success:function(data){
+                    if(data[0].code==1){
+                        flag=false;
+                    } else {
+                        flag=true;
+                    }
+                }
+            });
+        }
+        if(flag==false){
+            bootbox.alert("Mã Quận huyện này đã tồn tại. Vui lòng kiểm tra và nhập lại.");
+            return false;
+        };
+        var district_name= $('#name_district').val();
+        if(district_name !== "<?php echo $this->item->getName(); ?>"){
+        $.ajax({
+            type:'post',
+            url:'<?php echo $this->baseUrl()?>/master/masterdistrict/checkdistrictname/district_name/'+district_name,
+            async:false,
+            dataType:'json',
+            success:function(data){
+                if(data[0].code==1){
+                    flag1=false;
+                } else {
+                    flag1=true;
+                }
+            }
+        });
+        }
+        if(flag1==false){
+            bootbox.alert("Tên Quận huyện đã tồn tại.Vui lòng kiểm tra và nhập lại.");
+            return false;
+        };
+      return true;
+    }
+</script>
+<script type="text/javascript">
+     $(document).ready(function() {
+        var orderCount = 0;
+        $('#master_province_id').multiselect({
+            maxHeight: '300',
+            enableFiltering: true,
+            maxHeight: '300',
+            onChange: function(option, checked) {
+                if (checked) {
+                    orderCount++;
+                    $(option).data('order', orderCount);
+                }
+                else {
+                    $(option).data('order', '');
+                }
+            },
+        });
+        
+        $('#master_province_id').on('change', function() {
+            var selected = [];
+            $('#master_province_id option:selected').each(function() {
+                selected.push([$(this).val(), $(this).data('order')]);
+            });
+ 
+            selected.sort(function(a, b) {
+                return a[1] - b[1];
+            });
+ 
+            var text = '';
+            for (var i = 0; i < selected.length; i++) {
+                text += selected[i][0] + ', ';
+            }
+            text = text.substring(0, text.length - 2);
+ 
+            $('#selectionlog').val(text);
+            $('#selectionlog').text(text);
+        });
+        
+    });
+</script>

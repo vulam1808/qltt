@@ -1,0 +1,244 @@
+<div class="row">
+    <div class="col-lg-12">
+        <h3 class="page-header">Báo cáo tình hình sử dụng ấn chỉ</h3>      
+    </div>    
+</div>
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="row">
+                            <div class="form-group" id="selectionlog">
+                                  <div  class="col-lg-2" style='margin-bottom: 20px;'>   
+                                    <label style="margin-left: 20px;" >Tính theo</label>
+                                  </div>
+                                <div class="col-lg-1" id='thang'>
+                                    Tháng</div>
+                                <div class="col-lg-1" id='quy'>
+                                    Quý</div>
+                                <div class="col-lg-1" id='nam'>
+                                    Năm</div>
+                            </div>
+                        </div>
+                            <div class="row">
+                              
+                             
+                                 <form method="POST" action="<?php echo $this->baseUrl()?>/leader/report/exportmangementuseprint">
+                                    <div class="form-group">
+                                    <div  class="col-lg-1" id="lblThang" style="display:none">
+                                        <label style="margin-left: 20px;" >Tháng</label>
+                                    </div>
+                                    <div class="col-lg-2" id="cbbThang" style="display:none">  
+                                       <div style='float: left' id='month' name='month'>
+
+                                        </div>
+                                    </div></div> <div class="form-group">
+                                     <div  class="col-lg-1" id="lblQuy">
+                                        <label style="margin-left: 20px;" >Quý</label>
+                                    </div>
+                                      <div class="col-lg-2" id="cbbQuy" >  
+                                       <div style='float: left' id='quarter' name='quarter'>
+
+                                        </div>
+                                    </div></div><div class="form-group">
+                                       <div  class="col-lg-1" id="lblNam" >
+                                        <label style="margin-left: 20px;" >Năm</label>
+                                    </div>
+                                      <div class="col-lg-2" id="cbbNam">  
+                                       <div style='float: left' id='year' name='year'>
+
+                                        </div>
+                                    </div> </div>
+                                    <div class="form-group">
+                                            <button class="btn btn-primary" id="submit">Xuất excel</button>  
+                                     
+                                     </div>
+                                          <input type="hidden" class="form-control" name="actionExport" id="actionExport" value="QUY">
+                                                
+                                </form>
+                                  
+                            </div>
+                        
+                    </div>
+               
+            </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--<div class="row">            
+            <div class="panel-body">
+                <div class="table-reponsive">
+                    <div id="jqxgrid">
+
+                    </div>
+                </div>
+            </div>    
+</div>-->
+
+    <script type="text/javascript">
+$(document).ready(function () { 
+        $("#thang").jqxRadioButton({  checked: false });
+        $("#quy").jqxRadioButton({  checked: true });
+        $("#nam").jqxRadioButton({  checked: false });
+        $("#thang").on('checked', function () {
+                var lblThang = document.getElementById('lblThang');
+                var cbbThang = document.getElementById('cbbThang');
+                lblThang.style.display = 'block';
+                cbbThang.style.display = 'block';
+        
+                var lblQuy = document.getElementById('lblQuy');
+                var cbbQuy = document.getElementById('cbbQuy');
+                lblQuy.style.display = 'none';
+                cbbQuy.style.display = 'none';
+                
+                var lblNam = document.getElementById('lblNam');
+                var cbbNam = document.getElementById('cbbNam');
+                lblNam.style.display = 'block';
+                cbbNam.style.display = 'block';
+                
+                $("#actionExport").val("THANG");
+        });
+        $("#quy").on('checked', function () {
+           var lblThang = document.getElementById('lblThang');
+                var cbbThang = document.getElementById('cbbThang');
+                lblThang.style.display = 'none';
+                cbbThang.style.display = 'none';
+        
+                var lblQuy = document.getElementById('lblQuy');
+                var cbbQuy = document.getElementById('cbbQuy');
+                lblQuy.style.display = 'block';
+                cbbQuy.style.display = 'block';
+                
+                var lblNam = document.getElementById('lblNam');
+                var cbbNam = document.getElementById('cbbNam');
+                lblNam.style.display = 'block';
+                cbbNam.style.display = 'block';
+                
+                 $("#actionExport").val("QUY");
+        });
+        $("#nam").on('checked', function () {
+                var lblThang = document.getElementById('lblThang');
+                var cbbThang = document.getElementById('cbbThang');
+                lblThang.style.display = 'none';
+                cbbThang.style.display = 'none';
+        
+                var lblQuy = document.getElementById('lblQuy');
+                var cbbQuy = document.getElementById('cbbQuy');
+                lblQuy.style.display = 'none';
+                cbbQuy.style.display = 'none';
+                
+                var lblNam = document.getElementById('lblNam');
+                var cbbNam = document.getElementById('cbbNam');
+                lblNam.style.display = 'block';
+                cbbNam.style.display = 'block';
+                
+                $("#actionExport").val("NAM");
+        });
+        var y = new Date();
+        var arraymonth=new Array();
+                        for(var m=1;m<=12;m++){
+                       arraymonth[m]=m;
+                        }
+        var arrayyear=new Array();
+                        for(var j=y.getFullYear()-10;j<=y.getFullYear()+10;j++){
+                            arrayyear[j]=j;
+                        }
+       var arrayquarter=new Array();
+                        for(var q=1;q<=4;q++){
+                            if(q==1)
+                                arrayquarter[q]='I';
+                            if(q==2)
+                                arrayquarter[q]='II';
+                            if(q==3)
+                                arrayquarter[q]='III';
+                            if(q==4)
+                                arrayquarter[q]='IV';
+                        }
+        $("#quarter").jqxComboBox({ source: arrayquarter, width: '100px', height: '25px'});
+        $("#quarter").jqxComboBox('selectItem','III');
+        $("#month").jqxComboBox({ source: arraymonth, width: '100px', height: '25px'});
+        $("#month").jqxComboBox('selectItem',y.getMonth()+1);
+        $("#year").jqxComboBox({ source: arrayyear, width: '100px', height: '25px'});
+        $("#year").jqxComboBox('selectItem',y.getFullYear());
+        $('#master_print_id').multiselect({
+            includeSelectAllOption:true,
+            enableFiltering: true,
+            maxHeight: '300'
+        });
+         
+      
+            // prepare the data
+            var source =
+            {
+                datatype: "json",
+                datafields:
+                [
+                    { name: 'id',type:'int'},
+                    { name: 'name_customer', type: 'string' },                    
+                    { name: 'quarter1', type: 'int' },
+                    { name: 'quarter2', type: 'int' },
+                    { name: 'quarter3', type: 'int' },
+                    { name: 'quarter4', type: 'int' },                    
+                    { name: 'total_quantity', type: 'int' },
+                    { name: 'charges', type: 'float' }
+            
+                ],
+                url:'<?php echo $this->baseUrl() ?>/leader/report5/service',
+                data: {
+                    nam: "<?php echo $this->nam; ?>",
+                    agent_id: "<?php echo $this->agent_id; ?>" 
+                },
+                sortcolumn: 'charges',
+                sortdirection: 'desc'
+               
+            };
+         var dataAdapter = new $.jqx.dataAdapter(source, {
+                loadComplete: function () {
+                }
+            });
+            var cellsrenderer = function (row, column, value) {
+                return '<div style="text-align: left; margin-top: 5px;">&nbsp' +value + '</div>';
+            };
+            $("#jqxgrid").jqxGrid(
+            {
+                width: '100%',
+                source: dataAdapter,  
+                theme: 'bootstrap',
+                pageable: true,
+                showfilterrow: true,
+                filterable: true,
+                autoheight: true,
+                sortable: true,
+                altrows: true,
+                enabletooltips: true,
+                selectionmode: 'multiplecellsadvanced',
+                columnsResize: true,
+                showaggregates: true,
+                showstatusbar: true,
+                statusbarheight: 20,
+                rendergridrows: function (params) {
+                    return params.data;
+                },
+                ready: function () {
+                    $("#jqxgrid").jqxGrid('hideColumn', 'id');
+                },
+                columns: [
+                  {text:'id',dataField:'id',cellsalgin:'right',width:0},
+                  { text: 'Tên Khách hàng',cellsrenderer:cellsrenderer,editable: false, dataField: 'name_customer', width: '40%' },
+                  { text: 'Quý 1', editable: false, dataField: 'quarter1', width: '10%',aggregates: ['sum'] },
+                  { text: 'Quý 2', editable: false, dataField: 'quarter2', width: '10%',aggregates: ['sum'] },
+                  { text: 'Quý 3', editable: false, dataField: 'quarter3', width: '10%',aggregates: ['sum'] },
+                  { text: 'Quý 4', editable: false, dataField: 'quarter4', width: '10%',aggregates: ['sum'] },                  
+                  { text: 'Năm', editable: false, dataField: 'total_quantity', width: '10%',aggregates: ['sum'] },
+                  { text: 'Điểm', editable: false, dataField: 'charges', width: '10%',aggregates: ['sum'] }
+                ]
+            });
+           
+});
+
+    </script>
+    

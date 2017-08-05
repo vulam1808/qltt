@@ -1,0 +1,374 @@
+<?php $identity = Zend_Auth::getInstance()->getIdentity();
+//               if(!empty($identity)){
+////                    $this->model->setSys_Department_Id($identity->sys_department_id);
+////                    $this->model->setSys_User_Id($identity->id);
+//                }
+?>
+<div class="row">
+    <div class="col-lg-12">
+        <h3 class="page-header">Kiểm tra kinh doanh</h3>
+    </div>
+    <!-- /.col-lg-12 -->
+</div>   
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <form role="form" method="POST" name="EditSchedulecheck" onsubmit="return checkinput();">   
+                  <div class="form-group">
+                            <div class="row">
+                                <div class="col-lg-2">
+                                    <label>Đội thực hiện</label>
+                                </div>
+                              <div class="col-lg-4">
+                                      
+                                            <div id="dropDownButton">
+                                                <div style="border: none;" id="jqxTree">
+                                                    <ul>
+                                                   <?php echo GlobalLib::returntree($this->depart) ;?>
+                                                      
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                       
+                                          <input class="form-control" type="hidden" name="sys_department_id" id="sys_department_id" value="2">
+                                    </div>      
+                               
+                            </div>
+                        </div> 
+                    <div class="form-group">
+                                <div class="row">
+                                    <div class="col-lg-2">
+                                        <label>Kiểm tra theo lịch</label>
+                                    </div>
+                               <div class="col-lg-4">
+                                      <?php echo GlobalLib::getCombo('info_schedule_id', 'info_schedule', 'id', 'name_schedule',$this->item->getInfo_Schedule_Id()) ?>                                       
+                                  </div>
+                                    
+                                </div>
+                            </div>
+                     <div class="form-group">
+                                <div class="row">
+                                    <div class="col-lg-2">
+                                        <label>Tên doanh nghiệp</label>
+                                    </div>
+                                     <div class="col-lg-4">
+                                      <?php echo GlobalLib::getCombo('info_business_id', 'info_business', 'id', 'name', $this->item->getInfo_Business_Id()) ?>                                       
+                                  </div>
+                                </div>
+                            </div>
+                     <div class="form-group">
+                            <div class="row">
+                                <div class="col-lg-2">
+                                    <label>Ấn chỉ</label>
+                                </div>
+                                <div class="col-lg-4">
+                                     <?php // echo $this->masterprintHTML; ?>
+                                      <?php echo GlobalLib::getCombo('master_print_id', 'master_print', 'id', 'code',$this->getNameMasterPrint,false, 'where id in(select distinct master_print_id from doc_print_allocation where sys_department_id='.$this->depart.' and status ="DOING" and is_delete ="0")', '', 'onchange="getPrintCreatWithMasterPrintdefault(\'' . $this->aConfig["site"]["url"] . '\')"') ?>                                       
+                                  </div>
+                               
+                            </div>
+                     </div> 
+<!--                      <div class="form-group">
+                            <div class="row">
+                                <div class="col-lg-2">
+                                    <label>Số cuốn</label>
+                                </div>
+                            <div class="col-lg-4">
+                                 <?php // echo $this->printcreatHTML;?>
+                                      <?php // echo GlobalLib::getCombo('doc_print_create_id', 'doc_print_allocation', 'id', 'doc_print_create_id',0,false, 'where master_print_id=0') ?>                                       
+                             <input class="form-control" type="hidden" name="doc_print_allocation_id" id="doc_print_allocation_id" value="">      
+                            </div>
+                            </div>
+                        </div> -->
+                      <div class="form-group">
+                                <div class="row">
+                                    <div class="col-lg-2">
+                                        <label>Serial</label>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <!--<input class="form-control" name="serial_check" id="serial_check" value="<?php //  echo $this->item->getSerial_Check(); ?>">-->
+                                    <div id="abc">
+                                  
+                              </div>   
+                              <input class="form-control" type="hidden" name="doc_print_allocation_id" id="doc_print_allocation_id" value="">   
+                                        
+                                       
+                                    </div>
+                                    <input class="form-control" name="serial" id="serial" type="hidden">
+                                    <input class="form-control" name="serial1" id="serial1" type="hidden">
+                                </div>
+                            </div>
+                      <div class="form-group">
+                                <div class="row">
+                                    <div class="col-lg-2">
+                                        <label>Ngày</label>
+                                    </div>
+                                    <div class="col-lg-7">
+                                        <div id="jqxWidget">
+                                            <div style="float: left;">
+                                                <div style="float: left; margin-top: 3px;" id="jqxDateTimeInput">
+                                                </div>
+                                            <div style='margin-left: 20px; float: left;'>
+                                                <div>
+                                                    <input type="hidden" id="date_check" name="date_check" value=" ">
+                                                </div>
+                                            </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                      
+                      <div class="form-group">
+                                <div class="row">
+                                    <div class="col-lg-2">
+                                        <label>Nhân viên</label>
+                                    </div>   
+                                         <div class="col-lg-4">
+                                          <?php echo GlobalLib::getCombo('sys_user_id', 'sys_user', 'id', 'username',  $this->item->getStaff_Check(),'', 'where sys_department_id=0', '', '') ?>                                       
+                             
+                                         </div>
+                                    
+                                </div>
+                            </div>
+                     <div class="form-group">
+                                <div class="row">
+                                <div class="col-lg-2">
+                                    <label>Ghi chú</label>
+                                </div>
+                               <div class="col-lg-4">
+                                    <textarea  name="comment" id="comment" type="text" class="form-control" cols="100" rows="5"><?php echo $this->item->getComment(); ?></textarea>    
+                                </div> 
+                                </div>
+                      </div>
+                       <div class="form-group">
+                                
+                                <button type="submit" name="import" id="import" class="btn btn-primary">Thêm mới</button>
+                                <button type="reset" class="btn btn-default">Đặt lại</button>
+                       </div> 
+                    
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+      $(document).ready(function () {
+           <?php 
+//           if($identity->is_leader != 1)
+//              {
+//                    echo "$('#sys_user_id').attr('disabled', true);";
+//              }
+            ?>
+          
+            $("#dropDownButton").jqxDropDownButton({ width: 150, height: 25,theme: 'bootstrap'});
+            $('#jqxTree').on('select', function (event) {
+                var args = event.args;
+                var item = $('#jqxTree').jqxTree('getItem', args.element);
+                var dropDownContent = '<div style="position: relative; margin-left: 3px; margin-top: 5px;">' + item.label + '</div>';
+                $("#dropDownButton").jqxDropDownButton('setContent', dropDownContent);
+                $("#sys_department_id").val(event.args.element.id);
+                var url = "<?php echo $this->aConfig["site"]["url"]?>";
+                getMasterPrintWithDepartmentcbd(url+'master/service/index',<?php echo $this->item->getStaff_Check()?>,<?php echo $this->getNameMasterPrint?>,<?php echo $this->getinfoscheduleid?>);
+                //
+//                alert(<?php echo $this->getNameMasterPrint?>);
+                 var url = "<?php echo $this->aConfig["site"]["url"]?>";
+                var dataarray = new Array();
+                var id_master_print ;
+                if($('#master_print_id').val() == 0){
+                    id_master_print = <?php echo $this->getNameMasterPrint?>
+                }else{
+                    id_master_print = $('#master_print_id').val();
+                }
+                    dataarray[0]={master_print_id:id_master_print,sys_department_id:$('#sys_department_id').val(),defaultserial:<?php echo $this->getSerialCheck;?>};
+                var combobox = new Array();
+                $("#jqxTree").jqxTree({disabled:true});
+                $.ajax({
+                    type:'post',
+                    url:'<?php echo $this->baseUrl()?>/master/docviolationshandling/arrayserialcheck',
+                    data:{'data':dataarray},
+                    async:false,
+                    dataType:'json',
+                    success:function(data){
+                        combobox = data;
+                    }
+                });
+//                alert(combobox);
+                $('#abc').html(combobox);
+                $('#cobo_id').multiselect({
+                       maxHeight: '300',
+                       enableFiltering: true,
+                       maxHeight: '300',
+                       onChange: function(option, checked) {
+                           if (checked) {
+                               orderCount++;
+                               $(option).data('order', orderCount);
+                           }
+                           else {
+                               $(option).data('order', '');
+                           }
+                       },
+                   });
+
+               $('#cobo_id').on('change', function() {
+                   var selected = [];
+                   $('#cobo_id option:selected').each(function() {
+                       selected.push([$(this).val(), $(this).data('order')]);
+                   });
+
+                   selected.sort(function(a, b) {
+                       return a[1] - b[1];
+                   });
+
+                   var text = '';
+                   for (var i = 0; i < selected.length; i++) {
+                       text += selected[i][0] + ', ';
+                   }
+                   text = text.substring(0, text.length - 2);
+
+                   $('#selectionlog').val(text);
+                   $('#selectionlog').text(text);
+               });
+                //
+                
+                
+               $("#jqxTree").jqxTree({disabled:false});
+            });
+            $("#jqxTree").jqxTree({ width: 200, height: 220,theme: 'bootstrap',disabled:false});
+            $('#info_business_id,#master_print_id,#doc_print_create_id,#info_schedule_id,#sys_user_id').multiselect({
+            enableFiltering: true,
+            maxHeight: '300'
+            });
+            $('#jqxDateTimeInput').jqxDateTimeInput({ formatString: "dd-MM-yyyy"});
+             <?php 
+               $ngay =  GlobalLib::viewDate($this->item->getDate_Check());
+               $arrngay = explode("-", $ngay);               
+            ?>
+            $("#jqxDateTimeInput").jqxDateTimeInput({ width: '200px', height: '25px',value: new Date(<?php echo $arrngay[2]; ?>, <?php echo ($arrngay[1]-1); ?>,<?php echo $arrngay[0];?>)});
+                var formatString = $('#jqxDateTimeInput').jqxDateTimeInput('formatString');
+                $('#jqxDateTimeInput').on('valueChanged', function (event) {
+                    var date = event.args.date;
+                    var text= $('#jqxDateTimeInput').jqxDateTimeInput('getText'); 
+                     $('#date_check').val(text);
+                });
+            $('#doc_print_create_id').on('change', function (event) {
+                $('#doc_print_allocation_id').val($('#doc_print_create_id').val());
+            });
+            
+        });
+    
+</script>
+<script>
+    $('#master_print_id').on('change',function(){
+         var dataarray = new Array();var defaultserial;
+         if($('#master_print_id').val()== <?php echo $this->getNameMasterPrint;?>){
+             defaultserial = <?php echo $this->getSerialCheck;?>
+         }else{
+             defaultserial = 0;
+         }
+                    dataarray[0]={master_print_id:$('#master_print_id').val(),sys_department_id:$('#sys_department_id').val(),defaultserial:defaultserial};
+                var combobox = new Array();
+                $.ajax({
+                    type:'post',
+                    url:'<?php echo $this->baseUrl()?>/master/docviolationshandling/arrayserialcheck',
+                    data:{'data':dataarray},
+                    async:false,
+                    dataType:'json',
+                    success:function(data){
+                        combobox = data;
+                    }
+                });
+//                alert(combobox);
+                $('#abc').html(combobox);
+                $('#cobo_id').multiselect({
+                       maxHeight: '300',
+                       enableFiltering: true,
+                       maxHeight: '300',
+                       onChange: function(option, checked) {
+                           if (checked) {
+                               orderCount++;
+                               $(option).data('order', orderCount);
+                           }
+                           else {
+                               $(option).data('order', '');
+                           }
+                       },
+                   });
+
+               $('#cobo_id').on('change', function() {
+                   var selected = [];
+                   $('#cobo_id option:selected').each(function() {
+                       selected.push([$(this).val(), $(this).data('order')]);
+                   });
+
+                   selected.sort(function(a, b) {
+                       return a[1] - b[1];
+                   });
+
+                   var text = '';
+                   for (var i = 0; i < selected.length; i++) {
+                       text += selected[i][0] + ', ';
+                   }
+                   text = text.substring(0, text.length - 2);
+
+                   $('#selectionlog').val(text);
+                   $('#selectionlog').text(text);
+               });
+    });
+</script>
+<script>
+    $('#import').on('click',function(data){
+        $('#date_check').val($('#jqxDateTimeInput').val());
+        $('#doc_print_allocation_id').val($('#cobo_id').val()); 
+    });
+</script>
+
+<script type="text/javascript">
+    document.forms['EditSchedulecheck'].name_schedule.focus();
+    function set_focus() {
+        document.forms['EditSchedulecheck'].name_schedule.focus();
+    }
+    function checkinput() {
+        var frm = window.document.EditSchedulecheck;
+       if (($('#sys_department_id').val() == "")) {
+            bootbox.alert("Vui chọn đội thực hiện");
+            return false;
+        }; 
+         if (($('#info_schedule_id').val() == 0)) {
+            bootbox.alert("Vui chọn lịch kiểm tra");
+            return false;
+        }; 
+        if (($('#info_business_id').val() == 0)) {
+            bootbox.alert("Vui chọn doanh nghiệp/hộ kinh doanh");
+            return false;
+        }; 
+         if (($('#master_print_id').val() == 0)) {
+            bootbox.alert("Vui chọn ấn chỉ");
+            return false;
+        }; 
+        if (($('#cobo_id').val() == 0)) {
+            bootbox.alert("Vui chọn serial của ấn chỉ");
+            return false;
+        }; 
+         if (($('#jqxDateTimeInput').val() =="")) {
+            bootbox.alert("Vui chọn ngày thực hiện");
+            return false;
+        };
+         if (($('#sys_user_id').val() ==0)) {
+            bootbox.alert("Vui chọn nhân viên thực hiện");
+            return false;
+        };
+        
+      return true;
+    }
+</script>
+<!--<script type="text/javascript">
+    function checkinput(){
+                var frm = window.document.AddSchedulecheck;    
+                var ten = <?php $identity->id?>;
+                 bootbox.alert(ten);
+                 return false;
+            }
+</script>-->

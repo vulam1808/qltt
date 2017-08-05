@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+
+<div class="row">
+    <div class="col-lg-12">
+        <h3 class="page-header">Phân quyền cho người dùng</h3>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="row">
+                        <form role="form" method="POST" name="Addsysuser" onsubmit="return checkinput();">
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-lg-4">
+                                            <label>Phòng cấp trên(*)</label>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div id="jqxWidget">
+                                                <div id="dropDownButton">
+                                                    <div style="border: none;" id="jqxTree">
+                                                        <ul>
+                                                        <?php echo GlobalLib::returntree(0) ;?>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <input class="form-control" type="hidden" name="sys_department_id" id="sys_department_id" value="<?php echo $this->itemdepartment->getParent_Id(); ?>">
+                                        </div>                                   
+                                    </div>                 
+                                </div>
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-lg-4">
+                                            <label>Người dùng(*)</label>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div id="ar">
+                                                  <?php echo  GlobalLib::getComboVersatile('sys_user_id', 'sys_user', 'id', 'username,first_name',0, 'where sys_department_id=0', true, 'form-control', '', '', '', '-','Người dùng','');?> 
+                                                    <input type="hidden" id="id_user" name="id_user">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-lg-4">
+                                            <label>Nhóm người dùng(*)</label>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <?php echo GlobalLib::getCombo('sys_user_group_id', 'sys_user_group', 'id', 'group_name', $this->item->getSys_User_Group_Id()) ?>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                 
+                          </div> 
+                        <div class="col-lg-12">
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-lg-4">
+                                            <button type="submit" id="btnget" class="btn btn-primary">Thêm mới</button>
+                                            <button type="reset" class="btn btn-default">Đặt lại</button>
+                                            
+                                    </div>
+                                </div>    
+                            </div>
+                        </div> 
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>   
+</div>
+<script type="text/javascript">
+   
+$(function() {
+    $('#btnget').click(function() {
+         $('#id_user').val($('#sys_user_id').val());
+    })
+});
+</script>
+<script type="text/javascript">
+            // When the document is ready
+            $(document).ready(function () { 
+                $('#sys_user_id').multiselect({
+                    includeSelectAllOption:true,
+                    enableFiltering: true,
+                    maxHeight: '300',
+                    buttonText: function(options) 
+                    {
+                        var retStr = "";
+                        if (options.length === 0) {
+                           retStr = "Chưa chọn";
+                        } else if(options.length <=2){
+                           var textArray = [];
+                           $.each(options,function(key,value){
+                               textArray.push($.trim($(value).html()));
+                           });
+                           retStr = "<div class='pull-left restricted'>"+textArray.join(",")+"</div>";
+                        } else {
+                           retStr = options.length+" selected";
+                        }
+                        return retStr+" <b class='caret'></b>";
+                    }  
+                });
+        
+                 $('#sys_user_group_id').multiselect({
+                    maxHeight: '300',
+                    enableFiltering: true,
+                    maxHeight: '300',
+                    onChange: function(option, checked) {
+                        if (checked) {
+                            orderCount++;
+                            $(option).data('order', orderCount);
+                        }
+                        else {
+                            $(option).data('order', '');
+                        }
+                    },
+                });
+
+                $('#sys_user_group_id').on('change', function() {
+                    var selected = [];
+                    $('#sys_user_group_id option:selected').each(function() {
+                        selected.push([$(this).val(), $(this).data('order')]);
+                    });
+
+                    selected.sort(function(a, b) {
+                        return a[1] - b[1];
+                    });
+
+                    var text = '';
+                    for (var i = 0; i < selected.length; i++) {
+                        text += selected[i][0] + ', ';
+                    }
+                    text = text.substring(0, text.length - 2);
+
+                    $('#selectionlog').val(text);
+                    $('#selectionlog').text(text);
+                });
+               
+            });
+</script>
+<script type="text/javascript">
+    document.forms['Addsysuser'].name.focus();
+    function set_focus() {
+        document.forms['Addsysuser'].name.focus();
+    }
+    function checkinput() {        
+        var frm = window.document.Addsysuser;
+        if (frm.username.value == "") {
+            bootbox.alert("Vui lòng nhập đầy đủ tên người dùng!");
+            return false;
+        }
+        if ($("#password").val() == "") {
+            bootbox.alert("Vui lòng nhập mật khẩu!");
+            return false;
+        }        
+        if ($("#repassword").val() == "") {
+            bootbox.alert("Vui lòng nhập mật khẩu xác nhận!");
+            return false;
+        }        
+        if(frm.repassword.value != frm.password.value )
+        {
+            bootbox.alert("Mật khẩu xác nhận không chính xác!");
+            return false;
+        }
+        if (frm.last_name.value == "") {
+            bootbox.alert("Vui lòng nhập họ và tên đệm!");
+            return false;
+        }
+        if (frm.first_name.value == "") {
+            bootbox.alert("Vui lòng nhập tên!");
+            return false;
+        }       
+        if (frm.birthday.value == "") {
+            bootbox.alert("Vui lòng nhập ngày sinh!");
+            return false;
+        } 
+        var user_name= $('#username').val();
+        $.ajax({
+            type:'post',
+            url:'<?php echo $this->baseUrl()?>/master/sysuser/checkusername/username/'+user_name,
+            async:false,
+            dataType:'json',
+            success:function(data){
+                if(data[0].code==1){
+                    flag=false;
+                } else {
+                    flag=true;
+                }
+            }
+        });
+        if(flag==false){
+            bootbox.alert("Tên đăng nhập đã tồn tại.Vui lòng kiểm tra và nhập lại.");
+            return false;
+        };
+        return true;
+    }
+</script>
+<script type="text/javascript">
+        $(document).ready(function () {
+            $("#dropDownButton").jqxDropDownButton({ width: '100%', height: 25});
+            $('#jqxTree').on('select', function (event) {
+                var args = event.args;
+                var item = $('#jqxTree').jqxTree('getItem', args.element);
+                var dropDownContent = '<div style="position: relative; margin-left: 3px; margin-top: 5px;">' + item.label + '</div>';
+                $("#dropDownButton").jqxDropDownButton('setContent', dropDownContent);
+                 $("#sys_department_id").val(event.args.element.id);
+                  var url = "<?php echo $this->aConfig["site"]["url"]?>";
+                 getSysUserWithDepartment(url); 
+             
+            });
+            $("#jqxTree").jqxTree({ width: 200, height: 220});
+        });
+</script>

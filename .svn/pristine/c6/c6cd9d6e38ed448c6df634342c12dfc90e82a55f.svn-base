@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<div class="row">
+    <div class="col-lg-12">
+        <h3 class="page-header">Chỉnh sửa thông <?php echo GlobalLib::getNameBusiness($this->type_business);?></h3>
+    </div>
+    <!-- /.col-lg-12 -->
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-lg-12">
+                          <form role="form" method="POST" name="AddInfoBussiness" onsubmit="return checkinput();">
+                            
+                            
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <h4 class="panel-title">
+                                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" class=""><b>Thông tin Hành chính</b></a>
+                                        </h4>
+                                    </div>
+                                    <div id="collapseOne" class="panel-collapse collapse in" aria-expanded="true">
+                                        <div class="panel-body">
+                                            
+                              
+                                            <div class="form-group">
+                                                <div class="row">
+                                                     <div class="col-lg-2">
+                                                        <label>Tên <?php echo GlobalLib::getNameBusiness($this->type_business) ?>(*)</label>
+                                                    </div>
+                                                    <div class="col-lg-3">                                                                                
+                                                           <input type="text" class="form-control" name="name_business" id="name_business" value="<?php echo $this->item->getName(); ?>">   
+                                                    </div>
+                                                    <div class="col-lg-3">
+                                                        <label>Mã <?php echo GlobalLib::getNameBusiness($this->type_business) ?>(*)</label>
+                                                    </div>
+                                                    <div class="col-lg-3">                                                                                
+                                                        <input type="text" class="form-control" name="code_business" id="code_business" value="<?php echo $this->item->getCode(); ?>">                                                                                                                                                                  
+                                                    </div>  
+                                                    
+
+                                                </div>
+                                            </div>  
+                                            <div class="form-group">
+                                                <div class="row">
+                                                    <div class="col-lg-2">
+                                                        <label>Tỉnh thành(*)</label>
+                                                    </div>
+                                                    <div class="col-lg-2">                                                                                
+                                                           <?php echo $this->provinceHTML;?>   
+                                                    </div>
+                                                    <div class="col-lg-1">                                                                                
+                                                         <label></label>
+                                                    </div> 
+                                                    <div class="col-lg-2">                                                                                
+                                                        <?php echo $this->districtHTML;?>
+                                                    </div> 
+                                                    <div class="col-lg-1">                                                                                
+                                                         <label></label>
+                                                    </div> 
+                                                    <div class="col-lg-3">                                                                                
+                                                        <?php echo $this->wardHTML;?>
+                                                    </div> 
+                                                </div>
+                                            </div> 
+                                    
+                                            <div class="form-group">
+                                                <div class="row">
+                                                    <div class="col-lg-2">
+                                                        <label>Số giấy phép ĐKKD(*)</label>
+                                                    </div>
+                                                    <div class="col-lg-2">                                                                                
+                                                        <input type="text" class="form-control" name="license_business" id="license_business" value="<?php echo $this->item->getLicense_Business(); ?>"> 
+                                                    </div>
+                                                     <div class="col-lg-1">                                                                                
+                                                         <label>Nơi cấp(*)</label>
+                                                    </div> 
+                                                    <div class="col-lg-2">                                                                                
+                                                        <input type="text" class="form-control" name="place_license" id="place_license" value="<?php echo $this->item->getPlace_License(); ?>"> 
+                                                    </div>
+                                                     <div class="col-lg-1">                                                                                
+                                                         <label>Ngày(*)</label>
+                                                    </div> 
+                                                    <div class="col-lg-2">
+                                                       <div id='jqxWidget'>
+                                                            <div style='float: left;'>
+                                                                <div style='float: left; margin-top: 3px;' id='jqxDateTimeInput'>
+                                                                </div>
+                                                                <div style='margin-left: 20px; float: left;'>
+                                                                    <div>
+                                                                        <input type="hidden" id="day_license" name="day_license">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                   
+                                                </div>
+                                             </div> 
+                                             <div class="form-group">
+                                                <div class="row">
+                                                    <div class="col-lg-2">
+                                                        <label>Trụ sở chính(*)</label>
+                                                    </div>
+                                                    <div class="col-lg-3">                                                                                
+                                                        <input type="text" class="form-control" name="address_office" id="address_office" value="<?php echo $this->item->getAddress_Office(); ?>"> 
+                                                    </div>
+                                                    
+                                                </div>
+                                            </div>   
+                                                <div class="form-group">
+                                                <div class="row">
+                                                    <div class="col-lg-2">                                                                                
+                                                         <label>Số điện thoại(*)</label>
+                                                    </div> 
+                                                    <div class="col-lg-3">                                                                                
+                                                        <input type="text" class="form-control" name="phone_business" id="phone_business" value="<?php echo $this->item->getPhone(); ?>">
+                                                    </div> 
+                                                </div>
+                                            </div>     
+                                             <div class="form-group">
+                                                <div class="row">
+                                                  
+                                                     <div class="col-lg-2">                                                                                
+                                                         <label>Địa điểm KD khác</label>
+                                                    </div> 
+                                                    <div class="col-lg-3">                                                                                
+                                                        <input type="text" class="form-control" name="address_branch" id="address_branch" value="<?php echo $this->item->getAddress_Branch(); ?>">
+                                                    </div> 
+                                                    <div class="col-lg-2">                                                                                
+                                                         <label>Địa điểm sản xuất KD(*)</label>
+                                                    </div> 
+                                                    <div class="col-lg-3">                                                                                
+                                                       <input type="text" class="form-control" name="address_produce" id="address_produce" value="<?php echo $this->item->getAddress_Produce(); ?>">
+                                                    </div> 
+                                                </div>
+                                            </div>     
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                            
+                            
+                            
+                            <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <h4 class="panel-title">
+                                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" class=""><b>Thông tin Quản lý</b></a>
+                                        </h4>
+                                    </div>
+                                    <div id="collapseTwo" class="panel-collapse collapse" aria-expanded="false">
+                                        <div class="panel-body">
+                                            <div class="form-group">
+                                                <div class="row">
+                                                    <div class="col-lg-2">
+                                                        <label>Ngành nghề KD(*)</label>
+                                                    </div>
+                                                    <div class="col-lg-3">                                                                                
+                                                        <input type="text" class="form-control" name="work_business" id="work_business" value="<?php echo $this->item->getWork_Business(); ?>"> 
+                                                    </div>
+                                                  
+
+                                                 </div>
+                                            </div> 
+                                             <div class="form-group">
+                                                <div class="row">
+                                                     <div class="col-lg-2">
+                                                        <label>Loại hình kinh doanh(*)</label>
+                                                    </div>
+                                                    <div class="col-lg-3">                                                                                
+                                                        <?php echo GlobalLib::getComboInfoBusiness1('master_business_type_id', 'master_business_type', 'id', 'name',$this->item->getMaster_Business_Type_Id(),false,'form-control','','','','') ?>
+                                                    </div>
+                                                    <div class="col-lg-0">
+                                                        <input class="form-control" type="hidden" name="master_business_type_value" id="master_business_type_value" value="">
+                                                    </div>
+                                                     <div class="col-lg-3">                                                                                
+                                                         <label>Quy mô kinh doanh(*)</label>
+                                                    </div> 
+                                                    <div class="col-lg-3">                                                                                
+                                                        <?php echo GlobalLib::getComboInfoBusiness('master_business_size_id', 'master_business_size', 'id', 'name', $this->item->getMaster_Business_Size_Id(),false,'form-control','','','','') ?>
+                                                     </div>
+                                                     
+                                                </div>
+                                            </div>  
+                                             <div class="form-group">
+                                                <div class="row">
+                                                    <div class="col-lg-2">                                                                                
+                                                         <label>Mặt hàng hạn chế KD(*)</label>
+                                                    </div> 
+                                                    <div class="col-lg-3">                                                                                
+                                                       <?php echo GlobalLib::getComboInfoBusiness11('master_items_limit_id', 'master_items_limit', 'id', 'code', $this->item->getMaster_Items_Limit_Id(),'name',true,'form-control','','','','') ?>
+                                                    
+                                                    </div> 
+                                                     <div class="col-lg-0">
+                                                        <input class="form-control" type="hidden" name="master_items_limit_value" id="master_items_limit_value" value="">
+                                                    </div>
+                                                    <div class="col-lg-3">
+                                                        <label>Mặt hàng KD có điều kiện(*)</label>
+                                                    </div>
+                                                    <div class="col-lg-3">                                                                                
+                                                        <?php echo GlobalLib::getComboInfoBusiness11('master_items_condition_id', 'master_items_condition', 'id', 'code', $this->item->getMaster_Items_Condition_Id(),'name',true,'form-control','','','','') ?>
+                                                    </div>
+                                                    <div class="col-lg-0">
+                                                        <input class="form-control" type="hidden" name="master_items_condition_value" id="master_items_condition_value" value="">
+                                                    </div>
+                                                </div>
+                                            </div>  
+                                              <div class="form-group">
+                                                <div class="row">
+                                                    <div class="col-lg-2">                                                                                
+                                                         <label>GCN đủ điều kiện KD(*)</label>
+                                                    </div> 
+                                                    <div class="col-lg-3">                                                                                
+                                                        <input type="text" class="form-control" name="license_condition_business" id="license_condition_business" value="<?php echo $this->item->getLicense_Condition_Business(); ?>">
+                                                    </div>
+                                                    <div class="col-lg-3">
+                                                        <label>Ngày cấp GCN(*)</label>
+                                                    </div>
+                                                   <div class="col-lg-3">
+                                                       <div id='jqxWidget'>
+                                                            <div style='float: left;'>
+                                                                <div style='float: left; margin-top: 3px;' id='jqxDateTimeInput_condition_business'>
+                                                                </div>
+                                                                <div style='margin-left: 20px; float: left;'>
+                                                                    <div>
+                                                                        <input type="hidden" id="date_license_condition_business" name="date_license_condition_business">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                     
+                                                </div>
+                                            </div> 
+                                        </div>
+                                    </div>
+                                </div>
+                            <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <h4 class="panel-title">
+                                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseTree" aria-expanded="false" class=""><b>Thông tin <?php echo GlobalLib::getNameBusiness($this->type_business) ?></b></a>
+                                        </h4>
+                                    </div>
+                                    <div id="collapseTree" class="panel-collapse collapse" aria-expanded="false">
+                                        <div class="panel-body">
+                                           
+                                            <div class="form-group">
+                                                <div class="row">
+                                                    <div class="col-lg-2">
+                                                        <label>Tên chủ hộ(*)</label>
+                                                    </div>
+                                                    <div class="col-lg-3">                                                                                
+                                                        <input type="text" class="form-control" name="boss_business" id="boss_business" value="<?php echo $this->item->getBoss_Business(); ?>"> 
+                                                    </div>
+                                                    
+                                                </div>
+                                             </div> 
+                            
+                                           
+                                            <div class="form-group">
+                                               <div class="row">
+                                                    <div class="col-lg-2">                                                                                
+                                                         <label>Địa chỉ thường trú(*)</label>
+                                                    </div> 
+                                                    <div class="col-lg-3">                                                                                
+                                                        <input type="text" class="form-control" name="address_permanent" id="address_permanent" value="<?php echo $this->item->getAddress_Permanent(); ?>"> 
+                                                    </div>
+
+                                                    <div class="col-lg-2">                                                                                
+                                                         <label>Điện thoại cá nhân(*)</label>
+                                                    </div> 
+                                                    <div class="col-lg-2">                                                                                
+                                                        <input type="text" class="form-control" name="cellphone" id="cellphone" value="<?php echo $this->item->getCellphone(); ?>"> 
+                                                    </div>
+                                                  
+                                               </div>
+                                           </div> 
+                                            <div class="form-group">
+                                                <div class="row">
+                                                   <div class="col-lg-2">                                                                                
+                                                        <label>Ngày kiểm tra(*)</label>
+                                                   </div> 
+                                                  <div class="col-lg-3">
+                                                       <div id='jqxWidget'>
+                                                            <div style='float: left;'>
+                                                                <div style='float: left; margin-top: 3px;' id='jqxDateTimeInput_datecheck'>
+                                                                </div>
+                                                                <div style='margin-left: 20px; float: left;'>
+                                                                    <div>
+                                                                        <input type="hidden" id="day_check" name="day_check">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>    
+                                                </div>
+                                            </div> 
+                                             <div class="form-group">
+                                                <div class="row">
+                                                    <div class="col-lg-2">
+                                                        <label>Ghi chú</label>
+                                                    </div>
+                                                    <div class="col-lg-9">
+                                                        <textarea class="form-control" name="comment" id="comment" value="<?php echo $this->item->getComment(); ?>" rows="5" cols="150"></textarea>
+                                                    </div>
+                                                </div>
+                                            </div> 
+                                        </div>
+                                    </div>
+                                </div>
+
+                        
+                             
+                            <div class="form-group"><center>
+                                <button type="submit" id="luu" name="luu" class="btn btn-primary">Lưu</button>
+                                <button type="reset" class="btn btn-default">Đặt lại</button></center>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>   
+</div>
+<script>
+    $('#luu').on('click',function(){
+        $('#master_business_type_value').val( $('#master_business_type_id').val());
+        $('#master_items_limit_value').val( $('#master_business_type_id').val());
+        $('#master_items_condition_value').val( $('#master_business_type_id').val());
+        $('#date_license_condition_business').val( $('#master_business_type_id').val());
+    });
+</script>
+<script type="text/javascript">
+            // When the document is ready
+            $(document).ready(function () {
+                
+                $('#birthday').datepicker({
+                    dateFormat: "dd-mm-yy"
+                });  
+            
+            });
+//<!--</script>
+    <style type="text/css">
+	textarea {
+		border: 0 none white;
+		//overflow: hidden;
+                height:auto;                
+		padding: 0;
+                overflow:auto;
+		outline: none;
+		border:thin;
+                background:none;
+		resize: none;
+	}
+</style> 
+<script>
+    $('#luu').on('click',function(){
+        $('#day_license').val($('#jqxDateTimeInput').val());
+        $('#date_license_condition_business').val($('#jqxDateTimeInput_condition_business').val());
+        $('#day_check').val($('#jqxDateTimeInput_datecheck').val());
+    });
+</script>
+<script type="text/javascript">
+   document.forms['AddInfoBussiness'].name.focus();
+    function set_focus() {
+        document.forms['AddInfoBussiness'].name.focus();
+    }
+    var flag= true;
+    function checkinput() {        
+        var frm = window.document.AddInfoBussiness;       
+         if ($("#name_business").val() == "") {
+            bootbox.alert("Vui lòng nhập Tên doanh nghiệp!");
+            return false;
+        }  
+        if ($("#code_business").val() == "") {
+            bootbox.alert("Vui lòng nhập Mã doanh nghiệp!");
+            return false;
+        }        
+              
+        if(frm.master_province_id.value==0){
+            bootbox.alert("Vui lòng chọn tỉnh thành");
+            return false;
+        }
+        if(frm.master_district_id.value==0){
+            bootbox.alert("Vui lòng chọn Quận huyện");
+            return false;
+        }
+        if(frm.master_ward_id.value==0){
+            bootbox.alert("Vui long chọn Xã Phường");
+            return false;
+        }        
+        if(frm.license_business.value==""){
+            bootbox.alert("Vui lòng nhập số giấy phép ĐKKD");
+            return false;
+        }
+        if(frm.place_license.value==""){
+            bootbox.alert("Vui lòng nhập nơi cấp");
+            return false;
+        }
+        if(frm.address_office.value==""){
+            bootbox.alert("Vui lòng nhập trụ sở chính");
+            return false;
+        }
+        if (frm.phone_business.value == "") {
+            bootbox.alert("Vui lòng nhập số điện thoại");
+            return false;
+        };
+        
+        if(isNaN(frm.phone_business.value)== true){
+            bootbox.alert("Vui lòng nhập số điện thoại bằng số");
+            return false;
+        }  
+         if (frm.address_produce.value == "") {
+            bootbox.alert("Vui lòng nhập địa điểm sản xuất kinh doanh");
+            return false;
+        };
+         if (frm.work_business.value == "") {
+            bootbox.alert("Vui lòng nhập ngành nghề kinh doanh");
+            return false;
+        };
+         if ($("#master_business_type_id").val() == 0) {
+            bootbox.alert("Vui lòng chọn loại hình kinh doanh!");
+            return false;
+        }  
+         if ($("#master_business_size_id").val() == 0) {
+            bootbox.alert("Vui lòng chọn quy mô doanh nghiệp!");
+            return false;
+        } 
+         if ($("#master_items_limit_id").val() == null) {
+            bootbox.alert("Vui lòng chọn mặt hàng hạn chế kinh doanh!");
+            return false;
+        } 
+         if ($("#master_items_condition_id").val() == null) {
+            bootbox.alert("Vui lòng chọn mặt hàng kinh doanh có điều kiện!");
+            return false;
+        } 
+         if ($("#license_condition_business").val() == "") {
+            bootbox.alert("Vui lòng nhập giấy chứng nhận đủ điều kiện kinh doanh!");
+            return false;
+        } 
+         if ($("#boss_business").val() == "") {
+            bootbox.alert("Vui lòng nhập tên chủ hộ!");
+            return false;
+        } 
+        if(isNaN(frm.boss_business.value)== false){
+            bootbox.alert("Vui lòng nhập tên chủ hộ bằng chữ");
+            return false;
+        } 
+        if ($("#address_permanent").val() == "") {
+            bootbox.alert("Vui lòng nhập địa chỉ thường trú cho chủ hộ!");
+            return false;
+        } 
+         if (frm.cellphone.value == "") {
+            bootbox.alert("Vui lòng nhập số điện thoại cá nhân");
+            return false;
+        };
+        if(isNaN(frm.cellphone.value)== true){
+            bootbox.alert("Vui lòng nhập số điện thoại cá nhân bằng số");
+            return false;
+        }  
+        return true;
+    }
+</script>
+
+
+ <script type="text/javascript">
+     $(document).ready(function() {
+        $("#jqxDateTimeInput,#jqxDateTimeInput_condition_business,#jqxDateTimeInput_datecheck").jqxDateTimeInput({ width: '270px', height: '25px'});
+        <?php 
+               $ngay =  GlobalLib::viewDate($this->item->getDate_License());
+               $arrngay = explode("-", $ngay);               
+            ?>
+            $("#jqxDateTimeInput").jqxDateTimeInput({ width: '200px', height: '25px',value: new Date(<?php echo $arrngay[2]; ?>, <?php echo ($arrngay[1]-1); ?>,<?php echo $arrngay[0];?>)});
+         <?php 
+               $ngay =  GlobalLib::viewDate($this->item->getDate_License_Condition_Business());
+               $arrngay = explode("-", $ngay);               
+            ?>
+            $("#jqxDateTimeInput_condition_business").jqxDateTimeInput({ width: '200px', height: '25px',value: new Date(<?php echo $arrngay[2]; ?>, <?php echo ($arrngay[1]-1); ?>,<?php echo $arrngay[0];?>)});
+        <?php 
+               $ngay =  GlobalLib::viewDate($this->item->getDate_Check());
+               $arrngay = explode("-", $ngay);               
+            ?>
+            $("#jqxDateTimeInput_datecheck").jqxDateTimeInput({ width: '200px', height: '25px',value: new Date(<?php echo $arrngay[2]; ?>, <?php echo ($arrngay[1]-1); ?>,<?php echo $arrngay[0];?>)});
+        
+    var formatString = $('#jqxDateTimeInput,#jqxDateTimeInput_condition_business,#jqxDateTimeInput_datecheck').jqxDateTimeInput('formatString');
+        $('#jqxDateTimeInput').on('valueChanged', function (event) {
+                    var date = event.args.date;
+                    var text= $('#jqxDateTimeInput').jqxDateTimeInput('getText'); 
+                     $('#day_license').val(text);
+                });
+        $('#jqxDateTimeInput_condition_business').on('valueChanged', function (event) {
+                    var date = event.args.date;
+                    var text= $('#jqxDateTimeInput_condition_business').jqxDateTimeInput('getText'); 
+                     $('#date_license_condition_business').val(text);
+                });
+        $('#jqxDateTimeInput_datecheck').on('valueChanged', function (event) {
+                    var date = event.args.date;
+                    var text= $('#jqxDateTimeInput_datecheck').jqxDateTimeInput('getText'); 
+                     $('#day_check').val(text);
+                });
+      
+        var orderCount = 0;
+        $('#master_business_type_id,#master_business_size_id,#master_province_id,#master_ward_id,#master_district_id').multiselect({
+            maxHeight: '300',
+            enableFiltering: true,
+            maxHeight: '300',
+            onChange: function(option, checked) {
+                if (checked) {
+                    orderCount++;
+                    $(option).data('order', orderCount);
+                }
+                else {
+                    $(option).data('order', '');
+                }
+            },
+        });
+        
+        $('#master_business_type_id').on('change', function() {
+            var selected = [];
+            $('#master_business_type_id option:selected').each(function() {
+                selected.push([$(this).val(), $(this).data('order')]);
+            });
+            var text = '';
+            for (var i = 0; i < selected.length; i++) {
+                text += selected[i][0] + ', ';
+            }
+            text = text.substring(0, text.length - 2);
+            $('#selectionlog').val(text);
+           $('#selectionlog').text(text);
+            $('#master_business_type_value').val(text);
+        });
+        
+    });
+</script>
+<script type="text/javascript">
+     $(document).ready(function() {
+        var orderCount = 0;
+        $('#master_items_limit_id').multiselect({
+            maxHeight: '300',
+            enableFiltering: true,
+            maxHeight: '300',
+            onChange: function(option, checked) {
+                if (checked) {
+                    orderCount++;
+                    $(option).data('order', orderCount);
+                }
+                else {
+                    $(option).data('order', '');
+                }
+            },
+        });
+        
+        $('#master_items_limit_id').on('change', function() {
+            var selected = [];
+            $('#master_items_limit_id option:selected').each(function() {
+                selected.push([$(this).val(), $(this).data('order')]);
+            });
+            var text = '';
+            for (var i = 0; i < selected.length; i++) {
+                text += selected[i][0] + ', ';
+            }
+            text = text.substring(0, text.length - 2);
+            $('#selectionlog').val(text);
+           $('#selectionlog').text(text);
+            $('#master_items_limit_value').val(text);
+        });
+        
+    });
+</script>
+<script type="text/javascript">
+     $(document).ready(function() {
+        var orderCount = 0;
+        $('#master_items_condition_id').multiselect({
+            maxHeight: '300',
+            enableFiltering: true,
+            maxHeight: '300',
+            onChange: function(option, checked) {
+                if (checked) {
+                    orderCount++;
+                    $(option).data('order', orderCount);
+                }
+                else {
+                    $(option).data('order', '');
+                }
+            },
+        });
+        
+        $('#master_items_condition_id').on('change', function() {
+            var selected = [];
+            $('#master_items_condition_id option:selected').each(function() {
+                selected.push([$(this).val(), $(this).data('order')]);
+            });
+            var text = '';
+            for (var i = 0; i < selected.length; i++) {
+                text += selected[i][0] + ', ';
+            }
+            text = text.substring(0, text.length - 2);
+            $('#selectionlog').val(text);
+            $('#selectionlog').text(text);
+            $('#master_items_condition_value').val(text);
+        });
+        
+    });
+</script>
+<script type="text/javascript">
+     $(document).ready(function() {
+        var orderCount = 0;
+        $('#master_business_type_id').multiselect({
+            maxHeight: '300',
+            enableFiltering: true,
+            maxHeight: '300',
+            onChange: function(option, checked) {
+                if (checked) {
+                    orderCount++;
+                    $(option).data('order', orderCount);
+                }
+                else {
+                    $(option).data('order', '');
+                }
+            },
+        });
+        
+        $('#master_business_type_id').on('change', function() {
+            var selected = [];
+            $('#master_business_type_id option:selected').each(function() {
+                selected.push([$(this).val(), $(this).data('order')]);
+            });
+            var text = '';
+            for (var i = 0; i < selected.length; i++) {
+                text += selected[i][0] + ', ';
+            }
+            text = text.substring(0, text.length - 2);
+            $('#selectionlog').val(text);
+            $('#selectionlog').text(text);
+            $('#master_business_type_id').val(text);
+        });
+        
+    });
+</script>
