@@ -1,14 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="95308966-9a70-409b-9a90-6ebacbf29b42" name="Default" comment="">
+    <list default="true" readonly="true" id="95308966-9a70-409b-9a90-6ebacbf29b42" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/configs/application.ini" afterPath="$PROJECT_DIR$/application/configs/application.ini" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/models/Doc_Diary.php" afterPath="$PROJECT_DIR$/application/models/Doc_Diary.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/models/Doc_Items_Handling.php" afterPath="$PROJECT_DIR$/application/models/Doc_Items_Handling.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/models/Doc_Violations_Handling.php" afterPath="$PROJECT_DIR$/application/models/Doc_Violations_Handling.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/models/InfoBusiness.php" afterPath="$PROJECT_DIR$/application/models/InfoBusiness.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/models/Info_Schedule.php" afterPath="$PROJECT_DIR$/application/models/Info_Schedule.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/models/base/Doc_Items_HandlingBase.php" afterPath="$PROJECT_DIR$/application/models/base/Doc_Items_HandlingBase.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/models/base/Doc_Violations_HandlingBase.php" afterPath="$PROJECT_DIR$/application/models/base/Doc_Violations_HandlingBase.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/models/base/InfoBusinessBase.php" afterPath="$PROJECT_DIR$/application/models/base/InfoBusinessBase.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/models/base/Info_Schedule_CheckBase.php" afterPath="$PROJECT_DIR$/application/models/base/Info_Schedule_CheckBase.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/admin/controllers/IndexController.php" afterPath="$PROJECT_DIR$/application/modules/admin/controllers/IndexController.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/admin/controllers/ReportController.php" afterPath="$PROJECT_DIR$/application/modules/admin/controllers/ReportController.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/admin/controllers/ServiceController.php" afterPath="$PROJECT_DIR$/application/modules/admin/controllers/ServiceController.php" />
@@ -195,11 +198,11 @@
   </component>
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
-    <leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file leaf-file-name="application.ini" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/application/configs/application.ini">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="191">
+            <state relative-caret-position="405">
               <caret line="27" column="34" lean-forward="false" selection-start-line="27" selection-start-column="30" selection-end-line="27" selection-end-column="34" />
               <folding />
             </state>
@@ -209,7 +212,7 @@
       <file leaf-file-name="InfoBusiness.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/application/models/InfoBusiness.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="307">
+            <state relative-caret-position="345">
               <caret line="23" column="28" lean-forward="false" selection-start-line="23" selection-start-column="28" selection-end-line="23" selection-end-column="28" />
               <folding>
                 <marker date="1458897790000" expanded="true" signature="501:559" ph="UPDATE info_... " />
@@ -227,11 +230,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="InfoBusinessBase.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="InfoBusinessBase.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/application/models/base/InfoBusinessBase.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="616">
-              <caret line="425" column="7" lean-forward="false" selection-start-line="381" selection-start-column="3" selection-end-line="425" selection-end-column="7" />
+            <state relative-caret-position="16">
+              <caret line="385" column="34" lean-forward="false" selection-start-line="385" selection-start-column="34" selection-end-line="385" selection-end-column="34" />
               <folding>
                 <element signature="n#find#0;n#Model_InfoBusinessMapperBase#0;n#!!top" expanded="false" />
                 <element signature="n#fetchAllArray#0;n#Model_InfoBusinessMapperBase#0;n#!!top" expanded="false" />
@@ -244,12 +247,88 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="Info_Schedule_CheckBase.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/application/models/base/Info_Schedule_CheckBase.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="252">
+              <caret line="272" column="7" lean-forward="false" selection-start-line="245" selection-start-column="3" selection-end-line="272" selection-end-column="7" />
+              <folding>
+                <marker date="1501987936000" expanded="true" signature="10576:10644" ph="SELECT count... Doc_Violations_Handling" />
+                <marker date="1501987936000" expanded="true" signature="10728:10865" ph="SELECT * FRO... Doc_Violations_Handling" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Doc_Violations_HandlingBase.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/application/models/base/Doc_Violations_HandlingBase.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="145">
+              <caret line="256" column="7" lean-forward="false" selection-start-line="231" selection-start-column="3" selection-end-line="256" selection-end-column="7" />
+              <folding>
+                <marker date="1501988238000" expanded="true" signature="9714:9782" ph="SELECT count... Doc_Violations_Handling" />
+                <marker date="1501988238000" expanded="true" signature="9866:10003" ph="SELECT * FRO... Doc_Violations_Handling" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="list.phtml" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/application/modules/admin/views/scripts/docviolationshandling/list.phtml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="300">
+              <caret line="20" column="23" lean-forward="false" selection-start-line="20" selection-start-column="23" selection-end-line="20" selection-end-column="23" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Doc_Items_Handling.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/application/models/Doc_Items_Handling.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="195">
+              <caret line="41" column="0" lean-forward="false" selection-start-line="41" selection-start-column="0" selection-end-line="41" selection-end-column="0" />
+              <folding>
+                <marker date="1462529650000" expanded="true" signature="537:600" ph="UPDATE doc_i... " />
+                <marker date="1462529650000" expanded="true" signature="865:935" ph="select id fr... doc_items_handling" />
+                <marker date="1462529650000" expanded="true" signature="1256:1308" ph="select id fr... doc_items_handling" />
+                <marker date="1462529650000" expanded="true" signature="1687:2121" ph="select t1.*,... doc_items_handling" />
+                <marker date="1462529650000" expanded="true" signature="2145:2515" ph="select t1.*,... doc_items_handling" />
+                <marker date="1462529650000" expanded="true" signature="2597:2807" ph="select * fro... doc_items_handling" />
+                <marker date="1462529650000" expanded="true" signature="2835:2989" ph="select * fro... doc_items_handling" />
+                <marker date="1462529650000" expanded="true" signature="4639:5090" ph="select t1.*,... doc_items_handling" />
+                <marker date="1462529650000" expanded="true" signature="5113:5484" ph="select t1.*,... doc_items_handling" />
+                <marker date="1462529650000" expanded="true" signature="5565:5792" ph="select * fro... doc_items_handling" />
+                <marker date="1462529650000" expanded="true" signature="5819:5974" ph="select * fro... doc_items_handling" />
+                <marker date="1462529650000" expanded="true" signature="7884:8062" ph="select id,ma... doc_items_handling" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Doc_Items_HandlingBase.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/application/models/base/Doc_Items_HandlingBase.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="531">
+              <caret line="271" column="7" lean-forward="false" selection-start-line="244" selection-start-column="3" selection-end-line="271" selection-end-column="7" />
+              <folding>
+                <marker date="1501988324000" expanded="true" signature="10428:10491" ph="SELECT count... Doc_Items_Handling" />
+                <marker date="1501988324000" expanded="true" signature="10575:10707" ph="SELECT * FRO... Doc_Items_Handling" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
     </leaf>
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/application/models/base/InfoBusinessBase.php" />
+        <option value="$PROJECT_DIR$/application/models/base/Info_Schedule_CheckBase.php" />
+        <option value="$PROJECT_DIR$/application/models/base/Doc_Violations_HandlingBase.php" />
+        <option value="$PROJECT_DIR$/application/modules/admin/views/scripts/docviolationshandling/list.phtml" />
+        <option value="$PROJECT_DIR$/application/models/base/Doc_Items_HandlingBase.php" />
       </list>
     </option>
   </component>
@@ -279,6 +358,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scratches" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -302,6 +383,166 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="application" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="qltt" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="qltt" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="application" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="modules" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="qltt" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="qltt" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="application" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="modules" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="admin" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="qltt" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="qltt" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="application" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="modules" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="admin" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="views" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="scripts" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="qltt" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="qltt" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="application" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="modules" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="admin" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="views" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="scripts" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="docviolationshandling" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="qltt" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="qltt" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="application" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="modules" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="admin" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="views" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="qltt" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="qltt" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="application" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="modules" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="admin" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="layouts" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="scripts" />
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
           </PATH>
@@ -359,19 +600,40 @@
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="layouts" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="scripts" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="qltt" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="qltt" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="application" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="configs" />
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
-      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="FullScreen" value="true" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -390,6 +652,7 @@
   </component>
   <component name="SvnConfiguration" cleanupOnStartRun="true">
     <configuration>$USER_HOME$/.subversion</configuration>
+    <supportedVersion>125</supportedVersion>
   </component>
   <component name="SvnFileUrlMappingImpl">
     <option name="myMappingRoots">
@@ -416,33 +679,34 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1501938632092</updated>
-      <workItem from="1501938633267" duration="525000" />
+      <workItem from="1501938633267" duration="708000" />
+      <workItem from="1501987870287" duration="1155000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="525000" />
+    <option name="totallyTimeSpent" value="1863000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24964234" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2532189" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
@@ -459,23 +723,15 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/application/configs/application.ini">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="191">
+        <state relative-caret-position="405">
           <caret line="27" column="34" lean-forward="false" selection-start-line="27" selection-start-column="30" selection-end-line="27" selection-end-column="34" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/library/Zend/Db/Statement/Interface.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="268">
-          <caret line="133" column="20" lean-forward="false" selection-start-line="133" selection-start-column="20" selection-end-line="133" selection-end-column="20" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/application/models/InfoBusiness.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="307">
+        <state relative-caret-position="345">
           <caret line="23" column="28" lean-forward="false" selection-start-line="23" selection-start-column="28" selection-end-line="23" selection-end-column="28" />
           <folding>
             <marker date="1458897790000" expanded="true" signature="501:559" ph="UPDATE info_... " />
@@ -494,8 +750,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/application/models/base/InfoBusinessBase.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="616">
-          <caret line="425" column="7" lean-forward="false" selection-start-line="381" selection-start-column="3" selection-end-line="425" selection-end-column="7" />
+        <state relative-caret-position="5145">
+          <caret line="385" column="34" lean-forward="false" selection-start-line="385" selection-start-column="34" selection-end-line="385" selection-end-column="34" />
           <folding>
             <element signature="n#find#0;n#Model_InfoBusinessMapperBase#0;n#!!top" expanded="false" />
             <element signature="n#fetchAllArray#0;n#Model_InfoBusinessMapperBase#0;n#!!top" expanded="false" />
@@ -504,6 +760,118 @@
             <marker date="1501941532000" expanded="true" signature="17083:17141" ph="SELECT count... info_business" />
             <marker date="1501941532000" expanded="true" signature="17225:17352" ph="SELECT * FRO... info_business" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/configs/application.ini">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="405">
+          <caret line="27" column="34" lean-forward="false" selection-start-line="27" selection-start-column="30" selection-end-line="27" selection-end-column="34" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/library/Zend/Db/Statement/Interface.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="268">
+          <caret line="133" column="20" lean-forward="false" selection-start-line="133" selection-start-column="20" selection-end-line="133" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/models/InfoBusiness.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="345">
+          <caret line="23" column="28" lean-forward="false" selection-start-line="23" selection-start-column="28" selection-end-line="23" selection-end-column="28" />
+          <folding>
+            <marker date="1458897790000" expanded="true" signature="501:559" ph="UPDATE info_... " />
+            <marker date="1458897790000" expanded="true" signature="763:831" ph="select * fro... info_business" />
+            <marker date="1458897790000" expanded="true" signature="3237:3336" ph="select * fro... info_business" />
+            <marker date="1458897790000" expanded="true" signature="5735:5775" ph="select * fro... info_business" />
+            <marker date="1458897790000" expanded="true" signature="8199:8282" ph="select id fr... info_business" />
+            <marker date="1458897790000" expanded="true" signature="8614:8691" ph="select id,co... info_business" />
+            <marker date="1458897790000" expanded="true" signature="9023:9095" ph="select id fr... info_business" />
+            <marker date="1458897790000" expanded="true" signature="9425:9482" ph="select id,ty... info_business" />
+            <marker date="1458897790000" expanded="true" signature="9822:9906" ph="select id,in... doc_violations_handling" />
+            <marker date="1458897790000" expanded="true" signature="10241:10283" ph="select * fro... info_business" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/models/base/InfoBusinessBase.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="16">
+          <caret line="385" column="34" lean-forward="false" selection-start-line="385" selection-start-column="34" selection-end-line="385" selection-end-column="34" />
+          <folding>
+            <element signature="n#find#0;n#Model_InfoBusinessMapperBase#0;n#!!top" expanded="false" />
+            <element signature="n#fetchAllArray#0;n#Model_InfoBusinessMapperBase#0;n#!!top" expanded="false" />
+            <element signature="n#fetchPaging#0;n#Model_InfoBusinessMapperBase#0;n#!!top" expanded="false" />
+            <element signature="n#createCombo#0;n#Model_InfoBusinessMapperBase#0;n#!!top" expanded="false" />
+            <marker date="1501941532000" expanded="true" signature="17083:17141" ph="SELECT count... info_business" />
+            <marker date="1501941532000" expanded="true" signature="17225:17352" ph="SELECT * FRO... info_business" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/models/base/Info_Schedule_CheckBase.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="252">
+          <caret line="272" column="7" lean-forward="false" selection-start-line="245" selection-start-column="3" selection-end-line="272" selection-end-column="7" />
+          <folding>
+            <marker date="1501987936000" expanded="true" signature="10576:10644" ph="SELECT count... Doc_Violations_Handling" />
+            <marker date="1501987936000" expanded="true" signature="10728:10865" ph="SELECT * FRO... Doc_Violations_Handling" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/models/base/Doc_Violations_HandlingBase.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="145">
+          <caret line="256" column="7" lean-forward="false" selection-start-line="231" selection-start-column="3" selection-end-line="256" selection-end-column="7" />
+          <folding>
+            <marker date="1501988238000" expanded="true" signature="9714:9782" ph="SELECT count... Doc_Violations_Handling" />
+            <marker date="1501988238000" expanded="true" signature="9866:10003" ph="SELECT * FRO... Doc_Violations_Handling" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/models/Doc_Items_Handling.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="195">
+          <caret line="41" column="0" lean-forward="false" selection-start-line="41" selection-start-column="0" selection-end-line="41" selection-end-column="0" />
+          <folding>
+            <marker date="1462529650000" expanded="true" signature="537:600" ph="UPDATE doc_i... " />
+            <marker date="1462529650000" expanded="true" signature="865:935" ph="select id fr... doc_items_handling" />
+            <marker date="1462529650000" expanded="true" signature="1256:1308" ph="select id fr... doc_items_handling" />
+            <marker date="1462529650000" expanded="true" signature="1687:2121" ph="select t1.*,... doc_items_handling" />
+            <marker date="1462529650000" expanded="true" signature="2145:2515" ph="select t1.*,... doc_items_handling" />
+            <marker date="1462529650000" expanded="true" signature="2597:2807" ph="select * fro... doc_items_handling" />
+            <marker date="1462529650000" expanded="true" signature="2835:2989" ph="select * fro... doc_items_handling" />
+            <marker date="1462529650000" expanded="true" signature="4639:5090" ph="select t1.*,... doc_items_handling" />
+            <marker date="1462529650000" expanded="true" signature="5113:5484" ph="select t1.*,... doc_items_handling" />
+            <marker date="1462529650000" expanded="true" signature="5565:5792" ph="select * fro... doc_items_handling" />
+            <marker date="1462529650000" expanded="true" signature="5819:5974" ph="select * fro... doc_items_handling" />
+            <marker date="1462529650000" expanded="true" signature="7884:8062" ph="select id,ma... doc_items_handling" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/models/base/Doc_Items_HandlingBase.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="531">
+          <caret line="271" column="7" lean-forward="false" selection-start-line="244" selection-start-column="3" selection-end-line="271" selection-end-column="7" />
+          <folding>
+            <marker date="1501988324000" expanded="true" signature="10428:10491" ph="SELECT count... Doc_Items_Handling" />
+            <marker date="1501988324000" expanded="true" signature="10575:10707" ph="SELECT * FRO... Doc_Items_Handling" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/modules/admin/views/scripts/docviolationshandling/list.phtml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="300">
+          <caret line="20" column="23" lean-forward="false" selection-start-line="20" selection-start-column="23" selection-end-line="20" selection-end-column="23" />
+          <folding />
         </state>
       </provider>
     </entry>
