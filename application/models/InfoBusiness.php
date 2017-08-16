@@ -115,7 +115,7 @@ class Model_InfoBusinessMapper extends Model_InfoBusinessMapperBase{
     }
      public function  fetchAll_REPORT($wherer){
         $db = Zend_Db_Table::getDefaultAdapter();      
-       $select=" select * from info_business ".$wherer."";        
+       $select=" select * from info_business '".$wherer."'";
         $stmt=$db->query($select);
         $rows = $stmt->fetchAll(PDO::FETCH_CLASS);
         $stmt->closeCursor();
@@ -130,7 +130,7 @@ class Model_InfoBusinessMapper extends Model_InfoBusinessMapperBase{
                 ->setDate_License($row->date_license)
                 ->setPlace_License($row->place_license)
                 ->setAddress_Office($row->address_office)
-		->setAddress_Office2($row->address_office2)
+		        ->setAddress_Office2($row->address_office2)
                 ->setAddress_Branch($row->address_branch)
                 ->setAddress_Produce($row->address_produce)
                 ->setWork_Business($row->work_business)

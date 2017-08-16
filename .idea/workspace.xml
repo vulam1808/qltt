@@ -1,190 +1,190 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="95308966-9a70-409b-9a90-6ebacbf29b42" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/configs/application.ini" afterPath="$PROJECT_DIR$/application/configs/application.ini" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/models/Doc_Diary.php" afterPath="$PROJECT_DIR$/application/models/Doc_Diary.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/models/Doc_Items_Handling.php" afterPath="$PROJECT_DIR$/application/models/Doc_Items_Handling.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/models/Doc_Violations_Handling.php" afterPath="$PROJECT_DIR$/application/models/Doc_Violations_Handling.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/models/InfoBusiness.php" afterPath="$PROJECT_DIR$/application/models/InfoBusiness.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/models/Info_Schedule.php" afterPath="$PROJECT_DIR$/application/models/Info_Schedule.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/models/base/InfoBusinessBase.php" afterPath="$PROJECT_DIR$/application/models/base/InfoBusinessBase.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/admin/controllers/IndexController.php" afterPath="$PROJECT_DIR$/application/modules/admin/controllers/IndexController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/admin/controllers/ReportController.php" afterPath="$PROJECT_DIR$/application/modules/admin/controllers/ReportController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/admin/controllers/ServiceController.php" afterPath="$PROJECT_DIR$/application/modules/admin/controllers/ServiceController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/admin/controllers/plugin/Multi.php" afterPath="$PROJECT_DIR$/application/modules/admin/controllers/plugin/Multi.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/admin/views/scripts/docdiary/edit.phtml" afterPath="$PROJECT_DIR$/application/modules/admin/views/scripts/docdiary/edit.phtml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/admin/views/scripts/docdiary/list.phtml" afterPath="$PROJECT_DIR$/application/modules/admin/views/scripts/docdiary/list.phtml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/admin/views/scripts/docitemshandling/edit.phtml" afterPath="$PROJECT_DIR$/application/modules/admin/views/scripts/docitemshandling/edit.phtml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/admin/views/scripts/docitemshandling/list.phtml" afterPath="$PROJECT_DIR$/application/modules/admin/views/scripts/docitemshandling/list.phtml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/admin/views/scripts/docitemshandling/listtt.phtml" afterPath="$PROJECT_DIR$/application/modules/admin/views/scripts/docitemshandling/listtt.phtml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/admin/views/scripts/docprintallocation/add.phtml" afterPath="$PROJECT_DIR$/application/modules/admin/views/scripts/docprintallocation/add.phtml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/admin/views/scripts/docprintallocation/list.phtml" afterPath="$PROJECT_DIR$/application/modules/admin/views/scripts/docprintallocation/list.phtml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/admin/views/scripts/docprintallocation/list_1.phtml" afterPath="$PROJECT_DIR$/application/modules/admin/views/scripts/docprintallocation/list_1.phtml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/admin/views/scripts/docprintcreate/add.phtml" afterPath="$PROJECT_DIR$/application/modules/admin/views/scripts/docprintcreate/add.phtml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/admin/views/scripts/docprintcreate/list.phtml" afterPath="$PROJECT_DIR$/application/modules/admin/views/scripts/docprintcreate/list.phtml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/admin/views/scripts/docprintpayment/list.phtml" afterPath="$PROJECT_DIR$/application/modules/admin/views/scripts/docprintpayment/list.phtml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/admin/views/scripts/docviolationshandling/add.phtml" afterPath="$PROJECT_DIR$/application/modules/admin/views/scripts/docviolationshandling/add.phtml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/admin/views/scripts/docviolationshandling/addownerlessgoods.phtml" afterPath="$PROJECT_DIR$/application/modules/admin/views/scripts/docviolationshandling/addownerlessgoods.phtml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/admin/views/scripts/docviolationshandling/list.phtml" afterPath="$PROJECT_DIR$/application/modules/admin/views/scripts/docviolationshandling/list.phtml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/admin/views/scripts/docviolationshandling/listfrominfobusiness.phtml" afterPath="$PROJECT_DIR$/application/modules/admin/views/scripts/docviolationshandling/listfrominfobusiness.phtml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/admin/views/scripts/docviolationshandling/listfromprintrecords.phtml" afterPath="$PROJECT_DIR$/application/modules/admin/views/scripts/docviolationshandling/listfromprintrecords.phtml" />
+    <list default="true" readonly="true" id="95308966-9a70-409b-9a90-6ebacbf29b42" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/admin/views/scripts/docviolationshandling/listownerlessgoods.phtml" afterPath="$PROJECT_DIR$/application/modules/admin/views/scripts/docviolationshandling/listownerlessgoods.phtml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/admin/views/scripts/infobusiness/add.phtml" afterPath="$PROJECT_DIR$/application/modules/admin/views/scripts/infobusiness/add.phtml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/admin/views/scripts/infobusiness/edit.phtml" afterPath="$PROJECT_DIR$/application/modules/admin/views/scripts/infobusiness/edit.phtml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/admin/views/scripts/infobusiness/list.phtml" afterPath="$PROJECT_DIR$/application/modules/admin/views/scripts/infobusiness/list.phtml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/admin/views/scripts/infoschedule/list.phtml" afterPath="$PROJECT_DIR$/application/modules/admin/views/scripts/infoschedule/list.phtml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/admin/views/scripts/infoschedulecheck/edit.phtml" afterPath="$PROJECT_DIR$/application/modules/admin/views/scripts/infoschedulecheck/edit.phtml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/admin/views/scripts/infoschedulecheck/list.phtml" afterPath="$PROJECT_DIR$/application/modules/admin/views/scripts/infoschedulecheck/list.phtml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/admin/views/scripts/masterbusinesssize/list.phtml" afterPath="$PROJECT_DIR$/application/modules/admin/views/scripts/masterbusinesssize/list.phtml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/admin/views/scripts/masterbusinesstype/list.phtml" afterPath="$PROJECT_DIR$/application/modules/admin/views/scripts/masterbusinesstype/list.phtml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/admin/views/scripts/masteritemscondition/list.phtml" afterPath="$PROJECT_DIR$/application/modules/admin/views/scripts/masteritemscondition/list.phtml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/admin/views/scripts/masteritemslimit/list.phtml" afterPath="$PROJECT_DIR$/application/modules/admin/views/scripts/masteritemslimit/list.phtml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/admin/views/scripts/masterprint/list.phtml" afterPath="$PROJECT_DIR$/application/modules/admin/views/scripts/masterprint/list.phtml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/admin/views/scripts/mastersanction/list.phtml" afterPath="$PROJECT_DIR$/application/modules/admin/views/scripts/mastersanction/list.phtml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/admin/views/scripts/masterunit/list.phtml" afterPath="$PROJECT_DIR$/application/modules/admin/views/scripts/masterunit/list.phtml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/admin/views/scripts/masterviolation/list.phtml" afterPath="$PROJECT_DIR$/application/modules/admin/views/scripts/masterviolation/list.phtml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/admin/views/scripts/sysdepartments/list.phtml" afterPath="$PROJECT_DIR$/application/modules/admin/views/scripts/sysdepartments/list.phtml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/admin/views/scripts/sysprivileges/list.phtml" afterPath="$PROJECT_DIR$/application/modules/admin/views/scripts/sysprivileges/list.phtml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/admin/views/scripts/sysuser/list.phtml" afterPath="$PROJECT_DIR$/application/modules/admin/views/scripts/sysuser/list.phtml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/admin/views/scripts/sysusergroup/list.phtml" afterPath="$PROJECT_DIR$/application/modules/admin/views/scripts/sysusergroup/list.phtml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/default/controllers/IndexController.php" afterPath="$PROJECT_DIR$/application/modules/default/controllers/IndexController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/default/controllers/LoginController.php" afterPath="$PROJECT_DIR$/application/modules/default/controllers/LoginController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/default/controllers/ReportController.php" afterPath="$PROJECT_DIR$/application/modules/default/controllers/ReportController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/default/controllers/ServiceController.php" afterPath="$PROJECT_DIR$/application/modules/default/controllers/ServiceController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/default/controllers/plugin/Multi.php" afterPath="$PROJECT_DIR$/application/modules/default/controllers/plugin/Multi.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/default/views/scripts/docdiary/edit.phtml" afterPath="$PROJECT_DIR$/application/modules/default/views/scripts/docdiary/edit.phtml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/default/views/scripts/docdiary/list.phtml" afterPath="$PROJECT_DIR$/application/modules/default/views/scripts/docdiary/list.phtml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/default/views/scripts/docitemshandling/edit.phtml" afterPath="$PROJECT_DIR$/application/modules/default/views/scripts/docitemshandling/edit.phtml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/default/views/scripts/docitemshandling/list.phtml" afterPath="$PROJECT_DIR$/application/modules/default/views/scripts/docitemshandling/list.phtml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/default/views/scripts/docitemshandling/listtt.phtml" afterPath="$PROJECT_DIR$/application/modules/default/views/scripts/docitemshandling/listtt.phtml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/default/views/scripts/docprintallocation/list_1.phtml" afterPath="$PROJECT_DIR$/application/modules/default/views/scripts/docprintallocation/list_1.phtml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/default/views/scripts/docprintcreate/list.phtml" afterPath="$PROJECT_DIR$/application/modules/default/views/scripts/docprintcreate/list.phtml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/default/views/scripts/docprintpayment/list.phtml" afterPath="$PROJECT_DIR$/application/modules/default/views/scripts/docprintpayment/list.phtml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/default/views/scripts/docviolationshandling/add.phtml" afterPath="$PROJECT_DIR$/application/modules/default/views/scripts/docviolationshandling/add.phtml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/default/views/scripts/docviolationshandling/list.phtml" afterPath="$PROJECT_DIR$/application/modules/default/views/scripts/docviolationshandling/list.phtml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/default/views/scripts/docviolationshandling/listfrominfobusiness.phtml" afterPath="$PROJECT_DIR$/application/modules/default/views/scripts/docviolationshandling/listfrominfobusiness.phtml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/default/views/scripts/docviolationshandling/listfromprintrecords.phtml" afterPath="$PROJECT_DIR$/application/modules/default/views/scripts/docviolationshandling/listfromprintrecords.phtml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/default/views/scripts/docviolationshandling/listownerlessgoods.phtml" afterPath="$PROJECT_DIR$/application/modules/default/views/scripts/docviolationshandling/listownerlessgoods.phtml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/default/views/scripts/infobusiness/add.phtml" afterPath="$PROJECT_DIR$/application/modules/default/views/scripts/infobusiness/add.phtml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/default/views/scripts/infobusiness/edit.phtml" afterPath="$PROJECT_DIR$/application/modules/default/views/scripts/infobusiness/edit.phtml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/default/views/scripts/infobusiness/list.phtml" afterPath="$PROJECT_DIR$/application/modules/default/views/scripts/infobusiness/list.phtml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/default/views/scripts/infoschedule/add.phtml" afterPath="$PROJECT_DIR$/application/modules/default/views/scripts/infoschedule/add.phtml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/default/views/scripts/infoschedule/edit.phtml" afterPath="$PROJECT_DIR$/application/modules/default/views/scripts/infoschedule/edit.phtml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/default/views/scripts/infoschedule/list.phtml" afterPath="$PROJECT_DIR$/application/modules/default/views/scripts/infoschedule/list.phtml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/default/views/scripts/infoschedulecheck/add.phtml" afterPath="$PROJECT_DIR$/application/modules/default/views/scripts/infoschedulecheck/add.phtml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/default/views/scripts/infoschedulecheck/edit.phtml" afterPath="$PROJECT_DIR$/application/modules/default/views/scripts/infoschedulecheck/edit.phtml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/default/views/scripts/infoschedulecheck/list.phtml" afterPath="$PROJECT_DIR$/application/modules/default/views/scripts/infoschedulecheck/list.phtml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/default/views/scripts/report/mangementuseprintbysysdepartment.phtml" afterPath="$PROJECT_DIR$/application/modules/default/views/scripts/report/mangementuseprintbysysdepartment.phtml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/leader/controllers/IndexController.php" afterPath="$PROJECT_DIR$/application/modules/leader/controllers/IndexController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/leader/controllers/ReportController.php" afterPath="$PROJECT_DIR$/application/modules/leader/controllers/ReportController.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/leader/controllers/ServiceController.php" afterPath="$PROJECT_DIR$/application/modules/leader/controllers/ServiceController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/leader/layouts/scripts/default.phtml" afterPath="$PROJECT_DIR$/application/modules/leader/layouts/scripts/default.phtml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/leader/views/scripts/docdiary/edit.phtml" afterPath="$PROJECT_DIR$/application/modules/leader/views/scripts/docdiary/edit.phtml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/leader/views/scripts/docdiary/list.phtml" afterPath="$PROJECT_DIR$/application/modules/leader/views/scripts/docdiary/list.phtml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/leader/views/scripts/docitemshandling/list.phtml" afterPath="$PROJECT_DIR$/application/modules/leader/views/scripts/docitemshandling/list.phtml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/leader/views/scripts/docitemshandling/listtt.phtml" afterPath="$PROJECT_DIR$/application/modules/leader/views/scripts/docitemshandling/listtt.phtml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/leader/views/scripts/docprintallocation/list_1.phtml" afterPath="$PROJECT_DIR$/application/modules/leader/views/scripts/docprintallocation/list_1.phtml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/leader/views/scripts/docprintcreate/list.phtml" afterPath="$PROJECT_DIR$/application/modules/leader/views/scripts/docprintcreate/list.phtml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/leader/views/scripts/docprintpayment/list.phtml" afterPath="$PROJECT_DIR$/application/modules/leader/views/scripts/docprintpayment/list.phtml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/leader/views/scripts/docviolationshandling/addownerlessgoods.phtml" afterPath="$PROJECT_DIR$/application/modules/leader/views/scripts/docviolationshandling/addownerlessgoods.phtml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/leader/views/scripts/docviolationshandling/list.phtml" afterPath="$PROJECT_DIR$/application/modules/leader/views/scripts/docviolationshandling/list.phtml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/leader/views/scripts/docviolationshandling/listfrominfobusiness.phtml" afterPath="$PROJECT_DIR$/application/modules/leader/views/scripts/docviolationshandling/listfrominfobusiness.phtml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/leader/views/scripts/docviolationshandling/listfromprintrecords.phtml" afterPath="$PROJECT_DIR$/application/modules/leader/views/scripts/docviolationshandling/listfromprintrecords.phtml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/leader/views/scripts/docviolationshandling/listownerlessgoods.phtml" afterPath="$PROJECT_DIR$/application/modules/leader/views/scripts/docviolationshandling/listownerlessgoods.phtml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/leader/views/scripts/infobusiness/add.phtml" afterPath="$PROJECT_DIR$/application/modules/leader/views/scripts/infobusiness/add.phtml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/leader/views/scripts/infobusiness/edit.phtml" afterPath="$PROJECT_DIR$/application/modules/leader/views/scripts/infobusiness/edit.phtml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/leader/views/scripts/infobusiness/list.phtml" afterPath="$PROJECT_DIR$/application/modules/leader/views/scripts/infobusiness/list.phtml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/default/controllers/LoginController.php" afterPath="$PROJECT_DIR$/application/modules/default/controllers/LoginController.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/leader/views/scripts/infoschedule/list.phtml" afterPath="$PROJECT_DIR$/application/modules/leader/views/scripts/infoschedule/list.phtml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/leader/views/scripts/infoschedulecheck/edit.phtml" afterPath="$PROJECT_DIR$/application/modules/leader/views/scripts/infoschedulecheck/edit.phtml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/leader/views/scripts/infoschedulecheck/list.phtml" afterPath="$PROJECT_DIR$/application/modules/leader/views/scripts/infoschedulecheck/list.phtml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/master/controllers/InfoBusinessController.php" afterPath="$PROJECT_DIR$/application/modules/master/controllers/InfoBusinessController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/master/controllers/ReportController.php" afterPath="$PROJECT_DIR$/application/modules/master/controllers/ReportController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/master/views/scripts/docdiary/edit.phtml" afterPath="$PROJECT_DIR$/application/modules/master/views/scripts/docdiary/edit.phtml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/master/views/scripts/docdiary/list.phtml" afterPath="$PROJECT_DIR$/application/modules/master/views/scripts/docdiary/list.phtml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/master/views/scripts/docitemshandling/list.phtml" afterPath="$PROJECT_DIR$/application/modules/master/views/scripts/docitemshandling/list.phtml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/master/views/scripts/docitemshandling/listtt.phtml" afterPath="$PROJECT_DIR$/application/modules/master/views/scripts/docitemshandling/listtt.phtml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/master/views/scripts/docprintallocation/list_1.phtml" afterPath="$PROJECT_DIR$/application/modules/master/views/scripts/docprintallocation/list_1.phtml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/master/views/scripts/docprintcreate/add.phtml" afterPath="$PROJECT_DIR$/application/modules/master/views/scripts/docprintcreate/add.phtml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/master/views/scripts/docprintcreate/list.phtml" afterPath="$PROJECT_DIR$/application/modules/master/views/scripts/docprintcreate/list.phtml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/master/views/scripts/docprintpayment/list.phtml" afterPath="$PROJECT_DIR$/application/modules/master/views/scripts/docprintpayment/list.phtml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/master/views/scripts/docviolationshandling/list.phtml" afterPath="$PROJECT_DIR$/application/modules/master/views/scripts/docviolationshandling/list.phtml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/master/views/scripts/docviolationshandling/listfrominfobusiness.phtml" afterPath="$PROJECT_DIR$/application/modules/master/views/scripts/docviolationshandling/listfrominfobusiness.phtml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/master/views/scripts/docviolationshandling/listfromprintrecords.phtml" afterPath="$PROJECT_DIR$/application/modules/master/views/scripts/docviolationshandling/listfromprintrecords.phtml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/master/views/scripts/docviolationshandling/listownerlessgoods.phtml" afterPath="$PROJECT_DIR$/application/modules/master/views/scripts/docviolationshandling/listownerlessgoods.phtml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/master/views/scripts/infobusiness/add.phtml" afterPath="$PROJECT_DIR$/application/modules/master/views/scripts/infobusiness/add.phtml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/master/views/scripts/infobusiness/edit.phtml" afterPath="$PROJECT_DIR$/application/modules/master/views/scripts/infobusiness/edit.phtml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/master/views/scripts/infobusiness/list.phtml" afterPath="$PROJECT_DIR$/application/modules/master/views/scripts/infobusiness/list.phtml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/master/views/scripts/infoschedule/list.phtml" afterPath="$PROJECT_DIR$/application/modules/master/views/scripts/infoschedule/list.phtml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/master/views/scripts/infoschedulecheck/edit.phtml" afterPath="$PROJECT_DIR$/application/modules/master/views/scripts/infoschedulecheck/edit.phtml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/master/views/scripts/infoschedulecheck/list.phtml" afterPath="$PROJECT_DIR$/application/modules/master/views/scripts/infoschedulecheck/list.phtml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/master/views/scripts/report/mangementuseprint.phtml" afterPath="$PROJECT_DIR$/application/modules/master/views/scripts/report/mangementuseprint.phtml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public_html/js/jqwidgets/jqx-all.js" afterPath="$PROJECT_DIR$/public_html/js/jqwidgets/jqx-all.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxangular.js" afterPath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxangular.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxbulletchart.js" afterPath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxbulletchart.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxbuttongroup.js" afterPath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxbuttongroup.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxbuttons.js" afterPath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxbuttons.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxcalendar.js" afterPath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxcalendar.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxchart.core.js" afterPath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxchart.core.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxchart.js" afterPath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxchart.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxchart.rangeselector.js" afterPath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxchart.rangeselector.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxcheckbox.js" afterPath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxcheckbox.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxcolorpicker.js" afterPath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxcolorpicker.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxcombobox.js" afterPath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxcombobox.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxdata.export.js" afterPath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxdata.export.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxdata.js" afterPath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxdata.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxdatatable.js" afterPath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxdatatable.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxdatetimeinput.js" afterPath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxdatetimeinput.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxdocking.js" afterPath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxdocking.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxdockpanel.js" afterPath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxdockpanel.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxdragdrop.js" afterPath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxdragdrop.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxdraw.js" afterPath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxdraw.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxdropdownbutton.js" afterPath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxdropdownbutton.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxdropdownlist.js" afterPath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxdropdownlist.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxeditor.js" afterPath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxeditor.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxexpander.js" afterPath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxexpander.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxgauge.js" afterPath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxgauge.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxgrid.aggregates.js" afterPath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxgrid.aggregates.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxgrid.columnsreorder.js" afterPath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxgrid.columnsreorder.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxgrid.columnsresize.js" afterPath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxgrid.columnsresize.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxgrid.edit.js" afterPath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxgrid.edit.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxgrid.export.js" afterPath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxgrid.export.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxgrid.filter.js" afterPath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxgrid.filter.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxgrid.grouping.js" afterPath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxgrid.grouping.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxgrid.js" afterPath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxgrid.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxgrid.pager.js" afterPath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxgrid.pager.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxgrid.selection.js" afterPath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxgrid.selection.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxgrid.sort.js" afterPath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxgrid.sort.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxgrid.storage.js" afterPath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxgrid.storage.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxinput.js" afterPath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxinput.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxknockout.js" afterPath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxknockout.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxlistbox.js" afterPath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxlistbox.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxlistmenu.js" afterPath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxlistmenu.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxmaskedinput.js" afterPath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxmaskedinput.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxmenu.js" afterPath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxmenu.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxnavigationbar.js" afterPath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxnavigationbar.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxnotification.js" afterPath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxnotification.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxnumberinput.js" afterPath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxnumberinput.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxpanel.js" afterPath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxpanel.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxpasswordinput.js" afterPath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxpasswordinput.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxprogressbar.js" afterPath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxprogressbar.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxradiobutton.js" afterPath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxradiobutton.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxrangeselector.js" afterPath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxrangeselector.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxrating.js" afterPath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxrating.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxresponse.js" afterPath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxresponse.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxscrollbar.js" afterPath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxscrollbar.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxscrollview.js" afterPath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxscrollview.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxslider.js" afterPath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxslider.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxsplitter.js" afterPath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxsplitter.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxswitchbutton.js" afterPath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxswitchbutton.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxtabs.js" afterPath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxtabs.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxtooltip.js" afterPath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxtooltip.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/admin/views/scripts/docprintcreate/add.phtml" afterPath="$PROJECT_DIR$/application/modules/admin/views/scripts/docprintcreate/add.phtml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxtouch.js" afterPath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxtouch.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxtree.js" afterPath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxtree.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxtreegrid.js" afterPath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxtreegrid.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxtreemap.js" afterPath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxtreemap.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/leader/views/scripts/infobusiness/list.phtml" afterPath="$PROJECT_DIR$/application/modules/leader/views/scripts/infobusiness/list.phtml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxrangeselector.js" afterPath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxrangeselector.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxscrollbar.js" afterPath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxscrollbar.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/master/views/scripts/infoschedulecheck/list.phtml" afterPath="$PROJECT_DIR$/application/modules/master/views/scripts/infoschedulecheck/list.phtml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/admin/views/scripts/masterunit/list.phtml" afterPath="$PROJECT_DIR$/application/modules/admin/views/scripts/masterunit/list.phtml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/default/views/scripts/infobusiness/edit.phtml" afterPath="$PROJECT_DIR$/application/modules/default/views/scripts/infobusiness/edit.phtml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxradiobutton.js" afterPath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxradiobutton.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/leader/views/scripts/infoschedulecheck/edit.phtml" afterPath="$PROJECT_DIR$/application/modules/leader/views/scripts/infoschedulecheck/edit.phtml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxtooltip.js" afterPath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxtooltip.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/configs/application.ini" afterPath="$PROJECT_DIR$/application/configs/application.ini" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/master/controllers/ReportController.php" afterPath="$PROJECT_DIR$/application/modules/master/controllers/ReportController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/default/views/scripts/report/mangementuseprintbysysdepartment.phtml" afterPath="$PROJECT_DIR$/application/modules/default/views/scripts/report/mangementuseprintbysysdepartment.phtml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/master/views/scripts/infobusiness/add.phtml" afterPath="$PROJECT_DIR$/application/modules/master/views/scripts/infobusiness/add.phtml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/leader/views/scripts/infobusiness/edit.phtml" afterPath="$PROJECT_DIR$/application/modules/leader/views/scripts/infobusiness/edit.phtml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxgrid.edit.js" afterPath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxgrid.edit.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxvalidator.js" afterPath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxvalidator.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/master/views/scripts/infoschedule/list.phtml" afterPath="$PROJECT_DIR$/application/modules/master/views/scripts/infoschedule/list.phtml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/default/controllers/ServiceController.php" afterPath="$PROJECT_DIR$/application/modules/default/controllers/ServiceController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/leader/views/scripts/docviolationshandling/listfrominfobusiness.phtml" afterPath="$PROJECT_DIR$/application/modules/leader/views/scripts/docviolationshandling/listfrominfobusiness.phtml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxpasswordinput.js" afterPath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxpasswordinput.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/default/views/scripts/docprintallocation/list_1.phtml" afterPath="$PROJECT_DIR$/application/modules/default/views/scripts/docprintallocation/list_1.phtml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxslider.js" afterPath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxslider.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/admin/views/scripts/sysdepartments/list.phtml" afterPath="$PROJECT_DIR$/application/modules/admin/views/scripts/sysdepartments/list.phtml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/admin/views/scripts/docdiary/list.phtml" afterPath="$PROJECT_DIR$/application/modules/admin/views/scripts/docdiary/list.phtml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/models/Doc_Diary.php" afterPath="$PROJECT_DIR$/application/models/Doc_Diary.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/default/views/scripts/infoschedulecheck/edit.phtml" afterPath="$PROJECT_DIR$/application/modules/default/views/scripts/infoschedulecheck/edit.phtml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/admin/views/scripts/masterbusinesstype/list.phtml" afterPath="$PROJECT_DIR$/application/modules/admin/views/scripts/masterbusinesstype/list.phtml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxdragdrop.js" afterPath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxdragdrop.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/default/controllers/plugin/Multi.php" afterPath="$PROJECT_DIR$/application/modules/default/controllers/plugin/Multi.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/default/views/scripts/docviolationshandling/list.phtml" afterPath="$PROJECT_DIR$/application/modules/default/views/scripts/docviolationshandling/list.phtml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/default/views/scripts/infobusiness/add.phtml" afterPath="$PROJECT_DIR$/application/modules/default/views/scripts/infobusiness/add.phtml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/leader/views/scripts/docdiary/list.phtml" afterPath="$PROJECT_DIR$/application/modules/leader/views/scripts/docdiary/list.phtml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/leader/controllers/IndexController.php" afterPath="$PROJECT_DIR$/application/modules/leader/controllers/IndexController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/admin/views/scripts/docprintallocation/add.phtml" afterPath="$PROJECT_DIR$/application/modules/admin/views/scripts/docprintallocation/add.phtml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxgrid.js" afterPath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxgrid.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/default/views/scripts/infoschedulecheck/add.phtml" afterPath="$PROJECT_DIR$/application/modules/default/views/scripts/infoschedulecheck/add.phtml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxinput.js" afterPath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxinput.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/leader/views/scripts/docviolationshandling/listownerlessgoods.phtml" afterPath="$PROJECT_DIR$/application/modules/leader/views/scripts/docviolationshandling/listownerlessgoods.phtml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/default/views/scripts/docprintpayment/list.phtml" afterPath="$PROJECT_DIR$/application/modules/default/views/scripts/docprintpayment/list.phtml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxchart.core.js" afterPath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxchart.core.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/default/views/scripts/docviolationshandling/listfrominfobusiness.phtml" afterPath="$PROJECT_DIR$/application/modules/default/views/scripts/docviolationshandling/listfrominfobusiness.phtml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxscrollview.js" afterPath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxscrollview.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/default/views/scripts/infoschedule/edit.phtml" afterPath="$PROJECT_DIR$/application/modules/default/views/scripts/infoschedule/edit.phtml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxcolorpicker.js" afterPath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxcolorpicker.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/master/views/scripts/docviolationshandling/list.phtml" afterPath="$PROJECT_DIR$/application/modules/master/views/scripts/docviolationshandling/list.phtml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxdockpanel.js" afterPath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxdockpanel.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/default/views/scripts/docitemshandling/list.phtml" afterPath="$PROJECT_DIR$/application/modules/default/views/scripts/docitemshandling/list.phtml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/models/InfoBusiness.php" afterPath="$PROJECT_DIR$/application/models/InfoBusiness.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/models/Doc_Violations_Handling.php" afterPath="$PROJECT_DIR$/application/models/Doc_Violations_Handling.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/default/views/scripts/infobusiness/list.phtml" afterPath="$PROJECT_DIR$/application/modules/default/views/scripts/infobusiness/list.phtml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/admin/views/scripts/infobusiness/add.phtml" afterPath="$PROJECT_DIR$/application/modules/admin/views/scripts/infobusiness/add.phtml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/admin/views/scripts/docprintcreate/list.phtml" afterPath="$PROJECT_DIR$/application/modules/admin/views/scripts/docprintcreate/list.phtml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public_html/js/jqwidgets/jqx-all.js" afterPath="$PROJECT_DIR$/public_html/js/jqwidgets/jqx-all.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/leader/views/scripts/docprintpayment/list.phtml" afterPath="$PROJECT_DIR$/application/modules/leader/views/scripts/docprintpayment/list.phtml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/admin/views/scripts/masteritemslimit/list.phtml" afterPath="$PROJECT_DIR$/application/modules/admin/views/scripts/masteritemslimit/list.phtml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxbuttongroup.js" afterPath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxbuttongroup.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/leader/views/scripts/infoschedulecheck/list.phtml" afterPath="$PROJECT_DIR$/application/modules/leader/views/scripts/infoschedulecheck/list.phtml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/admin/controllers/plugin/Multi.php" afterPath="$PROJECT_DIR$/application/modules/admin/controllers/plugin/Multi.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/admin/views/scripts/docprintallocation/list_1.phtml" afterPath="$PROJECT_DIR$/application/modules/admin/views/scripts/docprintallocation/list_1.phtml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/master/views/scripts/docdiary/edit.phtml" afterPath="$PROJECT_DIR$/application/modules/master/views/scripts/docdiary/edit.phtml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/admin/views/scripts/masterbusinesssize/list.phtml" afterPath="$PROJECT_DIR$/application/modules/admin/views/scripts/masterbusinesssize/list.phtml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxgrid.filter.js" afterPath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxgrid.filter.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxdata.export.js" afterPath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxdata.export.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxpanel.js" afterPath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxpanel.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxcombobox.js" afterPath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxcombobox.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxexpander.js" afterPath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxexpander.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/models/Doc_Items_Handling.php" afterPath="$PROJECT_DIR$/application/models/Doc_Items_Handling.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/default/views/scripts/docviolationshandling/listfromprintrecords.phtml" afterPath="$PROJECT_DIR$/application/modules/default/views/scripts/docviolationshandling/listfromprintrecords.phtml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/admin/views/scripts/docprintallocation/list.phtml" afterPath="$PROJECT_DIR$/application/modules/admin/views/scripts/docprintallocation/list.phtml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/admin/controllers/ReportController.php" afterPath="$PROJECT_DIR$/application/modules/admin/controllers/ReportController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/default/views/scripts/docdiary/edit.phtml" afterPath="$PROJECT_DIR$/application/modules/default/views/scripts/docdiary/edit.phtml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/default/views/scripts/docprintcreate/list.phtml" afterPath="$PROJECT_DIR$/application/modules/default/views/scripts/docprintcreate/list.phtml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxeditor.js" afterPath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxeditor.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxgrid.export.js" afterPath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxgrid.export.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxmaskedinput.js" afterPath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxmaskedinput.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/leader/views/scripts/docviolationshandling/addownerlessgoods.phtml" afterPath="$PROJECT_DIR$/application/modules/leader/views/scripts/docviolationshandling/addownerlessgoods.phtml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/default/views/scripts/infoschedule/list.phtml" afterPath="$PROJECT_DIR$/application/modules/default/views/scripts/infoschedule/list.phtml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxchart.js" afterPath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxchart.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/models/Info_Schedule.php" afterPath="$PROJECT_DIR$/application/models/Info_Schedule.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxtabs.js" afterPath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxtabs.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/default/views/scripts/docitemshandling/listtt.phtml" afterPath="$PROJECT_DIR$/application/modules/default/views/scripts/docitemshandling/listtt.phtml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/admin/views/scripts/docviolationshandling/listfrominfobusiness.phtml" afterPath="$PROJECT_DIR$/application/modules/admin/views/scripts/docviolationshandling/listfrominfobusiness.phtml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxswitchbutton.js" afterPath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxswitchbutton.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/admin/views/scripts/sysusergroup/list.phtml" afterPath="$PROJECT_DIR$/application/modules/admin/views/scripts/sysusergroup/list.phtml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/default/views/scripts/docdiary/list.phtml" afterPath="$PROJECT_DIR$/application/modules/default/views/scripts/docdiary/list.phtml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/admin/views/scripts/mastersanction/list.phtml" afterPath="$PROJECT_DIR$/application/modules/admin/views/scripts/mastersanction/list.phtml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxgrid.selection.js" afterPath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxgrid.selection.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/models/base/InfoBusinessBase.php" afterPath="$PROJECT_DIR$/application/models/base/InfoBusinessBase.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/admin/views/scripts/docviolationshandling/add.phtml" afterPath="$PROJECT_DIR$/application/modules/admin/views/scripts/docviolationshandling/add.phtml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxknockout.js" afterPath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxknockout.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/master/views/scripts/docviolationshandling/listownerlessgoods.phtml" afterPath="$PROJECT_DIR$/application/modules/master/views/scripts/docviolationshandling/listownerlessgoods.phtml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxdatatable.js" afterPath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxdatatable.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/master/views/scripts/docprintallocation/list_1.phtml" afterPath="$PROJECT_DIR$/application/modules/master/views/scripts/docprintallocation/list_1.phtml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/master/views/scripts/docitemshandling/listtt.phtml" afterPath="$PROJECT_DIR$/application/modules/master/views/scripts/docitemshandling/listtt.phtml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxprogressbar.js" afterPath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxprogressbar.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/admin/views/scripts/docviolationshandling/listfromprintrecords.phtml" afterPath="$PROJECT_DIR$/application/modules/admin/views/scripts/docviolationshandling/listfromprintrecords.phtml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxtreegrid.js" afterPath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxtreegrid.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxgrid.columnsreorder.js" afterPath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxgrid.columnsreorder.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/default/controllers/IndexController.php" afterPath="$PROJECT_DIR$/application/modules/default/controllers/IndexController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxdropdownbutton.js" afterPath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxdropdownbutton.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/leader/views/scripts/docprintallocation/list_1.phtml" afterPath="$PROJECT_DIR$/application/modules/leader/views/scripts/docprintallocation/list_1.phtml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/leader/views/scripts/docviolationshandling/list.phtml" afterPath="$PROJECT_DIR$/application/modules/leader/views/scripts/docviolationshandling/list.phtml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxgrid.aggregates.js" afterPath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxgrid.aggregates.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxgrid.columnsresize.js" afterPath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxgrid.columnsresize.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/admin/views/scripts/sysuser/list.phtml" afterPath="$PROJECT_DIR$/application/modules/admin/views/scripts/sysuser/list.phtml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/leader/views/scripts/docitemshandling/listtt.phtml" afterPath="$PROJECT_DIR$/application/modules/leader/views/scripts/docitemshandling/listtt.phtml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/master/views/scripts/docprintcreate/add.phtml" afterPath="$PROJECT_DIR$/application/modules/master/views/scripts/docprintcreate/add.phtml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxresponse.js" afterPath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxresponse.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/admin/views/scripts/masterprint/list.phtml" afterPath="$PROJECT_DIR$/application/modules/admin/views/scripts/masterprint/list.phtml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/admin/views/scripts/sysprivileges/list.phtml" afterPath="$PROJECT_DIR$/application/modules/admin/views/scripts/sysprivileges/list.phtml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxrating.js" afterPath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxrating.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxnavigationbar.js" afterPath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxnavigationbar.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxmenu.js" afterPath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxmenu.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/admin/views/scripts/masteritemscondition/list.phtml" afterPath="$PROJECT_DIR$/application/modules/admin/views/scripts/masteritemscondition/list.phtml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/leader/layouts/scripts/default.phtml" afterPath="$PROJECT_DIR$/application/modules/leader/layouts/scripts/default.phtml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxnotification.js" afterPath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxnotification.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/admin/views/scripts/docitemshandling/edit.phtml" afterPath="$PROJECT_DIR$/application/modules/admin/views/scripts/docitemshandling/edit.phtml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxwindow.js" afterPath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxwindow.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxnumberinput.js" afterPath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxnumberinput.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/master/views/scripts/docprintpayment/list.phtml" afterPath="$PROJECT_DIR$/application/modules/master/views/scripts/docprintpayment/list.phtml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/master/views/scripts/docviolationshandling/listfromprintrecords.phtml" afterPath="$PROJECT_DIR$/application/modules/master/views/scripts/docviolationshandling/listfromprintrecords.phtml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxlistmenu.js" afterPath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxlistmenu.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/leader/views/scripts/docviolationshandling/listfromprintrecords.phtml" afterPath="$PROJECT_DIR$/application/modules/leader/views/scripts/docviolationshandling/listfromprintrecords.phtml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxchart.rangeselector.js" afterPath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxchart.rangeselector.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxbuttons.js" afterPath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxbuttons.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxcheckbox.js" afterPath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxcheckbox.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxtreemap.js" afterPath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxtreemap.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/default/controllers/ReportController.php" afterPath="$PROJECT_DIR$/application/modules/default/controllers/ReportController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxgrid.storage.js" afterPath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxgrid.storage.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/admin/views/scripts/infobusiness/edit.phtml" afterPath="$PROJECT_DIR$/application/modules/admin/views/scripts/infobusiness/edit.phtml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/admin/views/scripts/docitemshandling/list.phtml" afterPath="$PROJECT_DIR$/application/modules/admin/views/scripts/docitemshandling/list.phtml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/master/views/scripts/infobusiness/edit.phtml" afterPath="$PROJECT_DIR$/application/modules/master/views/scripts/infobusiness/edit.phtml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxdraw.js" afterPath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxdraw.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/admin/views/scripts/docviolationshandling/list.phtml" afterPath="$PROJECT_DIR$/application/modules/admin/views/scripts/docviolationshandling/list.phtml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxgauge.js" afterPath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxgauge.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxdatetimeinput.js" afterPath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxdatetimeinput.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/leader/views/scripts/docprintcreate/list.phtml" afterPath="$PROJECT_DIR$/application/modules/leader/views/scripts/docprintcreate/list.phtml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/leader/controllers/ReportController.php" afterPath="$PROJECT_DIR$/application/modules/leader/controllers/ReportController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/admin/views/scripts/infoschedule/list.phtml" afterPath="$PROJECT_DIR$/application/modules/admin/views/scripts/infoschedule/list.phtml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/master/views/scripts/docviolationshandling/listfrominfobusiness.phtml" afterPath="$PROJECT_DIR$/application/modules/master/views/scripts/docviolationshandling/listfrominfobusiness.phtml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxlistbox.js" afterPath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxlistbox.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/master/views/scripts/infobusiness/list.phtml" afterPath="$PROJECT_DIR$/application/modules/master/views/scripts/infobusiness/list.phtml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxcalendar.js" afterPath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxcalendar.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/admin/views/scripts/docitemshandling/listtt.phtml" afterPath="$PROJECT_DIR$/application/modules/admin/views/scripts/docitemshandling/listtt.phtml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/default/views/scripts/docviolationshandling/add.phtml" afterPath="$PROJECT_DIR$/application/modules/default/views/scripts/docviolationshandling/add.phtml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/master/views/scripts/docdiary/list.phtml" afterPath="$PROJECT_DIR$/application/modules/master/views/scripts/docdiary/list.phtml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/admin/views/scripts/infoschedulecheck/edit.phtml" afterPath="$PROJECT_DIR$/application/modules/admin/views/scripts/infoschedulecheck/edit.phtml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxangular.js" afterPath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxangular.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxsplitter.js" afterPath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxsplitter.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxdropdownlist.js" afterPath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxdropdownlist.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/master/views/scripts/infoschedulecheck/edit.phtml" afterPath="$PROJECT_DIR$/application/modules/master/views/scripts/infoschedulecheck/edit.phtml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxbulletchart.js" afterPath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxbulletchart.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxdocking.js" afterPath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxdocking.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/admin/views/scripts/infobusiness/list.phtml" afterPath="$PROJECT_DIR$/application/modules/admin/views/scripts/infobusiness/list.phtml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/master/controllers/InfoBusinessController.php" afterPath="$PROJECT_DIR$/application/modules/master/controllers/InfoBusinessController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/admin/views/scripts/infoschedulecheck/list.phtml" afterPath="$PROJECT_DIR$/application/modules/admin/views/scripts/infoschedulecheck/list.phtml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/admin/views/scripts/docdiary/edit.phtml" afterPath="$PROJECT_DIR$/application/modules/admin/views/scripts/docdiary/edit.phtml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/admin/views/scripts/docprintpayment/list.phtml" afterPath="$PROJECT_DIR$/application/modules/admin/views/scripts/docprintpayment/list.phtml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxtree.js" afterPath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxtree.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxdata.js" afterPath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxdata.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/admin/views/scripts/masterviolation/list.phtml" afterPath="$PROJECT_DIR$/application/modules/admin/views/scripts/masterviolation/list.phtml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxgrid.grouping.js" afterPath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxgrid.grouping.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/master/views/scripts/report/mangementuseprint.phtml" afterPath="$PROJECT_DIR$/application/modules/master/views/scripts/report/mangementuseprint.phtml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/default/views/scripts/infoschedule/add.phtml" afterPath="$PROJECT_DIR$/application/modules/default/views/scripts/infoschedule/add.phtml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/leader/views/scripts/infobusiness/add.phtml" afterPath="$PROJECT_DIR$/application/modules/leader/views/scripts/infobusiness/add.phtml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxgrid.sort.js" afterPath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxgrid.sort.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/default/views/scripts/docitemshandling/edit.phtml" afterPath="$PROJECT_DIR$/application/modules/default/views/scripts/docitemshandling/edit.phtml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/leader/views/scripts/docdiary/edit.phtml" afterPath="$PROJECT_DIR$/application/modules/leader/views/scripts/docdiary/edit.phtml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/admin/controllers/IndexController.php" afterPath="$PROJECT_DIR$/application/modules/admin/controllers/IndexController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/admin/controllers/ServiceController.php" afterPath="$PROJECT_DIR$/application/modules/admin/controllers/ServiceController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/leader/views/scripts/docitemshandling/list.phtml" afterPath="$PROJECT_DIR$/application/modules/leader/views/scripts/docitemshandling/list.phtml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/master/views/scripts/docitemshandling/list.phtml" afterPath="$PROJECT_DIR$/application/modules/master/views/scripts/docitemshandling/list.phtml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/default/views/scripts/infoschedulecheck/list.phtml" afterPath="$PROJECT_DIR$/application/modules/default/views/scripts/infoschedulecheck/list.phtml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/master/views/scripts/docprintcreate/list.phtml" afterPath="$PROJECT_DIR$/application/modules/master/views/scripts/docprintcreate/list.phtml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/modules/admin/views/scripts/docviolationshandling/addownerlessgoods.phtml" afterPath="$PROJECT_DIR$/application/modules/admin/views/scripts/docviolationshandling/addownerlessgoods.phtml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxgrid.pager.js" afterPath="$PROJECT_DIR$/public_html/js/jqwidgets/jqxgrid.pager.js" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -193,13 +193,12 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
-    <leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file leaf-file-name="application.ini" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/application/configs/application.ini">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="191">
+            <state relative-caret-position="459">
               <caret line="27" column="34" lean-forward="false" selection-start-line="27" selection-start-column="30" selection-end-line="27" selection-end-column="34" />
               <folding />
             </state>
@@ -209,36 +208,50 @@
       <file leaf-file-name="InfoBusiness.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/application/models/InfoBusiness.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="307">
-              <caret line="23" column="28" lean-forward="false" selection-start-line="23" selection-start-column="28" selection-end-line="23" selection-end-column="28" />
+            <state relative-caret-position="3485">
+              <caret line="243" column="40" lean-forward="false" selection-start-line="243" selection-start-column="40" selection-end-line="243" selection-end-column="40" />
               <folding>
-                <marker date="1458897790000" expanded="true" signature="501:559" ph="UPDATE info_... " />
-                <marker date="1458897790000" expanded="true" signature="763:831" ph="select * fro... info_business" />
-                <marker date="1458897790000" expanded="true" signature="3237:3336" ph="select * fro... info_business" />
-                <marker date="1458897790000" expanded="true" signature="5735:5775" ph="select * fro... info_business" />
-                <marker date="1458897790000" expanded="true" signature="8199:8282" ph="select id fr... info_business" />
-                <marker date="1458897790000" expanded="true" signature="8614:8691" ph="select id,co... info_business" />
-                <marker date="1458897790000" expanded="true" signature="9023:9095" ph="select id fr... info_business" />
-                <marker date="1458897790000" expanded="true" signature="9425:9482" ph="select id,ty... info_business" />
-                <marker date="1458897790000" expanded="true" signature="9822:9906" ph="select id,in... doc_violations_handling" />
-                <marker date="1458897790000" expanded="true" signature="10241:10283" ph="select * fro... info_business" />
+                <element signature="e#3499#5582#0#PHP" expanded="false" />
+                <marker date="1502443063109" expanded="true" signature="501:559" ph="UPDATE info_... " />
+                <marker date="1502443063109" expanded="true" signature="763:831" ph="select * fro... info_business" />
+                <marker date="1502443063109" expanded="true" signature="3237:3336" ph="select * fro... info_business" />
+                <marker date="1502443063109" expanded="true" signature="5735:5776" ph="select * fro... info_business" />
+                <marker date="1502443063109" expanded="true" signature="5735:5777" ph="select * fro... info_business" />
+                <marker date="1502443063109" expanded="true" signature="8201:8284" ph="select id fr... info_business" />
+                <marker date="1502443063109" expanded="true" signature="8616:8693" ph="select id,co... info_business" />
+                <marker date="1502443063109" expanded="true" signature="9025:9097" ph="select id fr... info_business" />
+                <marker date="1502443063109" expanded="true" signature="9427:9484" ph="select id,ty... info_business" />
+                <marker date="1502443063109" expanded="true" signature="9824:9908" ph="select id,in... doc_violations_handling" />
+                <marker date="1502443063109" expanded="true" signature="10243:10285" ph="select * fro... info_business" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="InfoBusinessBase.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="TypecommodityController.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/application/modules/admin/controllers/TypecommodityController.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="340">
+              <caret line="44" column="39" lean-forward="true" selection-start-line="44" selection-start-column="39" selection-end-line="44" selection-end-column="39" />
+              <folding>
+                <marker date="1502092595187" expanded="true" signature="3873:3886" ph="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="InfoBusinessBase.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/application/models/base/InfoBusinessBase.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="616">
-              <caret line="425" column="7" lean-forward="false" selection-start-line="381" selection-start-column="3" selection-end-line="425" selection-end-column="7" />
+            <state relative-caret-position="1768">
+              <caret line="104" column="65" lean-forward="false" selection-start-line="104" selection-start-column="52" selection-end-line="104" selection-end-column="65" />
               <folding>
                 <element signature="n#find#0;n#Model_InfoBusinessMapperBase#0;n#!!top" expanded="false" />
                 <element signature="n#fetchAllArray#0;n#Model_InfoBusinessMapperBase#0;n#!!top" expanded="false" />
                 <element signature="n#fetchPaging#0;n#Model_InfoBusinessMapperBase#0;n#!!top" expanded="false" />
                 <element signature="n#createCombo#0;n#Model_InfoBusinessMapperBase#0;n#!!top" expanded="false" />
-                <marker date="1501941532000" expanded="true" signature="17083:17141" ph="SELECT count... info_business" />
-                <marker date="1501941532000" expanded="true" signature="17225:17352" ph="SELECT * FRO... info_business" />
+                <marker date="1502092595138" expanded="true" signature="17083:17141" ph="SELECT count... info_business" />
+                <marker date="1502092595138" expanded="true" signature="17225:17352" ph="SELECT * FRO... info_business" />
               </folding>
             </state>
           </provider>
@@ -250,6 +263,7 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/application/models/base/InfoBusinessBase.php" />
+        <option value="$PROJECT_DIR$/application/models/InfoBusiness.php" />
       </list>
     </option>
   </component>
@@ -260,9 +274,9 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" />
-  <component name="ProjectFrameBounds">
-    <option name="width" value="1440" />
-    <option name="height" value="900" />
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="width" value="1380" />
+    <option name="height" value="788" />
   </component>
   <component name="ProjectView">
     <navigator currentView="ProjectPane" proportions="" version="1">
@@ -281,97 +295,64 @@
     <panes>
       <pane id="ProjectPane">
         <subPane>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="qltt" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="qltt" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="qltt" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="qltt" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="application" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="qltt" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="qltt" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="application" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="models" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="qltt" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="qltt" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="application" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="models" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="base" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="qltt" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="qltt" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="application" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="configs" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-          </PATH>
+          <expand>
+            <path>
+              <item name="qltt" type="b2602c69:ProjectViewProjectNode" />
+              <item name="qltt" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="qltt" type="b2602c69:ProjectViewProjectNode" />
+              <item name="qltt" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="application" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="qltt" type="b2602c69:ProjectViewProjectNode" />
+              <item name="qltt" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="application" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="modules" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="qltt" type="b2602c69:ProjectViewProjectNode" />
+              <item name="qltt" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="application" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="modules" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="admin" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="qltt" type="b2602c69:ProjectViewProjectNode" />
+              <item name="qltt" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="application" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="modules" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="admin" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="controllers" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="qltt" type="b2602c69:ProjectViewProjectNode" />
+              <item name="qltt" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="DB" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="qltt" type="b2602c69:ProjectViewProjectNode" />
+              <item name="qltt" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="Documents" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="qltt" type="b2602c69:ProjectViewProjectNode" />
+              <item name="qltt" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="public_html" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+          </expand>
+          <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
       <pane id="Scratches" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="full.screen.before.presentation.mode" value="true" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -389,25 +370,8 @@
     <option name="remove_strategy" value="false" />
   </component>
   <component name="SvnConfiguration" cleanupOnStartRun="true">
-    <configuration>$USER_HOME$/.subversion</configuration>
-  </component>
-  <component name="SvnFileUrlMappingImpl">
-    <option name="myMappingRoots">
-      <list>
-        <SvnCopyRootSimple>
-          <option name="myVcsRoot" value="$PROJECT_DIR$" />
-          <option name="myCopyRoot" value="$PROJECT_DIR$" />
-        </SvnCopyRootSimple>
-      </list>
-    </option>
-    <option name="myMoreRealMappingRoots">
-      <list>
-        <SvnCopyRootSimple>
-          <option name="myVcsRoot" value="$PROJECT_DIR$" />
-          <option name="myCopyRoot" value="$PROJECT_DIR$" />
-        </SvnCopyRootSimple>
-      </list>
-    </option>
+    <configuration>C:\Users\lam.le\AppData\Roaming\Subversion</configuration>
+    <supportedVersion>125</supportedVersion>
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -417,51 +381,355 @@
       <option name="presentableId" value="Default" />
       <updated>1501938632092</updated>
       <workItem from="1501938633267" duration="525000" />
+      <workItem from="1502094714273" duration="6538000" />
+      <workItem from="1502240726844" duration="4377000" />
+      <workItem from="1502361229905" duration="5365000" />
+      <workItem from="1502674584277" duration="8009000" />
+      <workItem from="1502779097695" duration="1956000" />
+      <workItem from="1502858235723" duration="17000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="525000" />
+    <option name="totallyTimeSpent" value="26787000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="0" width="1440" height="900" extended-state="0" />
+    <frame x="-8" y="-8" width="1376" height="744" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24964234" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2514706" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
+    <layout-to-restore>
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+    </layout-to-restore>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
-    <option name="processedProjectFiles" value="true" />
+    <option name="version" value="1" />
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager />
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="php">
+          <url>file://$PROJECT_DIR$/application/models/base/InfoBusinessBase.php</url>
+          <line>283</line>
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="php">
+          <url>file://$PROJECT_DIR$/application/models/base/InfoBusinessBase.php</url>
+          <line>9</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+      <option name="time" value="2" />
+    </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/application/configs/application.ini">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="191">
+        <state relative-caret-position="459">
           <caret line="27" column="34" lean-forward="false" selection-start-line="27" selection-start-column="30" selection-end-line="27" selection-end-column="34" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/models/InfoBusiness.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="4131">
+          <caret line="243" column="40" lean-forward="true" selection-start-line="243" selection-start-column="40" selection-end-line="243" selection-end-column="40" />
+          <folding>
+            <element signature="e#3499#5582#0#PHP" expanded="false" />
+            <marker date="1502443063109" expanded="true" signature="501:559" ph="UPDATE info_... " />
+            <marker date="1502443063109" expanded="true" signature="763:831" ph="select * fro... info_business" />
+            <marker date="1502443063109" expanded="true" signature="3237:3336" ph="select * fro... info_business" />
+            <marker date="1502443063109" expanded="true" signature="5735:5776" ph="select * fro... info_business" />
+            <marker date="1502443063109" expanded="true" signature="5735:5777" ph="select * fro... info_business" />
+            <marker date="1502443063109" expanded="true" signature="8201:8284" ph="select id fr... info_business" />
+            <marker date="1502443063109" expanded="true" signature="8616:8693" ph="select id,co... info_business" />
+            <marker date="1502443063109" expanded="true" signature="9025:9097" ph="select id fr... info_business" />
+            <marker date="1502443063109" expanded="true" signature="9427:9484" ph="select id,ty... info_business" />
+            <marker date="1502443063109" expanded="true" signature="9824:9908" ph="select id,in... doc_violations_handling" />
+            <marker date="1502443063109" expanded="true" signature="10243:10285" ph="select * fro... info_business" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/models/base/InfoBusinessBase.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1768">
+          <caret line="104" column="65" lean-forward="false" selection-start-line="104" selection-start-column="52" selection-end-line="104" selection-end-column="65" />
+          <folding>
+            <element signature="n#find#0;n#Model_InfoBusinessMapperBase#0;n#!!top" expanded="false" />
+            <element signature="n#fetchAllArray#0;n#Model_InfoBusinessMapperBase#0;n#!!top" expanded="false" />
+            <element signature="n#fetchPaging#0;n#Model_InfoBusinessMapperBase#0;n#!!top" expanded="false" />
+            <element signature="n#createCombo#0;n#Model_InfoBusinessMapperBase#0;n#!!top" expanded="false" />
+            <marker date="1502092595138" expanded="true" signature="17083:17141" ph="SELECT count... info_business" />
+            <marker date="1502092595138" expanded="true" signature="17225:17352" ph="SELECT * FRO... info_business" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/modules/admin/controllers/TypecommodityController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="663">
+          <caret line="39" column="37" lean-forward="true" selection-start-line="39" selection-start-column="37" selection-end-line="39" selection-end-column="37" />
+          <folding>
+            <marker date="1502092595187" expanded="true" signature="3873:3886" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/configs/application.ini">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="459">
+          <caret line="27" column="34" lean-forward="false" selection-start-line="27" selection-start-column="30" selection-end-line="27" selection-end-column="34" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/models/base/InfoBusinessBase.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1768">
+          <caret line="104" column="65" lean-forward="false" selection-start-line="104" selection-start-column="52" selection-end-line="104" selection-end-column="65" />
+          <folding>
+            <element signature="n#find#0;n#Model_InfoBusinessMapperBase#0;n#!!top" expanded="false" />
+            <element signature="n#fetchAllArray#0;n#Model_InfoBusinessMapperBase#0;n#!!top" expanded="false" />
+            <element signature="n#fetchPaging#0;n#Model_InfoBusinessMapperBase#0;n#!!top" expanded="false" />
+            <element signature="n#createCombo#0;n#Model_InfoBusinessMapperBase#0;n#!!top" expanded="false" />
+            <marker date="1502092595138" expanded="true" signature="17083:17141" ph="SELECT count... info_business" />
+            <marker date="1502092595138" expanded="true" signature="17225:17352" ph="SELECT * FRO... info_business" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/models/InfoBusiness.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3672">
+          <caret line="216" column="30" lean-forward="true" selection-start-line="216" selection-start-column="30" selection-end-line="216" selection-end-column="30" />
+          <folding>
+            <element signature="e#3499#5582#0#PHP" expanded="false" />
+            <marker date="1502443063109" expanded="true" signature="501:559" ph="UPDATE info_... " />
+            <marker date="1502443063109" expanded="true" signature="763:831" ph="select * fro... info_business" />
+            <marker date="1502443063109" expanded="true" signature="3237:3336" ph="select * fro... info_business" />
+            <marker date="1502443063109" expanded="true" signature="5735:5776" ph="select * fro... info_business" />
+            <marker date="1502443063109" expanded="true" signature="5735:5777" ph="select * fro... info_business" />
+            <marker date="1502443063109" expanded="true" signature="8201:8284" ph="select id fr... info_business" />
+            <marker date="1502443063109" expanded="true" signature="8616:8693" ph="select id,co... info_business" />
+            <marker date="1502443063109" expanded="true" signature="9025:9097" ph="select id fr... info_business" />
+            <marker date="1502443063109" expanded="true" signature="9427:9484" ph="select id,ty... info_business" />
+            <marker date="1502443063109" expanded="true" signature="9824:9908" ph="select id,in... doc_violations_handling" />
+            <marker date="1502443063109" expanded="true" signature="10243:10285" ph="select * fro... info_business" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/configs/application.ini">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="459">
+          <caret line="27" column="34" lean-forward="false" selection-start-line="27" selection-start-column="30" selection-end-line="27" selection-end-column="34" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/models/base/InfoBusinessBase.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1768">
+          <caret line="104" column="65" lean-forward="false" selection-start-line="104" selection-start-column="52" selection-end-line="104" selection-end-column="65" />
+          <folding>
+            <element signature="n#find#0;n#Model_InfoBusinessMapperBase#0;n#!!top" expanded="false" />
+            <element signature="n#fetchAllArray#0;n#Model_InfoBusinessMapperBase#0;n#!!top" expanded="false" />
+            <element signature="n#fetchPaging#0;n#Model_InfoBusinessMapperBase#0;n#!!top" expanded="false" />
+            <element signature="n#createCombo#0;n#Model_InfoBusinessMapperBase#0;n#!!top" expanded="false" />
+            <marker date="1502092595138" expanded="true" signature="17083:17141" ph="SELECT count... info_business" />
+            <marker date="1502092595138" expanded="true" signature="17225:17352" ph="SELECT * FRO... info_business" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/models/InfoBusiness.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3298">
+          <caret line="194" column="22" lean-forward="true" selection-start-line="194" selection-start-column="22" selection-end-line="194" selection-end-column="22" />
+          <folding>
+            <element signature="e#3499#5582#0#PHP" expanded="false" />
+            <marker date="1502443063109" expanded="true" signature="501:559" ph="UPDATE info_... " />
+            <marker date="1502443063109" expanded="true" signature="763:831" ph="select * fro... info_business" />
+            <marker date="1502443063109" expanded="true" signature="3237:3336" ph="select * fro... info_business" />
+            <marker date="1502443063109" expanded="true" signature="5735:5776" ph="select * fro... info_business" />
+            <marker date="1502443063109" expanded="true" signature="5735:5777" ph="select * fro... info_business" />
+            <marker date="1502443063109" expanded="true" signature="8201:8284" ph="select id fr... info_business" />
+            <marker date="1502443063109" expanded="true" signature="8616:8693" ph="select id,co... info_business" />
+            <marker date="1502443063109" expanded="true" signature="9025:9097" ph="select id fr... info_business" />
+            <marker date="1502443063109" expanded="true" signature="9427:9484" ph="select id,ty... info_business" />
+            <marker date="1502443063109" expanded="true" signature="9824:9908" ph="select id,in... doc_violations_handling" />
+            <marker date="1502443063109" expanded="true" signature="10243:10285" ph="select * fro... info_business" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/configs/application.ini">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="459">
+          <caret line="27" column="34" lean-forward="false" selection-start-line="27" selection-start-column="30" selection-end-line="27" selection-end-column="34" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/models/base/InfoBusinessBase.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1768">
+          <caret line="104" column="65" lean-forward="false" selection-start-line="104" selection-start-column="52" selection-end-line="104" selection-end-column="65" />
+          <folding>
+            <element signature="n#find#0;n#Model_InfoBusinessMapperBase#0;n#!!top" expanded="false" />
+            <element signature="n#fetchAllArray#0;n#Model_InfoBusinessMapperBase#0;n#!!top" expanded="false" />
+            <element signature="n#fetchPaging#0;n#Model_InfoBusinessMapperBase#0;n#!!top" expanded="false" />
+            <element signature="n#createCombo#0;n#Model_InfoBusinessMapperBase#0;n#!!top" expanded="false" />
+            <marker date="1502092595138" expanded="true" signature="17083:17141" ph="SELECT count... info_business" />
+            <marker date="1502092595138" expanded="true" signature="17225:17352" ph="SELECT * FRO... info_business" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/models/InfoBusiness.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="833">
+          <caret line="49" column="44" lean-forward="false" selection-start-line="49" selection-start-column="40" selection-end-line="49" selection-end-column="44" />
+          <folding>
+            <element signature="e#3499#5582#0#PHP" expanded="false" />
+            <marker date="1502443063109" expanded="true" signature="501:559" ph="UPDATE info_... " />
+            <marker date="1502443063109" expanded="true" signature="763:831" ph="select * fro... info_business" />
+            <marker date="1502443063109" expanded="true" signature="3237:3336" ph="select * fro... info_business" />
+            <marker date="1502443063109" expanded="true" signature="5735:5776" ph="select * fro... info_business" />
+            <marker date="1502443063109" expanded="true" signature="5735:5777" ph="select * fro... info_business" />
+            <marker date="1502443063109" expanded="true" signature="8201:8284" ph="select id fr... info_business" />
+            <marker date="1502443063109" expanded="true" signature="8616:8693" ph="select id,co... info_business" />
+            <marker date="1502443063109" expanded="true" signature="9025:9097" ph="select id fr... info_business" />
+            <marker date="1502443063109" expanded="true" signature="9427:9484" ph="select id,ty... info_business" />
+            <marker date="1502443063109" expanded="true" signature="9824:9908" ph="select id,in... doc_violations_handling" />
+            <marker date="1502443063109" expanded="true" signature="10243:10285" ph="select * fro... info_business" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/configs/application.ini">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="459">
+          <caret line="27" column="34" lean-forward="false" selection-start-line="27" selection-start-column="30" selection-end-line="27" selection-end-column="34" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/models/base/InfoBusinessBase.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1768">
+          <caret line="104" column="65" lean-forward="false" selection-start-line="104" selection-start-column="52" selection-end-line="104" selection-end-column="65" />
+          <folding>
+            <element signature="n#find#0;n#Model_InfoBusinessMapperBase#0;n#!!top" expanded="false" />
+            <element signature="n#fetchAllArray#0;n#Model_InfoBusinessMapperBase#0;n#!!top" expanded="false" />
+            <element signature="n#fetchPaging#0;n#Model_InfoBusinessMapperBase#0;n#!!top" expanded="false" />
+            <element signature="n#createCombo#0;n#Model_InfoBusinessMapperBase#0;n#!!top" expanded="false" />
+            <marker date="1502092595138" expanded="true" signature="17083:17141" ph="SELECT count... info_business" />
+            <marker date="1502092595138" expanded="true" signature="17225:17352" ph="SELECT * FRO... info_business" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/models/InfoBusiness.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="15" column="29" lean-forward="true" selection-start-line="15" selection-start-column="29" selection-end-line="15" selection-end-column="29" />
+          <folding>
+            <element signature="e#3499#5582#0#PHP" expanded="false" />
+            <marker date="1502443063109" expanded="true" signature="501:559" ph="UPDATE info_... " />
+            <marker date="1502443063109" expanded="true" signature="763:831" ph="select * fro... info_business" />
+            <marker date="1502443063109" expanded="true" signature="3237:3336" ph="select * fro... info_business" />
+            <marker date="1502443063109" expanded="true" signature="5735:5776" ph="select * fro... info_business" />
+            <marker date="1502443063109" expanded="true" signature="5735:5777" ph="select * fro... info_business" />
+            <marker date="1502443063109" expanded="true" signature="8201:8284" ph="select id fr... info_business" />
+            <marker date="1502443063109" expanded="true" signature="8616:8693" ph="select id,co... info_business" />
+            <marker date="1502443063109" expanded="true" signature="9025:9097" ph="select id fr... info_business" />
+            <marker date="1502443063109" expanded="true" signature="9427:9484" ph="select id,ty... info_business" />
+            <marker date="1502443063109" expanded="true" signature="9824:9908" ph="select id,in... doc_violations_handling" />
+            <marker date="1502443063109" expanded="true" signature="10243:10285" ph="select * fro... info_business" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/configs/application.ini">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="459">
+          <caret line="27" column="34" lean-forward="false" selection-start-line="27" selection-start-column="30" selection-end-line="27" selection-end-column="34" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/models/InfoBusiness.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="391">
+          <caret line="23" column="28" lean-forward="false" selection-start-line="23" selection-start-column="28" selection-end-line="23" selection-end-column="28" />
+          <folding>
+            <element signature="e#3499#5582#0#PHP" expanded="false" />
+            <marker date="1502443063109" expanded="true" signature="501:559" ph="UPDATE info_... " />
+            <marker date="1502443063109" expanded="true" signature="763:831" ph="select * fro... info_business" />
+            <marker date="1502443063109" expanded="true" signature="3237:3336" ph="select * fro... info_business" />
+            <marker date="1502443063109" expanded="true" signature="5735:5776" ph="select * fro... info_business" />
+            <marker date="1502443063109" expanded="true" signature="5735:5777" ph="select * fro... info_business" />
+            <marker date="1502443063109" expanded="true" signature="8201:8284" ph="select id fr... info_business" />
+            <marker date="1502443063109" expanded="true" signature="8616:8693" ph="select id,co... info_business" />
+            <marker date="1502443063109" expanded="true" signature="9025:9097" ph="select id fr... info_business" />
+            <marker date="1502443063109" expanded="true" signature="9427:9484" ph="select id,ty... info_business" />
+            <marker date="1502443063109" expanded="true" signature="9824:9908" ph="select id,in... doc_violations_handling" />
+            <marker date="1502443063109" expanded="true" signature="10243:10285" ph="select * fro... info_business" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/models/base/InfoBusinessBase.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="6511">
+          <caret line="425" column="7" lean-forward="false" selection-start-line="381" selection-start-column="3" selection-end-line="425" selection-end-column="7" />
+          <folding>
+            <element signature="n#find#0;n#Model_InfoBusinessMapperBase#0;n#!!top" expanded="false" />
+            <element signature="n#fetchAllArray#0;n#Model_InfoBusinessMapperBase#0;n#!!top" expanded="false" />
+            <element signature="n#fetchPaging#0;n#Model_InfoBusinessMapperBase#0;n#!!top" expanded="false" />
+            <element signature="n#createCombo#0;n#Model_InfoBusinessMapperBase#0;n#!!top" expanded="false" />
+            <marker date="1502092595138" expanded="true" signature="17083:17141" ph="SELECT count... info_business" />
+            <marker date="1502092595138" expanded="true" signature="17225:17352" ph="SELECT * FRO... info_business" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -469,40 +737,59 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="268">
           <caret line="133" column="20" lean-forward="false" selection-start-line="133" selection-start-column="20" selection-end-line="133" selection-end-column="20" />
-          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/application/models/InfoBusiness.php">
+    <entry file="file://$PROJECT_DIR$/application/configs/application.ini">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="307">
-          <caret line="23" column="28" lean-forward="false" selection-start-line="23" selection-start-column="28" selection-end-line="23" selection-end-column="28" />
-          <folding>
-            <marker date="1458897790000" expanded="true" signature="501:559" ph="UPDATE info_... " />
-            <marker date="1458897790000" expanded="true" signature="763:831" ph="select * fro... info_business" />
-            <marker date="1458897790000" expanded="true" signature="3237:3336" ph="select * fro... info_business" />
-            <marker date="1458897790000" expanded="true" signature="5735:5775" ph="select * fro... info_business" />
-            <marker date="1458897790000" expanded="true" signature="8199:8282" ph="select id fr... info_business" />
-            <marker date="1458897790000" expanded="true" signature="8614:8691" ph="select id,co... info_business" />
-            <marker date="1458897790000" expanded="true" signature="9023:9095" ph="select id fr... info_business" />
-            <marker date="1458897790000" expanded="true" signature="9425:9482" ph="select id,ty... info_business" />
-            <marker date="1458897790000" expanded="true" signature="9822:9906" ph="select id,in... doc_violations_handling" />
-            <marker date="1458897790000" expanded="true" signature="10241:10283" ph="select * fro... info_business" />
-          </folding>
+        <state relative-caret-position="459">
+          <caret line="27" column="34" lean-forward="false" selection-start-line="27" selection-start-column="30" selection-end-line="27" selection-end-column="34" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/application/models/base/InfoBusinessBase.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="616">
-          <caret line="425" column="7" lean-forward="false" selection-start-line="381" selection-start-column="3" selection-end-line="425" selection-end-column="7" />
+        <state relative-caret-position="1768">
+          <caret line="104" column="65" lean-forward="false" selection-start-line="104" selection-start-column="52" selection-end-line="104" selection-end-column="65" />
           <folding>
             <element signature="n#find#0;n#Model_InfoBusinessMapperBase#0;n#!!top" expanded="false" />
             <element signature="n#fetchAllArray#0;n#Model_InfoBusinessMapperBase#0;n#!!top" expanded="false" />
             <element signature="n#fetchPaging#0;n#Model_InfoBusinessMapperBase#0;n#!!top" expanded="false" />
             <element signature="n#createCombo#0;n#Model_InfoBusinessMapperBase#0;n#!!top" expanded="false" />
-            <marker date="1501941532000" expanded="true" signature="17083:17141" ph="SELECT count... info_business" />
-            <marker date="1501941532000" expanded="true" signature="17225:17352" ph="SELECT * FRO... info_business" />
+            <marker date="1502092595138" expanded="true" signature="17083:17141" ph="SELECT count... info_business" />
+            <marker date="1502092595138" expanded="true" signature="17225:17352" ph="SELECT * FRO... info_business" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/models/InfoBusiness.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3485">
+          <caret line="243" column="40" lean-forward="false" selection-start-line="243" selection-start-column="40" selection-end-line="243" selection-end-column="40" />
+          <folding>
+            <element signature="e#3499#5582#0#PHP" expanded="false" />
+            <marker date="1502443063109" expanded="true" signature="501:559" ph="UPDATE info_... " />
+            <marker date="1502443063109" expanded="true" signature="763:831" ph="select * fro... info_business" />
+            <marker date="1502443063109" expanded="true" signature="3237:3336" ph="select * fro... info_business" />
+            <marker date="1502443063109" expanded="true" signature="5735:5776" ph="select * fro... info_business" />
+            <marker date="1502443063109" expanded="true" signature="5735:5777" ph="select * fro... info_business" />
+            <marker date="1502443063109" expanded="true" signature="8201:8284" ph="select id fr... info_business" />
+            <marker date="1502443063109" expanded="true" signature="8616:8693" ph="select id,co... info_business" />
+            <marker date="1502443063109" expanded="true" signature="9025:9097" ph="select id fr... info_business" />
+            <marker date="1502443063109" expanded="true" signature="9427:9484" ph="select id,ty... info_business" />
+            <marker date="1502443063109" expanded="true" signature="9824:9908" ph="select id,in... doc_violations_handling" />
+            <marker date="1502443063109" expanded="true" signature="10243:10285" ph="select * fro... info_business" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/modules/admin/controllers/TypecommodityController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="340">
+          <caret line="44" column="39" lean-forward="true" selection-start-line="44" selection-start-column="39" selection-end-line="44" selection-end-column="39" />
+          <folding>
+            <marker date="1502092595187" expanded="true" signature="3873:3886" ph="..." />
           </folding>
         </state>
       </provider>
