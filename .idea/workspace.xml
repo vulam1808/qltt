@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" readonly="true" id="95308966-9a70-409b-9a90-6ebacbf29b42" name="Default" comment="">
+    <list default="true" readonly="true" id="bc43ff9c-bee1-48e7-b8d5-d7aab68e3adb" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/configs/application.ini" afterPath="$PROJECT_DIR$/application/configs/application.ini" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/models/Doc_Diary.php" afterPath="$PROJECT_DIR$/application/models/Doc_Diary.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/models/Doc_Items_Handling.php" afterPath="$PROJECT_DIR$/application/models/Doc_Items_Handling.php" />
@@ -198,173 +198,30 @@
   </component>
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="InfoBusiness.php" pinned="false" current-in-tab="false">
+    <leaf>
+      <file leaf-file-name="InfoBusiness.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/application/models/InfoBusiness.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="314">
-              <caret line="115" column="37" lean-forward="false" selection-start-line="115" selection-start-column="20" selection-end-line="115" selection-end-column="37" />
-              <folding>
-                <element signature="n#fetchAll#0;n#Model_InfoBusinessMapper#0;n#!!top" expanded="false" />
-                <element signature="n#fetchAllByUser#0;n#Model_InfoBusinessMapper#0;n#!!top" expanded="false" />
-                <element signature="n#fetchAll_REPORT#0;n#Model_InfoBusinessMapper#0;n#!!top" expanded="false" />
-                <element signature="n#findidbyname1#0;n#Model_InfoBusinessMapper#0;n#!!top" expanded="false" />
-                <element signature="n#findidbycode#0;n#Model_InfoBusinessMapper#0;n#!!top" expanded="false" />
-                <element signature="n#findidbyname#0;n#Model_InfoBusinessMapper#0;n#!!top" expanded="false" />
-                <element signature="n#findtypebusinessbyid#0;n#Model_InfoBusinessMapper#0;n#!!top" expanded="false" />
-                <element signature="n#finddocviolationsbyid#0;n#Model_InfoBusinessMapper#0;n#!!top" expanded="false" />
-                <element signature="n#findbusinessbyid#0;n#Model_InfoBusinessMapper#0;n#!!top" expanded="false" />
-                <marker date="1502529550000" expanded="true" signature="501:559" ph="UPDATE info_... " />
-                <marker date="1502529550000" expanded="true" signature="763:831" ph="select * fro... info_business" />
-                <marker date="1502529550000" expanded="true" signature="3237:3336" ph="select * fro... info_business" />
-                <marker date="1502529550000" expanded="true" signature="5744:5844" ph="select * fro... info_business" />
-                <marker date="1502529550000" expanded="true" signature="8243:8283" ph="select * fro... info_business" />
-                <marker date="1502529550000" expanded="true" signature="10707:10790" ph="select id fr... info_business" />
-                <marker date="1502529550000" expanded="true" signature="11122:11199" ph="select id,co... info_business" />
-                <marker date="1502529550000" expanded="true" signature="11531:11603" ph="select id fr... info_business" />
-                <marker date="1502529550000" expanded="true" signature="11933:11990" ph="select id,ty... info_business" />
-                <marker date="1502529550000" expanded="true" signature="12330:12414" ph="select id,in... doc_violations_handling" />
-                <marker date="1502529550000" expanded="true" signature="12749:12791" ph="select * fro... info_business" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="InfobusinessController.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/application/modules/default/controllers/InfobusinessController.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="302">
-              <caret line="83" column="58" lean-forward="false" selection-start-line="83" selection-start-column="58" selection-end-line="83" selection-end-column="58" />
-              <folding>
-                <element signature="n#listAction#0;n#InfoBusinessController#0;n#!!top" expanded="false" />
-                <element signature="n#serviceAction#0;n#InfoBusinessController#0;n#!!top" expanded="false" />
-                <element signature="n#addAction#0;n#InfoBusinessController#0;n#!!top" expanded="false" />
-                <element signature="n#editAction#0;n#InfoBusinessController#0;n#!!top" expanded="false" />
-                <element signature="n#checkdocviolationsAction#0;n#InfoBusinessController#0;n#!!top" expanded="false" />
-                <element signature="n#confirmdeleteAction#0;n#InfoBusinessController#0;n#!!top" expanded="false" />
-                <element signature="n#deleteAction#0;n#InfoBusinessController#0;n#!!top" expanded="false" />
-                <element signature="n#checkcodeAction#0;n#InfoBusinessController#0;n#!!top" expanded="false" />
-                <element signature="n#findbusinessbyidAction#0;n#InfoBusinessController#0;n#!!top" expanded="false" />
-                <marker date="1502529561000" expanded="true" signature="23839:23852" ph="..." />
-                <marker date="1502529561000" expanded="true" signature="24081:24094" ph="..." />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Doc_Violations_HandlingBase.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/application/models/base/Doc_Violations_HandlingBase.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="241">
-              <caret line="241" column="37" lean-forward="false" selection-start-line="241" selection-start-column="37" selection-end-line="241" selection-end-column="37" />
-              <folding>
-                <marker date="1501988238000" expanded="true" signature="9714:9782" ph="SELECT count... Doc_Violations_Handling" />
-                <marker date="1501988238000" expanded="true" signature="9866:10003" ph="SELECT * FRO... Doc_Violations_Handling" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="list.phtml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/application/modules/default/views/scripts/infobusiness/list.phtml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="380">
-              <caret line="41" column="40" lean-forward="false" selection-start-line="41" selection-start-column="40" selection-end-line="41" selection-end-column="40" />
-              <folding>
-                <element signature="e#22374#32384#0#HTML" expanded="false" />
-                <element signature="e#34896#36289#0#HTML" expanded="false" />
-                <marker date="1502529985000" expanded="true" signature="6061:6073" ph="..." />
-                <marker date="1502529985000" expanded="true" signature="6197:6221" ph="..." />
-                <marker date="1502529985000" expanded="true" signature="6290:6314" ph="..." />
-                <marker date="1502529985000" expanded="true" signature="6488:6501" ph="..." />
-                <marker date="1502529985000" expanded="true" signature="6604:6617" ph="..." />
-                <marker date="1502529985000" expanded="true" signature="6736:6749" ph="..." />
-                <marker date="1502529985000" expanded="true" signature="6874:6887" ph="..." />
-                <marker date="1502529985000" expanded="true" signature="7019:7032" ph="..." />
-                <marker date="1502529985000" expanded="true" signature="7150:7163" ph="..." />
-                <marker date="1502529985000" expanded="true" signature="7279:7292" ph="..." />
-                <marker date="1502529985000" expanded="true" signature="7419:7432" ph="..." />
-                <marker date="1502529985000" expanded="true" signature="7554:7567" ph="..." />
-                <marker date="1502529985000" expanded="true" signature="7701:7714" ph="..." />
-                <marker date="1502529985000" expanded="true" signature="8154:8167" ph="..." />
-                <marker date="1502529985000" expanded="true" signature="10202:10236" ph="..." />
-                <marker date="1502529985000" expanded="true" signature="10351:10385" ph="..." />
-                <marker date="1502529985000" expanded="true" signature="10499:10533" ph="..." />
-                <marker date="1502529985000" expanded="true" signature="10647:10681" ph="..." />
-                <marker date="1502529985000" expanded="true" signature="10808:10842" ph="..." />
-                <marker date="1502529985000" expanded="true" signature="10976:11010" ph="..." />
-                <marker date="1502529985000" expanded="true" signature="11134:11168" ph="..." />
-                <marker date="1502529985000" expanded="true" signature="11297:11331" ph="..." />
-                <marker date="1502529985000" expanded="true" signature="13304:13315" ph="..." />
-                <marker date="1502529985000" expanded="true" signature="17146:17159" ph="..." />
-                <marker date="1502529985000" expanded="true" signature="17172:17190" ph="..." />
-                <marker date="1502529985000" expanded="true" signature="18773:18910" ph="..." />
-                <marker date="1502529985000" expanded="true" signature="19612:19749" ph="..." />
-                <marker date="1502529985000" expanded="true" signature="23137:23149" ph="..." />
-                <marker date="1502529985000" expanded="true" signature="23261:23285" ph="..." />
-                <marker date="1502529985000" expanded="true" signature="23346:23370" ph="..." />
-                <marker date="1502529985000" expanded="true" signature="23520:23533" ph="..." />
-                <marker date="1502529985000" expanded="true" signature="23628:23641" ph="..." />
-                <marker date="1502529985000" expanded="true" signature="23752:23765" ph="..." />
-                <marker date="1502529985000" expanded="true" signature="23881:23894" ph="..." />
-                <marker date="1502529985000" expanded="true" signature="24018:24031" ph="..." />
-                <marker date="1502529985000" expanded="true" signature="24141:24154" ph="..." />
-                <marker date="1502529985000" expanded="true" signature="24262:24275" ph="..." />
-                <marker date="1502529985000" expanded="true" signature="24394:24407" ph="..." />
-                <marker date="1502529985000" expanded="true" signature="24521:24534" ph="..." />
-                <marker date="1502529985000" expanded="true" signature="24660:24673" ph="..." />
-                <marker date="1502529985000" expanded="true" signature="25065:25078" ph="..." />
-                <marker date="1502529985000" expanded="true" signature="26899:26933" ph="..." />
-                <marker date="1502529985000" expanded="true" signature="27048:27082" ph="..." />
-                <marker date="1502529985000" expanded="true" signature="27196:27230" ph="..." />
-                <marker date="1502529985000" expanded="true" signature="27344:27378" ph="..." />
-                <marker date="1502529985000" expanded="true" signature="27505:27539" ph="..." />
-                <marker date="1502529985000" expanded="true" signature="27673:27707" ph="..." />
-                <marker date="1502529985000" expanded="true" signature="27831:27865" ph="..." />
-                <marker date="1502529985000" expanded="true" signature="27994:28028" ph="..." />
-                <marker date="1502529985000" expanded="true" signature="29853:29864" ph="..." />
-                <marker date="1502529985000" expanded="true" signature="33574:33587" ph="..." />
-                <marker date="1502529985000" expanded="true" signature="33600:33618" ph="..." />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="add.phtml" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/application/modules/default/views/scripts/infoschedulecheck/add.phtml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1723">
+            <state relative-caret-position="-4289">
               <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding>
-                <marker date="1464681611000" expanded="true" signature="13298:13352" ph="..." />
+                <marker date="1502889004000" expanded="true" signature="501:559" ph="UPDATE info_... " />
+                <marker date="1502889004000" expanded="true" signature="763:831" ph="select * fro... info_business" />
+                <marker date="1502889004000" expanded="true" signature="3485:3584" ph="select * fro... info_business" />
+                <marker date="1502889004000" expanded="true" signature="6240:6340" ph="select * fro... info_business" />
+                <marker date="1502889004000" expanded="true" signature="8739:8780" ph="select * fro... info_business" />
+                <marker date="1502889004000" expanded="true" signature="11453:11536" ph="select id fr... info_business" />
+                <marker date="1502889004000" expanded="true" signature="11868:11945" ph="select id,co... info_business" />
+                <marker date="1502889004000" expanded="true" signature="12277:12349" ph="select id fr... info_business" />
+                <marker date="1502889004000" expanded="true" signature="12679:12736" ph="select id,ty... info_business" />
+                <marker date="1502889004000" expanded="true" signature="13076:13160" ph="select id,in... doc_violations_handling" />
+                <marker date="1502889004000" expanded="true" signature="13495:13537" ph="select * fro... info_business" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
     </leaf>
-  </component>
-  <component name="FindInProjectRecents">
-    <findStrings>
-      <find>infobusiness</find>
-      <find>fetchAllByUser</find>
-      <find>type_business</find>
-      <find>initrowdetails</find>
-    </findStrings>
-  </component>
-  <component name="IdeDocumentHistory">
-    <option name="CHANGED_PATHS">
-      <list>
-        <option value="$PROJECT_DIR$/application/models/base/InfoBusinessBase.php" />
-        <option value="$PROJECT_DIR$/application/models/base/Info_Schedule_CheckBase.php" />
-        <option value="$PROJECT_DIR$/application/models/base/Doc_Violations_HandlingBase.php" />
-        <option value="$PROJECT_DIR$/application/modules/admin/views/scripts/docviolationshandling/list.phtml" />
-        <option value="$PROJECT_DIR$/application/models/base/Doc_Items_HandlingBase.php" />
-        <option value="$PROJECT_DIR$/application/models/InfoBusiness.php" />
-        <option value="$PROJECT_DIR$/application/modules/default/controllers/InfobusinessController.php" />
-        <option value="$PROJECT_DIR$/application/modules/default/views/scripts/infobusiness/list.phtml" />
-      </list>
-    </option>
   </component>
   <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
   <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER" />
@@ -392,6 +249,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -415,230 +273,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="application" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="qltt" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="qltt" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="application" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="modules" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="qltt" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="qltt" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="application" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="modules" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="default" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="qltt" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="qltt" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="application" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="modules" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="default" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="views" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="scripts" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="qltt" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="qltt" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="application" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="modules" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="default" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="views" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="scripts" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="infoschedulecheck" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="qltt" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="qltt" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="application" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="modules" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="default" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="views" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="scripts" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="infobusiness" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="qltt" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="qltt" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="application" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="modules" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="default" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="views" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="scripts" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="docitemshandling" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="qltt" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="qltt" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="application" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="modules" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="default" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="views" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="qltt" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="qltt" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="application" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="modules" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="default" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="controllers" />
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
           </PATH>
@@ -682,33 +316,13 @@
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
           </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="qltt" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="qltt" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="application" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="configs" />
-              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
-            </PATH_ELEMENT>
-          </PATH>
         </subPane>
       </pane>
-      <pane id="Scratches" />
       <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="FullScreen" value="true" />
   </component>
   <component name="RunDashboard">
@@ -750,40 +364,38 @@
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="95308966-9a70-409b-9a90-6ebacbf29b42" name="Default" comment="" />
-      <created>1501938632092</created>
+      <changelist id="bc43ff9c-bee1-48e7-b8d5-d7aab68e3adb" name="Default" comment="" />
+      <created>1502889039124</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1501938632092</updated>
-      <workItem from="1501938633267" duration="708000" />
-      <workItem from="1501987870287" duration="1155000" />
-      <workItem from="1502527673189" duration="2480000" />
+      <updated>1502889039124</updated>
+      <workItem from="1502889041430" duration="235000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="4343000" />
+    <option name="totallyTimeSpent" value="235000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25679544" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24964234" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
@@ -794,467 +406,26 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <option name="time" value="1" />
-    </breakpoint-manager>
+    <breakpoint-manager />
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/application/configs/application.ini">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="405">
-          <caret line="27" column="34" lean-forward="false" selection-start-line="27" selection-start-column="30" selection-end-line="27" selection-end-column="34" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/application/models/InfoBusiness.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="345">
-          <caret line="23" column="28" lean-forward="false" selection-start-line="23" selection-start-column="28" selection-end-line="23" selection-end-column="28" />
-          <folding>
-            <element signature="n#fetchAll#0;n#Model_InfoBusinessMapper#0;n#!!top" expanded="false" />
-            <element signature="n#fetchAllByUser#0;n#Model_InfoBusinessMapper#0;n#!!top" expanded="false" />
-            <element signature="n#fetchAll_REPORT#0;n#Model_InfoBusinessMapper#0;n#!!top" expanded="false" />
-            <element signature="n#findidbyname1#0;n#Model_InfoBusinessMapper#0;n#!!top" expanded="false" />
-            <element signature="n#findidbycode#0;n#Model_InfoBusinessMapper#0;n#!!top" expanded="false" />
-            <element signature="n#findidbyname#0;n#Model_InfoBusinessMapper#0;n#!!top" expanded="false" />
-            <element signature="n#findtypebusinessbyid#0;n#Model_InfoBusinessMapper#0;n#!!top" expanded="false" />
-            <element signature="n#finddocviolationsbyid#0;n#Model_InfoBusinessMapper#0;n#!!top" expanded="false" />
-            <element signature="n#findbusinessbyid#0;n#Model_InfoBusinessMapper#0;n#!!top" expanded="false" />
-            <marker date="1502529550000" expanded="true" signature="501:559" ph="UPDATE info_... " />
-            <marker date="1502529550000" expanded="true" signature="763:831" ph="select * fro... info_business" />
-            <marker date="1502529550000" expanded="true" signature="3237:3336" ph="select * fro... info_business" />
-            <marker date="1502529550000" expanded="true" signature="5744:5844" ph="select * fro... info_business" />
-            <marker date="1502529550000" expanded="true" signature="8243:8283" ph="select * fro... info_business" />
-            <marker date="1502529550000" expanded="true" signature="10707:10790" ph="select id fr... info_business" />
-            <marker date="1502529550000" expanded="true" signature="11122:11199" ph="select id,co... info_business" />
-            <marker date="1502529550000" expanded="true" signature="11531:11603" ph="select id fr... info_business" />
-            <marker date="1502529550000" expanded="true" signature="11933:11990" ph="select id,ty... info_business" />
-            <marker date="1502529550000" expanded="true" signature="12330:12414" ph="select id,in... doc_violations_handling" />
-            <marker date="1502529550000" expanded="true" signature="12749:12791" ph="select * fro... info_business" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/models/base/InfoBusinessBase.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="5145">
-          <caret line="385" column="34" lean-forward="false" selection-start-line="385" selection-start-column="34" selection-end-line="385" selection-end-column="34" />
-          <folding>
-            <element signature="n#find#0;n#Model_InfoBusinessMapperBase#0;n#!!top" expanded="false" />
-            <element signature="n#fetchAllArray#0;n#Model_InfoBusinessMapperBase#0;n#!!top" expanded="false" />
-            <element signature="n#fetchPaging#0;n#Model_InfoBusinessMapperBase#0;n#!!top" expanded="false" />
-            <element signature="n#createCombo#0;n#Model_InfoBusinessMapperBase#0;n#!!top" expanded="false" />
-            <marker date="1501941532000" expanded="true" signature="17083:17141" ph="SELECT count... info_business" />
-            <marker date="1501941532000" expanded="true" signature="17225:17352" ph="SELECT * FRO... info_business" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/models/base/Info_Schedule_CheckBase.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4080">
-          <caret line="272" column="7" lean-forward="false" selection-start-line="245" selection-start-column="3" selection-end-line="272" selection-end-column="7" />
-          <folding>
-            <marker date="1501987936000" expanded="true" signature="10576:10644" ph="SELECT count... Doc_Violations_Handling" />
-            <marker date="1501987936000" expanded="true" signature="10728:10865" ph="SELECT * FRO... Doc_Violations_Handling" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/models/base/Doc_Violations_HandlingBase.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3840">
-          <caret line="256" column="7" lean-forward="false" selection-start-line="231" selection-start-column="3" selection-end-line="256" selection-end-column="7" />
-          <folding>
-            <marker date="1501988238000" expanded="true" signature="9714:9782" ph="SELECT count... Doc_Violations_Handling" />
-            <marker date="1501988238000" expanded="true" signature="9866:10003" ph="SELECT * FRO... Doc_Violations_Handling" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/models/Doc_Items_Handling.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="615">
-          <caret line="41" column="0" lean-forward="false" selection-start-line="41" selection-start-column="0" selection-end-line="41" selection-end-column="0" />
-          <folding>
-            <marker date="1462529650000" expanded="true" signature="537:600" ph="UPDATE doc_i... " />
-            <marker date="1462529650000" expanded="true" signature="865:935" ph="select id fr... doc_items_handling" />
-            <marker date="1462529650000" expanded="true" signature="1256:1308" ph="select id fr... doc_items_handling" />
-            <marker date="1462529650000" expanded="true" signature="1687:2121" ph="select t1.*,... doc_items_handling" />
-            <marker date="1462529650000" expanded="true" signature="2145:2515" ph="select t1.*,... doc_items_handling" />
-            <marker date="1462529650000" expanded="true" signature="2597:2807" ph="select * fro... doc_items_handling" />
-            <marker date="1462529650000" expanded="true" signature="2835:2989" ph="select * fro... doc_items_handling" />
-            <marker date="1462529650000" expanded="true" signature="4639:5090" ph="select t1.*,... doc_items_handling" />
-            <marker date="1462529650000" expanded="true" signature="5113:5484" ph="select t1.*,... doc_items_handling" />
-            <marker date="1462529650000" expanded="true" signature="5565:5792" ph="select * fro... doc_items_handling" />
-            <marker date="1462529650000" expanded="true" signature="5819:5974" ph="select * fro... doc_items_handling" />
-            <marker date="1462529650000" expanded="true" signature="7884:8062" ph="select id,ma... doc_items_handling" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/models/base/Doc_Items_HandlingBase.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4065">
-          <caret line="271" column="7" lean-forward="false" selection-start-line="244" selection-start-column="3" selection-end-line="271" selection-end-column="7" />
-          <folding>
-            <marker date="1501988324000" expanded="true" signature="10428:10491" ph="SELECT count... Doc_Items_Handling" />
-            <marker date="1501988324000" expanded="true" signature="10575:10707" ph="SELECT * FRO... Doc_Items_Handling" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/modules/admin/views/scripts/docviolationshandling/list.phtml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="20" column="23" lean-forward="false" selection-start-line="20" selection-start-column="23" selection-end-line="20" selection-end-column="23" />
-          <folding>
-            <element signature="n#style#0;n#input#0;n#div#1;n#div#1;n#div#0;n#div#1;n#!!top" expanded="true" />
-            <element signature="e#6014#21036#0#HTML" expanded="false" />
-            <marker date="1501988282000" expanded="true" signature="8232:8243" ph="..." />
-            <marker date="1501988282000" expanded="true" signature="10628:10765" ph="..." />
-            <marker date="1501988282000" expanded="true" signature="12047:12096" ph="..." />
-            <marker date="1501988282000" expanded="true" signature="14185:14203" ph="..." />
-            <marker date="1501988282000" expanded="true" signature="15368:15386" ph="..." />
-            <marker date="1501988282000" expanded="true" signature="16890:16908" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/configs/application.ini">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="405">
-          <caret line="27" column="34" lean-forward="false" selection-start-line="27" selection-start-column="30" selection-end-line="27" selection-end-column="34" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/models/InfoBusiness.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="345">
-          <caret line="23" column="28" lean-forward="false" selection-start-line="23" selection-start-column="28" selection-end-line="23" selection-end-column="28" />
-          <folding>
-            <element signature="n#fetchAll#0;n#Model_InfoBusinessMapper#0;n#!!top" expanded="false" />
-            <element signature="n#fetchAllByUser#0;n#Model_InfoBusinessMapper#0;n#!!top" expanded="false" />
-            <element signature="n#fetchAll_REPORT#0;n#Model_InfoBusinessMapper#0;n#!!top" expanded="false" />
-            <element signature="n#findidbyname1#0;n#Model_InfoBusinessMapper#0;n#!!top" expanded="false" />
-            <element signature="n#findidbycode#0;n#Model_InfoBusinessMapper#0;n#!!top" expanded="false" />
-            <element signature="n#findidbyname#0;n#Model_InfoBusinessMapper#0;n#!!top" expanded="false" />
-            <element signature="n#findtypebusinessbyid#0;n#Model_InfoBusinessMapper#0;n#!!top" expanded="false" />
-            <element signature="n#finddocviolationsbyid#0;n#Model_InfoBusinessMapper#0;n#!!top" expanded="false" />
-            <element signature="n#findbusinessbyid#0;n#Model_InfoBusinessMapper#0;n#!!top" expanded="false" />
-            <marker date="1502529550000" expanded="true" signature="501:559" ph="UPDATE info_... " />
-            <marker date="1502529550000" expanded="true" signature="763:831" ph="select * fro... info_business" />
-            <marker date="1502529550000" expanded="true" signature="3237:3336" ph="select * fro... info_business" />
-            <marker date="1502529550000" expanded="true" signature="5744:5844" ph="select * fro... info_business" />
-            <marker date="1502529550000" expanded="true" signature="8243:8283" ph="select * fro... info_business" />
-            <marker date="1502529550000" expanded="true" signature="10707:10790" ph="select id fr... info_business" />
-            <marker date="1502529550000" expanded="true" signature="11122:11199" ph="select id,co... info_business" />
-            <marker date="1502529550000" expanded="true" signature="11531:11603" ph="select id fr... info_business" />
-            <marker date="1502529550000" expanded="true" signature="11933:11990" ph="select id,ty... info_business" />
-            <marker date="1502529550000" expanded="true" signature="12330:12414" ph="select id,in... doc_violations_handling" />
-            <marker date="1502529550000" expanded="true" signature="12749:12791" ph="select * fro... info_business" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/models/base/InfoBusinessBase.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="5145">
-          <caret line="385" column="34" lean-forward="false" selection-start-line="385" selection-start-column="34" selection-end-line="385" selection-end-column="34" />
-          <folding>
-            <element signature="n#find#0;n#Model_InfoBusinessMapperBase#0;n#!!top" expanded="false" />
-            <element signature="n#fetchAllArray#0;n#Model_InfoBusinessMapperBase#0;n#!!top" expanded="false" />
-            <element signature="n#fetchPaging#0;n#Model_InfoBusinessMapperBase#0;n#!!top" expanded="false" />
-            <element signature="n#createCombo#0;n#Model_InfoBusinessMapperBase#0;n#!!top" expanded="false" />
-            <marker date="1501941532000" expanded="true" signature="17083:17141" ph="SELECT count... info_business" />
-            <marker date="1501941532000" expanded="true" signature="17225:17352" ph="SELECT * FRO... info_business" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/configs/application.ini">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="405">
-          <caret line="27" column="34" lean-forward="false" selection-start-line="27" selection-start-column="30" selection-end-line="27" selection-end-column="34" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/library/Zend/Db/Statement/Interface.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="268">
-          <caret line="133" column="20" lean-forward="false" selection-start-line="133" selection-start-column="20" selection-end-line="133" selection-end-column="20" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/models/base/Doc_Items_HandlingBase.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4065">
-          <caret line="271" column="7" lean-forward="false" selection-start-line="244" selection-start-column="3" selection-end-line="271" selection-end-column="7" />
-          <folding>
-            <marker date="1501988324000" expanded="true" signature="10428:10491" ph="SELECT count... Doc_Items_Handling" />
-            <marker date="1501988324000" expanded="true" signature="10575:10707" ph="SELECT * FRO... Doc_Items_Handling" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/models/base/Info_Schedule_CheckBase.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="64">
-          <caret line="272" column="7" lean-forward="false" selection-start-line="245" selection-start-column="3" selection-end-line="272" selection-end-column="7" />
-          <folding>
-            <marker date="1501987936000" expanded="true" signature="10576:10644" ph="SELECT count... Doc_Violations_Handling" />
-            <marker date="1501987936000" expanded="true" signature="10728:10865" ph="SELECT * FRO... Doc_Violations_Handling" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/models/base/InfoBusinessBase.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="16">
-          <caret line="385" column="34" lean-forward="false" selection-start-line="385" selection-start-column="34" selection-end-line="385" selection-end-column="34" />
-          <folding>
-            <element signature="n#find#0;n#Model_InfoBusinessMapperBase#0;n#!!top" expanded="false" />
-            <element signature="n#fetchAllArray#0;n#Model_InfoBusinessMapperBase#0;n#!!top" expanded="false" />
-            <element signature="n#fetchPaging#0;n#Model_InfoBusinessMapperBase#0;n#!!top" expanded="false" />
-            <element signature="n#createCombo#0;n#Model_InfoBusinessMapperBase#0;n#!!top" expanded="false" />
-            <marker date="1501941532000" expanded="true" signature="17083:17141" ph="SELECT count... info_business" />
-            <marker date="1501941532000" expanded="true" signature="17225:17352" ph="SELECT * FRO... info_business" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/modules/admin/views/scripts/docviolationshandling/list.phtml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="616">
-          <caret line="370" column="19" lean-forward="true" selection-start-line="366" selection-start-column="15" selection-end-line="370" selection-end-column="19" />
-          <folding>
-            <element signature="n#style#0;n#input#0;n#div#1;n#div#1;n#div#0;n#div#1;n#!!top" expanded="true" />
-            <element signature="e#6014#21036#0#HTML" expanded="false" />
-            <marker date="1501988282000" expanded="true" signature="8232:8243" ph="..." />
-            <marker date="1501988282000" expanded="true" signature="10628:10765" ph="..." />
-            <marker date="1501988282000" expanded="true" signature="12047:12096" ph="..." />
-            <marker date="1501988282000" expanded="true" signature="14185:14203" ph="..." />
-            <marker date="1501988282000" expanded="true" signature="15368:15386" ph="..." />
-            <marker date="1501988282000" expanded="true" signature="16890:16908" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/modules/admin/views/scripts/infobusiness/list.phtml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="36">
-          <caret line="35" column="32" lean-forward="true" selection-start-line="35" selection-start-column="8" selection-end-line="35" selection-end-column="32" />
-          <folding>
-            <marker date="1484189835000" expanded="true" signature="5492:5504" ph="..." />
-            <marker date="1484189835000" expanded="true" signature="5648:5672" ph="..." />
-            <marker date="1484189835000" expanded="true" signature="5741:5765" ph="..." />
-            <marker date="1484189835000" expanded="true" signature="5949:5962" ph="..." />
-            <marker date="1484189835000" expanded="true" signature="6065:6078" ph="..." />
-            <marker date="1484189835000" expanded="true" signature="6197:6210" ph="..." />
-            <marker date="1484189835000" expanded="true" signature="6335:6348" ph="..." />
-            <marker date="1484189835000" expanded="true" signature="6480:6493" ph="..." />
-            <marker date="1484189835000" expanded="true" signature="6611:6624" ph="..." />
-            <marker date="1484189835000" expanded="true" signature="6764:6777" ph="..." />
-            <marker date="1484189835000" expanded="true" signature="6904:6917" ph="..." />
-            <marker date="1484189835000" expanded="true" signature="7039:7052" ph="..." />
-            <marker date="1484189835000" expanded="true" signature="7186:7199" ph="..." />
-            <marker date="1484189835000" expanded="true" signature="7710:7723" ph="..." />
-            <marker date="1484189835000" expanded="true" signature="9756:9790" ph="..." />
-            <marker date="1484189835000" expanded="false" signature="9905:9939" ph="..." />
-            <marker date="1484189835000" expanded="false" signature="10053:10087" ph="..." />
-            <marker date="1484189835000" expanded="false" signature="10201:10235" ph="..." />
-            <marker date="1484189835000" expanded="false" signature="10362:10396" ph="..." />
-            <marker date="1484189835000" expanded="false" signature="10530:10564" ph="..." />
-            <marker date="1484189835000" expanded="false" signature="10688:10722" ph="..." />
-            <marker date="1484189835000" expanded="false" signature="10851:10885" ph="..." />
-            <marker date="1484189835000" expanded="true" signature="12908:12919" ph="..." />
-            <marker date="1484189835000" expanded="true" signature="16876:16889" ph="..." />
-            <marker date="1484189835000" expanded="true" signature="16902:16920" ph="..." />
-            <marker date="1484189835000" expanded="true" signature="18565:18702" ph="..." />
-            <marker date="1484189835000" expanded="true" signature="19404:19541" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/models/Doc_Items_Handling.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-433">
-          <caret line="41" column="0" lean-forward="false" selection-start-line="41" selection-start-column="0" selection-end-line="41" selection-end-column="0" />
-          <folding>
-            <marker date="1462529650000" expanded="true" signature="537:600" ph="UPDATE doc_i... " />
-            <marker date="1462529650000" expanded="true" signature="865:935" ph="select id fr... doc_items_handling" />
-            <marker date="1462529650000" expanded="true" signature="1256:1308" ph="select id fr... doc_items_handling" />
-            <marker date="1462529650000" expanded="true" signature="1687:2121" ph="select t1.*,... doc_items_handling" />
-            <marker date="1462529650000" expanded="true" signature="2145:2515" ph="select t1.*,... doc_items_handling" />
-            <marker date="1462529650000" expanded="true" signature="2597:2807" ph="select * fro... doc_items_handling" />
-            <marker date="1462529650000" expanded="true" signature="2835:2989" ph="select * fro... doc_items_handling" />
-            <marker date="1462529650000" expanded="true" signature="4639:5090" ph="select t1.*,... doc_items_handling" />
-            <marker date="1462529650000" expanded="true" signature="5113:5484" ph="select t1.*,... doc_items_handling" />
-            <marker date="1462529650000" expanded="true" signature="5565:5792" ph="select * fro... doc_items_handling" />
-            <marker date="1462529650000" expanded="true" signature="5819:5974" ph="select * fro... doc_items_handling" />
-            <marker date="1462529650000" expanded="true" signature="7884:8062" ph="select id,ma... doc_items_handling" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/modules/default/views/scripts/docitemshandling/list.phtml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="600">
-          <caret line="54" column="13" lean-forward="false" selection-start-line="33" selection-start-column="7" selection-end-line="54" selection-end-column="13" />
-          <folding>
-            <marker date="1484209840000" expanded="true" signature="6146:6157" ph="..." />
-            <marker date="1484209840000" expanded="true" signature="7480:7617" ph="..." />
-            <marker date="1484209840000" expanded="true" signature="8250:8387" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/models/Master_Business_Size.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
+        <state relative-caret-position="-4289">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <marker date="1440989314000" expanded="true" signature="548:613" ph="UPDATE maste... " />
-            <marker date="1440989314000" expanded="true" signature="882:972" ph="select id fr... master_business_size" />
-            <marker date="1440989314000" expanded="true" signature="1285:1319" ph="select * fro... master_business_size" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/models/InfoBusiness.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="314">
-          <caret line="115" column="37" lean-forward="false" selection-start-line="115" selection-start-column="20" selection-end-line="115" selection-end-column="37" />
-          <folding>
-            <element signature="n#fetchAll#0;n#Model_InfoBusinessMapper#0;n#!!top" expanded="false" />
-            <element signature="n#fetchAllByUser#0;n#Model_InfoBusinessMapper#0;n#!!top" expanded="false" />
-            <element signature="n#fetchAll_REPORT#0;n#Model_InfoBusinessMapper#0;n#!!top" expanded="false" />
-            <element signature="n#findidbyname1#0;n#Model_InfoBusinessMapper#0;n#!!top" expanded="false" />
-            <element signature="n#findidbycode#0;n#Model_InfoBusinessMapper#0;n#!!top" expanded="false" />
-            <element signature="n#findidbyname#0;n#Model_InfoBusinessMapper#0;n#!!top" expanded="false" />
-            <element signature="n#findtypebusinessbyid#0;n#Model_InfoBusinessMapper#0;n#!!top" expanded="false" />
-            <element signature="n#finddocviolationsbyid#0;n#Model_InfoBusinessMapper#0;n#!!top" expanded="false" />
-            <element signature="n#findbusinessbyid#0;n#Model_InfoBusinessMapper#0;n#!!top" expanded="false" />
-            <marker date="1502529550000" expanded="true" signature="501:559" ph="UPDATE info_... " />
-            <marker date="1502529550000" expanded="true" signature="763:831" ph="select * fro... info_business" />
-            <marker date="1502529550000" expanded="true" signature="3237:3336" ph="select * fro... info_business" />
-            <marker date="1502529550000" expanded="true" signature="5744:5844" ph="select * fro... info_business" />
-            <marker date="1502529550000" expanded="true" signature="8243:8283" ph="select * fro... info_business" />
-            <marker date="1502529550000" expanded="true" signature="10707:10790" ph="select id fr... info_business" />
-            <marker date="1502529550000" expanded="true" signature="11122:11199" ph="select id,co... info_business" />
-            <marker date="1502529550000" expanded="true" signature="11531:11603" ph="select id fr... info_business" />
-            <marker date="1502529550000" expanded="true" signature="11933:11990" ph="select id,ty... info_business" />
-            <marker date="1502529550000" expanded="true" signature="12330:12414" ph="select id,in... doc_violations_handling" />
-            <marker date="1502529550000" expanded="true" signature="12749:12791" ph="select * fro... info_business" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/modules/default/controllers/InfobusinessController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="302">
-          <caret line="83" column="58" lean-forward="false" selection-start-line="83" selection-start-column="58" selection-end-line="83" selection-end-column="58" />
-          <folding>
-            <element signature="n#listAction#0;n#InfoBusinessController#0;n#!!top" expanded="false" />
-            <element signature="n#serviceAction#0;n#InfoBusinessController#0;n#!!top" expanded="false" />
-            <element signature="n#addAction#0;n#InfoBusinessController#0;n#!!top" expanded="false" />
-            <element signature="n#editAction#0;n#InfoBusinessController#0;n#!!top" expanded="false" />
-            <element signature="n#checkdocviolationsAction#0;n#InfoBusinessController#0;n#!!top" expanded="false" />
-            <element signature="n#confirmdeleteAction#0;n#InfoBusinessController#0;n#!!top" expanded="false" />
-            <element signature="n#deleteAction#0;n#InfoBusinessController#0;n#!!top" expanded="false" />
-            <element signature="n#checkcodeAction#0;n#InfoBusinessController#0;n#!!top" expanded="false" />
-            <element signature="n#findbusinessbyidAction#0;n#InfoBusinessController#0;n#!!top" expanded="false" />
-            <marker date="1502529561000" expanded="true" signature="23839:23852" ph="..." />
-            <marker date="1502529561000" expanded="true" signature="24081:24094" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/models/base/Doc_Violations_HandlingBase.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="241">
-          <caret line="241" column="37" lean-forward="false" selection-start-line="241" selection-start-column="37" selection-end-line="241" selection-end-column="37" />
-          <folding>
-            <marker date="1501988238000" expanded="true" signature="9714:9782" ph="SELECT count... Doc_Violations_Handling" />
-            <marker date="1501988238000" expanded="true" signature="9866:10003" ph="SELECT * FRO... Doc_Violations_Handling" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/modules/default/views/scripts/infobusiness/list.phtml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="380">
-          <caret line="41" column="40" lean-forward="false" selection-start-line="41" selection-start-column="40" selection-end-line="41" selection-end-column="40" />
-          <folding>
-            <element signature="e#22374#32384#0#HTML" expanded="false" />
-            <element signature="e#34896#36289#0#HTML" expanded="false" />
-            <marker date="1502529985000" expanded="true" signature="6061:6073" ph="..." />
-            <marker date="1502529985000" expanded="true" signature="6197:6221" ph="..." />
-            <marker date="1502529985000" expanded="true" signature="6290:6314" ph="..." />
-            <marker date="1502529985000" expanded="true" signature="6488:6501" ph="..." />
-            <marker date="1502529985000" expanded="true" signature="6604:6617" ph="..." />
-            <marker date="1502529985000" expanded="true" signature="6736:6749" ph="..." />
-            <marker date="1502529985000" expanded="true" signature="6874:6887" ph="..." />
-            <marker date="1502529985000" expanded="true" signature="7019:7032" ph="..." />
-            <marker date="1502529985000" expanded="true" signature="7150:7163" ph="..." />
-            <marker date="1502529985000" expanded="true" signature="7279:7292" ph="..." />
-            <marker date="1502529985000" expanded="true" signature="7419:7432" ph="..." />
-            <marker date="1502529985000" expanded="true" signature="7554:7567" ph="..." />
-            <marker date="1502529985000" expanded="true" signature="7701:7714" ph="..." />
-            <marker date="1502529985000" expanded="true" signature="8154:8167" ph="..." />
-            <marker date="1502529985000" expanded="true" signature="10202:10236" ph="..." />
-            <marker date="1502529985000" expanded="true" signature="10351:10385" ph="..." />
-            <marker date="1502529985000" expanded="true" signature="10499:10533" ph="..." />
-            <marker date="1502529985000" expanded="true" signature="10647:10681" ph="..." />
-            <marker date="1502529985000" expanded="true" signature="10808:10842" ph="..." />
-            <marker date="1502529985000" expanded="true" signature="10976:11010" ph="..." />
-            <marker date="1502529985000" expanded="true" signature="11134:11168" ph="..." />
-            <marker date="1502529985000" expanded="true" signature="11297:11331" ph="..." />
-            <marker date="1502529985000" expanded="true" signature="13304:13315" ph="..." />
-            <marker date="1502529985000" expanded="true" signature="17146:17159" ph="..." />
-            <marker date="1502529985000" expanded="true" signature="17172:17190" ph="..." />
-            <marker date="1502529985000" expanded="true" signature="18773:18910" ph="..." />
-            <marker date="1502529985000" expanded="true" signature="19612:19749" ph="..." />
-            <marker date="1502529985000" expanded="true" signature="23137:23149" ph="..." />
-            <marker date="1502529985000" expanded="true" signature="23261:23285" ph="..." />
-            <marker date="1502529985000" expanded="true" signature="23346:23370" ph="..." />
-            <marker date="1502529985000" expanded="true" signature="23520:23533" ph="..." />
-            <marker date="1502529985000" expanded="true" signature="23628:23641" ph="..." />
-            <marker date="1502529985000" expanded="true" signature="23752:23765" ph="..." />
-            <marker date="1502529985000" expanded="true" signature="23881:23894" ph="..." />
-            <marker date="1502529985000" expanded="true" signature="24018:24031" ph="..." />
-            <marker date="1502529985000" expanded="true" signature="24141:24154" ph="..." />
-            <marker date="1502529985000" expanded="true" signature="24262:24275" ph="..." />
-            <marker date="1502529985000" expanded="true" signature="24394:24407" ph="..." />
-            <marker date="1502529985000" expanded="true" signature="24521:24534" ph="..." />
-            <marker date="1502529985000" expanded="true" signature="24660:24673" ph="..." />
-            <marker date="1502529985000" expanded="true" signature="25065:25078" ph="..." />
-            <marker date="1502529985000" expanded="true" signature="26899:26933" ph="..." />
-            <marker date="1502529985000" expanded="true" signature="27048:27082" ph="..." />
-            <marker date="1502529985000" expanded="true" signature="27196:27230" ph="..." />
-            <marker date="1502529985000" expanded="true" signature="27344:27378" ph="..." />
-            <marker date="1502529985000" expanded="true" signature="27505:27539" ph="..." />
-            <marker date="1502529985000" expanded="true" signature="27673:27707" ph="..." />
-            <marker date="1502529985000" expanded="true" signature="27831:27865" ph="..." />
-            <marker date="1502529985000" expanded="true" signature="27994:28028" ph="..." />
-            <marker date="1502529985000" expanded="true" signature="29853:29864" ph="..." />
-            <marker date="1502529985000" expanded="true" signature="33574:33587" ph="..." />
-            <marker date="1502529985000" expanded="true" signature="33600:33618" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/modules/default/views/scripts/infoschedulecheck/add.phtml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1723">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <marker date="1464681611000" expanded="true" signature="13298:13352" ph="..." />
+            <marker date="1502889004000" expanded="true" signature="501:559" ph="UPDATE info_... " />
+            <marker date="1502889004000" expanded="true" signature="763:831" ph="select * fro... info_business" />
+            <marker date="1502889004000" expanded="true" signature="3485:3584" ph="select * fro... info_business" />
+            <marker date="1502889004000" expanded="true" signature="6240:6340" ph="select * fro... info_business" />
+            <marker date="1502889004000" expanded="true" signature="8739:8780" ph="select * fro... info_business" />
+            <marker date="1502889004000" expanded="true" signature="11453:11536" ph="select id fr... info_business" />
+            <marker date="1502889004000" expanded="true" signature="11868:11945" ph="select id,co... info_business" />
+            <marker date="1502889004000" expanded="true" signature="12277:12349" ph="select id fr... info_business" />
+            <marker date="1502889004000" expanded="true" signature="12679:12736" ph="select id,ty... info_business" />
+            <marker date="1502889004000" expanded="true" signature="13076:13160" ph="select id,in... doc_violations_handling" />
+            <marker date="1502889004000" expanded="true" signature="13495:13537" ph="select * fro... info_business" />
           </folding>
         </state>
       </provider>

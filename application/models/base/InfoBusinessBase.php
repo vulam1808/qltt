@@ -12,11 +12,15 @@ class Model_InfoBusinessBase {
     protected $_name;
     protected $_license_business;
     protected $_date_license;
+    protected $_date_deadline;
     protected $_place_license;
     protected $_address_office;
     protected $_address_office2;
     protected $_address_branch;
     protected $_address_produce;
+    protected $_address_produce1;
+    protected $_address_produce11;
+    protected $_address_produce111;
     protected $_work_business;
     protected $_phone;
     protected $_boss_business;
@@ -103,7 +107,11 @@ class Model_InfoBusinessBase {
         return $this;
     }
     public function getDate_License(){return $this->_date_license;}
-    
+     public function setDate_Deadline($value){
+        $this->_date_deadline=$value;
+        return $this;
+    }
+    public function getDate_Deadline(){return $this->_date_deadline;}
     public function setPlace_License($value){
         $this->_place_license=$value;
         return $this;
@@ -131,6 +139,23 @@ class Model_InfoBusinessBase {
         return $this;
     }
     public function getAddress_Produce(){return $this->_address_produce;}
+
+    public function setAddress_Produce1($value){
+        $this->_address_produce1=$value;
+        return $this;
+    }
+    public function getAddress_Produce1(){return $this->_address_produce1;}
+
+    public function setAddress_Produce11($value){
+        $this->_address_produce11=$value;
+        return $this;
+    }
+    public function getAddress_Produce11(){return $this->_address_produce11;}
+    public function setAddress_Produce111($value){
+        $this->_address_produce111=$value;
+        return $this;
+    }
+    public function getAddress_Produce111(){return $this->_address_produce111;}
      public function setWork_Business($value){
         $this->_work_business=$value;
         return $this;
@@ -292,11 +317,15 @@ class Model_InfoBusinessMapperBase extends BaseMapper{
                 'name' => $entry->getName(),
                 'license_business'=>$entry->getLicense_Business(),
                 'date_license'=>$entry->getDate_License(),
+                'date_deadline'=>$entry->getDate_Deadline(),
                 'place_license'=>$entry->getPlace_License(),
                 'address_office'=> $entry->getAddress_Office(),
 		'address_office2'=> $entry->getAddress_Office2(),
                 'address_branch' => $entry->getAddress_Branch(),
                 'address_produce' =>$entry->getAddress_Produce(),
+                'address_produce1' =>$entry->getAddress_Produce1(),
+                'address_produce11' =>$entry->getAddress_Produce11(),
+                'address_produce111' =>$entry->getAddress_Produce111(),
                 'work_business'=>$entry->getWork_Business(),
                 'phone'=>$entry->getPhone(),
                 'boss_business'=>$entry->getBoss_Business(),
@@ -348,11 +377,15 @@ class Model_InfoBusinessMapperBase extends BaseMapper{
                 ->setName($row->name)
                 ->setLicense_Business($row->license_business)
                 ->setDate_License($row->date_license)
+                ->setDate_Deadline($row->date_deadline)
                 ->setPlace_License($row->place_license)
                 ->setAddress_Office($row->address_office)
 		->setAddress_Office2($row->address_office2)
                 ->setAddress_Branch($row->address_branch)
                 ->setAddress_Produce($row->address_produce)
+                 ->setAddress_Produce1($row->address_produce1)
+                  ->setAddress_Produce11($row->address_produce11)
+                   ->setAddress_Produce111($row->address_produce111)
                 ->setWork_Business($row->work_business)
                 ->setPhone($row->phone)
                 ->setBoss_Business($row->boss_business)
@@ -455,11 +488,15 @@ class Model_InfoBusinessMapperBase extends BaseMapper{
                 ->setName($row->name)
                 ->setLicense_Business($row->license_business)
                 ->setDate_License($row->date_license)
+                ->setDate_Deadline($row->date_deadline)
                 ->setPlace_License($row->place_license)
                 ->setAddress_Office($row->address_office)
 		->setAddress_Office2($row->address_office2)
                 ->setAddress_Branch($row->address_branch)
                 ->setAddress_Produce($row->address_produce)
+                ->setAddress_Produce1($row->address_produce1)
+                ->setAddress_Produce11($row->address_produce11)
+                ->setAddress_Produce111($row->address_produce111)
                 ->setWork_Business($row->work_business)
                 ->setPhone($row->phone)
                 ->setBoss_Business($row->boss_business)
