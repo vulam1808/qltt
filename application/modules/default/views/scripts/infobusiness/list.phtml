@@ -36,54 +36,70 @@
                      
                  </div>
             </div>
-           <div id='jqxWidget'>
-        <div id="jqxgrid"></div>
-    </div>
+            <div id="jqxTabs">
+                <ul style="margin-left: 30px;">
+                    <li id="tab1">Quản lý</li>
+                    <li id="tab">Ngoài quản lý</li>
+                </ul>
+
+                <div id="jqxWidget">
+                    <div id="jqxgrid"></div>
+                    <input type="button" id="excelExport" name="excelExport" class="btn btn-success"value="Xuất Excel"  />
+                </div>
+                <div id="jqxWidget">
+                    <div id="jqxgrid1"></div>
+                    <input type="button" id="excelExport1" name="excelExport" class="btn btn-success"value="Xuất Excel"  />
+                </div>
+
+            </div>
+
             </div>
     </div>
 </div>
-<input type="button" id="excelExport" name="excelExport" class="btn btn-success"value="Xuất Excel"  />
-<!--<button type="button" id="excelExport" name="excelExport" class="btn btn-success">Xuất Excel</button>-->
 
+<!--<button type="button" id="excelExport" name="excelExport" class="btn btn-success">Xuất Excel</button>-->
+<script type="text/javascript">
+    $('#jqxTabs').jqxTabs({ width:'100%'});
+    </script>
     <script type="text/javascript">
-        $(document).ready(function () {               
+        $(document).ready(function () {
             var source =
             {
                 datatype: "json",
                 datafields:
                 [   { name: 'g',type:'string'},
                     { name: 'Id',type:'int'},
-                    { name: 'code', type: 'string' }, 
+                    { name: 'code', type: 'string' },
                     { name: 'name', type: 'string' },
                     { name: 'license_business',type:'string'},
-                    { name: 'date_license', type: 'string' }, 
+                    { name: 'date_license', type: 'string' },
                     { name: 'place_license', type: 'string' },
                     { name: 'address_office',type:'string'},
-                    { name: 'address_branch', type: 'string' }, 
-                       { name: 'address_produce', type: 'string' }, 
+                    { name: 'address_branch', type: 'string' },
+                       { name: 'address_produce', type: 'string' },
                     { name: 'work_business', type: 'string' },
                     { name: 'phone',type:'string'},
-                    { name: 'boss_business', type: 'string' }, 
+                    { name: 'boss_business', type: 'string' },
                     { name: 'address_permanent', type: 'string' },
                     { name: 'cellphone',type:'string'},
-                    { name: 'license_condition_business', type: 'string' }, 
+                    { name: 'license_condition_business', type: 'string' },
                     { name: 'date_license_condition_business', type: 'string' },
                     { name: 'master_items_limit_id',type:'int'},
-                    { name: 'master_items_condition_id', type: 'int' }, 
+                    { name: 'master_items_condition_id', type: 'int' },
                     { name: 'master_province', type: 'string' },
                     { name: 'master_district', type: 'string' },
                     { name: 'master_ward',type:'string'},
-                    { name: 'master_business_type_id', type: 'string' }, 
+                    { name: 'master_business_type_id', type: 'string' },
                     { name: 'master_business_size_id', type: 'string' },
                     { name: 'date_check',type:'string'},
-                    { name: 'type_business', type: 'string' }, 
+                    { name: 'type_business', type: 'string' },
                     { name: 'comment',type:'string'}
-                   
+
                 ],
                 url:"<?php echo $this->baseUrl().'/default/infobusiness/service/type_business/'.$this->type_business.'/userid/'.$identity->id ?>",
                 sortcolumn: 'Id',
                 sortdirection: 'DESC'
-               
+
             };
             /////////////////////////
             var initrowdetails = function (index, parentElement, gridElement, datarecord) {
@@ -93,35 +109,35 @@
                 var information = null;
                 var survey = null;
                 var notes = null;
-                tabsdiv = $($(parentElement).children()[0]);      
-                
+                tabsdiv = $($(parentElement).children()[0]);
+
 //                /////////////////////////////////////////
 
-           
-                
-       //////////////////////////////////////////         
-                
+
+
+       //////////////////////////////////////////
+
                 if (tabsdiv != null) {
                     information = tabsdiv.find('.information');
                     notes = tabsdiv.find('.notes');
                     survey = tabsdiv.find('.survey');
                     var title = tabsdiv.find('.title');
-                    
+
                     title.text("Thông tin chính");
                     var container = $('<div style="margin: 5px;"></div>')
                     container.appendTo($(information));
-                    
+
                         var leftcolumn = $('<div style="float: left; width: 45%;"></div>');
                         var rightcolumn = $('<div style="float: left; width: 40%;"></div>');
                         container.append(leftcolumn);
-                        container.append(rightcolumn);          
+                        container.append(rightcolumn);
                         var firstname = "<div style='margin: 10px;'><b>Tên DN:</b>"+datarecord.name+" </div>";
                         var address_office = "<div style='margin: 10px;'><b>Trụ sở chính:</b>"+datarecord.address_office+" </div>";
                         var address_branch = "<div style='margin: 10px;'><b>Địa điểm KD khác:</b>"+datarecord.address_branch+" </div>";
                          var address_produce = "<div style='margin: 10px;'><b>Địa điểm sản xuất KD:</b>"+datarecord.address_produce+" </div>";
                         var master_district_id = "<div style='margin: 10px;'><b>Quận huyện:</b>"+datarecord.master_district+" </div>";
                         var master_ward_id = "<div style='margin: 10px;'><b>Phường xã:</b>"+datarecord.master_ward+" </div>";
-                        
+
                         var license_business = "<div style='margin: 10px;'><b>Giấy chứng nhận ĐKKD:</b>"+datarecord.license_business+" </div>";
                         var date_license = "<div style='margin: 10px;'><b>Ngày cấp:</b>"+datarecord.date_license+" </div>";
                         var master_business_type_id = "<div style='margin: 10px;'><b>Loại hình kinh doanh:</b>"+datarecord.master_business_type_id+"</div>";
@@ -129,11 +145,11 @@
                         $(leftcolumn).append(firstname);
                         $(leftcolumn).append(address_office);
                         $(leftcolumn).append(master_district_id);
-                        
+
                         $(leftcolumn).append(license_business);
                         $(leftcolumn).append(master_business_type_id);
-                       
-                        
+
+
                         $(rightcolumn).append("<div style='margin: 10px;'></div>");
                          $(rightcolumn).append(address_produce);
                           $(rightcolumn).append(master_ward_id);
@@ -174,13 +190,13 @@
 
                     $(survey).append(surveycontainer);
                     $(notes).append(notescontainer);
-                    $(tabsdiv).jqxTabs({ width: 850, height: 220});                         
+                    $(tabsdiv).jqxTabs({ width: 850, height: 220});
                     var id =tabsdiv.attr('id');
                     console.log(id);
                     var source2 =
                         {
                             datatype: "json",
-                            datafields:[ 
+                            datafields:[
                             { name: 'info_business_id', type: 'string' },
                             { name: 'master_violation_id', type: 'string' },
                             { name: 'address_business', type: 'string' },
@@ -192,9 +208,9 @@
                             { name: 'amount', type: 'string' },
                             { name: 'comment', type: 'string' },
                                         ],
-                            url:"<?php echo $this->baseUrl().'/default/docviolationshandling/servicefrominfobusiness/id/'?>"+datarecord.Id,            
-                        };         
-                        var dataAdapter2 = new $.jqx.dataAdapter(source2);     
+                            url:"<?php echo $this->baseUrl().'/default/docviolationshandling/servicefrominfobusiness/id/'?>"+datarecord.Id,
+                        };
+                        var dataAdapter2 = new $.jqx.dataAdapter(source2);
                             var array = new Array();
                             array[0] = {  text: 'Số TT', sortable: false, filterable: false, editable: false,
                                   groupable: false, draggable: false, resizable: false,
@@ -211,22 +227,22 @@
                             array[6] = { text: 'Đội xử lý',editable: false,align: "center", dataField: 'sys_department_id', width: '10%' };
                             array[7] = { text: 'Số tiền',editable: false,align: "center", dataField: 'amount', width: '10%' };
 
-            //                          
+            //
                         $("#jqxgrid2").jqxGrid(
                         {
                            width: '100%',
                     theme: 'bootstrap',
-                    source: dataAdapter2, 
+                    source: dataAdapter2,
                     rowdetails: true,
                     filterable: true,
                     autoheight: true,
-                    columnsResize: true,                      
-                                 ready: function (param) {                            
-                                    },      
-                            columns: array               
-                        });  
+                    columnsResize: true,
+                                 ready: function (param) {
+                                    },
+                            columns: array
+                        });
 //                    $("#"+id).on('selected',function(event){
-//                        var clickedItem = event.args.item; 
+//                        var clickedItem = event.args.item;
 //                        if(clickedItem == 2)
 //                        {
 //                        $.ajax({
@@ -249,12 +265,12 @@
             var dataAdapter = new $.jqx.dataAdapter(source);
             $("#excelExport").jqxButton();
             $("#excelExport").click(function () {
-            $("#jqxgrid").jqxGrid('exportdata', 'xls', 'DanhSach<?php echo $this->type_business ?>');           
+            $("#jqxgrid").jqxGrid('exportdata', 'xls', 'DanhSach<?php echo $this->type_business ?>');
             });
             $("#jqxgrid").jqxGrid(
             {
                 width: '100%',
-                height: 250,                
+                height: 250,
                 source: dataAdapter,
                 rowdetails: true,
                 theme: 'bootstrap',
@@ -275,16 +291,16 @@
                     $("#jqxgrid").jqxGrid('hideColumn', 'g');
                 },
                 rowdetailstemplate: { rowdetails: "<div style='margin: 10px;'><ul style='margin-left: 30px;'><li class='title'></li><li>Khảo sát</li><li class='test' >Vi phạm xử phạt</li></ul><div class='information'></div> <div class='survey'></div><div class='notes'></div></div>", rowdetailsheight: 250 },
-                ready: function () {                    
+                ready: function () {
                 },
                 initrowdetails: initrowdetails,
                 columns: [
                       { text: 'Mã <?php echo GlobalLib::getNameBusiness($this->type_business) ?>', datafield: 'code',align: "center", width: '10%' },
-                      { text: 'Tên <?php echo GlobalLib::getNameBusiness($this->type_business) ?>',align: "center", datafield: 'name', width: '20%' },                    
+                      { text: 'Tên <?php echo GlobalLib::getNameBusiness($this->type_business) ?>',align: "center", datafield: 'name', width: '20%' },
                       { text: 'Trụ sở chính',align: "center", datafield: 'address_office', width: '15%' },
                       { text: 'Tỉnh thành',align: "center", datafield: 'master_province', width: '10%' },
                       { text: 'Quận huyện',align: "center", datafield: 'master_district', width: '10%' },
-                      { text: 'Xã phường',align: "center", datafield: 'master_ward', width: '13%' },                      
+                      { text: 'Xã phường',align: "center", datafield: 'master_ward', width: '13%' },
                       { text: 'Ngành nghề', datafield: 'work_business',align: "center", width: '10%' },
                        {text: 'Xóa',filtertype: 'none', cellsalign: 'right', align: "center", columnType: 'none', editable: false, sortable: false, dataField: null, cellsrenderer: function (row) {
                           // render custom column.
@@ -305,9 +321,257 @@
                       }
                           }
                   ]
-            });   
-        });                    
+            });
+        });
     </script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        var source1 =
+            {
+                datatype: "json",
+                datafields:
+                    [   { name: 'g',type:'string'},
+                        { name: 'Id',type:'int'},
+                        { name: 'code', type: 'string' },
+                        { name: 'name', type: 'string' },
+                        { name: 'license_business',type:'string'},
+                        { name: 'date_license', type: 'string' },
+                        { name: 'place_license', type: 'string' },
+                        { name: 'address_office',type:'string'},
+                        { name: 'address_branch', type: 'string' },
+                        { name: 'address_produce', type: 'string' },
+                        { name: 'work_business', type: 'string' },
+                        { name: 'phone',type:'string'},
+                        { name: 'boss_business', type: 'string' },
+                        { name: 'address_permanent', type: 'string' },
+                        { name: 'cellphone',type:'string'},
+                        { name: 'license_condition_business', type: 'string' },
+                        { name: 'date_license_condition_business', type: 'string' },
+                        { name: 'master_items_limit_id',type:'int'},
+                        { name: 'master_items_condition_id', type: 'int' },
+                        { name: 'master_province', type: 'string' },
+                        { name: 'master_district', type: 'string' },
+                        { name: 'master_ward',type:'string'},
+                        { name: 'master_business_type_id', type: 'string' },
+                        { name: 'master_business_size_id', type: 'string' },
+                        { name: 'date_check',type:'string'},
+                        { name: 'type_business', type: 'string' },
+                        { name: 'comment',type:'string'}
+
+                    ],
+                url:"<?php echo $this->baseUrl().'/default/infobusiness/service1/type_business/'.$this->type_business.'/userid/'.$identity->id ?>",
+
+                sortdirection: 'DESC'
+
+            };
+        /////////////////////////
+        var initrowdetails1 = function (index, parentElement, gridElement, datarecord) {
+//                var dataRecord = $("#jqxgrid").jqxGrid('getrowdata',editrow);
+            var tabsdiv = null;
+            var tabssurvey = null;
+            var information = null;
+            var survey = null;
+            var notes = null;
+            tabsdiv = $($(parentElement).children()[0]);
+
+//                /////////////////////////////////////////
+
+
+
+            //////////////////////////////////////////
+
+            if (tabsdiv != null) {
+                information = tabsdiv.find('.information');
+                notes = tabsdiv.find('.notes');
+                survey = tabsdiv.find('.survey');
+                var title = tabsdiv.find('.title');
+
+                title.text("Thông tin chính");
+                var container = $('<div style="margin: 5px;"></div>')
+                container.appendTo($(information));
+
+                var leftcolumn = $('<div style="float: left; width: 45%;"></div>');
+                var rightcolumn = $('<div style="float: left; width: 40%;"></div>');
+                container.append(leftcolumn);
+                container.append(rightcolumn);
+                var firstname = "<div style='margin: 10px;'><b>Tên DN:</b>"+datarecord.name+" </div>";
+                var address_office = "<div style='margin: 10px;'><b>Trụ sở chính:</b>"+datarecord.address_office+" </div>";
+                var address_branch = "<div style='margin: 10px;'><b>Địa điểm KD khác:</b>"+datarecord.address_branch+" </div>";
+                var address_produce = "<div style='margin: 10px;'><b>Địa điểm sản xuất KD:</b>"+datarecord.address_produce+" </div>";
+                var master_district_id = "<div style='margin: 10px;'><b>Quận huyện:</b>"+datarecord.master_district+" </div>";
+                var master_ward_id = "<div style='margin: 10px;'><b>Phường xã:</b>"+datarecord.master_ward+" </div>";
+
+                var license_business = "<div style='margin: 10px;'><b>Giấy chứng nhận ĐKKD:</b>"+datarecord.license_business+" </div>";
+                var date_license = "<div style='margin: 10px;'><b>Ngày cấp:</b>"+datarecord.date_license+" </div>";
+                var master_business_type_id = "<div style='margin: 10px;'><b>Loại hình kinh doanh:</b>"+datarecord.master_business_type_id+"</div>";
+                var work_business = "<div style='margin: 10px;'><b>Ngành nghề:</b>"+datarecord.work_business+" </div>";
+                $(leftcolumn).append(firstname);
+                $(leftcolumn).append(address_office);
+                $(leftcolumn).append(master_district_id);
+
+                $(leftcolumn).append(license_business);
+                $(leftcolumn).append(master_business_type_id);
+
+
+                $(rightcolumn).append("<div style='margin: 10px;'></div>");
+                $(rightcolumn).append(address_produce);
+                $(rightcolumn).append(master_ward_id);
+                $(rightcolumn).append(date_license);
+                $(rightcolumn).append(work_business);
+//                        var license_business = "<div style='margin: 10px;'><b>Giấy chứng nhận ĐKKD:</b>"+datarecord.license_business+" </div>";
+//                        var date_license = "<div style='margin: 10px;'><b>Ngày cấp:</b>"+datarecord.date_license+" </div>";
+//                        var master_business_type_id = "<div style='margin: 10px;'><b>Loại hình kinh doanh:</b>"+datarecord.master_business_type_id+"</div>";
+//                        var work_business = "<div style='margin: 10px;'><b>Ngành nghề:</b>"+datarecord.work_business+" </div>";
+//                        $(rightcolumn).append(license_business);
+//                        $(rightcolumn).append(date_license);
+//                        $(rightcolumn).append(master_business_type_id);
+//                        $(rightcolumn).append(work_business);
+                var id = datarecord.Id;
+                var resultdocviolation = '';
+                $.ajax({
+                    type:'post',
+                    url:'<?php echo $this->baseUrl()?>/default/infobusiness/checkdocviolations/id/'+id,
+                    async:false,
+                    dataType:'json',
+                    success:function(data){
+                        if(data[0].code==1){
+                            resultdocviolation = data[0].message;
+                        } else {
+                            resultdocviolation = data[0].message;
+                        }
+                    }
+                });
+                var notescontainer = $('<div id="jqxgrid2" ></div>');
+                var surveycontainer = $("<div style='margin: 10px;float:left; width:49%'><b>Ngày khảo sát:</b>"+datarecord.date_check+" </div>\n\
+                                            <div style='margin: 10px;float:left; width:49%'><b>Tên chủ hộ:</b>"+datarecord.boss_business+"</div>\n\
+                                            <div style='margin: 10px;float:left; width:49%'><b>Số điện thoại:</b>"+datarecord.cellphone+" </div>\n\
+                                            <div style='margin: 10px;float:left; width:49%'><b>Địa chỉ thường trú:</b>"+datarecord.address_permanent+" </div>\n\
+                                            <div style='margin: 10px;float:left; width:49%'><b>Loại hình kinh doanh:</b>"+datarecord.master_business_type_id+"</div>\n\
+                                            <div style='margin: 10px;float:left; width:49%'><b>Mặt hàng kinh doanh:</b>"+datarecord.work_business+" </div>\n\
+                                            <div style='margin: 10px;float:left; width:49%'><b>Mặt hàng hạn chế:</b>"+datarecord.master_items_limit_id+" </div>\n\
+                                            <div style='margin: 10px;float:left; width:49%'><b>Mặt hàng KD có điều kiện:</b>"+datarecord.master_items_condition_id+" </div>");
+
+                $(survey).append(surveycontainer);
+                $(notes).append(notescontainer);
+                $(tabsdiv).jqxTabs({ width: 850, height: 220});
+                var id =tabsdiv.attr('id');
+                console.log(id);
+                var source2 =
+                    {
+                        datatype: "json",
+                        datafields:[
+                            { name: 'info_business_id', type: 'string' },
+                            { name: 'master_violation_id', type: 'string' },
+                            { name: 'address_business', type: 'string' },
+                            { name: 'master_sanction_id', type: 'string' },
+                            { name: 'sys_department_id', type: 'string' },
+                            { name: 'doc_items_handling', type: 'string' },
+                            { name: 'sys_user_id', type: 'string' },
+                            { name: 'date_violation', type: 'date' },
+                            { name: 'amount', type: 'string' },
+                            { name: 'comment', type: 'string' },
+                        ],
+                        url:"<?php echo $this->baseUrl().'/default/docviolationshandling/servicefrominfobusiness/id/'?>"+datarecord.Id,
+                    };
+                var dataAdapter2 = new $.jqx.dataAdapter(source2);
+                var array = new Array();
+                array[0] = {  text: 'Số TT', sortable: false, filterable: false, editable: false,
+                    groupable: false, draggable: false, resizable: false,
+                    datafield: '', columntype: 'number', width: '4%',
+                    cellsrenderer: function (row, column, value) {
+                        return "<div style='margin:7px;'>" + (value + 1) + "</div>";
+                    }
+                };
+                array[1] = { text: 'Tên Doanh nghiệp',editable: false,align: "center", dataField: 'info_business_id', width: '15%' };
+                array[2] = { text: 'Địa chỉ',editable: false,align: "center", dataField: 'address_business', width: '15%' };
+                array[3] = { text: 'Hành vi vi phạm',editable: false,align: "center", dataField: 'master_violation_id', width: '12%' };
+                array[4] = { text: 'Hình thức xử lý',editable: false,align: "center", dataField: 'master_sanction_id', width: '15%' };
+                array[5] = { text: 'Tịch thu hàng hóa',editable: false,align: "center", dataField: 'doc_items_handling', width: '15%' };
+                array[6] = { text: 'Đội xử lý',editable: false,align: "center", dataField: 'sys_department_id', width: '10%' };
+                array[7] = { text: 'Số tiền',editable: false,align: "center", dataField: 'amount', width: '10%' };
+
+                //
+                $("#jqxgrid2").jqxGrid(
+                    {
+                        width: '100%',
+                        theme: 'bootstrap',
+                        source: dataAdapter2,
+                        rowdetails: true,
+                        filterable: true,
+                        autoheight: true,
+                        columnsResize: true,
+                        ready: function (param) {
+                        },
+                        columns: array
+                    });
+//                    $("#"+id).on('selected',function(event){
+//                        var clickedItem = event.args.item;
+//                        if(clickedItem == 2)
+//                        {
+//                        $.ajax({
+//                                type:'post',
+//                                url:'<?php echo $this->baseUrl()?>/default/infobusiness/checkdocviolations/id/'+datarecord.Id,
+//                                async:false,
+//                                dataType:'json',
+//                                success:function(data){
+//                                    if(data[0].code==1){
+//                                        window.location.href = data[0].url;
+//                                    } else {
+//                                    resultdocviolation = data[0].message;
+//                                    }
+//                                }
+//                            });
+//                            }
+//                    });
+            }
+        }
+        var dataAdapter = new $.jqx.dataAdapter(source1);
+        $("#excelExport1").jqxButton();
+        $("#excelExport1").click(function () {
+            $("#jqxgrid1").jqxGrid('exportdata', 'xls', 'DanhSach<?php echo $this->type_business ?>ThuocDiabanQuanlyNgoaiDiaban');
+        });
+        $("#jqxgrid1").jqxGrid(
+            {
+                width: '100%',
+                height: 250,
+                source: dataAdapter,
+                rowdetails: true,
+                theme: 'bootstrap',
+                pageable: true,
+                showfilterrow: true,
+                filterable: true,
+                autoheight: true,
+                sortable: true,
+                altrows: true,
+                enabletooltips: true,
+                selectionmode: 'multiplecellsadvanced',
+                columnsResize: true,
+                rendergridrows: function (params) {
+                    return params.data;
+                },
+                ready: function () {
+                    $("#jqxgrid1").jqxGrid('hideColumn', 'Id');
+                    $("#jqxgrid1").jqxGrid('hideColumn', 'g');
+                },
+                rowdetailstemplate: { rowdetails: "<div style='margin: 10px;'><ul style='margin-left: 30px;'><li class='title'></li><li>Khảo sát</li><li class='test' >Vi phạm xử phạt</li></ul><div class='information'></div> <div class='survey'></div><div class='notes'></div></div>", rowdetailsheight: 250 },
+                ready: function () {
+                },
+                initrowdetails: initrowdetails1,
+                columns: [
+                    { text: 'Mã <?php echo GlobalLib::getNameBusiness($this->type_business) ?>', datafield: 'code',align: "center", width: '10%' },
+                    { text: 'Tên <?php echo GlobalLib::getNameBusiness($this->type_business) ?>',align: "center", datafield: 'name', width: '20%' },
+                    { text: 'Trụ sở chính',align: "center", datafield: 'address_office', width: '15%' },
+                    { text: 'Tỉnh thành',align: "center", datafield: 'master_province', width: '10%' },
+                    { text: 'Quận huyện',align: "center", datafield: 'master_district', width: '10%' },
+                    { text: 'Xã phường',align: "center", datafield: 'master_ward', width: '13%' },
+                    { text: 'Ngành nghề', datafield: 'work_business',align: "center", width: '10%' }
+
+
+                ]
+            });
+    });
+</script>
 
     <script type="text/javascript">
         function jsdelete(id,name)
