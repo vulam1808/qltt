@@ -242,7 +242,7 @@ class Model_Doc_Items_HandlingMapperBase extends BaseMapper{
                
     }
     
-    public function fetchAll(){
+   /* public function fetchAll(){
         $result = $this->getDbTable()->fetchAll();
         $entries = array();
         foreach ($result as $row){
@@ -269,7 +269,7 @@ class Model_Doc_Items_HandlingMapperBase extends BaseMapper{
             $entries[]=$entry;
         }
         return $entries;
-    }
+    }*/
     public function fetchAllArray()
     {
 		$data = array(array());
