@@ -1,0 +1,15 @@
+#*.class
+build.xml
+.idea/
+*.zip
+*.rar
+*.iml
+
+# Mobile Tools for Java (J2ME)
+#.mtj.tmp/
+*.iml
+# Package Files #
+#*.jar
+#*.war
+#*.ear
+
