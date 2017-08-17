@@ -58,7 +58,7 @@
                 'boss_business'=>$items->getBoss_Business(),
                 'address_permanent'=> $items->getAddress_Permanent(),
                 'cellphone' => $items->getCellphone(),
-                'license_condition_business'=>$items->getLicense_Condition_Business(),   
+                'license_condition_business'=>$items->getLicense_Condition_Business(),
                 'date_license_condition_business'=>GlobalLib::viewDate($items->getDate_License_Condition_Business()),
                 'master_items_limit_id'=>GlobalLib::getName('master_items_limit',$items->getMaster_Items_Limit_Id(),'name'),
                 'master_items_condition_id'=>GlobalLib::getName('master_items_condition',$items->getMaster_Items_Condition_Id(),'name'),
@@ -78,7 +78,55 @@
         echo json_encode($menber);
         exit();
     }
+        public function service1Action(){
+            $type_business= $this->_getParam("type_business","");
+            $userid = $this->_getParam("userid","");
+            $this->_helper->layout->disableLayout();
+            foreach ($this->modelMapper->fetchAllNotByUser($type_business,$userid) as $items ) {
+                if($items->getType_Business()=="DoanhNghiep"){
+                    $t = 1;
+                }  else if($items->getType_Business()=="HoKinhDoanh") {
+                    $t = 2;
+                }  else {
+                    $t = 3;
+                }
+                $menber[]=array(
+                    'g'=> $t,
+                    'Id' => $items->getId(),
+                    'code'=> $items->getCode(),
+                    'name' => $items->getName(),
+                    'license_business'=>$items->getLicense_Business(),
+                    'date_license'=>GlobalLib::viewDate($items->getDate_License()),
+                    'place_license'=>$items->getPlace_License(),
+                    'address_office'=> $items->getAddress_Office(),
+                    'address_office2'=> $items->getAddress_Office2(),
+                    'address_branch' => $items->getAddress_Branch(),
+                    'address_produce' => $items->getAddress_Produce(),
+                    'work_business'=>$items->getWork_Business(),
+                    'phone'=>$items->getPhone(),
+                    'boss_business'=>$items->getBoss_Business(),
+                    'address_permanent'=> $items->getAddress_Permanent(),
+                    'cellphone' => $items->getCellphone(),
+                    'license_condition_business'=>$items->getLicense_Condition_Business(),
+                    'date_license_condition_business'=>GlobalLib::viewDate($items->getDate_License_Condition_Business()),
+                    'master_items_limit_id'=>GlobalLib::getName('master_items_limit',$items->getMaster_Items_Limit_Id(),'name'),
+                    'master_items_condition_id'=>GlobalLib::getName('master_items_condition',$items->getMaster_Items_Condition_Id(),'name'),
+                    'master_province'=>GlobalLib::getName('master_province',$items->getMaster_Province_Id(),'name'),
+                    'master_district'=>GlobalLib::getName('master_district',$items->getMaster_District_Id(),'name'),
+                    'master_ward'=>GlobalLib::getName('master_ward',$items->getMaster_Ward_Id(),'name'),
+                    'master_business_type_id'=>GlobalLib::getName('master_business_type',$items->getMaster_Business_Type_Id(),'name'),
+                    'master_business_size_id'=>GlobalLib::getName('master_business_size',$items->getMaster_Business_Size_Id(),'name'),
+                    'date_check'=>  GlobalLib::viewDate($items->getDate_Check()),
+                    'type_business'=>$items->getType_Business(),
+                    'order'=>$items->getOrder(),
+                    'status'=>$items->getStatus(),
+                    'comment'=>$items->getComment()
 
+                );
+            }
+            echo json_encode($menber);
+            exit();
+        }
     public function addAction(){
         $type_business= $this->_getParam("type_business","");
         $this->model->setType_business($type_business);
