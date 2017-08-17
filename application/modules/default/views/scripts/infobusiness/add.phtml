@@ -68,24 +68,19 @@ and open the template in the editor.
                                                     <div class="col-lg-2">
                                                         <label>Số giấy phép ĐKKD(*)</label>
                                                     </div>
-                                                    <div class="col-lg-2">                                                                                
+                                                    <div class="col-lg-3">                                                                                
                                                         <input type="text" class="form-control" name="license_business" id="license_business" value="<?php echo $this->item->getLicense_Business(); ?>"> 
                                                     </div>
-                                                     <div class="col-lg-1">                                                                                
-                                                         <label>Nơi cấp(*)</label>
+                                                    
+                                                     <div class="col-lg-2">                                                                                
+                                                         <label>Ngày cấp(*)</label>
                                                     </div> 
-                                                    <div class="col-lg-2">                                                                                
-                                                        <input type="text" class="form-control" name="place_license" id="place_license" value="<?php echo $this->item->getPlace_License(); ?>"> 
-                                                    </div>
-                                                     <div class="col-lg-1">                                                                                
-                                                         <label>Ngày(*)</label>
-                                                    </div> 
-                                                    <div class="col-lg-2">
+                                                    <div class="col-lg-3">
                                                        <div id='jqxWidget'>
                                                             <div style='float: left;'>
-                                                                <div style='float: left; margin-top: 3px;' id='jqxDateTimeInput'>
+                                                                <div style='float: left; margin-top: 3px;' id='jqxDateTimeInput1'>
                                                                 </div>
-                                                                <div style='margin-left: 20px; float: left;'>
+                                                                <div style='margin-right: 20px; float: left;'>
                                                                     <div>
                                                                         <input type="hidden" id="day_license" name="day_license">
                                                                     </div>
@@ -96,12 +91,44 @@ and open the template in the editor.
                                                 </div>
                                             </div> 
                                             <div class="form-group">
+                                            <div class="row">
+                                                     <div class="col-lg-2">                                                                                
+                                                         <label>Nơi cấp(*)</label>
+                                                    </div> 
+                                                    <div class="col-lg-3">                                                                                
+                                                        <input type="text" class="form-control" name="place_license" id="place_license" value="<?php echo $this->item->getPlace_License(); ?>"> 
+                                                    </div>
+                                                    <div class="col-lg-2">                                                                                
+                                                         <label>Ngày hết hạn(*)</label>
+                                                    </div> 
+                                                    <div class="col-lg-3">
+                                                       <div id='jqxWidget'>
+                                                            <div style='float: left;'>
+                                                                <div style='float: left; margin-top: 3px;' id='jqxDateTimeInput2'>
+                                                                </div>
+                                                                <div style='margin-left: 20px; float: left;'>
+                                                                    <div>
+                                                                        <input type="hidden" id="day_deadline" name="day_deadline">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                            </div>
+                                            </div>
+                                            <div class="form-group">
                                                 <div class="row">
                                                     <div class="col-lg-2">
                                                         <label>Trụ sở chính(*)</label>
                                                     </div>
                                                     <div class="col-lg-3">                                                                                
                                                         <input type="text" class="form-control" name="address_office" id="address_office" value="<?php echo $this->item->getAddress_Office(); ?>"> 
+                                                    </div>
+                                                  <div class="col-lg-2">
+                                                        <label>Trụ sở chính 2(*)</label>
+                                                    </div>
+                                                    <div class="col-lg-3">                                                                                
+                                                        <input type="text" class="form-control" name="address_office2" id="address_office2" value="<?php echo $this->item->getAddress_Office2(); ?>"> 
                                                     </div>
                                                     
                                                 </div>
@@ -113,7 +140,13 @@ and open the template in the editor.
                                                     </div> 
                                                     <div class="col-lg-3">                                                                                
                                                         <input type="text" class="form-control" name="phone_business" id="phone_business" value="<?php echo $this->item->getPhone(); ?>">
+                                                    </div>
+                                                    <div class="col-lg-2">                                                                                
+                                                         <label>Địa điểm SXKD 1</label>
                                                     </div> 
+                                                    <div class="col-lg-3">                                                                                
+                                                        <input type="text" class="form-control" name="address_produce" id="address_produce" value="<?php echo $this->item->getAddress_Produce(); ?>">
+                                                    </div>  
                                                 </div>
                                             </div>     
                                              <div class="form-group">
@@ -125,14 +158,29 @@ and open the template in the editor.
                                                         <input type="text" class="form-control" name="address_branch" id="address_branch" value="<?php echo $this->item->getAddress_Branch(); ?>">
                                                     </div> 
                                                     <div class="col-lg-2">                                                                                
-                                                         <label>Địa điểm sản xuất KD</label>
+                                                         <label>Địa điểm SXKD 2</label>
                                                     </div> 
                                                     <div class="col-lg-3">                                                                                
-                                                        <input type="text" class="form-control" name="address_produce" id="address_produce" value="<?php echo $this->item->getAddress_Produce(); ?>">
+                                                        <input type="text" class="form-control" name="address_produce1" id="address_produce1" value="<?php echo $this->item->getAddress_Produce1(); ?>">
                                                     </div> 
                                                 </div>
                                             </div>     
-                                            
+                                             <div class="form-group">
+                                                <div class="row">
+                                                    <div class="col-lg-2">                                                                                
+                                                         <label>Địa điểm SXKD 4</label>
+                                                    </div> 
+                                                    <div class="col-lg-3">                                                                                
+                                                        <input type="text" class="form-control" name="address_produce11" id="address_produce11" value="<?php echo $this->item->getAddress_Produce11(); ?>">
+                                                    </div> 
+                                                    <div class="col-lg-2">                                                                                
+                                                         <label>Địa điểm SXKD 3</label>
+                                                    </div> 
+                                                    <div class="col-lg-3">                                                                                
+                                                        <input type="text" class="form-control" name="address_produce111" id="address_produce111" value="<?php echo $this->item->getAddress_Produce111(); ?>">
+                                                    </div> 
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                             </div>
@@ -310,17 +358,17 @@ and open the template in the editor.
     </div>   
 </div>
     <style type="text/css">
-	textarea {
-		border: 0 none white;
-		//overflow: hidden;
+    textarea {
+        border: 0 none white;
+        //overflow: hidden;
                 height:auto;                
-		padding: 0;
+        padding: 0;
                 overflow:auto;
-		outline: none;
-		border:thin;
+        outline: none;
+        border:thin;
                 background:none;
-		resize: none;
-	}
+        resize: none;
+    }
 </style> 
 <script type="text/javascript">
    document.forms['AddInfoBussiness'].name.focus();
@@ -329,7 +377,8 @@ and open the template in the editor.
     }
     var flag= true;
     function checkinput() {        
-        var frm = window.document.AddInfoBussiness;       
+        var frm = window.document.AddInfoBussiness; 
+            
        if ($("#name_business").val() == "") {
             bootbox.alert("Vui lòng nhập Tên <?php echo GlobalLib::getNameBusiness($this->type_business) ?>!");
             return false;
@@ -341,7 +390,7 @@ and open the template in the editor.
         var code_business= $('#code_business').val();
         $.ajax({
             type:'post',
-            url:'<?php echo $this->baseUrl()?>/default/infobusiness/checkcode/code_business/'+code_business,
+            url:'<?php echo $this->baseUrl()?>/admin/infobusiness/checkcode/code_business/'+code_business,
             async:false,
             dataType:'json',
             success:function(data){
@@ -357,10 +406,29 @@ and open the template in the editor.
             bootbox.alert("Mã <?php echo GlobalLib::getNameBusiness($this->type_business) ?> đã tồn tại.Vui lòng kiểm tra và nhập lại.");
             return false;
         };
-        
+        //kiem tra ngay het han nho hon ngay bat dau
+        document.forms['AddInfoBussiness'].day_license.focus();
+        function set_focus() {
+            document.forms['AddInfoBussiness'].day_license.focus();
+        }
+        function parseDate(str) {
+                var mdy = str.split('-');
+                return new Date(mdy[2], mdy[1], mdy[0]);
+            }
+        var stringstartDate =$('#jqxDateTimeInput1').val()
+         var stringendDate =$('#jqxDateTimeInput2').val();
+        var startDate = parseDate(stringstartDate).getTime();
+        var endDate = parseDate(stringendDate).getTime();
+        if (startDate > endDate){
+            bootbox.alert("Ngày hết hạn phải lớn (hoặc bằng) ngày cấp giấy phép ĐKKD!");
+            return false;
+        }
+        //end  
         return true;
     }
-    var getMutiValue = function(selectID, value){
+</script>
+<script>
+     var getMutiValue = function(selectID, value){
             var selected = [];
             $('#'+selectID+' option:selected').each(function() {
                 selected.push([$(this).val(), $(this).data('order')]);
@@ -375,10 +443,11 @@ and open the template in the editor.
             $('#'+value).val(text);
         };
     $('#luu').on('click',function(){
-        $('#day_license').val($('#jqxDateTimeInput').val());
+        $('#day_license').val($('#jqxDateTimeInput1').val());
+         $('#day_deadline').val($('#jqxDateTimeInput2').val());
         $('#date_license_condition_business').val($('#jqxDateTimeInput_condition_business').val());
         $('#day_check').val($('#jqxDateTimeInput_datecheck').val());
-         getMutiValue("master_items_limit_id","master_items_limit_value");
+        getMutiValue("master_items_limit_id","master_items_limit_value");
         getMutiValue("master_items_condition_id","master_items_condition_value");
         getMutiValue("master_business_type_id","master_business_type_value");
     });
@@ -386,9 +455,9 @@ and open the template in the editor.
 
  <script type="text/javascript">
      $(document).ready(function() {
-        $("#jqxDateTimeInput,#jqxDateTimeInput_condition_business,#jqxDateTimeInput_datecheck").jqxDateTimeInput({ width: '270px', height: '25px'});
-        $("#jqxDateTimeInput,#jqxDateTimeInput_condition_business,#jqxDateTimeInput_datecheck").jqxDateTimeInput({ formatString: "dd-MM-yyyy"});
-         var formatString = $('#jqxDateTimeInput,#jqxDateTimeInput_condition_business,#jqxDateTimeInput_datecheck').jqxDateTimeInput('formatString');
+        $("#jqxDateTimeInput1,#jqxDateTimeInput2,#jqxDateTimeInput_condition_business,#jqxDateTimeInput_datecheck").jqxDateTimeInput({ width: '270px', height: '25px'});
+        $("#jqxDateTimeInput1,#jqxDateTimeInput2,#jqxDateTimeInput_condition_business,#jqxDateTimeInput_datecheck").jqxDateTimeInput({ formatString: "dd-MM-yyyy"});
+         var formatString = $('#jqxDateTimeInput1,#jqxDateTimeInput2,#jqxDateTimeInput_condition_business,#jqxDateTimeInput_datecheck').jqxDateTimeInput('formatString');
 //        $('#jqxDateTimeInput').on('valueChanged', function (event) {
 //                    var date = event.args.date;
 //                    var text= $('#jqxDateTimeInput').jqxDateTimeInput('getText'); 
@@ -420,9 +489,7 @@ and open the template in the editor.
                 }
             },
         });
-        
-        
-        
+      
     });
 </script>
 <script type="text/javascript">
@@ -465,7 +532,6 @@ and open the template in the editor.
             },
         });
         
-     
-        
+       
     });
 </script>
