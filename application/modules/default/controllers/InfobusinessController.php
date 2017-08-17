@@ -47,6 +47,7 @@
                 'name' => $items->getName(),
                 'license_business'=>$items->getLicense_Business(),
                 'date_license'=>GlobalLib::viewDate($items->getDate_License()),
+                 'date_deadline'=>GlobalLib::viewDate($items->getDate_Deadline()),
                 'place_license'=>$items->getPlace_License(),
                 'address_office'=> $items->getAddress_Office(),
 		'address_office2'=> $items->getAddress_Office2(),
@@ -57,7 +58,7 @@
                 'boss_business'=>$items->getBoss_Business(),
                 'address_permanent'=> $items->getAddress_Permanent(),
                 'cellphone' => $items->getCellphone(),
-                'license_condition_business'=>$items->getLicense_Condition_Business(),   
+                'license_condition_business'=>$items->getLicense_Condition_Business(),
                 'date_license_condition_business'=>GlobalLib::viewDate($items->getDate_License_Condition_Business()),
                 'master_items_limit_id'=>GlobalLib::getName('master_items_limit',$items->getMaster_Items_Limit_Id(),'name'),
                 'master_items_condition_id'=>GlobalLib::getName('master_items_condition',$items->getMaster_Items_Condition_Id(),'name'),
@@ -77,7 +78,55 @@
         echo json_encode($menber);
         exit();
     }
+        public function service1Action(){
+            $type_business= $this->_getParam("type_business","");
+            $userid = $this->_getParam("userid","");
+            $this->_helper->layout->disableLayout();
+            foreach ($this->modelMapper->fetchAllNotByUser($type_business,$userid) as $items ) {
+                if($items->getType_Business()=="DoanhNghiep"){
+                    $t = 1;
+                }  else if($items->getType_Business()=="HoKinhDoanh") {
+                    $t = 2;
+                }  else {
+                    $t = 3;
+                }
+                $menber[]=array(
+                    'g'=> $t,
+                    'Id' => $items->getId(),
+                    'code'=> $items->getCode(),
+                    'name' => $items->getName(),
+                    'license_business'=>$items->getLicense_Business(),
+                    'date_license'=>GlobalLib::viewDate($items->getDate_License()),
+                    'place_license'=>$items->getPlace_License(),
+                    'address_office'=> $items->getAddress_Office(),
+                    'address_office2'=> $items->getAddress_Office2(),
+                    'address_branch' => $items->getAddress_Branch(),
+                    'address_produce' => $items->getAddress_Produce(),
+                    'work_business'=>$items->getWork_Business(),
+                    'phone'=>$items->getPhone(),
+                    'boss_business'=>$items->getBoss_Business(),
+                    'address_permanent'=> $items->getAddress_Permanent(),
+                    'cellphone' => $items->getCellphone(),
+                    'license_condition_business'=>$items->getLicense_Condition_Business(),
+                    'date_license_condition_business'=>GlobalLib::viewDate($items->getDate_License_Condition_Business()),
+                    'master_items_limit_id'=>GlobalLib::getName('master_items_limit',$items->getMaster_Items_Limit_Id(),'name'),
+                    'master_items_condition_id'=>GlobalLib::getName('master_items_condition',$items->getMaster_Items_Condition_Id(),'name'),
+                    'master_province'=>GlobalLib::getName('master_province',$items->getMaster_Province_Id(),'name'),
+                    'master_district'=>GlobalLib::getName('master_district',$items->getMaster_District_Id(),'name'),
+                    'master_ward'=>GlobalLib::getName('master_ward',$items->getMaster_Ward_Id(),'name'),
+                    'master_business_type_id'=>GlobalLib::getName('master_business_type',$items->getMaster_Business_Type_Id(),'name'),
+                    'master_business_size_id'=>GlobalLib::getName('master_business_size',$items->getMaster_Business_Size_Id(),'name'),
+                    'date_check'=>  GlobalLib::viewDate($items->getDate_Check()),
+                    'type_business'=>$items->getType_Business(),
+                    'order'=>$items->getOrder(),
+                    'status'=>$items->getStatus(),
+                    'comment'=>$items->getComment()
 
+                );
+            }
+            echo json_encode($menber);
+            exit();
+        }
     public function addAction(){
         $type_business= $this->_getParam("type_business","");
         $this->model->setType_business($type_business);
@@ -149,7 +198,12 @@
                 $date_license = GlobalLib::toMysqlDateString($_POST["day_license"]);
             }
             $this->model->setDate_License($date_license);
-            
+            if(strlen($_POST["day_deadline"])<=0){
+                $date_deadline = date("Y/m/d H:i:s");
+            }  else {
+                $date_deadline = GlobalLib::toMysqlDateString($_POST["day_deadline"]);
+            }
+            $this->model->setDate_Deadline($date_deadline);
             if(isset($_POST["place_license"])){
                 $this->model->setPlace_License($_POST["place_license"]);
             }
@@ -164,6 +218,15 @@
             }
              if(isset($_POST["address_produce"])){
                 $this->model->setAddress_Produce($_POST["address_produce"]);
+            }
+            if(isset($_POST["address_produce1"])){
+                $this->model->setAddress_Produce1($_POST["address_produce1"]);
+            }
+            if(isset($_POST["address_produce11"])){
+                $this->model->setAddress_Produce11($_POST["address_produce11"]);
+            }
+            if(isset($_POST["address_produce111"])){
+                $this->model->setAddress_Produce111($_POST["address_produce111"]);
             }
             if(isset($_POST["work_business"])){
                 $this->model->setWork_Business($_POST["work_business"]);
@@ -324,7 +387,12 @@
                 $date_license = GlobalLib::toMysqlDateString($_POST["day_license"]);
             }
             $this->model->setDate_License($date_license);
-            
+            if(strlen($_POST["day_deadline"])<=0){
+                $date_deadline = date("Y/m/d H:i:s");
+            }  else {
+                $date_deadline = GlobalLib::toMysqlDateString($_POST["day_deadline"]);
+            }
+            $this->model->setDate_Deadline($date_deadline);
             if(isset($_POST["place_license"])){
                 $this->model->setPlace_License($_POST["place_license"]);
             }
@@ -339,6 +407,15 @@
             }
             if(isset($_POST["address_produce"])){
                 $this->model->setAddress_Produce($_POST["address_produce"]);
+            }
+            if(isset($_POST["address_produce1"])){
+                $this->model->setAddress_Produce1($_POST["address_produce1"]);
+            }
+            if(isset($_POST["address_produce11"])){
+                $this->model->setAddress_Produce11($_POST["address_produce11"]);
+            }
+            if(isset($_POST["address_produce111"])){
+                $this->model->setAddress_Produce111($_POST["address_produce111"]);
             }
             if(isset($_POST["work_business"])){
                 $this->model->setWork_Business($_POST["work_business"]);
@@ -502,11 +579,15 @@
                 'name' => $items->getName(),
                 'license_business'=>$items->getLicense_Business(),
                 'date_license'=>$items->getDate_License(),
+                 'date_deadline'=>$items->getDate_Deadline(),
                 'place_license'=>$items->getPlace_License(),
                 'address_office'=> $items->getAddress_Office(),
 		'address_office2'=> $items->getAddress_Office2(),
                 'address_branch' => $items->getAddress_Branch(),
                 'address_produce' => $items->getAddress_Produce(),
+                'address_produce1' => $items->getAddress_Produce1(),
+                'address_produce11' => $items->getAddress_Produce11(),
+                'address_produce111' => $items->getAddress_Produce111(),
                 'work_business'=>$items->getWork_Business(),
                 'phone'=>$items->getPhone(),
                 'boss_business'=>$items->getBoss_Business(),

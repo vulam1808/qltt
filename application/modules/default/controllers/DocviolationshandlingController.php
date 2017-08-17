@@ -992,7 +992,7 @@ class DocViolationsHandlingController extends Zend_Controller_Action{
     } 
     public function servicefrominfobusinessAction(){
         $this->_helper->layout->disableLayout();
-        $id= $this->_getParam("id","");  
+        $id= $this->_getParam("id","");
         foreach ($this->modelMapper->fetchAllfrominfobusiness($id) as $items ){
             $menber[]=array(
                 'id' => $items->getId(),
