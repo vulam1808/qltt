@@ -1,3 +1,10 @@
+<?php $identity = Zend_Auth::getInstance()->getIdentity();
+if(!empty($identity)){
+//                    $this->model->setSys_Department_Id($identity->sys_department_id);
+//                    $this->model->setSys_User_Id($identity->id);
+}
+?>
+
 <div class="row">
     <div class="col-lg-12">
         <h3 class="page-header">KẾT QUẢ KIỂM TRA,XỬ LÝ THEO QUÝ</h3>      
@@ -9,31 +16,32 @@
       
       <div class="panel-body">
           <div class="form-group">
-              <form role="form" method="POST" name="Search" onsubmit="">
+              <form role="form" method="POST" action="<?php echo $this->baseUrl()?>/admin/report/exportdocviolationshandling">
 
-        <div  class="col-lg-1">
-            <label  >Quý</label>
-        </div>
-        <div  class="col-lg-2">
-           <div  id="quy" name="quy">
-          </div>      
-            </div>
-     
-           <div  class="col-lg-1">
-            <label >Năm</label>
-        </div>
-          <div class="col-lg-2">  
-           <div  id="year" name="year">
-                
-            </div>
-        </div>
-        <div class="form-group">
-                <button type="submit" class="btn btn-primary">Xuất Excel</button>
-        </div>
+                    <div  class="col-lg-1">
+                      <label  >Quý</label>
+                  </div>
+                  <div  class="col-lg-2">
+                      <div  id="quy" name="quy">
+                      </div>
+                  </div>
 
-                    </form>
+                  <div  class="col-lg-1">
+                      <label >Năm</label>
+                  </div>
+                  <div class="col-lg-2">
+                      <div  id="year" name="year">
+
+                      </div>
+                  </div>
+                  <div class="form-group">
+
+                      <button class="btn btn-primary" id="submit">Xuất excel</button>
+                  </div>
+
+              </form>
           </div>
-            </div>
+      </div>
    </div>
 </div>
 <script type="text/javascript">   

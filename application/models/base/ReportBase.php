@@ -247,5 +247,6 @@ class Model_ReportMapperBase extends BaseMapper{
         }
         return $entries;
     }
-   
+
+
 }

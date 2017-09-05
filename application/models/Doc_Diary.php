@@ -83,9 +83,10 @@ class Model_Doc_DiaryMapper extends Model_Doc_DiaryMapperBase{
          $ngaybatdau = GlobalLib::toMysqlDateString($tungay);
          $ngayketthuc = GlobalLib::toMysqlDateString($denngay);
         $select="select * from doc_diary where created_by = '".$userID."' and is_delete ='0' and date_diary BETWEEN CAST('$ngaybatdau' AS DATE) AND CAST('$ngayketthuc' AS DATE) ";                
-         if($userID===NULL)
-            $select="select * from doc_diary where date_diary BETWEEN CAST('$ngaybatdau' AS DATE) AND CAST('$ngayketthuc' AS DATE) and is_delete ='0'";        
-       
+         if($userID===NULL) {
+             $select = "select * from doc_diary where date_diary BETWEEN CAST('$ngaybatdau' AS DATE) AND CAST('$ngayketthuc' AS DATE) and is_delete ='0'";
+         }
+
         $stmt=$db->query($select);
         $rows = $stmt->fetchAll(PDO::FETCH_CLASS);
         $stmt->closeCursor();

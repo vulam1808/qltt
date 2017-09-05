@@ -8,6 +8,54 @@
     </div>
 </div>
 <div class="row">
+
+    <?php if($this->type_business == 'DoanhNghiep'){ ?>
+        <div class="col-lg-12">
+            <form  method="POST" name="filterDoanhNghiep" >
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-lg-2">
+                            <label>Doanh nghiệp</label>
+                        </div>
+                        <div class="col-lg-3">
+                            <?php echo $this->doanhnghiepHTML;?>
+                        </div>
+                        <div class="col-lg-2">
+                            <label>Tỉnh thành</label>
+                        </div>
+                        <div class="col-lg-3">
+                            <?php echo $this->tinhthanhHTML;?>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-lg-2">
+                            <label>Loại hình</label>
+                        </div>
+                        <div class="col-lg-3">
+                            <?php echo $this->loaihinhHTML;?>
+                        </div>
+                        <div class="col-lg-2">
+                            <label>Ngành nghề</label>
+                        </div>
+                        <div class="col-lg-3">
+                            <?php echo $this->nganhngheHTML;?>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-lg-2">
+                            <button class="btn btn-success" type="submit" id="submit">Xem</button>
+                            <div id="divTest"></div>
+                        </div>
+                    </div>
+                </div>
+                <br>
+
+            </form>
+        </div>
+    <?php  } ?>
+
     <div class="col-lg-12">
         <div class="panel panel-default">
              <div class="panel-heading">
@@ -19,20 +67,6 @@
                              <span >Thêm Mới</span>
                          </a>
                      </div>
-<!--                     <div class="col-lg-2" style="text-align:center;width: 80px;padding-right: 0px;padding-left: 0px;">
-                         <a  href="<?php echo $this->baseUrl().'/default/infobusiness/add/type_business/'.$this->type_business?>">
-                            <button type="button" class="btn btn-info btn-action"><i class="fa fa-pencil fa-2x"></i>
-                            </button></br>
-                             <span >Chỉnh sửa</span>
-                         </a>
-                     </div>
-                      <div class="col-lg-2" style="text-align:center;width: 80px;padding-right: 0px;padding-left: 0px;">
-                         <a  href="<?php echo $this->baseUrl().'/default/infobusiness/add/type_business/'.$this->type_business?>">
-                            <button type="button" class="btn btn-danger btn-action"><i class="fa fa-minus fa-2x"></i>
-                            </button></br>
-                             <span >Xóa</span>
-                         </a>
-                     </div>-->
                      
                  </div>
             </div>
