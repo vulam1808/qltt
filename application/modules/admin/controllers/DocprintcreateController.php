@@ -710,7 +710,7 @@ class Admin_DocPrintCreateController extends Zend_Controller_Action{
                 'status'=>$status,
                 'serial_recovery'=>$items->getSerial_Recovery()
             );
-             }
+            }
         }
         echo json_encode($menber);
         exit();

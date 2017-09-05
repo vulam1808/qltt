@@ -27,6 +27,46 @@
             $this->_redirect($redirectUrl);
         }
         $this->view->type_business=$type_business;
+
+        //$this->view->testNganhNghe = "";
+
+        if($this->getRequest()->isPost()) {
+            if (isset($_POST['doanhnghiep_id'])) {
+                $doanhnghiep_id = array();
+                foreach ($_POST['doanhnghiep_id'] as $key => $value) {
+                    array_push($doanhnghiep_id, $value);
+                }
+                $this->view->doanhnghiep_id = implode(",", $doanhnghiep_id);
+            }
+
+            if (isset($_POST['tinhthanh_id'])) {
+                $tinhthanh_id = array();
+                foreach ($_POST['tinhthanh_id'] as $key => $value) {
+                    array_push($tinhthanh_id, $value);
+                }
+                $this->view->tinhthanh_id = implode(",", $tinhthanh_id);
+            }
+
+            if (isset($_POST['loaihinh_id'])) {
+                $loaihinh_id = array();
+                foreach ($_POST['loaihinh_id'] as $key => $value) {
+                    array_push($loaihinh_id, $value);
+                }
+                $this->view->loaihinh_id = implode(",", $loaihinh_id);
+            }
+
+            if (isset($_POST['nganhnghe_id'])) {
+                $nganhnghe_id = array();
+                foreach ($_POST['nganhnghe_id'] as $key => $value) {
+                    array_push($nganhnghe_id, $value);
+                }
+                $this->view->nganhnghe_id = implode(",", $nganhnghe_id);
+            }
+        }
+        $this->view->doanhnghiepHTML = GlobalLib::getComboMultiSelect("doanhnghiep_id", "info_business", "code", "name",NULL,$this->view->doanhnghiep_id,true);
+        $this->view->tinhthanhHTML = GlobalLib::getComboMultiSelect("tinhthanh_id", "master_province", "id", "name",NULL,$this->view->tinhthanh_id,true);
+        $this->view->loaihinhHTML = GlobalLib::getComboMultiSelect("loaihinh_id", "master_business_type", "id", "name",NULL,$this->view->loaihinh_id,true," where code in ('DN_NN','DN_TN','CT_CP','CT_TNHH','CT_HD','CT_LD')");
+        $this->view->nganhngheHTML = GlobalLib::getComboDistinctMultiSelect("nganhnghe_id", "info_business", "code", "work_business",NULL,$this->view->nganhnghe_id,true);
     }    
     public function serviceAction(){
         $type_business= $this->_getParam("type_business","");
@@ -612,5 +652,63 @@
         exit();
             
     }
-    
+
+    // Lan Duong
+        public function filterdoanhnghiepAction(){
+            $this->_helper->layout->disableLayout();
+            $type_business= $this->_getParam("type_business","");
+            $doanhnghiep_id = $this->_getParam("doanhnghiep_id","");
+            $tinhthanh_id = $this->_getParam("tinhthanh_id","");
+            $loaihinh_id = $this->_getParam("loaihinh_id","");
+            $nganhnghe_id = $this->_getParam("nganhnghe_id","");
+            //var_dump($nganhnghe_id);die();
+            foreach ($this->modelMapper->fetchAllFilterDoanhNghiep($type_business, $doanhnghiep_id, $nganhnghe_id, $tinhthanh_id, $loaihinh_id) as $items ) {
+                if($items->getType_Business()=="DoanhNghiep"){
+                    $t = 1;
+                }  else if($items->getType_Business()=="HoKinhDoanh") {
+                    $t = 2;
+                }  else {
+                    $t = 3;
+                }
+                $menber[]=array(
+                    'g'=> $t,
+                    'Id' => $items->getId(),
+                    'code'=> $items->getCode(),
+                    'name' => $items->getName(),
+                    'license_business'=>$items->getLicense_Business(),
+                    'date_license'=>GlobalLib::viewDate($items->getDate_License()),
+                    'date_deadline'=>GlobalLib::viewDate($items->getDate_Deadline()),
+                    'place_license'=>$items->getPlace_License(),
+                    'address_office'=> $items->getAddress_Office(),
+                    'address_office2'=> $items->getAddress_Office2(),
+                    'address_branch' => $items->getAddress_Branch(),
+                    'address_produce' => $items->getAddress_Produce(),
+                    'address_produce1' => $items->getAddress_Produce1(),
+                    'address_produce11' => $items->getAddress_Produce11(),
+                    'address_produce111' => $items->getAddress_Produce111(),
+                    'work_business'=>$items->getWork_Business(),
+                    'phone'=>$items->getPhone(),
+                    'boss_business'=>$items->getBoss_Business(),
+                    'address_permanent'=> $items->getAddress_Permanent(),
+                    'cellphone' => $items->getCellphone(),
+                    'license_condition_business'=>$items->getLicense_Condition_Business(),
+                    'date_license_condition_business'=>GlobalLib::viewDate($items->getDate_License_Condition_Business()),
+                    'master_items_limit_id'=>GlobalLib::getName('master_items_limit',$items->getMaster_Items_Limit_Id(),'name'),
+                    'master_items_condition_id'=>GlobalLib::getName('master_items_condition',$items->getMaster_Items_Condition_Id(),'name'),
+                    'master_province'=>GlobalLib::getName('master_province',$items->getMaster_Province_Id(),'name'),
+                    'master_district'=>GlobalLib::getName('master_district',$items->getMaster_District_Id(),'name'),
+                    'master_ward'=>GlobalLib::getName('master_ward',$items->getMaster_Ward_Id(),'name'),
+                    'master_business_type_id'=>GlobalLib::getName('master_business_type',$items->getMaster_Business_Type_Id(),'name'),
+                    'master_business_size_id'=>GlobalLib::getName('master_business_size',$items->getMaster_Business_Size_Id(),'name'),
+                    'date_check'=>  GlobalLib::viewDate($items->getDate_Check()),
+                    'type_business'=>$items->getType_Business(),
+                    'order'=>$items->getOrder(),
+                    'status'=>$items->getStatus(),
+                    'comment'=>$items->getComment()
+
+                );
+            }
+            echo json_encode($menber);
+            exit();
+        }
 }

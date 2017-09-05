@@ -33,9 +33,9 @@ $(window).load(function(){
                sortdirection: 'DESC'
             };
 
- var dataAdapter = new $.jqx.dataAdapter(source);
-  $("#jqxgrid").jqxGrid(
-            {
+             var dataAdapter = new $.jqx.dataAdapter(source);
+             $("#jqxgrid").jqxGrid(
+             {
                 width: '100%',
                 source: dataAdapter,  
                 theme: 'bootstrap',
@@ -57,7 +57,7 @@ $(window).load(function(){
                 },
                 ready: function () {
                     $("#jqxgrid").jqxGrid('hideColumn', 'Id');
-                     $("#jqxgrid").jqxGrid('hideColumn', 'master_print_id');
+                    $("#jqxgrid").jqxGrid('hideColumn', 'master_print_id');
                 },
                 rendertoolbar: function (toolbar) {
                     var me = this;

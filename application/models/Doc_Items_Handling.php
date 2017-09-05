@@ -47,10 +47,10 @@ class Model_Doc_Items_HandlingMapper extends Model_Doc_Items_HandlingMapperBase{
                     where t1.is_delete ='0' and month(t1.date_handling)='".$month."' and year(t1.date_handling)='".$year."' and (t1.status='TG-CXL_TG' or t1.status='TL_TG' or t1.status='CGCQK_TG' or t1.status='XLN_TG') ";  
         $select2="select t1.*,t2.sys_department_id from doc_items_handling as t1 inner join doc_violations_handling as t2
                     on t1.doc_violations_handling_id =  t2.id and t2.sys_department_id = '$sys_department_id'  
-                     where t1.is_delete ='0' and (month(t1.date_handling)='".$month."' and year(t1.date_handling)='".$year."' and t1.status='".$status."') ";        
+                     where t1.is_delete ='0' and (month(t1.date_handling)='".$month."' and year(t1.date_handling)='".$year."' and t1.status='".$status."') ";
         if($sys_department_id===NULL)
         {
-            $select1="select * from doc_items_handling where is_delete ='0' and (month(date_handling)='".$month."' and year(date_handling)='".$year."' and status='TG-CXL_TG' or status='TL_TG' or status='CGCQK_TG' or status='XLN_TG') ";  
+            $select1="select * from doc_items_handling where is_delete ='0' and month(date_handling)='".$month."' and year(date_handling)='".$year."' and (status='TG-CXL_TG' or status='TL_TG' or status='CGCQK_TG' or status='XLN_TG') ";
             $select2="select * from doc_items_handling where is_delete ='0' and (month(date_handling)='".$month."' and year(date_handling)='".$year."' and status='".$status."') ";        
         }
         if($status == "ALL"){
@@ -99,9 +99,10 @@ class Model_Doc_Items_HandlingMapper extends Model_Doc_Items_HandlingMapperBase{
                      where t1.is_delete ='0' and (month(t1.date_handling)='".$month."' and year(t1.date_handling)='".$year."' and t1.status='".$status."' )";        
         if($sys_department_id===NULL)
         {
-            $select1="select * from doc_items_handling where is_delete ='0' and (month(date_handling)='".$month."' and year(date_handling)='".$year."' and status='TT_TT' or status='TH_TT' or status='ĐG_TT' or status='CGCQKSD_TT' or status='XLN_TT' )";  
+            $select1="select * from doc_items_handling where is_delete ='0' and month(date_handling)='".$month."' and year(date_handling)='".$year."' and (status='TT_TT' or status='TH_TT' or status='ĐG_TT' or status='CGCQKSD_TT' or status='XLN_TT' )";
             $select2="select * from doc_items_handling where is_delete ='0' and (month(date_handling)='".$month."' and year(date_handling)='".$year."' and status='".$status."' )";        
         }
+
         if($status == "ALL"){
            $select =  $select1;
         }else{

@@ -450,7 +450,7 @@ $(function() {
                     else {
                         $(option).data('order', '');
                     }
-                },
+                }
             });
         
         $('#master_print_id').on('change', function() {
@@ -458,20 +458,21 @@ $(function() {
             $('#master_print_id option:selected').each(function() {
                 selected.push([$(this).val(), $(this).data('order')]);
             });
- 
+
             selected.sort(function(a, b) {
                 return a[1] - b[1];
             });
- 
+
             var text = '';
             for (var i = 0; i < selected.length; i++) {
                 text += selected[i][0] + ', ';
             }
             text = text.substring(0, text.length - 2);
- 
+
             $('#selectionlog').val(text);
             $('#selectionlog').text(text);
         });
+
             $('#jqxDateTimeInput').jqxDateTimeInput({ formatString: "dd-MM-yyyy"});
             var formatString = $('#jqxDateTimeInput').jqxDateTimeInput('formatString');
             $('#jqxDateTimeInput').on('valueChanged', function (event) {

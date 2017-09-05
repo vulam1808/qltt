@@ -16,7 +16,6 @@ class LoginController extends Zend_Controller_Action {
         $this->model = new Model_Sys_User();
          $this->modelUserGroupMapper= new Model_Sys_User_GroupMapper();
           $this->modelUserGroup = new Model_Sys_User_Group();
- 
         
         $bootstrap = $this->getInvokeArg("bootstrap");
         $this->aConfig = $bootstrap->getOptions();

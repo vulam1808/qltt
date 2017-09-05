@@ -83,45 +83,7 @@ and open the template in the editor.
         }
         
         var province_code= $('#province_code').val();
-//        if(province_code !== "<?php echo $this->item->getCode(); ?>"){
-//            $.ajax({
-//                type:'post',
-//                url:'<?php echo $this->baseUrl()?>/admin/masterprovince/checkprovincecode/province_code/'+province_code,
-//                async:false,
-//                dataType:'json',
-//                success:function(data){
-//                    if(data[0].code==1){
-//                        flag=false;
-//                    } else {
-//                        flag=true;
-//                    }
-//                }
-//            });
-//        }
-//        if(flag==false){
-//            bootbox.alert("Mã Thành phố này đã tồn tại. Vui lòng kiểm tra và nhập lại.");
-//            return false;
-//        };
-//        var province_name= $('#name_province').val();
-//        if(province_name !== "<?php echo $this->item->getName(); ?>"){
-//        $.ajax({
-//            type:'post',
-//            url:'<?php echo $this->baseUrl()?>/admin/masterprovince/checkprovincename/province_name/'+province_name,
-//            async:false,
-//            dataType:'json',
-//            success:function(data){
-//                if(data[0].code==1){
-//                    flag1=false;
-//                } else {
-//                    flag1=true;
-//                }
-//            }
-//        });
-//        }
-//        if(flag1==false){
-//            bootbox.alert("Tên tỉnh đã tồn tại.Vui lòng kiểm tra và nhập lại.");
-//            return false;
-//        };
+
       return true;
     }
 </script>

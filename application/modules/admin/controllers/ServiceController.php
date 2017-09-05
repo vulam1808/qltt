@@ -144,7 +144,7 @@ class Admin_ServiceController extends Zend_Controller_Action {
                 exit;
                 break;
             case 'getprintcreate':
-                $this->_helper->layout()->disableLayout();               
+                $this->_helper->layout()->disableLayout();
                 $printcreatHTML = '<select name="doc_print_create_id" style="width: 386px;"><option value=""></option></select>';
                 if ($this->_request->isPost()) {
                     $master_print_id = $this->_getParam("master_print_id", "");

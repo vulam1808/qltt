@@ -1782,6 +1782,111 @@ class GlobalLib{
         }
         return $array;
     }
+
+    // Lan Duong
+    public static function getComboMultiDoanhNghiep($fieldName, $tableName, $valueColumn, $textColumn, $defaultValue, $multiSelect = false, $filters = '', $orderBys = NULL, $onclick='', $zeroValueName = 'Chưa lựa chọn') {
+        $db = Zend_Db_Table::getDefaultAdapter();
+        $query = 'SELECT ' . $valueColumn . ',' . $textColumn . ' from ' . $tableName . ' '.$filters.' '.$orderBys;
+        $stmt = $db->query($query);
+        $items = $stmt->fetchAll(); //PDO::FETCH_CLASS);
+        $stmt->closeCursor();
+        $multiSelectHTML = '';
+        $html1 = '';
+        if ($multiSelect) {
+            $multiSelectHTML = 'multiple="multiple"';
+        }
+        $html = '<select id="' . $fieldName . '" name="' . $fieldName . '" ' . $multiSelectHTML .' '.$onclick .'>';
+        $html .= $html1;
+        $html .= '<option value="0">'.$zeroValueName.'</option>';
+        foreach ($items as $item) {
+            $selected = '';
+            if ($defaultValue == $item[$valueColumn])
+                $selected = ' selected="selected"';
+            $html .= '<option value="' . $item[$valueColumn] . '" ' . $selected .'>' . str_replace("'", "\'", $item[$textColumn]) . '</option>';
+        }
+        $html .= '</select>';
+        return $html;
+    }
+
+    public static function getComboMultiSelect($fieldName, $tableName, $valueColumn, $textColumn,$textColumn1=NULL, $defaultValue, $multiSelect = false, $filters = '', $orderBys = NULL, $onclick='', $zeroValueName = 'Chưa lựa chọn') {
+        $db = Zend_Db_Table::getDefaultAdapter();
+        if($textColumn1 ==NULL){
+            $query = 'SELECT ' . $valueColumn . ',' . $textColumn . ' from ' . $tableName . ' '.$filters.' '.$orderBys;
+        } else {
+            $query = 'SELECT ' . $valueColumn . ',' . $textColumn . ','.$textColumn1. ' from ' . $tableName . ' '.$filters.' '.$orderBys;
+        }
+        $stmt = $db->query($query);
+        $items = $stmt->fetchAll(); //PDO::FETCH_CLASS);
+        $stmt->closeCursor();
+        $multiSelectHTML = '';
+        $html1 = '';
+        $html = '<select id="' . $fieldName . '" name="' . $fieldName . '" ' . $multiSelectHTML .' '.$onclick .'>';
+        if ($multiSelect) {
+            $multiSelectHTML = 'multiple="multiple"';
+            $html = '<select id="' . $fieldName . '" name="' . $fieldName . '[]" ' . $multiSelectHTML .' '.$onclick .'>';
+        }
+
+        $html .= $html1;
+//        $html .= '<option value="0">'.$zeroValueName.'</option>';
+        foreach ($items as $item) {
+            $selected = '';
+            if (in_array($item[$valueColumn], explode(',', $defaultValue)))
+                $selected = ' selected="selected"';
+            if($textColumn1==NULL){
+                $html .= '<option value="' . $item[$valueColumn] . '" ' . $selected .'>' . str_replace("'", "\'", $item[$textColumn]) . '</option>';
+            } else {
+                $html .= '<option value="' . $item[$valueColumn] . '" ' . $selected .'>' . str_replace("'", "\'", $item[$textColumn]).' - '.str_replace("'", "\'", $item[$textColumn1]) . '</option>';
+            }
+        }
+        $html .= '</select>';
+        return $html;
+    }
+
+    public static function getComboDistinctMultiSelect($fieldName, $tableName, $valueColumn, $textColumn,$textColumn1=NULL, $defaultValue, $multiSelect = false, $filters = '', $orderBys = NULL, $onclick='', $zeroValueName = 'Chưa lựa chọn') {
+        $db = Zend_Db_Table::getDefaultAdapter();
+        if($textColumn1 ==NULL){
+            $query = 'SELECT DISTINCT ' . $textColumn . ' from ' . $tableName . ' '.$filters.' '.$orderBys;
+        } else {
+            $query = 'SELECT DISTINCT' . $textColumn . ','.$textColumn1. ' from ' . $tableName . ' '.$filters.' '.$orderBys;
+        }
+        $i = 1;
+        $stmt = $db->query($query);
+        $items = $stmt->fetchAll(); //PDO::FETCH_CLASS);
+        $stmt->closeCursor();
+        $multiSelectHTML = '';
+        $html1 = '';
+        $html = '<select id="' . $fieldName . '" name="' . $fieldName . '" ' . $multiSelectHTML .' '.$onclick .'>';
+        if ($multiSelect) {
+            $multiSelectHTML = 'multiple="multiple"';
+            $html = '<select id="' . $fieldName . '" name="' . $fieldName . '[]" ' . $multiSelectHTML .' '.$onclick .'>';
+        }
+
+        $html .= $html1;
+        //$html .= '<option value="0">'.$zeroValueName.'</option>';
+        foreach ($items as $item) {
+            $selected = '';
+            if (in_array($i, explode(',', $defaultValue)))
+                $selected = ' selected="selected"';
+            if($textColumn1==NULL){
+                //$html .= '<option value="' . $item[$textColumn] . '" ' . $selected .'>' . str_replace("'", "\'", $item[$textColumn]) . '</option>';
+                $html .= '<option value="' . $i . '" ' . $selected .'>' . str_replace("'", "\'", $item[$textColumn]) . '</option>';
+            } else {
+                $html .= '<option value="' . $item[$textColumn] . '" ' . $selected .'>' . str_replace("'", "\'", $item[$textColumn]).' - '.str_replace("'", "\'", $item[$textColumn1]) . '</option>';
+            }
+            $i++;
+        }
+        $html .= '</select>';
+        return $html;
+    }
+
+    public static function getHiddenFieldControl($id, $name)
+    {
+        $db = Zend_Db_Table::getDefaultAdapter();
+
+        $html = '<input id="' . $id . '" name="' . $id . '" type=hidden>';
+
+        return $html;
+    }
 }
 
-    
+

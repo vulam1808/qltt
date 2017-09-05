@@ -27,9 +27,7 @@ class Model_InfoBusiness extends Model_InfoBusinessBase{
 class Model_Master_Violation extends Model_Master_ViolationBase{
     
 }
-class Model_Doc_Violations_Handling extends Model_Doc_Violations_HandlingBase{
-    
-}
+
 class Model_Master_Sanction extends Model_Master_SanctionBase{
     
 }
@@ -37,6 +35,9 @@ class Model_SysDepartments extends Model_SysDepartmentsBase{
     
 }
 
+class Model_Doc_Violations_Handling extends Model_Doc_Violations_HandlingBase{
+
+}
 class Model_Doc_Violations_HandlingMapper extends Model_Doc_Violations_HandlingMapperBase{
     public function deleteDoc_Violations_Handling($id){
         $db = Zend_Db_Table::getDefaultAdapter();

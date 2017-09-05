@@ -916,5 +916,148 @@ class ReportController extends Zend_Controller_Action{
              exit();
          }  
     }
-   
+
+    // Lan Duong
+    public function exportkinhdoanhAction(){
+        $this->_helper->layout->disableLayout();
+        $type_business_name = "";
+        $type_business_header_name = "";
+        $type_business = $this->_getParam("type_business","");
+        if($type_business == 'DoanhNghiep') {
+            $type_business_name = 'DOANH NGHIỆP';
+            $type_business_header_name = 'DOANH NGHIỆP';
+        }
+        else if($type_business == 'HoKinhDoanh') {
+            $type_business_name = 'HỘ KINH DOANH';
+            $type_business_header_name = 'HỘ KINH DOANH';
+        }
+        else {
+            $type_business_name = 'DOANH NGHIỆP NGOÀI ĐỊA BÀN';
+            $type_business_header_name = 'DOANH NGHIỆP';
+        }
+        $doanhnghiep_id = $this->_getParam("doanhnghiep_id","");
+        $nganhnghe_id = $this->_getParam("nganhnghe_name","");
+        $tinhthanh_id = $this->_getParam("tinhthanh_id","");
+        $loaihinh_id = $this->_getParam("loaihinh_id","");
+
+        $objPHPExcel = new PHPExcel();
+        $objPHPExcel->setActiveSheetIndex(0);
+
+        $objPHPExcel->getActiveSheet()->setCellValue('A1', "CHI CỤC QLTT BÌNH ĐỊNH");
+        $objPHPExcel->getActiveSheet()->setCellValue('A2', "Đơn vị:………………………");
+        $objPHPExcel->getActiveSheet()->setCellValue('B1', "CỘNG HÒA XÃ HỘI CHỦ NGHĨA VIỆT NAM");
+        $objPHPExcel->getActiveSheet()->mergeCells('B1:C1');
+        $objPHPExcel->getActiveSheet()->getStyle("B1:C1")->getFont()->setBold(true);
+        $objPHPExcel->getActiveSheet()->getStyle("B1:C1")->getAlignment()->applyFromArray(
+            array('horizontal' => PHPExcel_Style_Alignment::HORIZONTAL_CENTER,)
+        );
+        $objPHPExcel->getActiveSheet()->setCellValue('B2', "Độc lập - Tự do - Hạnh phúc");
+        $objPHPExcel->getActiveSheet()->mergeCells('B2:C2');
+        $objPHPExcel->getActiveSheet()->getStyle("B2:C2")->getFont()->setBold(true);
+        $objPHPExcel->getActiveSheet()->getStyle("B2:C2")->getAlignment()->applyFromArray(
+            array('horizontal' => PHPExcel_Style_Alignment::HORIZONTAL_CENTER,)
+        );
+        $objPHPExcel->getActiveSheet()->setCellValue('B4', "DANH SÁCH ".$type_business_name);
+        $objPHPExcel->getActiveSheet()->mergeCells('B4:D4');
+        $objPHPExcel->getActiveSheet()->getStyle("B4:D4")->getFont()->setSize(20);
+        $objPHPExcel->getActiveSheet()->getStyle("B4:D4")->getFont()->setBold(true);
+        $objPHPExcel->getActiveSheet()->getStyle("B4:D4")->getAlignment()->applyFromArray(
+            array('horizontal' => PHPExcel_Style_Alignment::HORIZONTAL_CENTER,)
+        );
+
+        //BANG
+        $totalRow = $this->modelMapper->fetchrRowCountDSKinhDoanh($type_business, $doanhnghiep_id, $nganhnghe_id, $tinhthanh_id, $loaihinh_id);
+        $totalRow = $totalRow + 5;
+        $style_alignment = array('horizontal' => PHPExcel_Style_Alignment::HORIZONTAL_CENTER,
+            'vertical' => PHPExcel_Style_Alignment::VERTICAL_CENTER);
+        $style_left_alignment = array('horizontal' => PHPExcel_Style_Alignment::HORIZONTAL_LEFT,
+            'vertical' => PHPExcel_Style_Alignment::VERTICAL_CENTER);
+        $objPHPExcel->getActiveSheet()->setCellValue('A5', "MÃ " .$type_business_header_name);
+        $objPHPExcel->getActiveSheet()->getStyle('A5:A'.$totalRow)->getBorders()->getAllBorders()->setBorderStyle(PHPExcel_Style_Border::BORDER_THIN);
+        $objPHPExcel->getActiveSheet()->getStyle('A5:A'.$totalRow)->getAlignment()->applyFromArray($style_alignment);
+        $objPHPExcel->getActiveSheet()->getColumnDimension('A')->setWidth(25);
+        $objPHPExcel->getActiveSheet()->getStyle('A6:A'.$totalRow)->getAlignment()->setWrapText(true);
+        $objPHPExcel->getActiveSheet()->setCellValue('B5', "TÊN " . $type_business_header_name);
+        $objPHPExcel->getActiveSheet()->getStyle('B5:B'.$totalRow)->getBorders()->getAllBorders()->setBorderStyle(PHPExcel_Style_Border::BORDER_THIN);
+        $objPHPExcel->getActiveSheet()->getStyle('B5:B'.$totalRow)->getAlignment()->applyFromArray($style_left_alignment);
+        $objPHPExcel->getActiveSheet()->getColumnDimension('B')->setWidth(35);
+        $objPHPExcel->getActiveSheet()->getStyle('B6:B'.$totalRow)->getAlignment()->setWrapText(true);
+        $objPHPExcel->getActiveSheet()->setCellValue('C5', "TRỤ SỞ CHÍNH");
+        $objPHPExcel->getActiveSheet()->getStyle('C5:C'.$totalRow)->getBorders()->getAllBorders()->setBorderStyle(PHPExcel_Style_Border::BORDER_THIN);
+        $objPHPExcel->getActiveSheet()->getStyle('C5:C'.$totalRow)->getAlignment()->applyFromArray($style_left_alignment);
+        $objPHPExcel->getActiveSheet()->getColumnDimension('C')->setWidth(30);
+        $objPHPExcel->getActiveSheet()->getStyle('C6:C'.$totalRow)->getAlignment()->setWrapText(true);
+        $objPHPExcel->getActiveSheet()->setCellValue('D5', "TỈNH THÀNH");
+        $objPHPExcel->getActiveSheet()->getStyle('D5:D'.$totalRow)->getBorders()->getAllBorders()->setBorderStyle(PHPExcel_Style_Border::BORDER_THIN);
+        $objPHPExcel->getActiveSheet()->getStyle('D5:D'.$totalRow)->getAlignment()->applyFromArray($style_left_alignment);
+        $objPHPExcel->getActiveSheet()->getColumnDimension('D')->setWidth(15);
+        $objPHPExcel->getActiveSheet()->getStyle('D6:D'.$totalRow)->getAlignment()->setWrapText(true);
+        $objPHPExcel->getActiveSheet()->setCellValue('E5', "QUẬN HUYỆN");
+        $objPHPExcel->getActiveSheet()->getStyle('E5:E'.$totalRow)->getBorders()->getAllBorders()->setBorderStyle(PHPExcel_Style_Border::BORDER_THIN);
+        $objPHPExcel->getActiveSheet()->getStyle('E5:E'.$totalRow)->getAlignment()->applyFromArray($style_left_alignment);
+        $objPHPExcel->getActiveSheet()->getColumnDimension('E')->setWidth(15);
+        $objPHPExcel->getActiveSheet()->getStyle('E6:E'.$totalRow)->getAlignment()->setWrapText(true);
+        $objPHPExcel->getActiveSheet()->setCellValue('F5', "XÃ PHƯỜNG");
+        $objPHPExcel->getActiveSheet()->getStyle('F5:F'.$totalRow)->getBorders()->getAllBorders()->setBorderStyle(PHPExcel_Style_Border::BORDER_THIN);
+        $objPHPExcel->getActiveSheet()->getStyle('F5:F'.$totalRow)->getAlignment()->applyFromArray($style_left_alignment);
+        $objPHPExcel->getActiveSheet()->getColumnDimension('F')->setWidth(15);
+        $objPHPExcel->getActiveSheet()->getStyle('F6:F'.$totalRow)->getAlignment()->setWrapText(true);
+        $objPHPExcel->getActiveSheet()->setCellValue('G5', "NGÀNH NGHỀ");
+        $objPHPExcel->getActiveSheet()->getStyle('G5:G'.$totalRow)->getBorders()->getAllBorders()->setBorderStyle(PHPExcel_Style_Border::BORDER_THIN);
+        $objPHPExcel->getActiveSheet()->getStyle('G5:G'.$totalRow)->getAlignment()->applyFromArray($style_alignment);
+        $objPHPExcel->getActiveSheet()->getColumnDimension('G')->setWidth(15);
+        $objPHPExcel->getActiveSheet()->getStyle('G6:G'.$totalRow)->getAlignment()->setWrapText(true);
+
+        $rowCount = 6;
+        $stt=1;
+        foreach ($this->modelMapper->fetchDSKinhDoanh($type_business, $doanhnghiep_id, $nganhnghe_id, $tinhthanh_id, $loaihinh_id) as $items){
+            $objPHPExcel->getActiveSheet()->setCellValue('A' . $rowCount, $items['code']);
+            $objPHPExcel->getActiveSheet()->setCellValue('B' . $rowCount, $items['name']);
+            $objPHPExcel->getActiveSheet()->setCellValue('C' . $rowCount, $items['address_office']);
+            $objPHPExcel->getActiveSheet()->setCellValue('D' . $rowCount, $items['master_province_id']);
+            $objPHPExcel->getActiveSheet()->setCellValue('E' . $rowCount, $items['master_district_id']);
+            $objPHPExcel->getActiveSheet()->setCellValue('F' . $rowCount, $items['master_ward_id']);
+            $objPHPExcel->getActiveSheet()->setCellValue('G' . $rowCount, $items['work_business']);
+            $rowCount++;
+        }
+
+        // Footer
+        $totalRow = $totalRow + 1;
+        $objPHPExcel->getActiveSheet()->setCellValue('A'.$totalRow, 'Ngày lập phiếu');
+        $objPHPExcel->getActiveSheet()->mergeCells('A'.$totalRow.':B'.$totalRow);
+        $objPHPExcel->getActiveSheet()->getStyle('A'.$totalRow.':B'.$totalRow)->getFont()->setBold(true);
+        $objPHPExcel->getActiveSheet()->getStyle('A'.$totalRow.':B'.$totalRow)->getAlignment()->applyFromArray(
+            array('horizontal' => PHPExcel_Style_Alignment::HORIZONTAL_CENTER,)
+        );
+        $objPHPExcel->getActiveSheet()->setCellValue('E'.$totalRow, 'Thủ trưởng');
+        $objPHPExcel->getActiveSheet()->mergeCells('E'.$totalRow.':G'.$totalRow);
+        $objPHPExcel->getActiveSheet()->getStyle('E'.$totalRow.':G'.$totalRow)->getFont()->setBold(true);
+        $objPHPExcel->getActiveSheet()->getStyle('E'.$totalRow.':G'.$totalRow)->getAlignment()->applyFromArray(
+            array('horizontal' => PHPExcel_Style_Alignment::HORIZONTAL_CENTER,)
+        );
+        $totalRow = $totalRow + 1;
+        $objPHPExcel->getActiveSheet()->setCellValue('A'.$totalRow, '(Kí ghi rõ họ tên)');
+        $objPHPExcel->getActiveSheet()->mergeCells('A'.$totalRow.':B'.$totalRow);
+        $objPHPExcel->getActiveSheet()->getStyle('A'.$totalRow.':B'.$totalRow)->getFont()->setSize(10);
+        $objPHPExcel->getActiveSheet()->getStyle('A'.$totalRow.':B'.$totalRow)->getFont()->setItalic(true);
+        $objPHPExcel->getActiveSheet()->getStyle('A'.$totalRow.':B'.$totalRow)->getAlignment()->applyFromArray(
+            array('horizontal' => PHPExcel_Style_Alignment::HORIZONTAL_CENTER,)
+        );
+        $objPHPExcel->getActiveSheet()->setCellValue('E'.$totalRow, '(Kí ghi rõ họ tên)');
+        $objPHPExcel->getActiveSheet()->mergeCells('E'.$totalRow.':G'.$totalRow);
+        $objPHPExcel->getActiveSheet()->getStyle('E'.$totalRow.':G'.$totalRow)->getFont()->setSize(10);
+        $objPHPExcel->getActiveSheet()->getStyle('E'.$totalRow.':G'.$totalRow)->getFont()->setItalic(true);
+        $objPHPExcel->getActiveSheet()->getStyle('E'.$totalRow.':G'.$totalRow)->getAlignment()->applyFromArray(
+            array('horizontal' => PHPExcel_Style_Alignment::HORIZONTAL_CENTER,)
+        );
+
+        //tên file excel
+        $filename='DanhSach'.$type_business.'.xls';
+        header('Content-Type: application/vnd.ms-excel');
+        header('Content-Disposition: attachment;filename='.$filename);
+        header('Cache-Control: max-age=0');
+        $objWriter = new PHPExcel_Writer_Excel5($objPHPExcel);
+        $objWriter->save('php://output');
+        exit();
+    }
 }
