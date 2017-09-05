@@ -1204,7 +1204,7 @@ function getDocPrintCreatWithMasterPrintdefault(url)
     getDocPrintCreateMasterPrintdefault(url+'default/service/index',$('#master_print_id').val(),$('#sys_department_id').val(),'doc_print_create_id','Xin Chờ Trong Giây Lát');
 }
 function getPrintCreatWithMasterPrint(url)
-{  
+{
     getPrintCreateMasterPrint(url,$('#master_print_id').val(),'doc_print_create_id','Xin Chờ Trong Giây Lát');
 }
 function getPrintCreatWithMasterPrint1(url)
