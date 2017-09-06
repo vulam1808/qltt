@@ -4,110 +4,132 @@
     </div>
 </div>
 
-          <div class="panel-body">
-          <div class="form-group">
-              <form role="form" method="POST" name="Search" onsubmit="">
-      <div class="row" id="jqxcombobox">
-        <div  class="col-lg-1">
-            <label  >Tháng</label>
-        </div>
-        <div  class="col-lg-2">
-           <div  id='month' name='month'>
-            </div>    
+<div class="panel-body">
+    <div class="form-group">
+        <form role="form" method="POST" name="Search" onsubmit="">
+            <div class="row" id="jqxcombobox">
+                <div  class="col-lg-1">
+                    <label  >Tháng</label>
+                </div>
+                <div  class="col-lg-2">
+                    <div  id='month' name='month'>
+                    </div>
+                </div>
+
+                <div  class="col-lg-1">
+                    <label  >Năm</label>
+                </div>
+                <div class="col-lg-2">
+                    <div  id='year' name='year'>
+
+                    </div>
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary">Tìm</button>
+                </div>
             </div>
-     
-           <div  class="col-lg-1">
-            <label  >Năm</label>
-        </div>
-          <div class="col-lg-2">  
-           <div  id='year' name='year'>
-                
-            </div>
-        </div>
-        <div class="form-group">
-                <button type="submit" class="btn btn-primary">Tìm</button>
-        </div>
-      </div>  
-                    </form>
-          </div>
-          <div class="form-group" >
-       <div id="jqxTabs">
-        <ul style="margin-left: 30px;">
-         <li id="tab1">Tang vật tịch thu</li>
-         <li id="tab5">Tang vật cần xử lý nhanh</li>
-         <li id="tab2">Tang vật tiêu hủy</li>
-         <li id="tab3">Tang vật đấu giá</li>
-         <li id="tab4">Tang vật chuyển giao cơ quan khác sử dụng</li>
-         
-        </ul>
-        
-        <div id="jqxWidget">
-            <div id="jqxgrid"></div>
-        </div>
-        <div id="jqxWidget">
-            <div id="jqxgrid1"></div>
-        </div>
+        </form>
+    </div>
+    <div class="form-group" >
+        <div id="jqxTabs">
+            <ul style="margin-left: 30px;">
+                <li id="tab1">Tang vật tịch thu</li>
+                <li id="tab5">Tang vật cần xử lý nhanh</li>
+                <li id="tab2">Tang vật tiêu hủy</li>
+                <li id="tab3">Tang vật đấu giá</li>
+                <li id="tab4">Tang vật chuyển giao cơ quan khác sử dụng</li>
+
+            </ul>
+
             <div id="jqxWidget">
-            <div id="jqxgrid2"></div>
+                <div id="jqxgrid"></div>
+            </div>
+            <div id="jqxWidget">
+                <div id="jqxgrid1"></div>
+            </div>
+            <div id="jqxWidget">
+                <div id="jqxgrid2"></div>
+            </div>
+            <div id="jqxWidget">
+                <div id="jqxgrid3"></div>
+            </div>
+            <div id="jqxWidget">
+                <div id="jqxgrid4"></div>
+            </div>
         </div>
-           <div id="jqxWidget">
-            <div id="jqxgrid3"></div>
+        <input style="display: none" id="hide"/>
+    </div>
+
+    <div class="col-lg-12">
+        <div class="form-group">
+            <div class="row">
+                <input type="button" value="Export to Excel" id='excelExport' class="btn btn-primary" />
+            </div>
         </div>
-           <div id="jqxWidget">
-            <div id="jqxgrid4"></div>
-        </div>
-    </div>       
-    <input style="display: none" id="hide"/>
-          </div>
-      </div>
-  <input type="button" value="Export to Excel" id='excelExport' />
+    </div>
+</div>
 
 <script type="text/javascript">
-        $(document).ready(function () {   
-            $('#jqxTabs').jqxTabs({ width:'100%'});
-             var month = "<?php echo $this->month?>";
-             var year = "<?php echo $this->year?>";
-             var y = new Date();
-             var i = y.getFullYear();
-            var arraymonth=new Array();
-                        for(var m=1;m<=12;m++){
-                       arraymonth[m]=m;
-                        }
-                function selectedmonth(){
-                    if(month == ""){
-                        month = y.getMonth()+1;
-                        return month;
-                    }
-                    else return month;
-                }
-                function selectedyear(){
-                if(year==""){
-                    year = y.getFullYear();
-                  return  10;
-                    } 
-                else {
-                    var selectyear =  year;
-                        selectyear = i-selectyear;
-                        selectyear = 10-selectyear;
-                        return selectyear;
-                    }
-                }
-               
-            $("#month").jqxComboBox({ source: arraymonth,selectedIndex:selectedmonth()-1, width: '100px', height: '25px'});
-                var arrayyear=new Array();
-                        for(var j=i-10;j<=i+10;j++){
-                            arrayyear[j]=j;
-                        }
-            $("#year").jqxComboBox({ source: arrayyear,selectedIndex:selectedyear(), width: '100px', height: '25px'});         
-            loadgrid("jqxgrid","ALL",month,year,"Danh sách tang vật tịch thu-chờ xử lý");
-            loadgrid("jqxgrid1","XLN_TT",month,year,"Danh sách tang vật cần xử lý nhanh");
-            loadgrid("jqxgrid2","TH_TT",month,year,"Danh sách tang vật tiêu hủy");
-            loadgrid("jqxgrid3","ĐG_TT",month,year,"Danh sách tang vật đấu giá");
-            loadgrid("jqxgrid4","CGCQKSD_TT",month,year,"Danh sách tang vật chuyển cơ quan khác sử dụng");
-           
-            function loadgrid(_grid,_status,_month,_year,_exel){
+    $(document).ready(function () {
+        var _selStatus = "ALL";
+        $('#jqxTabs').jqxTabs({ width:'100%'});
+        var month = "<?php echo $this->month?>";
+        var year = "<?php echo $this->year?>";
+        var y = new Date();
+        var i = y.getFullYear();
+        var arraymonth=new Array();
+        for(var m=1;m<=12;m++){
+            arraymonth[m]=m;
+        }
+        function selectedmonth(){
+            if(month == ""){
+                month = y.getMonth()+1;
+                return month;
+            }
+            else return month;
+        }
+        function selectedyear(){
+            if(year==""){
+                year = y.getFullYear();
+                return  10;
+            }
+            else {
+                var selectyear =  year;
+                selectyear = i-selectyear;
+                selectyear = 10-selectyear;
+                return selectyear;
+            }
+        }
+
+        $("#month").jqxComboBox({ source: arraymonth,selectedIndex:selectedmonth()-1, width: '100px', height: '25px'});
+        var arrayyear=new Array();
+        for(var j=i-10;j<=i+10;j++){
+            arrayyear[j]=j;
+        }
+        $("#year").jqxComboBox({ source: arrayyear,selectedIndex:selectedyear(), width: '100px', height: '25px'});
+        loadgrid("jqxgrid","ALL",month,year,"Danh sách tang vật tịch thu-chờ xử lý");
+        loadgrid("jqxgrid1","XLN_TT",month,year,"Danh sách tang vật cần xử lý nhanh");
+        loadgrid("jqxgrid2","TH_TT",month,year,"Danh sách tang vật tiêu hủy");
+        loadgrid("jqxgrid3","ĐG_TT",month,year,"Danh sách tang vật đấu giá");
+        loadgrid("jqxgrid4","CGCQKSD_TT",month,year,"Danh sách tang vật chuyển cơ quan khác sử dụng");
+
+        $('#jqxTabs').on('selected', function (event) {
+            var clickedItem = event.args.item;
+            if(clickedItem == 0)
+                _selStatus = "ALL";
+            else if(clickedItem == 1)
+                _selStatus = "XLN_TT";
+            else if(clickedItem == 2)
+                _selStatus = "TH_TT";
+            else if(clickedItem == 3)
+                _selStatus = "ĐG_TT";
+            else
+                _selStatus = "CGCQK_TG";
+        });
+
+        function loadgrid(_grid,_status,_month,_year,_exel){
             var url = "<?php echo $this->baseUrl()?>/leader/docitemshandling/servicetichthu/status/"+_status+"/month/"+_month+"/year/"+_year;
-//         
+//
             var source =
             {
                 dataType: "json",
@@ -122,83 +144,84 @@
                     { name: 'date_handling', type: 'string' },
                     { name: 'amount', type: 'string' },
                     { name: 'status', type: 'string' },
-                    { name: 'comment', type: 'int' } 
+                    { name: 'comment', type: 'int' }
                 ],
                 url:url
             };
-            var dataAdapter = new $.jqx.dataAdapter(source);   
+            var dataAdapter = new $.jqx.dataAdapter(source);
             $("#excelExport").jqxButton();
             $("#excelExport").click(function () {
-            $("#"+_grid).jqxGrid('exportdata', 'xls', _exel);           
+                return window.location = "<?php echo $this->baseUrl()?>/admin/report/exporttangvattichthu/status/"+_selStatus+"/month/"+_month+"/year/"+_year;
             });
             $("#"+_grid).jqxGrid(
-            {
-                width: '100%',
-                source: dataAdapter,  
-                theme: 'bootstrap',
-                pageable: true,
-                showfilterrow: true,
-                filterable: true,
-                autoheight: true,
-                sortable: true,
-                altrows: true,
-                enabletooltips: true,
-                selectionmode: 'multiplecellsadvanced',
-                columnsResize: true,
-                rendergridrows: function (params) {
-                    return params.data;
-                },
-                ready: function () {
-                    $("#"+_grid).jqxGrid('hideColumn', 'id');
-                },
-                columns: [   
-                    { text: 'id', dataField: 'id',align: "center", width: '0%' },
-                    {  text: 'Số TT', sortable: false, filterable: false, editable: false,
-                     groupable: false, draggable: false, resizable: false,
-                     datafield: '', columntype: 'number', width: '5%',
-                     cellsrenderer: function (row, column, value) {
-                          return "<div style='margin:7px;'>" + (value + 1) + "</div>";
-                      }
+                {
+                    width: '100%',
+                    source: dataAdapter,
+                    theme: 'bootstrap',
+                    pageable: true,
+                    showfilterrow: true,
+                    filterable: true,
+                    autoheight: true,
+                    sortable: true,
+                    altrows: true,
+                    enabletooltips: true,
+                    selectionmode: 'multiplecellsadvanced',
+                    columnsResize: true,
+                    rendergridrows: function (params) {
+                        return params.data;
                     },
-                    { text: 'Tên hàng hóa', dataField: 'master_items_id',align: "center", width: '10%' },                    
-                    { text: 'Tên DN', dataField: 'doc_violations_handling_id',align: "center", width: '10%' },
-                    { text: 'Biên lai tịch thu', dataField: 'serial_handling',align: "center", width: '10%' },
-                    { text: 'Số lượng', dataField: 'quantity_commodity',align: "center", width: '9%' },
-                    { text: 'Đơn vị tính', dataField: 'master_unit_id',align: "center", width: '9%' },
-                    { text: 'Ngày tịch thu', dataField: 'date_handling',align: "center", width: '10%' },
-                    { text: 'Số tiền', dataField: 'amount',align: "center", width: '9%' },
-                    { text: 'Trạng thái', dataField: 'master_sanction_id',align: "center", width: '16%' },
-                    {text: 'Xóa',filtertype: 'none', cellsalign: 'right', align: "center",width: '5%', columnType: 'none', editable: false, sortable: false, dataField: null, cellsrenderer: function (row) {                          
-                          editrow = row;
-                          var dataRecord = $("#"+_grid).jqxGrid('getrowdata',editrow);
-                          var url= "<div style='overflow: hidden; text-overflow: ellipsis; padding-bottom: 2px; text-align: center; margin-right: 2px; margin-left: 4px; margin-top: 4px;'><a class='fa fa-trash-o fa-lg'";
-                          url = url + "href='#' onclick='return jsdelete("+dataRecord.id+")'></a></div>";
-                          return url;
-                      }
-                     },
-                    {text: 'Sửa',filtertype: 'none', cellsalign: 'right', align: "center",width: '5%', columnType: 'none', editable: false, sortable: false, dataField: null, cellsrenderer: function (row) {                        
-                          editrow = row;
-                          var dataRecord = $("#"+_grid).jqxGrid('getrowdata',editrow);
-                          var url= "<div style='overflow: hidden; text-overflow: ellipsis; padding-bottom: 2px; text-align: center; margin-right: 2px; margin-left: 4px; margin-top: 4px;'><a class='fa fa-edit fa-lg'";
-                          url = url + "href='<?php echo $this->baseUrl() ?>/leader/docitemshandling/edit/id/"+dataRecord.id+"/type/TichThuHangHoa'></a></div>"
-                          return url;
-                      }
-                          }
-                        ]      
-              });   
-            }
-        });
-       
-    </script>
-    <script type="text/javascript">
-        function jsdelete(id)
-        {            
-                    bootbox.confirm("Bạn có chắc muốn xoá tang vật này không?",
-                    function(result){
-                        if(result == true)
-                        {
-                           return window.location = "<?php echo $this->baseUrl() ?>/leader/docitemshandling/deletettt/id/"+id;
+                    ready: function () {
+                        $("#"+_grid).jqxGrid('hideColumn', 'id');
+                    },
+                    columns: [
+                        { text: 'id', dataField: 'id',align: "center", width: '0%' },
+                        {  text: 'Số TT', sortable: false, filterable: false, editable: false,
+                            groupable: false, draggable: false, resizable: false,
+                            datafield: '', columntype: 'number', width: '5%',
+                            cellsrenderer: function (row, column, value) {
+                                return "<div style='margin:7px;'>" + (value + 1) + "</div>";
+                            }
+                        },
+                        { text: 'Tên hàng hóa', dataField: 'master_items_id',align: "center", width: '10%' },
+                        { text: 'Tên DN', dataField: 'doc_violations_handling_id',align: "center", width: '10%' },
+                        { text: 'Biên lai tịch thu', dataField: 'serial_handling',align: "center", width: '10%' },
+                        { text: 'Số lượng', dataField: 'quantity_commodity',align: "center", width: '9%' },
+                        { text: 'Đơn vị tính', dataField: 'master_unit_id',align: "center", width: '9%' },
+                        { text: 'Ngày tịch thu', dataField: 'date_handling',align: "center", width: '10%' },
+                        { text: 'Số tiền', dataField: 'amount',align: "center", width: '9%' },
+                        { text: 'Trạng thái', dataField: 'master_sanction_id',align: "center", width: '16%' },
+                        {text: 'Xóa',filtertype: 'none', cellsalign: 'right', align: "center",width: '5%', columnType: 'none', editable: false, sortable: false, dataField: null, cellsrenderer: function (row) {
+                            editrow = row;
+                            var dataRecord = $("#"+_grid).jqxGrid('getrowdata',editrow);
+                            var url= "<div style='overflow: hidden; text-overflow: ellipsis; padding-bottom: 2px; text-align: center; margin-right: 2px; margin-left: 4px; margin-top: 4px;'><a class='fa fa-trash-o fa-lg'";
+                            url = url + "href='#' onclick='return jsdelete("+dataRecord.id+")'></a></div>";
+                            return url;
                         }
-                    });             
+                        },
+                        {text: 'Sửa',filtertype: 'none', cellsalign: 'right', align: "center",width: '5%', columnType: 'none', editable: false, sortable: false, dataField: null, cellsrenderer: function (row) {
+                            editrow = row;
+                            var dataRecord = $("#"+_grid).jqxGrid('getrowdata',editrow);
+                            var url= "<div style='overflow: hidden; text-overflow: ellipsis; padding-bottom: 2px; text-align: center; margin-right: 2px; margin-left: 4px; margin-top: 4px;'><a class='fa fa-edit fa-lg'";
+                            url = url + "href='<?php echo $this->baseUrl() ?>/leader/docitemshandling/edit/id/"+dataRecord.id+"/type/TichThuHangHoa'></a></div>"
+                            return url;
+                        }
+                        }
+                    ]
+                });
         }
-    </script>
+    });
+       
+</script>
+
+<script type="text/javascript">
+    function jsdelete(id)
+    {
+        bootbox.confirm("Bạn có chắc muốn xoá tang vật này không?",
+            function(result){
+                if(result == true)
+                {
+                    return window.location = "<?php echo $this->baseUrl() ?>/leader/docitemshandling/deletettt/id/"+id;
+                }
+            });
+    }
+</script>
