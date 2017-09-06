@@ -4,65 +4,73 @@
     </div>
 </div>
 
-          <div class="panel-body">
-          <div class="form-group">
-              <form role="form" method="POST" name="Search" onsubmit="">
-      <div class="row" id="jqxcombobox">
-        <div  class="col-lg-1">
-            <label style="margin-left: 20px;" >Tháng</label>
-        </div>
-        
-           <div style='float: left' id='month' name='month'>
-                
+<div class="panel-body">
+    <div class="form-group">
+        <form role="form" method="POST" name="Search" onsubmit="">
+            <div class="row" id="jqxcombobox">
+                <div  class="col-lg-1">
+                    <label style="margin-left: 20px;" >Tháng</label>
+                </div>
+
+                <div style='float: left' id='month' name='month'>
+
+                </div>
+
+                <div  class="col-lg-1">
+                    <label style="margin-left: 20px;" >Năm</label>
+                </div>
+                <div class="col-lg-2">
+                    <div style='float: left' id='year' name='year'>
+
+                    </div>
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary">Tìm</button>
+                </div>
             </div>
-     
-           <div  class="col-lg-1">
-            <label style="margin-left: 20px;" >Năm</label>
-        </div>
-          <div class="col-lg-2">  
-           <div style='float: left' id='year' name='year'>
-                
-            </div>
-        </div>
-        <div class="form-group">
-                <button type="submit" class="btn btn-primary">Tìm</button>
-        </div>
-      </div>  
-                    </form>
-          </div>
-          <div class="form-group" >
-       <div id="jqxTabs">
-        <ul style="margin-left: 30px;">
-         <li id="tab1">Tang vật tịch thu</li>
-         <li id="tab5">Tang vật cần xử lý nhanh</li>
-         <li id="tab2">Tang vật tiêu hủy</li>
-         <li id="tab3">Tang vật đấu giá</li>
-         <li id="tab4">Tang vật chuyển giao cơ quan khác sử dụng</li>
-         
-        </ul>
-        
-        <div id="jqxWidget">
-            <div id="jqxgrid"></div>
-        </div>
-        <div id="jqxWidget">
-            <div id="jqxgrid1"></div>
-        </div>
+        </form>
+    </div>
+    <div class="form-group" >
+        <div id="jqxTabs">
+            <ul style="margin-left: 30px;">
+                <li id="tab1">Tang vật tịch thu</li>
+                <li id="tab5">Tang vật cần xử lý nhanh</li>
+                <li id="tab2">Tang vật tiêu hủy</li>
+                <li id="tab3">Tang vật đấu giá</li>
+                <li id="tab4">Tang vật chuyển giao cơ quan khác sử dụng</li>
+
+            </ul>
+
             <div id="jqxWidget">
-            <div id="jqxgrid2"></div>
+                <div id="jqxgrid"></div>
+            </div>
+            <div id="jqxWidget">
+                <div id="jqxgrid1"></div>
+            </div>
+            <div id="jqxWidget">
+                <div id="jqxgrid2"></div>
+            </div>
+            <div id="jqxWidget">
+                <div id="jqxgrid3"></div>
+            </div>
+            <div id="jqxWidget">
+                <div id="jqxgrid4"></div>
+            </div>
         </div>
-           <div id="jqxWidget">
-            <div id="jqxgrid3"></div>
+        <input style="display: none" id="hide"/>
+    </div>
+</div>
+
+<div class="col-lg-12">
+    <div class="form-group">
+        <div class="row">
+            <input type="button" value="Export to Excel" id='excelExport' class="btn btn-primary" />
         </div>
-           <div id="jqxWidget">
-            <div id="jqxgrid4"></div>
-        </div>
-    </div>       
-    <input style="display: none" id="hide"/>
-          </div>
-      </div>
-  <input type="button" value="Export to Excel" id='excelExport' />
+    </div>
+</div>
 
 <script type="text/javascript">
+        var _selStatus = "ALL";
         $(document).ready(function () {   
             $('#jqxTabs').jqxTabs({ width:'100%'});
              var month = "<?php echo $this->month?>";
@@ -104,6 +112,20 @@
             loadgrid("jqxgrid2","TH_TT",month,year,"Danh sách tang vật tiêu hủy");
             loadgrid("jqxgrid3","ĐG_TT",month,year,"Danh sách tang vật đấu giá");
             loadgrid("jqxgrid4","CGCQKSD_TT",month,year,"Danh sách tang vật chuyển cơ quan khác sử dụng");
+
+            $('#jqxTabs').on('selected', function (event) {
+                var clickedItem = event.args.item;
+                if(clickedItem == 0)
+                    _selStatus = "ALL";
+                else if(clickedItem == 1)
+                    _selStatus = "XLN_TT";
+                else if(clickedItem == 2)
+                    _selStatus = "TH_TT";
+                else if(clickedItem == 3)
+                    _selStatus = "ĐG_TT";
+                else
+                    _selStatus = "CGCQK_TG";
+            });
            
             function loadgrid(_grid,_status,_month,_year,_exel){
             var url = "<?php echo $this->baseUrl()?>/default/docitemshandling/servicetichthu/status/"+_status+"/month/"+_month+"/year/"+_year;
@@ -129,7 +151,8 @@
             var dataAdapter = new $.jqx.dataAdapter(source);   
             $("#excelExport").jqxButton();
             $("#excelExport").click(function () {
-            $("#"+_grid).jqxGrid('exportdata', 'xls', _exel);           
+                //$("#"+_grid).jqxGrid('exportdata', 'xls', _exel);
+                return window.location = "<?php echo $this->baseUrl()?>/default/report/exporttangvattichthu/status/"+_selStatus+"/month/"+_month+"/year/"+_year;
             });
             $("#"+_grid).jqxGrid(
             {
