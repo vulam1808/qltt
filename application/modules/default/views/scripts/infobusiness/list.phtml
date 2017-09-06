@@ -78,16 +78,26 @@
 
                 <div id="jqxWidget">
                     <div id="jqxgrid"></div>
-                    <input type="button" id="excelExport" name="excelExport" class="btn btn-success"value="Xuất Excel"  />
+                    <!--<input type="button" id="excelExport" name="excelExport" class="btn btn-success"value="Xuất Excel"  />-->
                 </div>
                 <div id="jqxWidget">
                     <div id="jqxgrid1"></div>
-                    <input type="button" id="excelExport1" name="excelExport" class="btn btn-success"value="Xuất Excel"  />
+                    <!--<input type="button" id="excelExport1" name="excelExport" class="btn btn-success"value="Xuất Excel"  />-->
                 </div>
-
             </div>
 
+        </div>
+    </div>
+
+    <div class="col-lg-12">
+        <div class="form-group">
+            <div class="row">
+
+                <!--<button class="btn btn-primary" id="submit">Xuất excel</button>-->
+                <input type="button" id="excelExport" name="excelExport" class="btn btn-success"value="Xuất Excel"  />
+
             </div>
+        </div>
     </div>
 </div>
 
@@ -97,6 +107,117 @@
     </script>
     <script type="text/javascript">
         $(document).ready(function () {
+
+            // Begin: khởi tạo css style cho DoanhNghiepMultiSelectCombobox
+            $('#doanhnghiep_id').multiselect({
+                includeSelectAllOption:true,
+                enableFiltering: true,
+                maxHeight: '300',
+                buttonText: function(options)
+                {
+                    var retStr = "";
+                    if (options.length === 0) {
+                        retStr = "None selected";
+                    } else if(options.length <=2){
+                        var textArray = [];
+                        $.each(options,function(key,value){
+                            textArray.push($.trim($(value).html()));
+                        });
+                        retStr = "<div class='pull-left restricted'>"+textArray.join(",")+"</div>";
+                    } else {
+                        retStr = options.length+" selected";
+                    }
+                    return retStr+" <b class='caret'></b>";
+                }
+            });
+            // End: khởi tạo css style cho DoanhNghiepMultiSelectCombobox
+
+            // Begin: khởi tạo css style cho TinhThanhMultiSelectCombobox
+            $('#tinhthanh_id').multiselect({
+                includeSelectAllOption:true,
+                enableFiltering: true,
+                maxHeight: '300',
+                buttonText: function(options)
+                {
+                    var retStr = "";
+                    if (options.length === 0) {
+                        retStr = "None selected";
+                    } else if(options.length <=2){
+                        var textArray = [];
+                        $.each(options,function(key,value){
+                            textArray.push($.trim($(value).html()));
+                        });
+                        retStr = "<div class='pull-left restricted'>"+textArray.join(",")+"</div>";
+                    } else {
+                        retStr = options.length+" selected";
+                    }
+                    return retStr+" <b class='caret'></b>";
+                }
+            });
+            // End: khởi tạo css style cho TinhThanhMultiSelectCombobox
+
+            // Begin: khởi tạo css style cho LoaiHinhMultiSelectCombobox
+            $('#loaihinh_id').multiselect({
+                includeSelectAllOption:true,
+                enableFiltering: true,
+                maxHeight: '300',
+                buttonText: function(options)
+                {
+                    var retStr = "";
+                    if (options.length === 0) {
+                        retStr = "None selected";
+                    } else if(options.length <=2){
+                        var textArray = [];
+                        $.each(options,function(key,value){
+                            textArray.push($.trim($(value).html()));
+                        });
+                        retStr = "<div class='pull-left restricted'>"+textArray.join(",")+"</div>";
+                    } else {
+                        retStr = options.length+" selected";
+                    }
+                    return retStr+" <b class='caret'></b>";
+                }
+            });
+            // End: khởi tạo css style cho LoaiHinhMultiSelectCombobox
+
+            // Begin: khởi tạo css style cho NganhNgheMultiSelectCombobox
+            $('#nganhnghe_id').multiselect({
+                includeSelectAllOption:true,
+                enableFiltering: true,
+                maxHeight: '300',
+                buttonText: function(options)
+                {
+                    var retStr = "";
+                    if (options.length === 0) {
+                        retStr = "None selected";
+                    } else if(options.length <=2){
+                        var textArray = [];
+                        $.each(options,function(key,value){
+                            textArray.push($.trim($(value).html()));
+                        });
+                        retStr = "<div class='pull-left restricted'>"+textArray.join(",")+"</div>";
+                    } else {
+                        retStr = options.length+" selected";
+                    }
+                    return retStr+" <b class='caret'></b>";
+                }
+            });
+            // End: khởi tạo css style cho NganhNgheMultiSelectCombobox
+
+            $("#nganhnghe_id").change(function () {
+                var stNganhNghe = "";
+
+                $("#nganhnghe_id option:selected").each(function() {
+                    stNganhNghe += "'" + $( this ).text() + "',";
+                });
+                stNganhNghe = stNganhNghe.substr(0, stNganhNghe.length-1);
+                //$("#divTest").text(stNganhNghe);
+                localStorage.setItem("name", stNganhNghe);
+            }).change();
+
+            var _idNganhNghe = localStorage.getItem("name");
+            //alert(_idNganhNghe);
+
             var source =
             {
                 datatype: "json",
@@ -130,7 +251,7 @@
                     { name: 'comment',type:'string'}
 
                 ],
-                url:"<?php echo $this->baseUrl().'/default/infobusiness/service/type_business/'.$this->type_business.'/userid/'.$identity->id ?>",
+                url:"<?php echo $this->baseUrl().'/default/infobusiness/filterdoanhnghiep/type_business/'.$this->type_business.'/doanhnghiep_id/'.$this->doanhnghiep_id.'/tinhthanh_id/'.$this->tinhthanh_id.'/loaihinh_id/'.$this->loaihinh_id.'/nganhnghe_id/'?>"+_idNganhNghe,
                 sortcolumn: 'Id',
                 sortdirection: 'DESC'
 
@@ -299,7 +420,8 @@
             var dataAdapter = new $.jqx.dataAdapter(source);
             $("#excelExport").jqxButton();
             $("#excelExport").click(function () {
-            $("#jqxgrid").jqxGrid('exportdata', 'xls', 'DanhSach<?php echo $this->type_business ?>');
+                //$("#jqxgrid").jqxGrid('exportdata', 'xls', 'DanhSach<?php echo $this->type_business ?>');
+                return window.location = "<?php echo $this->baseUrl().'/default/report/exportkinhdoanh/type_business/'.$this->type_business.'/doanhnghiep_id/'.$this->doanhnghiep_id.'/tinhthanh_id/'.$this->tinhthanh_id.'/loaihinh_id/'.$this->loaihinh_id.'/nganhnghe_id/'?>" + _idNganhNghe;
             });
             $("#jqxgrid").jqxGrid(
             {

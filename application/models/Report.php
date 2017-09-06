@@ -212,7 +212,12 @@ class Model_ReportMapper extends Model_ReportMapperBase{
         }
         else
         {
-
+            $select = "SELECT doc_violations_handling.id, info_business.name AS TenDoanhNghiep, info_business.address_office AS DiaChi, master_violation.Name AS HanhViViPham, master_sanction.name AS HinhThucXuLy, sys_user.username AS DoiXuLy, doc_violations_handling.amount AS SoTien";
+            $select .= " FROM doc_violations_handling inner join info_business on info_business.type_business='".$type_business."'";
+            $select .= " inner join master_violation on doc_violations_handling.master_violation_id=master_violation.id";
+            $select .= " inner join master_sanction on doc_violations_handling.master_sanctions_id=master_sanction.id";
+            $select .= " inner join sys_user on doc_violations_handling.sys_user_id=sys_user.id";
+            $select .= " WHERE doc_violations_handling.info_business_id= info_business.id and month(doc_violations_handling.date_violation)='".$month."'and year(doc_violations_handling.date_violation)='".$year."' and doc_violations_handling.sys_department_id='".$id."'";
         }
         $stmt=$db->query($select);
         $rows = $stmt->fetchAll(PDO::FETCH_CLASS);
@@ -245,7 +250,12 @@ class Model_ReportMapper extends Model_ReportMapperBase{
         }
         else
         {
-
+            $select = "SELECT doc_violations_handling.id, info_business.name AS TenDoanhNghiep, info_business.address_office AS DiaChi, master_violation.Name AS HanhViViPham, master_sanction.name AS HinhThucXuLy, sys_user.username AS DoiXuLy, doc_violations_handling.amount AS SoTien";
+            $select .= " FROM doc_violations_handling inner join info_business on info_business.type_business='".$type_business."'";
+            $select .= " inner join master_violation on doc_violations_handling.master_violation_id=master_violation.id";
+            $select .= " inner join master_sanction on doc_violations_handling.master_sanctions_id=master_sanction.id";
+            $select .= " inner join sys_user on doc_violations_handling.sys_user_id=sys_user.id";
+            $select .= " WHERE doc_violations_handling.info_business_id= info_business.id and month(doc_violations_handling.date_violation)='".$month."'and year(doc_violations_handling.date_violation)='".$year."' and doc_violations_handling.sys_department_id='".$id."'";
         }
         $stmt=$db->query($select);
         $rows = $stmt->fetchAll(PDO::FETCH_CLASS);
@@ -427,7 +437,7 @@ class Model_ReportMapper extends Model_ReportMapperBase{
         $ngaybatdau = GlobalLib::toMysqlDateString($ngaybatdau);
         $ngayketthuc = GlobalLib::toMysqlDateString($ngayketthuc);
         if($ngaybatdau==NULL && $ngayketthuc==NULL){
-            $select="select * from doc_diary where is_delete ='0'";
+            $select="select * from doc_diary where is_delete ='0' and created_by = '".$userID."'";
         }
         else {
             $select="select * from doc_diary where created_by = '".$userID."' and is_delete ='0' and date_diary BETWEEN CAST('$ngaybatdau' AS DATE) AND CAST('$ngayketthuc' AS DATE) ";
@@ -461,7 +471,7 @@ class Model_ReportMapper extends Model_ReportMapperBase{
         $ngaybatdau = GlobalLib::toMysqlDateString($ngaybatdau);
         $ngayketthuc = GlobalLib::toMysqlDateString($ngayketthuc);
         if($ngaybatdau==NULL && $ngayketthuc==NULL){
-            $select="select * from doc_diary where is_delete ='0'";
+            $select="select * from doc_diary where is_delete ='0' and created_by = '".$userID."'";
         }
         else {
             $select="select * from doc_diary where created_by = '".$userID."' and is_delete ='0' and date_diary BETWEEN CAST('$ngaybatdau' AS DATE) AND CAST('$ngayketthuc' AS DATE) ";

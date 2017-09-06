@@ -336,6 +336,7 @@ class DocDiaryController extends Zend_Controller_Action{
         $this->_redirect($redirectUrl);        
     }    
     
-    
+    // Lan Duong
+
    
 }
