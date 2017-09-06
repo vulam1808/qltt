@@ -93,7 +93,7 @@ class Model_Doc_Items_HandlingMapper extends Model_Doc_Items_HandlingMapperBase{
         $select="";
         $select1="select t1.*,t2.sys_department_id from doc_items_handling as t1 inner join doc_violations_handling as t2
                     on t1.doc_violations_handling_id =  t2.id and t2.sys_department_id = '$sys_department_id'  
-                    where t1.is_delete ='0' and month(t1.date_handling)='".$month."' and year(t1.date_handling)='".$year."' and (t1.status='TT_TT' or t1.status='TH_TT' or t1.status='ĐG_TT' or t1.status='CGCQKSD_TT' or status='XLN_TT' )";  
+                    where t1.is_delete ='0' and month(t1.date_handling)='".$month."' and year(t1.date_handling)='".$year."' and (t1.status='TT_TT' or t1.status='TH_TT' or t1.status='ĐG_TT' or t1.status='CGCQKSD_TT' or t1.status='XLN_TT' )";  
         $select2="select t1.*,t2.sys_department_id from doc_items_handling as t1 inner join doc_violations_handling as t2
                     on t1.doc_violations_handling_id =  t2.id and t2.sys_department_id = '$sys_department_id'  
                      where t1.is_delete ='0' and (month(t1.date_handling)='".$month."' and year(t1.date_handling)='".$year."' and t1.status='".$status."' )";        
