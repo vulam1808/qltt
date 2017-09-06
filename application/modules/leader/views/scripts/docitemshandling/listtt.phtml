@@ -151,7 +151,7 @@
             var dataAdapter = new $.jqx.dataAdapter(source);
             $("#excelExport").jqxButton();
             $("#excelExport").click(function () {
-                return window.location = "<?php echo $this->baseUrl()?>/admin/report/exporttangvattichthu/status/"+_selStatus+"/month/"+_month+"/year/"+_year;
+                return window.location = "<?php echo $this->baseUrl()?>/leader/report/exporttangvattichthu/status/"+_selStatus+"/month/"+_month+"/year/"+_year;
             });
             $("#"+_grid).jqxGrid(
                 {
