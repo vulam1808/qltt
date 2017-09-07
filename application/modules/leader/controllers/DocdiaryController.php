@@ -115,6 +115,12 @@ class Leader_DocDiaryController extends Zend_Controller_Action{
         $this->view->item=$this->model;
     }   
     public function listAction(){
+        $this->view->fromdate="";
+        $this->view->todate="";
+        if($this->getRequest()->isPost()) {
+            $this->view->fromdate = $_POST["fromdate"];
+            $this->view->todate = $_POST["todate"];
+        }
     }
     
     public function serviceAction(){
@@ -136,22 +142,43 @@ class Leader_DocDiaryController extends Zend_Controller_Action{
     }
     public function servicetungaydenngayAction(){
         $this->_helper->layout->disableLayout();
-        $ngaybatdau = $this->_getParam("tungay","");
-        $ngayketthuc = $this->_getParam("denngay","");
-        foreach ($this->modelMapper->fetchwhereAll($ngaybatdau,$ngayketthuc) as $items ) {
-            $menber[]=array(
-                'Id'=>$items->getId(),
-                'date_diary'=>  GlobalLib::viewDate($items->getDate_Diary()),
-                'implementers'=>$items->getImplementers(),                
-                'position'=>$items->getPosition(),
-                'content_inspection'=>$items->getContent_Inspection(),
-                'time_check'=>$items->getTime_Check(),                
-                'status_and_test_results'=>$items->getStatus_And_Test_Results(),
-                'processing_results'=>$items->getProcessing_Results()
-            );
+        $ngaybatdau = $this->_getParam("fromdate","");
+        $ngayketthuc = $this->_getParam("todate","");
+
+        if($ngaybatdau == null && $ngayketthuc == null) {
+            foreach ($this->modelMapper->fetchAll() as $items ) {
+                $menber1[]=array(
+                    'Id'=>$items->getId(),
+                    'date_diary'=>  GlobalLib::viewDate($items->getDate_Diary()),
+                    'implementers'=>$items->getImplementers(),
+                    'position'=>$items->getPosition(),
+                    'content_inspection'=>$items->getContent_Inspection(),
+                    'time_check'=>$items->getTime_Check(),
+                    'status_and_test_results'=>$items->getStatus_And_Test_Results(),
+                    'processing_results'=>$items->getProcessing_Results()
+                );
+            }
+            echo json_encode($menber1);
+            exit();
         }
-        echo json_encode($menber);
-        exit();
+        else
+        {
+            foreach ($this->modelMapper->fetchwhereAll($ngaybatdau, $ngayketthuc) as $items) {
+                $menber2[] = array(
+                    'Id' => $items->getId(),
+                    'date_diary' => GlobalLib::viewDate($items->getDate_Diary()),
+                    'implementers' => $items->getImplementers(),
+                    'position' => $items->getPosition(),
+                    'content_inspection' => $items->getContent_Inspection(),
+                    'time_check' => $items->getTime_Check(),
+                    'status_and_test_results' => $items->getStatus_And_Test_Results(),
+                    'processing_results' => $items->getProcessing_Results()
+                );
+            }
+            echo json_encode($menber2);
+            exit();
+        }
+
     }
     
     public function printpaymenttonthatexportAction(){

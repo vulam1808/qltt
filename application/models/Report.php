@@ -123,6 +123,7 @@ class Model_ReportMapper extends Model_ReportMapperBase{
         return $entries2;
     }
 
+    // Lan Duong
     public function fetchDSKinhDoanh($type_business, $doanhnghiep_id, $nganhnghe_id, $tinhthanh_id, $loaihinh_id){
         $db = Zend_Db_Table::getDefaultAdapter();
         $select = "select info_business.code, info_business.name , info_business.address_office, master_province.name as master_province_id, master_district.name as master_district_id, master_ward.name as master_ward_id, info_business.work_business";
@@ -486,6 +487,152 @@ class Model_ReportMapper extends Model_ReportMapperBase{
         $i = 0;
         foreach ($rows as $row){
             $i++;
+        }
+        return $i;
+    }
+
+    public function fetchDSBCKiemTraTheoQui($quy,$year, $sys_department_id = null){
+        if($quy==1){
+            $begin = 1;
+            $end = 3;
+        }
+        if($quy==2){
+            $begin = 4;
+            $end = 6;
+        }
+        if($quy==3){
+            $begin = 7;
+            $end = 9;
+        }
+        if($quy==4){
+            $begin = 10;
+            $end = 12;
+        }
+
+        $db = Zend_Db_Table::getDefaultAdapter();
+        $entriess1   = array("department"=>"","result"=>"");
+        $entriess = array("result"=>"");
+        $select="select code from master_violation";
+        $stmt=$db->query($select);
+        $rows = $stmt->fetchAll(PDO::FETCH_CLASS);
+        $stmt->closeCursor();
+        foreach($rows as $row){
+            $entriess[$row->code]="";
+            $entriess1[$row->code]="";
+        }
+        $entries=$entriess;
+        $entries1=$entriess1;
+        $entries2 = array();
+        if($sys_department_id === null)
+            $select="select count(*) count,sys_department_id from info_schedule_check where (month(date_check) between '".$begin."' and '".$end."') and year(date_check)='".$year."' group by sys_department_id";
+        else
+            $select="select count(*) count,sys_department_id from info_schedule_check where (month(date_check) between '".$begin."' and '".$end."') and year(date_check)='".$year."' and sys_department_id='".$sys_department_id."' group by sys_department_id";
+        $stmt=$db->query($select);
+        $rows = $stmt->fetchAll(PDO::FETCH_CLASS);
+        $stmt->closeCursor();
+        foreach($rows as $row){
+            $entries=$entriess;
+            $entries1=$entriess1;
+            $selects="select count(*) count,sys_department_id from doc_violations_handling where (month(date_violation) between '".$begin."' and '".$end."') and year(date_violation)='".$year."' and sys_department_id='".$row->sys_department_id."'";
+            $stmts=$db->query($selects);
+            $rowss = $stmts->fetchAll(PDO::FETCH_CLASS);
+            $stmts->closeCursor();
+            foreach($rowss as $row1)
+                $entries1["department"]=  GlobalLib::getName("sys_department",$row->sys_department_id,"name");
+            $entries1["result"]=$row->count."/".$row1->count;
+
+
+            $select1= "select name,code,count(name) count,Sum(amount) sums FROM doc_violations_handling mv
+                        inner join master_violation dvh on mv.master_violation_id=dvh.id
+                       WHERE (mv.is_delete = 0) and (month(date_violation) between '".$begin."' and '".$end."') and year(date_violation)='".$year."' and sys_department_id='".$row->sys_department_id."'  group by name";
+            $stmt1=$db->query($select1);
+            $rows1 = $stmt1->fetchAll(PDO::FETCH_CLASS);
+            $stmt1->closeCursor();
+            foreach($rows1 as $row2){
+                $sum = $row2->sums;
+                if(empty($sum))
+                {
+                    $sum = 0;
+                }
+                $entries[$row2->code]= $sum;
+                $entries["result"]= $sum+$entries["result"];
+                $entries1[$row2->code]= $row2->count;
+            }
+            $entries2[] = array($entries1,$entries);
+        }
+        return $entries2;
+    }
+
+    public function fetchRowCountDSBCKiemTraTheoQui($quy,$year, $sys_department_id = null){
+        if($quy==1){
+            $begin = 1;
+            $end = 3;
+        }
+        if($quy==2){
+            $begin = 4;
+            $end = 6;
+        }
+        if($quy==3){
+            $begin = 7;
+            $end = 9;
+        }
+        if($quy==4){
+            $begin = 10;
+            $end = 12;
+        }
+
+        $db = Zend_Db_Table::getDefaultAdapter();
+        $entriess1   = array("department"=>"","result"=>"");
+        $entriess = array("result"=>"");
+        $select="select code from master_violation";
+        $stmt=$db->query($select);
+        $rows = $stmt->fetchAll(PDO::FETCH_CLASS);
+        $stmt->closeCursor();
+        foreach($rows as $row){
+            $entriess[$row->code]="";
+            $entriess1[$row->code]="";
+        }
+        $entries=$entriess;
+        $entries1=$entriess1;
+        $entries2 = array();
+        if($sys_department_id === null)
+            $select="select count(*) count,sys_department_id from info_schedule_check where (month(date_check) between '".$begin."' and '".$end."') and year(date_check)='".$year."' group by sys_department_id";
+        else
+            $select="select count(*) count,sys_department_id from info_schedule_check where (month(date_check) between '".$begin."' and '".$end."') and year(date_check)='".$year."' and sys_department_id='".$sys_department_id."' group by sys_department_id";
+        $stmt=$db->query($select);
+        $rows = $stmt->fetchAll(PDO::FETCH_CLASS);
+        $stmt->closeCursor();
+        $i = 0;
+        foreach($rows as $row){
+            $entries=$entriess;
+            $entries1=$entriess1;
+            $selects="select count(*) count,sys_department_id from doc_violations_handling where (month(date_violation) between '".$begin."' and '".$end."') and year(date_violation)='".$year."' and sys_department_id='".$row->sys_department_id."'";
+            $stmts=$db->query($selects);
+            $rowss = $stmts->fetchAll(PDO::FETCH_CLASS);
+            $stmts->closeCursor();
+            foreach($rowss as $row1)
+                $entries1["department"]=  GlobalLib::getName("sys_department",$row->sys_department_id,"name");
+            $entries1["result"]=$row->count."/".$row1->count;
+
+
+            $select1= "select name,code,count(name) count,Sum(amount) sums FROM doc_violations_handling mv
+                        inner join master_violation dvh on mv.master_violation_id=dvh.id
+                       WHERE (mv.is_delete = 0) and (month(date_violation) between '".$begin."' and '".$end."') and year(date_violation)='".$year."' and sys_department_id='".$row->sys_department_id."'  group by name";
+            $stmt1=$db->query($select1);
+            $rows1 = $stmt1->fetchAll(PDO::FETCH_CLASS);
+            $stmt1->closeCursor();
+            foreach($rows1 as $row2){
+                $sum = $row2->sums;
+                if(empty($sum))
+                {
+                    $sum = 0;
+                }
+                $entries[$row2->code]= $sum;
+                $entries["result"]= $sum+$entries["result"];
+                $entries1[$row2->code]= $row2->count;
+                $i++;
+            }
+            $entries2[] = array($entries1,$entries);
         }
         return $i;
     }
