@@ -5,35 +5,34 @@
 </div>
 <div class="row">
    
-   <div class="panel panel-default">             
-      
-      <div class="panel-body">
-          <div class="form-group">
-              <form role="form" method="POST" name="Search" onsubmit="">
+   <div class="panel panel-default">
+       <div class="panel-body">
+           <div class="form-group">
+               <form role="form" method="POST" name="Search" action="<?php echo $this->baseUrl()?>/leader/report/exportdocviolationshandling">
 
-        <div  class="col-lg-1">
-            <label style="margin-left: 20px;" >Quý</label>
-        </div>
-        
-           <div style="float: left" id="quy" name="quy">
-                
-            </div>
-     
-           <div  class="col-lg-1">
-            <label style="margin-left: 20px;" >Năm</label>
-        </div>
-          <div class="col-lg-2">  
-           <div style="float: left" id="year" name="year">
-                
-            </div>
-        </div>
-        <div class="form-group">
-                <button type="submit" class="btn btn-primary">Xuất Excel</button>
-        </div>
+                   <div  class="col-lg-1">
+                       <label style="margin-left: 20px;" >Quý</label>
+                   </div>
 
-                    </form>
-          </div>
-            </div>
+                   <div style="float: left" id="quy" name="quy">
+
+                   </div>
+
+                   <div  class="col-lg-1">
+                       <label style="margin-left: 20px;" >Năm</label>
+                   </div>
+                   <div class="col-lg-2">
+                       <div style="float: left" id="year" name="year">
+
+                       </div>
+                   </div>
+                   <div class="form-group">
+                       <button type="submit" class="btn btn-primary">Xuất Excel</button>
+                   </div>
+
+               </form>
+           </div>
+       </div>
    </div>
 </div>
 <script type="text/javascript">   
