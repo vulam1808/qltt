@@ -944,7 +944,8 @@ class Admin_ReportController extends Zend_Controller_Action{
                 'name' => 'Times New Roman'
             ));
 
-        $objPHPExcel->getActiveSheet()->setCellValue('A1', "CHI CỤC QLTT BÌNH ĐỊNH");$objPHPExcel->getActiveSheet()->mergeCells('A1:C1');
+        $objPHPExcel->getActiveSheet()->setCellValue('A1', "CHI CỤC QLTT BÌNH ĐỊNH");
+        $objPHPExcel->getActiveSheet()->mergeCells('A1:C1');
         $objPHPExcel->getActiveSheet()->setCellValue('A2', "Đơn vị:………………………");
         $objPHPExcel->getActiveSheet()->setCellValue('E1', "CỘNG HÒA XÃ HỘI CHỦ NGHĨA VIỆT NAM");
         $objPHPExcel->getActiveSheet()->mergeCells('E1:Q1');
@@ -956,7 +957,7 @@ class Admin_ReportController extends Zend_Controller_Action{
         $objPHPExcel->getActiveSheet()->getStyle("E2:Q2")->getAlignment()->applyFromArray(
             array('horizontal' => PHPExcel_Style_Alignment::HORIZONTAL_CENTER,)
         );
-        $objPHPExcel->getActiveSheet()->setCellValue('E4', "KẾT QUẢ KIỂM TRA,XỬ LÝ QUÝ ".$quy." NĂM");
+        $objPHPExcel->getActiveSheet()->setCellValue('E4', "KẾT QUẢ KIỂM TRA,XỬ LÝ QUÝ ".$quy." NĂM ".$year);
         $objPHPExcel->getActiveSheet()->mergeCells('E4:Q4');
         $objPHPExcel->getActiveSheet()->getStyle("E4:Q4")->getAlignment()->applyFromArray(
             array('horizontal' => PHPExcel_Style_Alignment::HORIZONTAL_CENTER,));
@@ -1057,7 +1058,7 @@ class Admin_ReportController extends Zend_Controller_Action{
         $objPHPExcel->getActiveSheet()->mergeCells('A1:C1');
 
         //$totalRow = $totalRow * 2;
-        $objPHPExcel->getActiveSheet()->setCellValue('A14', $totalRow);
+        $objPHPExcel->getActiveSheet()->setCellValue('A14', "A");
         $objPHPExcel->getActiveSheet()->getStyle('A14:A'.$totalRow)->getBorders()->getAllBorders()->setBorderStyle(PHPExcel_Style_Border::BORDER_THIN);
         $objPHPExcel->getActiveSheet()->setCellValue('B14', "B");
         $objPHPExcel->getActiveSheet()->mergeCells('B14:C14');

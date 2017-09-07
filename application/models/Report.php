@@ -491,7 +491,7 @@ class Model_ReportMapper extends Model_ReportMapperBase{
         return $i;
     }
 
-    public function fetchDSBCKiemTraTheoQui($quy,$year){
+    public function fetchDSBCKiemTraTheoQui($quy,$year, $sys_department_id = null){
         if($quy==1){
             $begin = 1;
             $end = 3;
@@ -523,7 +523,10 @@ class Model_ReportMapper extends Model_ReportMapperBase{
         $entries=$entriess;
         $entries1=$entriess1;
         $entries2 = array();
-        $select="select count(*) count,sys_department_id from info_schedule_check where (month(date_check) between '".$begin."' and '".$end."') and year(date_check)='".$year."' group by sys_department_id";
+        if($sys_department_id === null)
+            $select="select count(*) count,sys_department_id from info_schedule_check where (month(date_check) between '".$begin."' and '".$end."') and year(date_check)='".$year."' group by sys_department_id";
+        else
+            $select="select count(*) count,sys_department_id from info_schedule_check where (month(date_check) between '".$begin."' and '".$end."') and year(date_check)='".$year."' and sys_department_id='".$sys_department_id."' group by sys_department_id";
         $stmt=$db->query($select);
         $rows = $stmt->fetchAll(PDO::FETCH_CLASS);
         $stmt->closeCursor();
@@ -560,7 +563,7 @@ class Model_ReportMapper extends Model_ReportMapperBase{
         return $entries2;
     }
 
-    public function fetchRowCountDSBCKiemTraTheoQui($quy,$year){
+    public function fetchRowCountDSBCKiemTraTheoQui($quy,$year, $sys_department_id = null){
         if($quy==1){
             $begin = 1;
             $end = 3;
@@ -592,7 +595,10 @@ class Model_ReportMapper extends Model_ReportMapperBase{
         $entries=$entriess;
         $entries1=$entriess1;
         $entries2 = array();
-        $select="select count(*) count,sys_department_id from info_schedule_check where (month(date_check) between '".$begin."' and '".$end."') and year(date_check)='".$year."' group by sys_department_id";
+        if($sys_department_id === null)
+            $select="select count(*) count,sys_department_id from info_schedule_check where (month(date_check) between '".$begin."' and '".$end."') and year(date_check)='".$year."' group by sys_department_id";
+        else
+            $select="select count(*) count,sys_department_id from info_schedule_check where (month(date_check) between '".$begin."' and '".$end."') and year(date_check)='".$year."' and sys_department_id='".$sys_department_id."' group by sys_department_id";
         $stmt=$db->query($select);
         $rows = $stmt->fetchAll(PDO::FETCH_CLASS);
         $stmt->closeCursor();
