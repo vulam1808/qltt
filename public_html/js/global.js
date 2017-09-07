@@ -1230,10 +1230,10 @@ function arrayserial(string){
       for(var i=0;i<serial.length;i++){
          var serial1 = serial[i].split(/-/);
          if(serial1.length==1){
-             arrayserial[k++]= serial1[0];
+             arrayserial[k++]= parseInt(serial1[0].trim());
          }else{
-             for( var l = serial1[0];l<= serial1[1];l++){
-               arrayserial[k++]= l;  
+             for( var l = serial1[0].trim();l<= serial1[1].trim();l++){
+               arrayserial[k++]= parseInt(l);  
              }
          }
      }

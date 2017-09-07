@@ -331,6 +331,7 @@ and open the template in the editor.
                                 bootbox.alert("Bạn chưa nhập giá trị cho serial thu hồi. Vui long kiểm tra và nhập lại");
                                 return false;
                             }
+
                             if(checkserial(arr,valuerecovery)==1){
                                 bootbox.alert("Serial thu hồi không nằm trong serial của quyển được cấp phát. Vui long kiểm tra và nhập lại");
                                 return false;
@@ -354,6 +355,7 @@ and open the template in the editor.
                                 bootbox.alert("Bạn chưa nhập giá trị cho serial hỏng. Vui long kiểm tra và nhập lại");
                                 return false;
                             }
+
                             if(valueserialrecovery !=""){
                                 if(checkserial(arrayrecovery,valuefail)==1){
                                     if(checkserial(arr,valuefail)==1){
@@ -812,12 +814,15 @@ and open the template in the editor.
 //                            alert("dsd");
                             if((column.text == "Serial T.hồi")){
                                 var value = $("#jqxgrid").jqxGrid('getcellvalue', row, 'serial_doc_print_create');
+                                console.log(value);
                                 var arr = arrayserial(value);
                                 var valuerecovery = arrayserial(event.args.value);
                                 if(event.args.value ==""){
                                     bootbox.alert("Bạn chưa nhập giá trị cho serial thu hồi. Vui long kiểm tra và nhập lại");
                                     return false;
                                 }
+                                console.log(arr);
+                                console.log(valuerecovery);
                                 if(checkserial(arr,valuerecovery)==1){
                                     bootbox.alert("Serial thu hồi không nằm trong serial của quyển được cấp phát. Vui long kiểm tra và nhập lại");
                                     return false;
