@@ -141,8 +141,13 @@ class Admin_DocPrintAllocationController extends Zend_Controller_Action{
             $objPHPExcel->getActiveSheet()->setCellValue('E11', "………………………………");$objPHPExcel->getActiveSheet()->mergeCells('E11:F11');
             $objPHPExcel->getActiveSheet()->setCellValue('G11', "Ngày:");
             $objPHPExcel->getActiveSheet()->setCellValue('H11', "………………………………");$objPHPExcel->getActiveSheet()->mergeCells('H11:J11');
-             $objPHPExcel->getActiveSheet()->setCellValue('A12', "Ngày xuất ấn chỉ:");$objPHPExcel->getActiveSheet()->mergeCells('A12:D12');
-              $objPHPExcel->getActiveSheet()->setCellValue('E12', "………………………………");$objPHPExcel->getActiveSheet()->mergeCells('E12:J12');
+            $objPHPExcel->getActiveSheet()->setCellValue('A12', "Ngày xuất ấn chỉ:");
+            $objPHPExcel->getActiveSheet()->mergeCells('A12:D12');
+            $objPHPExcel->getActiveSheet()->setCellValue('E12', "………………………………");
+            $objPHPExcel->getActiveSheet()->mergeCells('E12:J12');
+
+            $objPHPExcel->getActiveSheet()->setCellValue('A8', $ngaycapphat);
+
             //BANG
             $style_alignment = array('horizontal' => PHPExcel_Style_Alignment::HORIZONTAL_CENTER,
                 'vertical' => PHPExcel_Style_Alignment::VERTICAL_CENTER);
@@ -171,26 +176,21 @@ class Admin_DocPrintAllocationController extends Zend_Controller_Action{
              $objPHPExcel->getActiveSheet()->getStyle("L13:L14")->getBorders()->getAllBorders()->setBorderStyle(PHPExcel_Style_Border::BORDER_THIN);
              $objPHPExcel->getActiveSheet()->mergeCells('A1:C1');
              $objPHPExcel->getActiveSheet()->getStyle('A13:L14')->getFont()->setBold(true);
-               // thuc hien xuat du lieu ra file excel
-               $dateallocationmax=$ngaycapphat;
-//               $id_doc_print_allocation=
-               $getsysdepartmentid=$sys_department_id;
-               $getsysuserid=$sys_user_id;
-               $getrequestnumber=$sohd;        
-             //lay ra ngay lon nhat trong bang csdl
-//            $dateallocationmax= $this->modelMapper->maxdateallocation();
-//            $id_doc_print_allocation =  $this->modelMapper->findidbyname('date_allocation',$dateallocationmax);
-//            $this->modelMapper->find($id_doc_print_allocation,$this->model);
-           // $getmasterprintid = $this->model->getMaster_Print_Id();
-//            $getsysdepartmentid = $this->model->getSys_Department_Id();
-//            $getsysuserid = $this->model->getUser_Id();
-//            $getrequestnumber = $this->model->getRequest_Number();
+
+             // thuc hien xuat du lieu ra file excel
+             $dateallocationmax=$ngaycapphat;
+             $getsysdepartmentid=$sys_department_id;
+             $getsysuserid=$sys_user_id;
+             $getrequestnumber=$sohd;
+
             //xuat du lieu ra luoi
-            $selectmasterprintid="select distinct master_print_id from doc_print_allocation where sys_department_id='$getsysdepartmentid' and sys_user_id='$getsysuserid' and request_number='$getrequestnumber' and  date_allocation ='$dateallocationmax'";
+            $testvalue = '';
+            $selectmasterprintid="select distinct master_print_id from doc_print_allocation where sys_department_id=$getsysdepartmentid and sys_user_id=$getsysuserid and request_number='$getrequestnumber' and CAST(created_date AS DATE)=CAST('$ngaycapphat' AS DATE)";
 //            $selectmasterprintid="select distinct master_print_id from doc_print_allocation where sys_department_id='2' and sys_user_id='6' and request_number='ko11' and  date_allocation ='2015-07-09 00:00:00'";
             foreach ($this->modelMapper->fetchAlllPrint($selectmasterprintid) as $value) {
                 $master_print_id = $value->getMaster_Print_Id();
-                $selectlist ="select doc_print_create_id,master_print_id,sys_department_id,sys_user_id,request_number,date_allocation from doc_print_allocation where master_print_id='$master_print_id' and sys_department_id='$getsysdepartmentid' and sys_user_id='$getsysuserid'  and request_number='$getrequestnumber' and date_allocation ='$dateallocationmax' and is_delete ='0'";
+                $testvalue = $master_print_id;
+                $selectlist ="select doc_print_create_id,master_print_id,sys_department_id,sys_user_id,request_number,date_allocation,created_date from doc_print_allocation where master_print_id=$master_print_id and sys_department_id=$getsysdepartmentid and sys_user_id=$getsysuserid  and request_number='$getrequestnumber' and CAST(created_date AS DATE)=CAST('$ngaycapphat' AS DATE)  and is_delete ='0'"; //and date_allocation ='$dateallocationmax'
                 $soluong =0;$string_soquyen ='';$string_serial='';
                  foreach ($this->modelMapper->fetchAlllExport($selectlist) as $values) {
                      $doc_print_create_id = $values->getDoc_Print_Create_Id();
@@ -210,44 +210,47 @@ class Admin_DocPrintAllocationController extends Zend_Controller_Action{
                      $sys_user_id = $values->getUser_Id();
                      $hovaten = GlobalLib::getName('sys_user', $sys_user_id, 'first_name').' '.GlobalLib::getName('sys_user', $sys_user_id, 'last_name');
                      $request_number = $values->getRequest_Number();
-                     $date_allocation = $values->getDate_Allocation();
-                } 
-                $objPHPExcel->getActiveSheet()->setCellValue('A' . $rowCount, $stt);$objPHPExcel->getActiveSheet()->getStyle('A' . $rowCount, $stt)->getAlignment()->applyFromArray($style_alignment);
-                $objPHPExcel->getActiveSheet()->mergeCells('B' . $rowCount.':'.'E' . $rowCount);               
+                     $date_allocation = $values->getCreated_Date();
+                }
+
+                $objPHPExcel->getActiveSheet()->setCellValue('A' . $rowCount, $stt);
+                $objPHPExcel->getActiveSheet()->getStyle('A' . $rowCount, $stt)->getAlignment()->applyFromArray($style_alignment);
+                $objPHPExcel->getActiveSheet()->mergeCells('B' . $rowCount.':'.'E' . $rowCount);
                 $objPHPExcel->getActiveSheet()->setCellValue('B' . $rowCount, GlobalLib::getName('master_print', $master_print_id, 'name'));
                 $objPHPExcel->getActiveSheet()->getStyle('B' . $rowCount.':'.'E' . $rowCount)->getAlignment()->applyFromArray($style_alignmentleft)->setWrapText(true);
-                 $objPHPExcel->getActiveSheet()->getRowDimension($rowCount)->setRowHeight(30);
-                    $objPHPExcel->getActiveSheet()->getStyle('E' . $rowCount.':'.'K' . $rowCount)->getAlignment()->applyFromArray($style_alignment);
-                
-                $objPHPExcel->getActiveSheet()->mergeCells('F' . $rowCount.':'.'F' . $rowCount);               
+                $objPHPExcel->getActiveSheet()->getRowDimension($rowCount)->setRowHeight(30);
+                $objPHPExcel->getActiveSheet()->getStyle('E' . $rowCount.':'.'K' . $rowCount)->getAlignment()->applyFromArray($style_alignment);
+
+                $objPHPExcel->getActiveSheet()->mergeCells('F' . $rowCount.':'.'F' . $rowCount);
                 $objPHPExcel->getActiveSheet()->setCellValue('F' . $rowCount, GlobalLib::getName('master_print', $master_print_id, 'code'));
                 $objPHPExcel->getActiveSheet()->getStyle('F' . $rowCount.':'.'F' . $rowCount)->getAlignment()->applyFromArray($style_alignment)->setWrapText(true);
-                $objPHPExcel->getActiveSheet()->mergeCells('G' . $rowCount.':'.'G' . $rowCount);               
+                $objPHPExcel->getActiveSheet()->mergeCells('G' . $rowCount.':'.'G' . $rowCount);
                 $objPHPExcel->getActiveSheet()->setCellValue('G' . $rowCount, $soluong);
                 $objPHPExcel->getActiveSheet()->getStyle('G' . $rowCount.':'.'G' . $rowCount)->getAlignment()->applyFromArray($style_alignment)->setWrapText(true);
-                 $objPHPExcel->getActiveSheet()->mergeCells('H' . $rowCount.':'.'I' . $rowCount);               
+                $objPHPExcel->getActiveSheet()->mergeCells('H' . $rowCount.':'.'I' . $rowCount);
                 $objPHPExcel->getActiveSheet()->setCellValue('H' . $rowCount, $string_soquyen);
                 $objPHPExcel->getActiveSheet()->getStyle('H' . $rowCount.':'.'I' . $rowCount)->getAlignment()->applyFromArray($style_alignment)->setWrapText(true);
-                
-                $objPHPExcel->getActiveSheet()->mergeCells('J' . $rowCount.':'.'K' . $rowCount);               
+
+                $objPHPExcel->getActiveSheet()->mergeCells('J' . $rowCount.':'.'K' . $rowCount);
                 $objPHPExcel->getActiveSheet()->setCellValue('J' . $rowCount, $string_serial);
                 $objPHPExcel->getActiveSheet()->getStyle('J' . $rowCount.':'.'I' . $rowCount)->getAlignment()->applyFromArray($style_alignment)->setWrapText(true);
-                
-                
+
+
                 $objPHPExcel->getActiveSheet()->mergeCells('L' . $rowCount.':'.'L' . $rowCount);
                 $objPHPExcel->getActiveSheet()->getStyle('A' . $rowCount.':'.'L' . $rowCount)->getBorders()->getAllBorders()->setBorderStyle(PHPExcel_Style_Border::BORDER_THIN);
-                
+
                 $objPHPExcel->getActiveSheet()->mergeCells('E9:J9');
                 $objPHPExcel->getActiveSheet()->setCellValue('E9', $hovaten);
                 $objPHPExcel->getActiveSheet()->setCellValue('E12',GlobalLib::viewDate($date_allocation ));$objPHPExcel->getActiveSheet()->mergeCells('E12:J12');
                 $objPHPExcel->getActiveSheet()->setCellValue('E10', $request_number);$objPHPExcel->getActiveSheet()->mergeCells('E10:F10');
-                
+
                 $rowCount++;
                 $stt++;
-                
             }
-            
-             $objPHPExcel->getActiveSheet()->setCellValue('A'.$rowCount,"Người giao ấn chỉ");$objPHPExcel->getActiveSheet()->mergeCells('A'.$rowCount.':'.'B'.$rowCount);
+
+
+            $objPHPExcel->getActiveSheet()->setCellValue('A'.$rowCount,"Người giao ấn chỉ");
+            $objPHPExcel->getActiveSheet()->mergeCells('A'.$rowCount.':'.'B'.$rowCount);
             $objPHPExcel->getActiveSheet()->setCellValue('C'.$rowCount,"Thủ kho");$objPHPExcel->getActiveSheet()->mergeCells('C'.$rowCount.':'.'E'.$rowCount);
             $objPHPExcel->getActiveSheet()->setCellValue('F'.$rowCount,"Kế toán");$objPHPExcel->getActiveSheet()->mergeCells('F'.$rowCount.':'.'H'.$rowCount);
             $objPHPExcel->getActiveSheet()->setCellValue('I'.$rowCount,"Thủ trưởng đơn vị");$objPHPExcel->getActiveSheet()->mergeCells('I'.$rowCount.':'.'K'.$rowCount);
@@ -273,7 +276,7 @@ class Admin_DocPrintAllocationController extends Zend_Controller_Action{
            
             $style_alignment = array('horizontal' => PHPExcel_Style_Alignment::HORIZONTAL_CENTER,
                 'vertical' => PHPExcel_Style_Alignment::VERTICAL_CENTER);
-//            $objPHPExcel->getActiveSheet()->getStyle("A3:K" . $rowCount)->getAlignment()->applyFromArray($style_alignment);
+
             //tên file excel
             $filename='PhieuXuatAnChi'.date("Y/m/d H:i:s").'.xls';
             header('Content-Type: application/vnd.ms-excel');
@@ -328,7 +331,7 @@ class Admin_DocPrintAllocationController extends Zend_Controller_Action{
                    $serial_recovery=$this->modelMapperDocPrintCreate->findidbyserialrecovery("id",(int)$arrayprintcreate[$j]);
                    $serial=$this->modelMapperDocPrintCreate->findidbyserialserial("id",(int)$arrayprintcreate[$j]);
                    
-                    $serial_allocation ;
+                    $serial_allocation;
                    if($serial_recovery == null){
                        $serial_allocation = $serial;
                    }else{
@@ -637,7 +640,7 @@ class Admin_DocPrintAllocationController extends Zend_Controller_Action{
     }   
     public function listAction(){  
          $this->view->itemdepartment= $this->modelDepartment;
-        $this->view->itemuser= $this->modelUser;
+         $this->view->itemuser= $this->modelUser;
     }    
      public function serviceAction(){
         $this->_helper->layout->disableLayout();
@@ -683,7 +686,7 @@ class Admin_DocPrintAllocationController extends Zend_Controller_Action{
                 'status' =>$trangthai,
                 'anchithuhoi'=> $getserialrecovery,
                 'anchihuhong'=> $getserialfail,
-                'date_allocation'=> GlobalLib::viewDate($items->getDate_Allocation()),
+                'date_allocation'=> GlobalLib::viewDate($items->getCreated_Date())
                 
             );
             }

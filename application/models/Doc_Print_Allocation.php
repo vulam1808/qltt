@@ -101,8 +101,8 @@ class Model_Doc_Print_AllocationMapper extends Model_Doc_Print_AllocationMapperB
     }
     
  public function fetchAlllPrint($select){
-         $db = Zend_Db_Table::getDefaultAdapter();
-       // $select="select * from doc_print_allocation where is_delete ='0'";        
+        $db = Zend_Db_Table::getDefaultAdapter();
+        //$select1="select distinct master_print_id from doc_print_allocation where sys_department_id=18 and sys_user_id=24 and request_number='Lan-Cap-001'";
         $stmt=$db->query($select);
         $rows = $stmt->fetchAll(PDO::FETCH_CLASS);
         $stmt->closeCursor();
@@ -131,6 +131,7 @@ class Model_Doc_Print_AllocationMapper extends Model_Doc_Print_AllocationMapperB
                 ->setUser_Id($row->sys_user_id)
                 ->setRequest_Number($row->request_number)
                 ->setDate_Allocation($row->date_allocation)
+                ->setCreated_Date($row->created_date)
                ;
             $entries[]=$entry;
         }
