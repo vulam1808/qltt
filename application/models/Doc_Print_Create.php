@@ -705,7 +705,7 @@ class Model_Doc_Print_CreateMapper extends Model_Doc_Print_CreateMapperBase{
                 from doc_print_allocation inner join doc_print_create 
                         ON doc_print_create.id =doc_print_allocation.doc_print_create_id 
                          and doc_print_create.master_print_id = $print_id
-                where month(doc_print_allocation.date_allocation) = $month and year(doc_print_allocation.date_allocation) = $year";        
+                where month(doc_print_allocation.date_allocation) = $month and year(doc_print_allocation.date_allocation) = $year";
         $stmt=$db->query($select);
         $rows = $stmt->fetchAll(PDO::FETCH_CLASS);
         $stmt->closeCursor();

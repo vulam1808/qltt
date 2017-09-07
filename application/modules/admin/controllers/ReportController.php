@@ -29,7 +29,7 @@ class Admin_ReportController extends Zend_Controller_Action{
     }
     public function mangementuseprintbysysdepartmentAction(){      
     }
-  public function exportmangementprintAction() {
+    public function exportmangementprintAction() {
         $this->_helper->layout->disableLayout();
             $redirectUrl = $this->aConfig["site"]["url"]."admin/report/mangementprint";
             $month = $this->_getParam("month","");
@@ -182,7 +182,7 @@ class Admin_ReportController extends Zend_Controller_Action{
              
               foreach ($this->modelMapperDocPrintCreate->getImportExportPrint($month,$year,$print_id) as $value)
               {
-                  
+
                     $objPHPExcel->getActiveSheet()->setCellValue('A' . $rowCount,$value['invoice_number']);
                     $objPHPExcel->getActiveSheet()->setCellValue('B' . $rowCount, GlobalLib::viewDate($value['created_date'],false));
                     $objPHPExcel->getActiveSheet()->setCellValue('D' . $rowCount, 'Cuốn');
@@ -200,17 +200,17 @@ class Admin_ReportController extends Zend_Controller_Action{
                         {
                             $objPHPExcel->getActiveSheet()->setCellValue('I' . $rowCount, $value['serial']);
                         }
-                       
+
                         $objPHPExcel->getActiveSheet()->setCellValue('J' . $rowCount, $value['coefficient']);
-                        
-                        
+
+
                     }
                     if($value['status'] == 'Import' || $value['status'] == 'Import And Export')
                     {
                         $objPHPExcel->getActiveSheet()->setCellValue('K' . $rowCount, '1');
                         $objPHPExcel->getActiveSheet()->setCellValue('L' . $rowCount, $value['serial']);
                         $objPHPExcel->getActiveSheet()->setCellValue('M' . $rowCount, $value['coefficient']);
-                        
+
                         //Tồn
                         if($value['status'] == 'Import')
                         {
@@ -218,7 +218,7 @@ class Admin_ReportController extends Zend_Controller_Action{
                             $objPHPExcel->getActiveSheet()->setCellValue('S' . $rowCount,  $value['coefficient']);
                             $objPHPExcel->getActiveSheet()->setCellValue('T' . $rowCount,'1');
                         }
-                        
+
                     }
                       if($value['status'] == 'Export' || $value['status'] == 'Import And Export')
                     {
@@ -232,7 +232,7 @@ class Admin_ReportController extends Zend_Controller_Action{
                             $objPHPExcel->getActiveSheet()->setCellValue('S' . $rowCount,  $value['coefficient']);
                             $objPHPExcel->getActiveSheet()->setCellValue('T' . $rowCount,'1');
                         }
-                        
+
                     }
                      $objPHPExcel->getActiveSheet()->getStyle('A' . $rowCount.':'.'T' . $rowCount)->getAlignment()->applyFromArray($style_alignment)->setWrapText(true);
                      $objPHPExcel->getActiveSheet()->getStyle('C11:C' . $rowCount)->getAlignment()->applyFromArray($style_alignmentleft)->setWrapText(true);

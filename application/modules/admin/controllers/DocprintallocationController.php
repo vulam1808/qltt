@@ -146,7 +146,6 @@ class Admin_DocPrintAllocationController extends Zend_Controller_Action{
             $objPHPExcel->getActiveSheet()->setCellValue('E12', "………………………………");
             $objPHPExcel->getActiveSheet()->mergeCells('E12:J12');
 
-            $objPHPExcel->getActiveSheet()->setCellValue('A8', $ngaycapphat);
 
             //BANG
             $style_alignment = array('horizontal' => PHPExcel_Style_Alignment::HORIZONTAL_CENTER,

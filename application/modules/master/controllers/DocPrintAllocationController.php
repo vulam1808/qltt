@@ -171,26 +171,17 @@ class Master_DocPrintAllocationController extends Zend_Controller_Action{
              $objPHPExcel->getActiveSheet()->getStyle("L13:L14")->getBorders()->getAllBorders()->setBorderStyle(PHPExcel_Style_Border::BORDER_THIN);
              $objPHPExcel->getActiveSheet()->mergeCells('A1:C1');
              $objPHPExcel->getActiveSheet()->getStyle('A13:L14')->getFont()->setBold(true);
-               // thuc hien xuat du lieu ra file excel
-               $dateallocationmax=$ngaycapphat;
-//               $id_doc_print_allocation=
-               $getsysdepartmentid=$sys_department_id;
-               $getsysuserid=$sys_user_id;
-               $getrequestnumber=$sohd;        
-             //lay ra ngay lon nhat trong bang csdl
-//            $dateallocationmax= $this->modelMapper->maxdateallocation();
-//            $id_doc_print_allocation =  $this->modelMapper->findidbyname('date_allocation',$dateallocationmax);
-//            $this->modelMapper->find($id_doc_print_allocation,$this->model);
-           // $getmasterprintid = $this->model->getMaster_Print_Id();
-//            $getsysdepartmentid = $this->model->getSys_Department_Id();
-//            $getsysuserid = $this->model->getUser_Id();
-//            $getrequestnumber = $this->model->getRequest_Number();
+             // thuc hien xuat du lieu ra file excel
+             $dateallocationmax=$ngaycapphat;
+             $getsysdepartmentid=$sys_department_id;
+             $getsysuserid=$sys_user_id;
+             $getrequestnumber=$sohd;
+
             //xuat du lieu ra luoi
-            $selectmasterprintid="select distinct master_print_id from doc_print_allocation where sys_department_id='$getsysdepartmentid' and sys_user_id='$getsysuserid' and request_number='$getrequestnumber' and  date_allocation ='$dateallocationmax'";
-//            $selectmasterprintid="select distinct master_print_id from doc_print_allocation where sys_department_id='2' and sys_user_id='6' and request_number='ko11' and  date_allocation ='2015-07-09 00:00:00'";
+            $selectmasterprintid="select distinct master_print_id from doc_print_allocation where sys_department_id='$getsysdepartmentid' and sys_user_id='$getsysuserid' and request_number='$getrequestnumber' and CAST(created_date AS DATE)=CAST('$dateallocationmax' AS DATE)";
             foreach ($this->modelMapper->fetchAlllPrint($selectmasterprintid) as $value) {
                 $master_print_id = $value->getMaster_Print_Id();
-                $selectlist ="select doc_print_create_id,master_print_id,sys_department_id,sys_user_id,request_number,date_allocation from doc_print_allocation where master_print_id='$master_print_id' and sys_department_id='$getsysdepartmentid' and sys_user_id='$getsysuserid'  and request_number='$getrequestnumber' and date_allocation ='$dateallocationmax' and is_delete ='0'";
+                $selectlist ="select doc_print_create_id,master_print_id,sys_department_id,sys_user_id,request_number,date_allocation,created_date from doc_print_allocation where master_print_id='$master_print_id' and sys_department_id='$getsysdepartmentid' and sys_user_id='$getsysuserid'  and request_number='$getrequestnumber' and CAST(created_date AS DATE)=CAST('$dateallocationmax' AS DATE) and is_delete ='0'";
                 $soluong =0;$string_soquyen ='';$string_serial='';
                  foreach ($this->modelMapper->fetchAlllExport($selectlist) as $values) {
                      $doc_print_create_id = $values->getDoc_Print_Create_Id();
@@ -211,6 +202,7 @@ class Master_DocPrintAllocationController extends Zend_Controller_Action{
                      $hovaten = GlobalLib::getName('sys_user', $sys_user_id, 'first_name').' '.GlobalLib::getName('sys_user', $sys_user_id, 'last_name');
                      $request_number = $values->getRequest_Number();
                      $date_allocation = $values->getDate_Allocation();
+                     $created_date = $values->getCreated_Date();
                 } 
                 $objPHPExcel->getActiveSheet()->setCellValue('A' . $rowCount, $stt);$objPHPExcel->getActiveSheet()->getStyle('A' . $rowCount, $stt)->getAlignment()->applyFromArray($style_alignment);
                 $objPHPExcel->getActiveSheet()->mergeCells('B' . $rowCount.':'.'E' . $rowCount);               
@@ -239,7 +231,7 @@ class Master_DocPrintAllocationController extends Zend_Controller_Action{
                 
                 $objPHPExcel->getActiveSheet()->mergeCells('E9:J9');
                 $objPHPExcel->getActiveSheet()->setCellValue('E9', $hovaten);
-                $objPHPExcel->getActiveSheet()->setCellValue('E12',GlobalLib::viewDate($date_allocation ));$objPHPExcel->getActiveSheet()->mergeCells('E12:J12');
+                $objPHPExcel->getActiveSheet()->setCellValue('E12',GlobalLib::viewDate($created_date ));$objPHPExcel->getActiveSheet()->mergeCells('E12:J12');
                 $objPHPExcel->getActiveSheet()->setCellValue('E10', $request_number);$objPHPExcel->getActiveSheet()->mergeCells('E10:F10');
                 
                 $rowCount++;
