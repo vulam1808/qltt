@@ -21,7 +21,7 @@ class Master_DocPrintCreateController extends Zend_Controller_Action{
         $this->modelMasterPrintMapper= new Model_Master_PrintMapper();
         $this->modelMasterPrint= new Model_Master_Print();
         $this->modelReport =  new Model_ReportMapper();
-        //$this->modelMappermasterprint = new Model_Master_PrintMapper();
+        $this->modelMapperDocPrintCreate = new Model_Doc_Print_CreateMapper();
     }
     public function taAction(){
         $this->modelMapper->checkserialpayment(3,1,"1-18","19");
@@ -1016,6 +1016,258 @@ class Master_DocPrintCreateController extends Zend_Controller_Action{
         );
         //tên file excel
         $filename='BaoCaoTheoDoiTinhHinhAnChi'.date("Y/m/d H:i:s").'.xls';
+        header('Content-Type: application/vnd.ms-excel');
+        header('Content-Disposition: attachment;filename='.$filename);
+        header('Cache-Control: max-age=0');
+        $objWriter = new PHPExcel_Writer_Excel5($objPHPExcel);
+        $objWriter->save('php://output');
+        exit();
+    }
+
+    public function exportmangementuseprintAction() {
+        $this->_helper->layout->disableLayout();
+        //$redirectUrl = $this->aConfig["site"]["url"]."admin/docprintcreate/list";
+        $month = $this->_getParam("month","");
+        $year = $this->_getParam("year","");
+        $quarter = $this->_getParam("quarter","");
+        $actionExport= $this->_getParam("actionExport","");
+        if(empty($actionExport) || empty($year))
+        {
+            $this->_redirect($redirectUrl);
+            return;
+        }
+        $from ;$to;
+        if($actionExport == "QUY")
+        {
+            if(empty($quarter))
+            {
+                $this->_redirect($redirectUrl);
+                return;
+            }
+            if($quarter == "I")
+            {
+                $from = $year."-01-01";
+                $to = $year."-03-31";
+            }
+            else if($quarter == "II")
+            {
+                $from = $year."-04-01";
+                $to = $year."-06-30";
+            }
+            else if($quarter == "III")
+            {
+                $from = $year."-07-01";
+                $to = $year."-09-30";
+            }
+            else if($quarter == "IV")
+            {
+                $from = $year."-10-01";
+                $to = $year."-12-31";
+            }
+        }
+        if($actionExport == "THANG")
+        {
+            $from = date_format(new DateTime($year."-".$month."-01"), 'Y-m-d');
+            $nextMonth = $month+1;
+            $nextdate = new DateTime($year."-".$nextMonth."-01");
+            date_add($nextdate, date_interval_create_from_date_string('-1 days'));
+            $to = date_format($nextdate, 'Y-m-d');
+        }
+        if($actionExport == "YEAR")
+        {
+            $from = $year."-01-01";
+            $to = $year."-12-31";
+        }
+        $objPHPExcel = new PHPExcel();
+        $objPHPExcel->setActiveSheetIndex(0);
+        $rowCount = 11;
+        $stt=1;
+        $styledataArray = array(
+            'font' => array(
+                'color' => array('rgb' => '080808'),
+                'size' => 13,
+                'name' => 'Times New Roman'
+            ));
+        $objPHPExcel->getActiveSheet()->setCellValue('A1', "CHI CỤC QUẢN LÝ THỊ TRƯỜNG BÌNH ĐỊNH");$objPHPExcel->getActiveSheet()->mergeCells('A1:E1');
+        $objPHPExcel->getActiveSheet()->setCellValue('A2', "Đơn vị:………………………");$objPHPExcel->getActiveSheet()->mergeCells('A2:E2');
+        $objPHPExcel->getActiveSheet()->setCellValue('M1', "CỘNG HÒA XÃ HỘI CHỦ NGHĨA VIỆT NAM");$objPHPExcel->getActiveSheet()->mergeCells('M1:R1');
+        $objPHPExcel->getActiveSheet()->setCellValue('M2', "Độc lập - Tự do - Hạnh phúc");$objPHPExcel->getActiveSheet()->mergeCells('M2:R2');
+        $objPHPExcel->getActiveSheet()->getStyle("M1:R2")->getAlignment()->applyFromArray(
+            array('horizontal' => PHPExcel_Style_Alignment::HORIZONTAL_CENTER,)
+        );
+
+        $objPHPExcel->getActiveSheet()->setCellValue('D4', "BÁO CÁO THEO DÕI TÌNH HÌNH SỬ DỤNG ẤN CHỈ TRONG THÁNG/QUÝ/NĂM");$objPHPExcel->getActiveSheet()->mergeCells('D4:P4');
+        $objPHPExcel->getActiveSheet()->getStyle("D4:P4")->getAlignment()->applyFromArray(
+            array('horizontal' => PHPExcel_Style_Alignment::HORIZONTAL_CENTER,)
+        );
+        $objPHPExcel->getActiveSheet()->getStyle("D4:E4")->getFont()->setBold(true);
+//            $objPHPExcel->getActiveSheet()->setCellValue('D6', "Tên ấn chỉ: ".$this->modelMappermasterprint->findidby('name','id',$print_id));$objPHPExcel->getActiveSheet()->mergeCells('D5:G5');
+//            $objPHPExcel->getActiveSheet()->setCellValue('J6', "Ký hiệu: ".$this->modelMappermasterprint->findidby('code','id',$print_id));$objPHPExcel->getActiveSheet()->mergeCells('J6:L6');
+        $objPHPExcel->getActiveSheet()->getStyle("A1:T6")->applyFromArray($styledataArray);
+
+        //BANG
+        $style_alignment = array('horizontal' => PHPExcel_Style_Alignment::HORIZONTAL_CENTER,
+            'vertical' => PHPExcel_Style_Alignment::VERTICAL_CENTER,
+            'wrap'=> true
+        );
+        $style_alignmentleft = array('horizontal' => PHPExcel_Style_Alignment::HORIZONTAL_LEFT,
+            'vertical' => PHPExcel_Style_Alignment::VERTICAL_CENTER);
+        $objPHPExcel->getActiveSheet()->setCellValue('A7', "STT");$objPHPExcel->getActiveSheet()->mergeCells('A7:A10');
+
+        $objPHPExcel->getActiveSheet()->setCellValue('B7', "Mã ấn chỉ");$objPHPExcel->getActiveSheet()->mergeCells('B7:B10');
+
+        $objPHPExcel->getActiveSheet()->setCellValue('C7', "Tên loại");$objPHPExcel->getActiveSheet()->mergeCells('C7:C10');
+        $objPHPExcel->getActiveSheet()->getColumnDimension('C')->setWidth(35);
+
+        $objPHPExcel->getActiveSheet()->setCellValue('D7', "Ký hiệu");$objPHPExcel->getActiveSheet()->mergeCells('D7:D10');
+
+        $objPHPExcel->getActiveSheet()->setCellValue('E7', "Số tồn đầu kỳ, mua/in phát hành/nhận trong kỳ");$objPHPExcel->getActiveSheet()->mergeCells('E7:I7');
+
+        $objPHPExcel->getActiveSheet()->setCellValue('E8', "Tổng số");$objPHPExcel->getActiveSheet()->mergeCells('E8:E10');
+
+        $objPHPExcel->getActiveSheet()->setCellValue('F8', "Tồn đầu kỳ");$objPHPExcel->getActiveSheet()->mergeCells('F8:G8');
+
+        $objPHPExcel->getActiveSheet()->setCellValue('F9', "Từ số");$objPHPExcel->getActiveSheet()->mergeCells('F9:F10');
+
+        $objPHPExcel->getActiveSheet()->setCellValue('G9', "Đến số");$objPHPExcel->getActiveSheet()->mergeCells('G9:G10');
+
+        $objPHPExcel->getActiveSheet()->setCellValue('H8', "Mua/in phát hành/nhận");$objPHPExcel->getActiveSheet()->mergeCells('H8:I8');
+
+        $objPHPExcel->getActiveSheet()->setCellValue('H9', "Từ số");$objPHPExcel->getActiveSheet()->mergeCells('H9:H10');
+
+        $objPHPExcel->getActiveSheet()->setCellValue('I9', "Đến số");$objPHPExcel->getActiveSheet()->mergeCells('I9:I10');
+
+        $objPHPExcel->getActiveSheet()->setCellValue('J7', "Sử dụng, xóa bỏ, mất, hỏng trong kỳ");$objPHPExcel->getActiveSheet()->mergeCells('J7:S7');
+
+        $objPHPExcel->getActiveSheet()->setCellValue('J8', "Tổng số");$objPHPExcel->getActiveSheet()->mergeCells('J8:L8');
+
+        $objPHPExcel->getActiveSheet()->setCellValue('J9', "Từ số ");$objPHPExcel->getActiveSheet()->mergeCells('J9:J10');
+
+        $objPHPExcel->getActiveSheet()->setCellValue('K9', "Đến số");$objPHPExcel->getActiveSheet()->mergeCells('K9:K10');
+
+        $objPHPExcel->getActiveSheet()->setCellValue('L9', "Tổng");$objPHPExcel->getActiveSheet()->mergeCells('L9:L10');
+
+        $objPHPExcel->getActiveSheet()->setCellValue('M9', "Số lượng đã sử dụng");$objPHPExcel->getActiveSheet()->mergeCells('M9:M10');
+
+        $objPHPExcel->getActiveSheet()->setCellValue('N9', "Xóa bỏ");$objPHPExcel->getActiveSheet()->mergeCells('N9:O9');
+
+        $objPHPExcel->getActiveSheet()->setCellValue('N10', "Số lượng");
+
+        $objPHPExcel->getActiveSheet()->setCellValue('O10', "Số");
+
+        $objPHPExcel->getActiveSheet()->setCellValue('P9', "Hết");$objPHPExcel->getActiveSheet()->mergeCells('P9:Q9');
+
+        $objPHPExcel->getActiveSheet()->setCellValue('P10', "Số lượng");
+
+        $objPHPExcel->getActiveSheet()->setCellValue('Q10', "Số");
+
+        $objPHPExcel->getActiveSheet()->setCellValue('R9', "Hủy");$objPHPExcel->getActiveSheet()->mergeCells('R9:S9');
+        $objPHPExcel->getActiveSheet()->setCellValue('R10', "Số lượng");
+        $objPHPExcel->getActiveSheet()->setCellValue('S10', "Số");
+
+        $objPHPExcel->getActiveSheet()->setCellValue('T7', "Tồn cuối kỳ");$objPHPExcel->getActiveSheet()->mergeCells('T7:V7');
+        $objPHPExcel->getActiveSheet()->setCellValue('T8', "Từ số");$objPHPExcel->getActiveSheet()->mergeCells('T8:T10');
+        $objPHPExcel->getActiveSheet()->setCellValue('U8', "Tới số");$objPHPExcel->getActiveSheet()->mergeCells('U8:U10');
+        $objPHPExcel->getActiveSheet()->setCellValue('V8', "Số lượng");$objPHPExcel->getActiveSheet()->mergeCells('V8:V10');
+
+        $objPHPExcel->getActiveSheet()->getStyle("A7:V10")->getBorders()->getAllBorders()->setBorderStyle(PHPExcel_Style_Border::BORDER_THIN);
+        $objPHPExcel->getActiveSheet()->getStyle("A7:V10")->getAlignment()->applyFromArray($style_alignment);
+
+        //thuc hien xuat du lieu ra file excel
+        //lẤY DỮ LIỆU NHẬP TRONG KỲ
+
+        foreach ($this->modelMapperDocPrintCreate->getUsePrint($from,$to) as $value)
+        {
+            $objPHPExcel->getActiveSheet()->setCellValue('A' . $rowCount,$stt);
+            $objPHPExcel->getActiveSheet()->setCellValue('B' . $rowCount,$value['Code']);
+            $objPHPExcel->getActiveSheet()->setCellValue('C' . $rowCount,$value['Name']);
+            $objPHPExcel->getActiveSheet()->setCellValue('C' . $rowCount,$value['Name']);
+            $tong = $value['TDK_Tong'] + $value['TrongKy_TongSo'];
+            $objPHPExcel->getActiveSheet()->setCellValue('E' . $rowCount,$tong);
+            $objPHPExcel->getActiveSheet()->setCellValue('F' . $rowCount,$value['TDK_TuSo']);
+            $objPHPExcel->getActiveSheet()->setCellValue('G' . $rowCount,$value['TDK_Denso']);
+            $objPHPExcel->getActiveSheet()->setCellValue('H' . $rowCount,$value['TrongKy_TuSo']);
+            $objPHPExcel->getActiveSheet()->setCellValue('I' . $rowCount,$value['TrongKy_DenSo']);
+
+            $objPHPExcel->getActiveSheet()->setCellValue('J' . $rowCount,$value['SuDung_TuSo']);
+            $objPHPExcel->getActiveSheet()->setCellValue('K' . $rowCount,$value['SuDung_DenSo']);
+            $objPHPExcel->getActiveSheet()->setCellValue('L' . $rowCount,$value['SuDung_Tong']);
+
+            $objPHPExcel->getActiveSheet()->setCellValue('M' . $rowCount,$value['SuDung_Tong']);
+
+            $objPHPExcel->getActiveSheet()->setCellValue('N' . $rowCount,$value['XoaBo_SoLuong']);
+            $objPHPExcel->getActiveSheet()->setCellValue('O' . $rowCount,$value['XoaBo_So']);
+
+            $objPHPExcel->getActiveSheet()->setCellValue('P' . $rowCount,$value['Het_SoLuong']);
+            $objPHPExcel->getActiveSheet()->setCellValue('Q' . $rowCount,$value['Het_So']);
+
+            $objPHPExcel->getActiveSheet()->setCellValue('R' . $rowCount,$value['Huy_SoLuong']);
+            $objPHPExcel->getActiveSheet()->setCellValue('S' . $rowCount,$value['Huy_So']);
+
+            $objPHPExcel->getActiveSheet()->setCellValue('T' . $rowCount,$value['TCK_TuSo']);
+            $objPHPExcel->getActiveSheet()->setCellValue('U' . $rowCount,$value['TCK_DenSo']);
+            $objPHPExcel->getActiveSheet()->setCellValue('V' . $rowCount,$value['Het_SoLuong']);
+
+            $rowCount++;
+            $stt++;
+        }
+        $rowCount--;
+        $objPHPExcel->getActiveSheet()->getStyle('A11:V' . $rowCount)->getAlignment()->applyFromArray($style_alignment)->setWrapText(true);
+        $objPHPExcel->getActiveSheet()->getStyle('A11:V' . $rowCount)->getBorders()->getAllBorders()->setBorderStyle(PHPExcel_Style_Border::BORDER_THIN);
+        $objPHPExcel->getActiveSheet()->getStyle('C11:C' . $rowCount)->getAlignment()->applyFromArray($style_alignmentleft)->setWrapText(true);
+        $rowCount++;
+//
+//
+        $styleArray = array(
+            'font' => array(
+                'bold' => true
+            ),
+        );
+        $objPHPExcel->getActiveSheet()->setCellValue('P'. $rowCount, "....,ngày....tháng....năm");
+        $objPHPExcel->getActiveSheet()->mergeCells('P'.$rowCount.':T'.$rowCount);
+        $objPHPExcel->getActiveSheet()->getStyle('P'.$rowCount.':T'.$rowCount)->getAlignment()->applyFromArray(
+            array('horizontal' => PHPExcel_Style_Alignment::HORIZONTAL_RIGHT));
+
+        $rowCount++;
+        $objPHPExcel->getActiveSheet()->setCellValue('C'. $rowCount, "NGƯỜI LẬP BIỂU");$objPHPExcel->getActiveSheet()->mergeCells('C'.$rowCount.':E'.$rowCount);
+        $objPHPExcel->getActiveSheet()->setCellValue('P'. $rowCount, "THỦ TRƯỞNG ĐƠN VỊ");$objPHPExcel->getActiveSheet()->mergeCells('P'.$rowCount.':T'.$rowCount);
+        $objPHPExcel->getActiveSheet()->getStyle('C'.$rowCount.':P'.$rowCount)->getAlignment()->applyFromArray($style_alignment);
+        $objPHPExcel->getActiveSheet()->getStyle('C'.$rowCount.':P'.$rowCount)->applyFromArray($styleArray);
+
+        $rowCount++;
+        $objPHPExcel->getActiveSheet()->setCellValue('P'. $rowCount, "(Ký, ghi rõ họ tên)");$objPHPExcel->getActiveSheet()->mergeCells('P'.$rowCount.':T'.$rowCount);
+        $objPHPExcel->getActiveSheet()->setCellValue('C'. $rowCount, "(Ký, ghi rõ họ tên)");$objPHPExcel->getActiveSheet()->mergeCells('C'.$rowCount.':E'.$rowCount);
+        $objPHPExcel->getActiveSheet()->getStyle('C'.$rowCount.':P'.$rowCount)->getAlignment()->applyFromArray($style_alignment);
+
+        $objPHPExcel->getActiveSheet()->getStyle("A1:L2")->applyFromArray($styleArray);
+        $objPHPExcel->getActiveSheet()->getStyle("A7:V10")->applyFromArray($styleArray);
+        $objPHPExcel->getActiveSheet()->getStyle('A1:L'.$rowCount)->getFont()->setName('Times New Roman');
+        $style_alignment = array('horizontal' => PHPExcel_Style_Alignment::HORIZONTAL_CENTER,
+            'vertical' => PHPExcel_Style_Alignment::VERTICAL_CENTER);
+        //$objPHPExcel->getActiveSheet()->getStyle("A3:K" . $rowCount)->getAlignment()->applyFromArray($style_alignment);
+        $styleArray = array(
+            'borders' => array(
+                'allborders' => array(
+                    'style' => PHPExcel_Style_Border::BORDER_THIN,
+                ),
+            ),
+        );
+        $styledataArray = array(
+            'font' => array(
+                'bold' => true,
+                'color' => array('rgb' => '080808'),
+                'size' => 15,
+                'name' => 'Times New Roman'
+            ));
+        $styletitleArray=array(
+            'font' => array(
+                'bold' => true,
+                'color' => array('rgb' => '080808'),
+                'size' => 10,
+                'name' => 'Times New Roman')
+        );
+        //tên file excel
+        $filename='BaoCaoTinhHinhSuDungAnChi'.date("Y/m/d H:i:s").'.xls';
         header('Content-Type: application/vnd.ms-excel');
         header('Content-Disposition: attachment;filename='.$filename);
         header('Cache-Control: max-age=0');

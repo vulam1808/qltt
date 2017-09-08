@@ -715,8 +715,8 @@ class Model_Doc_Print_CreateMapper extends Model_Doc_Print_CreateMapperBase{
                 $arrayEntries[$row->id]["serial_recovery"] = "";
                     $arrayEntries[$row->id]["serial_fail"] = "";
                     $arrayEntries[$row->id]["reasons_fail"] = "";
+
                 //Lay an chi da thanh toan để lấy ấn chi thu hoi
-               
                 $select1=" select * from doc_print_payment where doc_print_payment.doc_print_allocation_id = $row->id_allocation";        
                 $stmt1=$db->query($select1);
                 $rows1 = $stmt1->fetchAll(PDO::FETCH_CLASS);
