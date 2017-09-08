@@ -8,28 +8,29 @@ include APPLICATION_PATH."/models/Doc_Print_Create.php";
  * and open the template in the editor.
  */
 class Master_ReportController extends Zend_Controller_Action{
-    public function init(){       
+    public function init(){
         $bootstrap = $this->getInvokeArg("bootstrap");
         $this->aConfig = $bootstrap->getOptions();
         $this->view->aConfig = $this->aConfig;
         $this->modelMapper = new Model_ReportMapper();
-        $this->model= new Model_Report(); 
+        $this->model= new Model_Report();
         $this->modelDocPrintCreate= new Model_Doc_Print_Create();
         $this->modelMapperDocPrintCreate = new Model_Doc_Print_CreateMapper();
         $this->modelmasterprint= new Model_Master_Print();
         $this->modelMappermasterprint = new Model_Master_PrintMapper();
+        //$this->modelViolationHandlingMapper= new Model_Doc_Violations_HandlingMapper();
     }
-    public function indexAction(){      
+    public function indexAction(){
     }
-     public function mangementprintAction(){      
+    public function mangementprintAction(){
     }
-    public function mangementuseprintAction(){      
+    public function mangementuseprintAction(){
     }
-    public function mangementuseprintbysysdepartmentAction(){      
+    public function mangementuseprintbysysdepartmentAction(){
     }
     public function exportmangementprintAction() {
         $this->_helper->layout->disableLayout();
-        /*$redirectUrl = $this->aConfig["site"]["url"]."admin/report/mangementprint";
+        $redirectUrl = $this->aConfig["site"]["url"]."admin/report/mangementprint";
         $month = $this->_getParam("month","");
         $year = $this->_getParam("year","");
         $print_id = $this->_getParam("master_print_id","");
@@ -37,12 +38,12 @@ class Master_ReportController extends Zend_Controller_Action{
         {
             $this->_redirect($redirectUrl);
             return;
-        }*/
+        }
 
         $objPHPExcel = new PHPExcel();
         $objPHPExcel->setActiveSheetIndex(0);
 
-        /*$rowCount = 13;
+        $rowCount = 13;
         $stt=1;
         $styledataArray = array(
             'font' => array(
@@ -287,10 +288,10 @@ class Master_ReportController extends Zend_Controller_Action{
                 'color' => array('rgb' => '080808'),
                 'size' => 10,
                 'name' => 'Times New Roman')
-        );*/
+        );
 
         //tên file excel
-        $filename='BaoCaoTheoDoiTinhHinhAnChi1'.date("Y/m/d H:i:s").'.xls';
+        $filename='BaoCaoTheoDoiTinhHinhAnChi1.xls';
         header('Content-Type: application/vnd.ms-excel');
         header('Content-Disposition: attachment;filename='.$filename);
         header('Cache-Control: max-age=0');
@@ -923,5 +924,20 @@ class Master_ReportController extends Zend_Controller_Action{
              exit();
          }  
     }
-   
+
+    public function theodoinhapxuatAction()
+    {
+        $this->_helper->layout->disableLayout();
+
+        $objPHPExcel = new PHPExcel();
+        $objPHPExcel->setActiveSheetIndex(0);
+
+        $filename='PhieuNhapAnChi'.date("Y/m/d H:i:s").'.xls';
+        header('Content-Type: application/vnd.ms-excel');
+        header('Content-Disposition: attachment;filename='.$filename);
+        header('Cache-Control: max-age=0');
+        $objWriter = new PHPExcel_Writer_Excel5($objPHPExcel);
+        $objWriter->save('php://output');
+        exit();
+    }
 }
