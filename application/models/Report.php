@@ -636,4 +636,116 @@ class Model_ReportMapper extends Model_ReportMapperBase{
         }
         return $i;
     }
+
+    public function fetchAllDSBCKiemTraTheoQui($year, $sys_department_id = null){
+        $db = Zend_Db_Table::getDefaultAdapter();
+        $entriess1   = array("department"=>"","result"=>"");
+        $entriess = array("result"=>"");
+        $select="select code from master_violation";
+        $stmt=$db->query($select);
+        $rows = $stmt->fetchAll(PDO::FETCH_CLASS);
+        $stmt->closeCursor();
+        foreach($rows as $row){
+            $entriess[$row->code]="";
+            $entriess1[$row->code]="";
+        }
+        $entries=$entriess;
+        $entries1=$entriess1;
+        $entries2 = array();
+        if($sys_department_id === null)
+            $select="select count(*) count,sys_department_id from info_schedule_check where year(date_check)='".$year."' group by sys_department_id";
+        else
+            $select="select count(*) count,sys_department_id from info_schedule_check where year(date_check)='".$year."' and sys_department_id='".$sys_department_id."' group by sys_department_id";
+        $stmt=$db->query($select);
+        $rows = $stmt->fetchAll(PDO::FETCH_CLASS);
+        $stmt->closeCursor();
+        foreach($rows as $row){
+            $entries=$entriess;
+            $entries1=$entriess1;
+            $selects="select count(*) count,sys_department_id from doc_violations_handling where year(date_violation)='".$year."' and sys_department_id='".$row->sys_department_id."'";
+            $stmts=$db->query($selects);
+            $rowss = $stmts->fetchAll(PDO::FETCH_CLASS);
+            $stmts->closeCursor();
+            foreach($rowss as $row1)
+                $entries1["department"]=  GlobalLib::getName("sys_department",$row->sys_department_id,"name");
+            $entries1["result"]=$row->count."/".$row1->count;
+
+
+            $select1= "select name,code,count(name) count,Sum(amount) sums FROM doc_violations_handling mv
+                        inner join master_violation dvh on mv.master_violation_id=dvh.id
+                       WHERE (mv.is_delete = 0) and year(date_violation)='".$year."' and sys_department_id='".$row->sys_department_id."'  group by name";
+            $stmt1=$db->query($select1);
+            $rows1 = $stmt1->fetchAll(PDO::FETCH_CLASS);
+            $stmt1->closeCursor();
+            foreach($rows1 as $row2){
+                $sum = $row2->sums;
+                if(empty($sum))
+                {
+                    $sum = 0;
+                }
+                $entries[$row2->code]= $sum;
+                $entries["result"]= $sum+$entries["result"];
+                $entries1[$row2->code]= $row2->count;
+            }
+            $entries2[] = array($entries1,$entries);
+        }
+        return $entries2;
+    }
+
+    public function fetchRowCountAllDSBCKiemTraTheoQui($year, $sys_department_id = null){
+        $db = Zend_Db_Table::getDefaultAdapter();
+        $entriess1   = array("department"=>"","result"=>"");
+        $entriess = array("result"=>"");
+        $select="select code from master_violation";
+        $stmt=$db->query($select);
+        $rows = $stmt->fetchAll(PDO::FETCH_CLASS);
+        $stmt->closeCursor();
+        foreach($rows as $row){
+            $entriess[$row->code]="";
+            $entriess1[$row->code]="";
+        }
+        $entries=$entriess;
+        $entries1=$entriess1;
+        $entries2 = array();
+        if($sys_department_id === null)
+            $select="select count(*) count,sys_department_id from info_schedule_check where year(date_check)='".$year."' group by sys_department_id";
+        else
+            $select="select count(*) count,sys_department_id from info_schedule_check where year(date_check)='".$year."' and sys_department_id='".$sys_department_id."' group by sys_department_id";
+        $stmt=$db->query($select);
+        $rows = $stmt->fetchAll(PDO::FETCH_CLASS);
+        $stmt->closeCursor();
+        $i = 0;
+        foreach($rows as $row){
+            $entries=$entriess;
+            $entries1=$entriess1;
+            $selects="select count(*) count,sys_department_id from doc_violations_handling where year(date_violation)='".$year."' and sys_department_id='".$row->sys_department_id."'";
+            $stmts=$db->query($selects);
+            $rowss = $stmts->fetchAll(PDO::FETCH_CLASS);
+            $stmts->closeCursor();
+            foreach($rowss as $row1)
+                $entries1["department"]=  GlobalLib::getName("sys_department",$row->sys_department_id,"name");
+            $entries1["result"]=$row->count."/".$row1->count;
+
+
+            $select1= "select name,code,count(name) count,Sum(amount) sums FROM doc_violations_handling mv
+                        inner join master_violation dvh on mv.master_violation_id=dvh.id
+                       WHERE (mv.is_delete = 0) and year(date_violation)='".$year."' and sys_department_id='".$row->sys_department_id."'  group by name";
+            $stmt1=$db->query($select1);
+            $rows1 = $stmt1->fetchAll(PDO::FETCH_CLASS);
+            $stmt1->closeCursor();
+            foreach($rows1 as $row2){
+                $sum = $row2->sums;
+                if(empty($sum))
+                {
+                    $sum = 0;
+                }
+                $entries[$row2->code]= $sum;
+                $entries["result"]= $sum+$entries["result"];
+                $entries1[$row2->code]= $row2->count;
+                $i++;
+            }
+            $entries2[] = array($entries1,$entries);
+        }
+        return $i;
+    }
 }
