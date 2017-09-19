@@ -8,13 +8,13 @@
         <div class="panel panel-default">
             <div class="panel-heading">
                  <div class="row">
-                     <div class="col-lg-2" style="text-align:center;width: 9%;padding-right: 0px;">
+                     <!--<div class="col-lg-2" style="text-align:center;width: 9%;padding-right: 0px;">
                          <a  href="<?php echo $this->baseUrl().'/admin/infoschedulecheck/add/'?>">
                              <button type="button" class="btn btn-success btn-action"><i class="fa fa-plus fa-2x"></i>
                              </button></br>
                              <span >Thêm Mới</span>
                          </a>
-                     </div>                     
+                     </div>-->
                  </div>
             </div>
             <div class="panel-body">                
@@ -139,14 +139,14 @@
                           return "<div style='margin:7px;'>" + (value + 1) + "</div>";
                       }
                     },
-                    { text: 'Tên doanh nghiệp', dataField: 'info_business_id',align: "center", width: '15%' },
+                    { text: 'Tên doanh nghiệp', dataField: 'info_business_id',align: "center", width: '30%' },
                     { text: 'Tên lịch', dataField: 'info_schedule_id',align: "center", width: '10%' },
                     { text: 'Ấn chỉ', dataField: 'master_print_id',align: "center", width: '10%' },
-                    { text: 'Số cuốn', dataField: 'doc_print_create_id',align: "center", width: '5%' },
-                    { text: 'Người thực hiện', dataField: 'staff_check',align: "center", width: '15%' },
+                    { text: 'Số cuốn', dataField: 'doc_print_create_id',align: "center", width: '10%' },
+                    { text: 'Người thực hiện', dataField: 'staff_check',align: "center", width: '20%' },
                     { text: 'Serial', dataField: 'serial_check',align: "center", width: '10%' },
                     { text: 'Ngày', dataField: 'date_check',align: "center", width: '10%' },
-                    {text: 'Xóa',filtertype: 'none', cellsalign: 'right', align: "center", columnType: 'none', editable: false, sortable: false, dataField: null, cellsrenderer: function (row) {                          
+                    /*{text: 'Xóa',filtertype: 'none', cellsalign: 'right', align: "center", columnType: 'none', editable: false, sortable: false, dataField: null, cellsrenderer: function (row) {
                           editrow = row;
                           var dataRecord = $("#jqxgrid").jqxGrid('getrowdata',editrow);
                           var url= "<div style='overflow: hidden; text-overflow: ellipsis; padding-bottom: 2px; text-align: center; margin-right: 2px; margin-left: 4px; margin-top: 4px;'><a class='fa fa-trash-o fa-lg'";
@@ -161,8 +161,8 @@
                           url = url + "href='<?php echo $this->baseUrl() ?>/admin/infoschedulecheck/edit/id/"+dataRecord.id+"'></a></div>"
                           return url;
                       }
-                          }
-                        ]      
+                    }*/
+                ]
             });           
         });
        

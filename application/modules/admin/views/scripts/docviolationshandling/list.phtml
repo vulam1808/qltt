@@ -9,7 +9,7 @@
        <div class="panel-heading">
             <div class="row">
                  <div class="row">
-                     <div class="col-lg-2" style="text-align:center;width: 9%;padding-right: 0px;">
+                     <!--<div class="col-lg-2" style="text-align:center;width: 9%;padding-right: 0px;">
                          <a id ="addLink" href="<?php
                              echo $this->baseUrl()."/admin/docviolationshandling/add/type_business/".GlobalLib::_DN
                                  ?>">
@@ -17,7 +17,7 @@
                              </button></br>
                              <span >Thêm Mới</span>
                          </a>
-                     </div>
+                     </div>-->
                  </div>
             </div>
        </div>
@@ -126,7 +126,7 @@
                     if (args != undefined) {
                         var item = event.args.item;
                             if (item != null) {
-                                $('#month').val()=item.val();
+                                $('#month').val=item.val();
                             }
                     }
 
@@ -136,7 +136,7 @@
                     if (args != undefined) {
                         var item = event.args.item;
                         if (item != null) {
-                           $('#year').val() = item.value;
+                           $('#year').val = item.value;
                         }
                     }
 
@@ -198,14 +198,14 @@
                               return "<div style='margin:7px;'>" + (value + 1) + "</div>";
                           }
                     };
-                    array[2] = { text: 'Tên Doanh nghiệp',editable: false,align: "center", dataField: 'info_business_name', width: '15%' };
-                    array[3] = { text: 'Địa chỉ',editable: false,align: "center", dataField: 'address_business', width: '12%' };
+                    array[2] = { text: 'Tên Doanh nghiệp',editable: false,align: "center", dataField: 'info_business_name', width: '20%' };
+                    array[3] = { text: 'Địa chỉ',editable: false,align: "center", dataField: 'address_business', width: '18%' };
                     array[4] = { text: 'Hành vi vi phạm',editable: false,align: "center", dataField: 'master_violation_id', width: '15%' };
                     array[5] = { text: 'Hình thức xử lý',editable: false,align: "center", dataField: 'master_sanction_id', width: '10%' };
                     array[7] = { text: 'Đội xử lý',editable: false,align: "center", dataField: 'sys_department_id', width: '15%' };
                     array[8] = { text: 'Số tiền',editable: false,align: "center", dataField: 'amount', width: '10%' };
                     array[9] = { text: 'Search theo ngày tháng', datafield: 'date_violation', filtertype: 'range', cellsalign: 'left', width: '10%', cellsformat: 'd' };
-                    array[11] = {text: 'Sửa',filtertype: 'none', cellsalign: 'right', align: "center", columnType: 'none', editable: false, sortable: false, dataField: null, cellsrenderer: function (row) {
+                    /*array[11] = {text: 'Sửa',filtertype: 'none', cellsalign: 'right', align: "center", columnType: 'none', editable: false, sortable: false, dataField: null, cellsrenderer: function (row) {
                             // render custom column.
                             editrow = row;
                             var dataRecord = $("#"+_grid).jqxGrid('getrowdata',editrow);
@@ -213,8 +213,8 @@
                             url = url + "href='<?php echo $this->baseUrl()?>/admin/docviolationshandling/edit/id/"+dataRecord.id+"'></a></div>"
                             return url;
                         }
+                    };*/
 
-                    };
                     $("#excelExport").jqxButton();
                     $("#excelExport").click(function () {
                         //$("#"+_grid).jqxGrid('exportdata', 'xls', 'jqxGrid');
