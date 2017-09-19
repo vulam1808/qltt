@@ -118,7 +118,7 @@ class Model_Master_PrintBase{
 }
 class Model_DbTable_Master_Print extends Zend_Db_Table_Abstract
 {
-    protected $_name = "Master_Print";
+    protected $_name = "master_print";
     protected $_primary = "id";
 }
 class Model_Master_PrintMapperBase extends BaseMapper{

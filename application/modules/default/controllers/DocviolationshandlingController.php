@@ -798,15 +798,20 @@ class DocViolationsHandlingController extends Zend_Controller_Action{
     //mang lay ra danh sach serial_allocation
     public function arrayserialcheckAction(){
         $this->_helper->layout->disableLayout();
-        if($this->getRequest()->isPost()){ 
-//            $idmasterprint = $this->_getParam("idmaster","4");
-//            $idsysdepartment = $this->_getParam("idsys","17");
+        if($this->getRequest()->isPost()){
             $arraydata = $_POST['data'];
             $idmasterprint =  $arraydata[0]['master_print_id'];
             $idsysdepartment = $arraydata[0]['sys_department_id'];
-            $k=0;$arraydocprintallocation = array();$arrayserialcheck = array();$arrayserialhanding = array();$tam = "";
-            $i=0;$arrayserial = array();$arrayserialdc = array();$arrayserialxp = array();
-            foreach ($this->modelMapperdocprintallocation->arrayserial($idmasterprint,$idsysdepartment) as $items ) {            //
+
+            $k=0;
+            $arraydocprintallocation = array();
+            $arrayserialcheck = array();
+            $arrayserialhanding = array();$tam = "";
+
+            $i=0;$arrayserial = array();
+            $arrayserialdc = array();
+            $arrayserialxp = array();
+            foreach ($this->modelMapperdocprintallocation->arrayserial($idmasterprint,$idsysdepartment) as $items ) {
                     $serialtam = $items->getserial_recovery1();
                     $arraytam = explode("-", $serialtam);
                     for($j = (int)$arraytam[0];$j<= (int)$arraytam[1];$j++){
@@ -1060,7 +1065,8 @@ class DocViolationsHandlingController extends Zend_Controller_Action{
                 'address_business'=> GlobalLib::getName('info_business',$items->getInfo_Business_Id(),'address_office'),
                 'master_violation_id'=> GlobalLib::getName('master_violation',$items->getMaster_Violation_Id(),'name'),
                 'master_sanction_id'=>GlobalLib::getName('master_sanction',$items->getMaster_Sanctions_Id(),'name'),
-                'doc_items_handling'=>  GlobalLib::getName('master_items',GlobalLib::getName('doc_items_handling',$items->getId(),'master_items_id'),'name'),
+                'doc_items_handling'=>  GlobalLib::getName('master_items',GlobalLib::getItemHandlingNameByViolationID('doc_items_handling',$items->getId(),'master_items_id'),'name'),
+                'serial'=>  GlobalLib::getItemHandlingNameByViolationID('doc_items_handling',$items->getId(),'serial_handling'),
                 'sys_department_id'=>GlobalLib::getName('sys_department',$items->getSys_Department_Id(),'name'),
                 'sys_user_id'=>$items->getSys_User_Id(),
                 'date_violation'=>$items->getDate_Violation(),
@@ -1124,6 +1130,22 @@ class DocViolationsHandlingController extends Zend_Controller_Action{
         $redirectUrl=$this->aConfig["site"]["url"]."default/docviolationshandling/list";
         if(empty($type)){
             $this->_redirect($redirectUrl);
+        }
+        if($type == 'allbusiness')
+        {
+
+            $info_business_id = $this->_getParam("infobusinessid","");
+            if(!empty($info_business_id))
+            {
+                $where = " id = '8'";
+            }
+            foreach ($this->modelMapper->fetchAllInfoBusiness($where) as $items ) {
+                $menber[]=array(
+                    'business_id' => $items->getId(),
+                    'info_business_name' => $items->getName(),
+                    'address_office' => $items->getAddress_Office()
+                );
+            }
         }
         if($type == 'business')
         {
@@ -1344,7 +1366,7 @@ class DocViolationsHandlingController extends Zend_Controller_Action{
                         continue;
                     }
                     $this->modelDocPrintHandling = new Model_Doc_Print_Handling();
-                     $this->modelDocPrintHandling->setMaster_Print_Id($master_print_id);
+                    $this->modelDocPrintHandling->setMaster_Print_Id($master_print_id);
                     $this->modelDocPrintHandling->setDoc_Print_Allocation_Id($print_allocation_id);
                     $this->modelDocPrintHandling->setDoc_Violations_Handling_Id($idDocViolationsHandling);    
                     $this->modelDocPrintHandling->setDoc_Violations_Handling_Id($idDocViolationsHandling);   
@@ -1416,7 +1438,7 @@ class DocViolationsHandlingController extends Zend_Controller_Action{
                      'code'=>0,
                      'message'=>$redirectUrl,
                      'value'=>''
-                         ); 
+                         );
         } catch (Exception $e) {
              $member[]=array(
                      'code'=>1,

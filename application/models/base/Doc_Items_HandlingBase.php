@@ -25,6 +25,7 @@ class Model_Doc_Items_HandlingBase{
     protected $_status;
     protected $_is_delete;
     protected $_comment;
+    protected $_info_schedule_check_id;
 
     public function __construct(array $options = NULL)   
     {   
@@ -157,6 +158,12 @@ class Model_Doc_Items_HandlingBase{
         return $this;
     }
     public function getIs_Delete(){return $this->_is_delete;}
+
+    public function getInfo_Schedule_Check_Id(){return $this->_info_schedule_check_id;}
+    public function setInfo_Schedule_Check_Id($value){
+        $this->_info_schedule_check_id=$value;
+        return $this;
+    }
 }
 class Model_DbTable_Doc_Items_Handling extends Zend_Db_Table_Abstract
 {
@@ -203,7 +210,8 @@ class Model_Doc_Items_HandlingMapperBase extends BaseMapper{
                 'modified_by'=>$entry->getModified_By(),
                 'order'=>$entry->getOrder(),
                 'status'=>$entry->getStatus(),
-                'comment'=>$entry->getComment()
+                'comment'=>$entry->getComment(),
+                'info_schedule_check_id'=>$entry->getInfo_Schedule_Check_Id()
                 //'is_delete'=>$entry->getIs_Delete()               
                 );
          if (null === ($id = $entry->getId())) {
@@ -212,7 +220,25 @@ class Model_Doc_Items_HandlingMapperBase extends BaseMapper{
         } else {
             $this->getDbTable()->update($data, array("id = ?" => $id));
         }
-    }  
+    }
+
+    public function updateSanction($info_schedule_check_id, $master_sanction_id, $status) {
+        $data = array(
+            'master_sanction_id' => $master_sanction_id,
+            'modified_date'=> date("Y/m/d H:i:s"),
+            'status'=>$status
+        );
+        $this->getDbTable()->update($data, array("info_schedule_check_id = ?" => $info_schedule_check_id));
+    }
+
+    public function updateDocViolationHandling($info_schedule_check_id, $doc_violations_handling_id) {
+        $data = array(
+            'doc_violations_handling_id' => $doc_violations_handling_id,
+            'modified_date'=> date("Y/m/d H:i:s")
+        );
+        $this->getDbTable()->update($data, array("info_schedule_check_id = ?" => $info_schedule_check_id));
+    }
+
     public function find($id, Model_Doc_Items_Handling $entry){
         $result = $this->getDbTable()->find($id);
         if(0== count($result))
@@ -238,8 +264,8 @@ class Model_Doc_Items_HandlingMapperBase extends BaseMapper{
                 ->setOrder($row->order)
                 ->setStatus($row->status)
                 ->setComment($row->comment)
-                ->setIs_Delete($row->is_delete);
-               
+                ->setIs_Delete($row->is_delete)
+                ->setInfo_Schedule_Check_Id($row->info_schedule_check_id);
     }
     
    /* public function fetchAll(){
@@ -296,7 +322,7 @@ class Model_Doc_Items_HandlingMapperBase extends BaseMapper{
         foreach ($rows as $row) {
             $entry = new Model_Doc_Items_Handling();
             $entry->setId($row->id)
-                 ->setId($row->id)
+                ->setId($row->id)
                 ->setMaster_Items_Id($row->master_items_id) 
                 ->setMaster_Sanction_Id($row->master_sanction_id)
                 ->setDoc_Violations_Handling_id($row->doc_violations_handling_id) 
@@ -313,6 +339,7 @@ class Model_Doc_Items_HandlingMapperBase extends BaseMapper{
                 ->setOrder($row->order)
                 ->setStatus($row->status)
                 ->setComment($row->comment)
+                ->setInfo_Schedule_Check_Id($row->info_schedule_check_id)
                 ->setIs_Delete($row->is_delete);
             $entries[] = $entry;
         }

@@ -575,14 +575,7 @@
                 $(rightcolumn).append(master_ward_id);
                 $(rightcolumn).append(date_license);
                 $(rightcolumn).append(work_business);
-//                        var license_business = "<div style='margin: 10px;'><b>Giấy chứng nhận ĐKKD:</b>"+datarecord.license_business+" </div>";
-//                        var date_license = "<div style='margin: 10px;'><b>Ngày cấp:</b>"+datarecord.date_license+" </div>";
-//                        var master_business_type_id = "<div style='margin: 10px;'><b>Loại hình kinh doanh:</b>"+datarecord.master_business_type_id+"</div>";
-//                        var work_business = "<div style='margin: 10px;'><b>Ngành nghề:</b>"+datarecord.work_business+" </div>";
-//                        $(rightcolumn).append(license_business);
-//                        $(rightcolumn).append(date_license);
-//                        $(rightcolumn).append(master_business_type_id);
-//                        $(rightcolumn).append(work_business);
+
                 var id = datarecord.Id;
                 var resultdocviolation = '';
                 $.ajax({
@@ -661,25 +654,6 @@
                         },
                         columns: array
                     });
-//                    $("#"+id).on('selected',function(event){
-//                        var clickedItem = event.args.item;
-//                        if(clickedItem == 2)
-//                        {
-//                        $.ajax({
-//                                type:'post',
-//                                url:'<?php echo $this->baseUrl()?>/default/infobusiness/checkdocviolations/id/'+datarecord.Id,
-//                                async:false,
-//                                dataType:'json',
-//                                success:function(data){
-//                                    if(data[0].code==1){
-//                                        window.location.href = data[0].url;
-//                                    } else {
-//                                    resultdocviolation = data[0].message;
-//                                    }
-//                                }
-//                            });
-//                            }
-//                    });
             }
         }
         var dataAdapter = new $.jqx.dataAdapter(source1);

@@ -8,7 +8,8 @@ include_once "BaseMapper.php";
 class Model_Info_Schedule_CheckBase{
     protected $_id;
     protected $_info_schedule_id;  
-    protected $_info_business_id; 
+    protected $_info_business_id;
+    protected $_master_violation_id;
     protected $_doc_print_allocation_id;  
     protected $_serial_check;//de danh khi bao cao cho ro rang
     protected $_staff_check;//user di xu ly
@@ -74,7 +75,14 @@ class Model_Info_Schedule_CheckBase{
         $this->_info_business_id=$value;
         return $this;
     }
-    public function getInfo_Business_Id(){return $this->_info_business_id;} 
+    public function getInfo_Business_Id(){return $this->_info_business_id;}
+
+    public function setMaster_Violation_Id($value){
+        $this->_master_violation_id=$value;
+        return $this;
+    }
+    public function getMaster_Violation_Id(){return $this->_master_violation_id;}
+
     public function setDoc_Print_Allocation_Id($value){
         $this->_doc_print_allocation_id=$value;
         return $this;
@@ -189,6 +197,7 @@ class Model_Info_Schedule_CheckMapperBase extends BaseMapper{
                 'id' => $entry->getId(),
                 'info_schedule_id'=> $entry->getInfo_Schedule_Id(),  
                 'info_business_id'=>$entry->getInfo_Business_Id(),
+                'master_violation_id'=>$entry->getMaster_Violation_Id(),
                 'doc_print_allocation_id'=>$entry->getDoc_Print_Allocation_Id(),
                 'serial_check'=>$entry->getSerial_Check(),
                 'staff_check'=>$entry->getStaff_Check(),
@@ -213,7 +222,21 @@ class Model_Info_Schedule_CheckMapperBase extends BaseMapper{
                 $this->getDbTable()->update($data, array("id = ?" => $id));
             }
         
-    }  
+    }
+
+    public function updateViolation($id, $is_violations) {
+        if($is_violations == 0)
+            $violation = 3; // Không vi phạm, trả lại
+        else
+            $violation = $is_violations;
+        $data = array(
+            'id' => $id,
+            'modified_date'=> date("Y/m/d H:i:s"),
+            'is_violations'=>$violation
+        );
+        $this->getDbTable()->update($data, array("id = ?" => $id));
+    }
+
     public function find($id,Model_Info_Schedule_Check $entry){
         $result = $this->getDbTable()->find($id);
         if(0== count($result))
@@ -225,6 +248,7 @@ class Model_Info_Schedule_CheckMapperBase extends BaseMapper{
                 ->setId($row->id)
                 ->setInfo_Schedule_Id($row->info_schedule_id) 
                 ->setInfo_Business_Id($row->info_business_id)
+                ->setMaster_Violation_Id($row->master_violation_id)
                 ->setDoc_Print_Allocation_Id($row->doc_print_allocation_id) 
                 ->setSerial_Check($row->serial_check)
                 ->setStaff_Check($row->staff_check) 

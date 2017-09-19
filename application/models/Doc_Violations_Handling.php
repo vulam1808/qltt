@@ -64,7 +64,7 @@ class Model_Doc_Violations_HandlingMapper extends Model_Doc_Violations_HandlingM
         $stmt->closeCursor(); 
     }
     public function findidbyid_info_schedule($sys_department_id,$info_schedule_id){        
-       $db = Zend_Db_Table::getDefaultAdapter();
+        $db = Zend_Db_Table::getDefaultAdapter();
         $select= "select id,info_schedule_id,sys_department_id from doc_violations_handling where sys_department_id='".$sys_department_id."' and info_schedule_id ='".$info_schedule_id."'";
         $stmt=$db->query($select);
         $row = $stmt->fetchAll(PDO::FETCH_CLASS);

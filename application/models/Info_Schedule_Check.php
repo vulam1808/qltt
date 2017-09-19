@@ -166,9 +166,23 @@ class Model_Info_Schedule_CheckMapper extends Model_Info_Schedule_CheckMapperBas
         $stmt=$db->query($select);
         $rows = $stmt->fetchAll(PDO::FETCH_CLASS);
         $stmt->closeCursor();
-        $entries = array();$i=0;
+        $entries = array();
+        $i=0;
         foreach ($rows as $row){
             $entries[$i++]=$row->serial_check;
+        }
+        if($rows == null)
+        {
+            $select1="select serial_check from info_schedule_check where sys_department_id ='$sys_department_id' and is_delete ='0'";
+            $stmt = $db->query($select1);
+            $rows1 = $stmt->fetchAll(PDO::FETCH_CLASS);
+            $stmt->closeCursor();
+            $entries1 = array();
+            $i=0;
+            foreach ($rows1 as $row){
+                $entries1[$i++]=$row->serial_check;
+            }
+            return $entries1;
         }
         return $entries;
     }
@@ -293,6 +307,51 @@ class Model_Info_Schedule_CheckMapper extends Model_Info_Schedule_CheckMapperBas
                 ->setIs_Delete($row->is_delete);
             $entries[]=$entry;
            
+        }
+        return $entries;
+    }
+
+    // Hien thi du lieu theo Hanh Vi Vi Pham (1:'0: ko vi pham, 1: Vi Pham'; 2: '2: Co dau hieu vi pham')
+    public function fetchAllByIsViolations($sys_department_id, $type_violations)
+    {
+        $db = Zend_Db_Table::getDefaultAdapter();
+        if ($sys_department_id == null) {
+            if($type_violations == 1)
+                $select = "select * from info_schedule_check where is_violations in (0,1,3)";
+            else
+                $select = "select * from info_schedule_check where is_violations=2";
+        }
+        else {
+            if($type_violations == 1)
+                $select="select * from info_schedule_check where sys_department_id ='".$sys_department_id."' and is_violations in (0,1,3)";
+            else
+                $select="select * from info_schedule_check where sys_department_id ='".$sys_department_id."' and is_violations=2";
+        }
+        $stmt=$db->query($select);
+        $rows = $stmt->fetchAll(PDO::FETCH_CLASS);
+        $stmt->closeCursor();
+        $entries = array();
+        foreach ($rows as $row){
+            $entry = new Model_Info_Schedule_Check();
+            $entry->setId($row->id)
+                ->setId($row->id)
+                ->setInfo_Schedule_Id($row->info_schedule_id)
+                ->setInfo_Business_Id($row->info_business_id)
+                ->setDoc_Print_Allocation_Id($row->doc_print_allocation_id)
+                ->setSerial_Check($row->serial_check)
+                ->setStaff_Check($row->staff_check)
+                ->setDate_Check($row->date_check)
+                ->setSys_Department_Id($row->sys_department_id)
+                ->setCreated_Date($row->created_date)
+                ->setCreated_By($row->created_by)
+                ->setModified_Date($row->modified_date)
+                ->setModified_By($row->modified_by)
+                ->setOrder($row->order)
+                ->setStatus($row->status)
+                ->setComment($row->comment)
+                ->setDoc_Violations_Handling_Id($row->doc_violations_handling_id)
+                ->setIs_Delete($row->is_delete);
+            $entries[]=$entry;
         }
         return $entries;
     }

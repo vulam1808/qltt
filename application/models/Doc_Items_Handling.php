@@ -87,6 +87,50 @@ class Model_Doc_Items_HandlingMapper extends Model_Doc_Items_HandlingMapperBase{
         }
         return $entries;
     }
+
+
+    // tra lai
+    public function fetchAllTangVatTraLai($status,$month,$year,$sys_department_id = null){
+        $db = Zend_Db_Table::getDefaultAdapter();
+        $select="select t1.*,t2.sys_department_id from doc_items_handling as t1 inner join info_schedule_check as t2
+                    on t1.info_schedule_check_id =  t2.id and t2.sys_department_id = '$sys_department_id'
+                     where t1.is_delete ='0' and month(t1.modified_date)='".$month."' and year(t1.modified_date)='".$year."' and t1.status='".$status."' ";
+        if($sys_department_id===NULL)
+        {
+            $select="select * from doc_items_handling where is_delete ='0' and month(modified_date)='".$month."' and year(modified_date)='".$year."' and status='".$status."'";
+        }
+
+        $stmt=$db->query($select);
+        $rows = $stmt->fetchAll(PDO::FETCH_CLASS);
+        $stmt->closeCursor();
+        $entries = array();
+        foreach ($rows as $row){
+            $entry = new Model_Doc_Items_Handling();
+            $entry->setId($row->id)
+                ->setId($row->id)
+                ->setMaster_Items_Id($row->master_items_id)
+                ->setMaster_Sanction_Id($row->master_sanction_id)
+                ->setDoc_Violations_Handling_id($row->doc_violations_handling_id)
+                ->setSerial_Handling($row->serial_handling)
+                ->setQuantity_Commodity($row->quantity_commodity)
+                ->setMaster_Unit_Id($row->master_unit_id)
+                ->setDate_Handling($row->date_handling)
+                ->setAmount($row->amount)
+                ->setFile_Upload($row->file_upload)
+                ->setCreated_Date($row->created_date)
+                ->setCreated_By($row->created_by)
+                ->setModified_Date($row->modified_date)
+                ->setModified_By($row->modified_by)
+                ->setOrder($row->order)
+                ->setStatus($row->status)
+                ->setComment($row->comment)
+                ->setIs_Delete($row->is_delete)
+                ->setInfo_Schedule_Check_Id($row->info_schedule_check_id);
+                
+            $entries[]=$entry;
+        }
+        return $entries;
+    }
     //tich thu
     public function fetchAlltichthu($status,$month,$year,$sys_department_id = null){
         $db = Zend_Db_Table::getDefaultAdapter();
@@ -156,6 +200,26 @@ class Model_Doc_Items_HandlingMapper extends Model_Doc_Items_HandlingMapperBase{
                 'name'=>  GlobalLib::getName("master_items",$row->master_items_id,"name"),
                 'sanction'=>  GlobalLib::getName("master_sanction",$row->master_sanction_id,"name"),
                 'serial'=>$row->serial_handling                
+            );
+        }
+        return $result;
+    }
+
+    function finditembyInfoScheduleCheck($info_schedule_check_id)
+    {
+        $db = Zend_Db_Table::getDefaultAdapter();
+        $select = "select id,master_sanction_id,master_items_id,info_schedule_check_id,serial_handling from doc_items_handling where info_schedule_check_id='".$info_schedule_check_id."'";
+        $stmt=$db->query($select);
+        $rows = $stmt->fetchAll(PDO::FETCH_CLASS);
+        $stmt->closeCursor();
+        $result = null;
+        foreach ($rows as $row)
+        {
+            $result[] = array(
+                'id'=>$row->id,
+                'name'=>  GlobalLib::getName("master_items",$row->master_items_id,"name"),
+                'sanction'=>  GlobalLib::getName("master_sanction",$row->master_sanction_id,"name"),
+                'serial'=>$row->serial_handling
             );
         }
         return $result;

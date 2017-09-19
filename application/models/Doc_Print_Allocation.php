@@ -243,7 +243,7 @@ class Model_Doc_Print_AllocationMapper extends Model_Doc_Print_AllocationMapperB
     //ham lay serial theo ma an chi va theo phong ban
     public function arrayserial($master_print_id,$sys_department_id){
          $db = Zend_Db_Table::getDefaultAdapter();
-        $select="select id,master_print_id,sys_department_id,serial_recovery1,is_delete,status from doc_print_allocation where master_print_id='$master_print_id' and sys_department_id='$sys_department_id' and is_delete ='0' and status !='RECOVERY'";        
+        $select="select id,master_print_id,sys_department_id,serial_recovery1,is_delete,status from doc_print_allocation where master_print_id='$master_print_id' and sys_department_id='$sys_department_id' and is_delete ='0' and status !='RECOVERY'";
         $stmt=$db->query($select);
         $rows = $stmt->fetchAll(PDO::FETCH_CLASS);
         $stmt->closeCursor();
@@ -278,7 +278,7 @@ class Model_Doc_Print_AllocationMapper extends Model_Doc_Print_AllocationMapperB
             $entries[]=$entry;
         }
         return $entries;
-    }    
+    }
 
 
 

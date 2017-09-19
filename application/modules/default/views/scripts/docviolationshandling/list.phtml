@@ -125,7 +125,7 @@
                     if (args != undefined) {
                         var item = event.args.item;
                             if (item != null) {
-                                $('#month').val()=item.val();      
+                                $('#month').val=item.val();
                             }
                     }
                
@@ -135,7 +135,7 @@
                     if (args != undefined) {
                         var item = event.args.item;
                         if (item != null) {
-                           $('#year').val() = item.value;                       
+                           $('#year').val = item.value;
                         }
                     }
                
@@ -144,8 +144,7 @@
             loadingGrid("jqxgrid1",id,"HoKinhDoanh",month,year);
             loadingGrid("jqxgrid2",id,"DoanhNghiepNgoaiDiaBan",month,year);
             $('#jqxTabs').on('selected', function (event) {
-             var clickedItem = event.args.item; 
-                var _selTypeBusiness ="<?php echo GlobalLib::_DN;?>";
+             var clickedItem = event.args.item;
                 if(clickedItem==1)
                 {
                     _selTypeBusiness ="<?php echo GlobalLib::_HKD;?>";
@@ -158,13 +157,16 @@
                              echo $this->baseUrl()."/default/docviolationshandling/add/type_business/" 
                                  ?>"+_selTypeBusiness+""; 
           }); 
-          $('#jqxTabs').val(seltab);
+          //$('#jqxTabs').val(seltab);
+
+            $("#excelExport").click(function () {
+                //$("#jqxgrid").jqxGrid('exportdata', 'xls', 'jqxGrid');
+                return window.location = "<?php echo $this->baseUrl()?>/default/report/exportxuphatvipham/type_business/"+_selTypeBusiness+"/id/"+id+"/month/"+month+"/year/"+year;
+            });
             
             function loadingGrid(_grid,_id,_type_business,_month,_year){
                 
             var url = "<?php echo $this->baseUrl()?>/default/docviolationshandling/service/type_business/"+_type_business+"/id/"+_id+"/month/"+_month+"/year/"+_year;
-//            var url1 = "<?php echo $this->baseUrl().'/default/docviolationshandling/service/type_business/'.GlobalLib::_HKD.'/id/'.$this->id.'/month/'.$this->month.'/year/'.$this->year.''?>";
-//            var url2 = "<?php echo $this->baseUrl().'/default/docviolationshandling/service/type_business/'.GlobalLib::_DNNDB.'/id/'.$this->id.'/month/'.$this->month.'/year/'.$this->year.''?>";
 
             var arrays = new Array(); 
                 arrays[0]={ name: 'id',type:'int'};
@@ -173,7 +175,7 @@
                 arrays[3]={ name: 'address_business', type: 'string' };
                 arrays[4]={ name: 'master_sanction_id', type: 'string' };
                 arrays[5]={ name: 'sys_department_id', type: 'string' };
-//                arrays[6]={ name: 'doc_items_handling', type: 'string' };
+//              arrays[6]={ name: 'doc_items_handling', type: 'string' };
                 arrays[7]={ name: 'sys_user_id', type: 'string' };
                 arrays[8]={ name: 'date_violation', type: 'date' };
                 arrays[9]={ name: 'range', map:'date_violation',type: 'date' };
@@ -201,20 +203,11 @@
                 array[3] = { text: 'Địa chỉ',editable: false,align: "center", dataField: 'address_business', width: '12%' };
                 array[4] = { text: 'Hành vi vi phạm',editable: false,align: "center", dataField: 'master_violation_id', width: '15%' };
                 array[5] = { text: 'Hình thức xử lý',editable: false,align: "center", dataField: 'master_sanction_id', width: '10%' };
-//                array[6] = { text: 'Tịch thu tang vật',editable: false,align: "center", dataField: 'doc_items_handling', width: '10%' };
+//              array[6] = { text: 'Tịch thu tang vật',editable: false,align: "center", dataField: 'doc_items_handling', width: '10%' };
                 array[7] = { text: 'Đội xử lý',editable: false,align: "center", dataField: 'sys_department_id', width: '15%' };
                 array[8] = { text: 'Số tiền',editable: false,align: "center", dataField: 'amount', width: '10%' };
                 array[9] = { text: 'Search theo ngày tháng', datafield: 'date_violation', filtertype: 'range', cellsalign: 'left', width: '10%', cellsformat: 'd' };
-//                array[10] = {text: 'Xóa',filtertype: 'none', cellsalign: 'center', align: "center", columnType: 'none', editable: false, sortable: false, dataField: null, cellsrenderer: function (row) {
-//                          // render custom column.
-//                          editrow = row;
-//                          var dataRecord = $("#"+_grid).jqxGrid('getrowdata',editrow);
-//                          var url= "<div style='overflow: hidden; text-overflow: ellipsis; padding-bottom: 2px; text-align: center; margin-right: 2px; margin-left: 4px; margin-top: 4px;'><a class='fa fa-trash-o fa-lg'";
-//                          url = url + "href='#' onclick='return jsdelete("+dataRecord.id+")'></a></div>"
-//                          return url;
-//                      }
-//              };
-              array[11] = {text: 'Sửa',filtertype: 'none', cellsalign: 'right', align: "center", columnType: 'none', editable: false, sortable: false, dataField: null, cellsrenderer: function (row) {
+                array[11] = {text: 'Sửa',filtertype: 'none', cellsalign: 'right', align: "center", columnType: 'none', editable: false, sortable: false, dataField: null, cellsrenderer: function (row) {
                           // render custom column.
                           editrow = row;
                           var dataRecord = $("#"+_grid).jqxGrid('getrowdata',editrow);
@@ -224,10 +217,7 @@
                       }
               };
             //$("#excelExport").jqxButton();
-            $("#excelExport").click(function () {
-                //$("#jqxgrid").jqxGrid('exportdata', 'xls', 'jqxGrid');
-                return window.location = "<?php echo $this->baseUrl()?>/default/report/exportxuphatvipham/type_business/"+_selTypeBusiness+"/id/"+_id+"/month/"+_month+"/year/"+_year;
-            });
+
                                                                 
             $("#"+_grid).jqxGrid(
             {

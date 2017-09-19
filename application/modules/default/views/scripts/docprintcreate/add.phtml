@@ -299,6 +299,7 @@ and open the template in the editor.
     </script>
  <script type="text/javascript">
         $(document).ready(function () {
+            var orderCount = 0;
             $("#luu").hide();
              $('#master_print_id').multiselect({
                 maxHeight: '300',
@@ -312,7 +313,7 @@ and open the template in the editor.
                     else {
                         $(option).data('order', '');
                     }
-                },
+                }
             });
         
         $('#master_print_id').on('change', function() {

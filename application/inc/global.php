@@ -10,6 +10,7 @@ class GlobalLib{
      const _DN       = 'DoanhNghiep';
      const _DNNDB      = 'DoanhNghiepNgoaiDiaBan';
      const _HKD       = 'HoKinhDoanh';
+     const _PT       = 'PhuongTien';
      const _TTHH      = 'TichThuHangHoa';
      const _XLVP      = 'XuLyViPham'; 
      const _TG      = 'TamGiu'; 
@@ -228,7 +229,7 @@ class GlobalLib{
     
      public static function getComboSeclectTitle($fieldName, $tableName, $valueColumn, $textColumn, $defaultValue,$title, $multiSelect = false, $filters = '', $orderBys = NULL, $onclick='', $zeroValueName = 'Chưa lựa chọn') {
         $db = Zend_Db_Table::getDefaultAdapter();
-        $query = 'SELECT ' . $valueColumn . ',' . $textColumn .  ',' .$title. ' from ' . $tableName . ' '.$filters.' '.$orderBys;
+        $query = 'select ' . $valueColumn . ',' . $textColumn .  ',' .$title. ' from ' . $tableName . ' '.$filters.' '.$orderBys;
         $stmt = $db->query($query);
         $items = $stmt->fetchAll(); //PDO::FETCH_CLASS);
         $stmt->closeCursor();
@@ -243,9 +244,11 @@ class GlobalLib{
         
         foreach ($items as $item) {
             $selected = '';
-            if ($defaultValue == $item[$valueColumn])
-                $selected = ' selected="selected"';
-            $html .= '<option title="'.$item[$title].'" value="' . $item[$valueColumn] . '" ' . $selected .'>' . str_replace("'", "\'", $item[$textColumn]) . '</option>';
+            if($item[$valueColumn] > 0) {
+                if ($defaultValue == $item[$valueColumn])
+                    $selected = ' selected="selected"';
+                $html .= '<option title="' . $item[$title] . '" value="' . $item[$valueColumn] . '" ' . $selected . '>' . str_replace("'", "\'", $item[$textColumn]) . '</option>';
+            }
         }
         $html .= '</select>';       
         return $html;
@@ -704,7 +707,49 @@ class GlobalLib{
         
         return ''; 
         
-    }  
+    }
+    public static function getItemInDocItemsHandlingByScheduleCheckID($tableName, $valueColumn, $textColumn){
+        if(empty($valueColumn))
+        {
+            return '';
+        }
+
+
+        $db = Zend_Db_Table::getDefaultAdapter();
+        $query = 'SELECT '.$valueColumn.','.$textColumn . ' from ' . $tableName . ' where info_schedule_check_id='. $valueColumn.'';
+        $stmt = $db->query($query);
+        $items = $stmt->fetchAll(); //PDO::FETCH_CLASS);
+        $stmt->closeCursor();
+        $results = array();
+        foreach ($items as $item) {
+            $results[$item[$valueColumn]] = $item[$textColumn];
+            return $results[$valueColumn];
+        }
+        return '';
+
+    }
+
+    public static function getDocPrintAllocationByMasterPrintID($tableName, $valueColumn1, $valueColumn2, $textColumn){
+        if(empty($valueColumn1))
+        {
+            return '';
+        }
+
+
+        $db = Zend_Db_Table::getDefaultAdapter();
+        $query = 'SELECT '.$valueColumn1.','.$textColumn . ' from ' . $tableName . ' where master_print_id='. $valueColumn1.' and sys_department_id='.$valueColumn2;
+        $stmt = $db->query($query);
+        $items = $stmt->fetchAll(); //PDO::FETCH_CLASS);
+        $stmt->closeCursor();
+        $results = array();
+        foreach ($items as $item) {
+            $results[$item[$valueColumn1]] = $item[$textColumn];
+            return $results[$valueColumn1];
+        }
+        return '';
+
+    }
+
     //
     public static function getName1($tableName, $valueColumn, $textColumn){
         if(empty($valueColumn))
@@ -772,7 +817,24 @@ class GlobalLib{
         
         return ''; 
         
-    }  
+    }
+
+    public static function getItemHandlingNameByViolationID($tableName, $valueColumn, $textColumn){
+        $db = Zend_Db_Table::getDefaultAdapter();
+        $query = 'SELECT '.$valueColumn.','.$textColumn . ' from ' . $tableName . ' where doc_violations_handling_id= '. $valueColumn.'';
+        $stmt = $db->query($query);
+        $items = $stmt->fetchAll(); //PDO::FETCH_CLASS);
+        $stmt->closeCursor();
+        $results = array();
+        foreach ($items as $item) {
+            $results[$item[$valueColumn]] = $item[$textColumn];
+            return $results[$valueColumn];
+        }
+        return '';
+    }
+
+
+
     public static function getNameItems($Name){
        if($Name=="condition")
         return "Kinh doanh có điều kiện"; 
@@ -787,17 +849,17 @@ class GlobalLib{
         return "Hàng không xác định";
     }  
      public static function getNameBusiness($Name){
-       if($Name=="DoanhNghiep")
-        return "Doanh nghiệp"; 
-       else{
-       if($Name=="HoKinhDoanh")
-        return "Hộ kinh doanh";
-       else{
-       if($Name=="DoanhNghiepNgoaiDiaBan") 
-        return "Doanh Nghiệp ngoài địa bàn";
-       else return "khongtontai";
-           }
-       }   
+         if($Name=="DoanhNghiep")
+             return "Doanh nghiệp";
+         else{
+             if($Name=="HoKinhDoanh")
+                 return "Hộ kinh doanh";
+             else{
+                 if($Name=="DoanhNghiepNgoaiDiaBan")
+                     return "Doanh Nghiệp ngoài địa bàn";
+                 else return "Phương tiện";
+             }
+         }
      }
       public static function getNameTypeMasterSanction($Name){
        if($Name=="TichThuHangHoa")

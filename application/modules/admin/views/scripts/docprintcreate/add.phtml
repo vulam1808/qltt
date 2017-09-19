@@ -303,6 +303,7 @@ and open the template in the editor.
     </script>
  <script type="text/javascript">
         $(document).ready(function () {
+            var orderCount = 0;
             $("#luu").hide();
              $('#master_print_id').multiselect({
                 maxHeight: '300',
@@ -316,7 +317,7 @@ and open the template in the editor.
                     else {
                         $(option).data('order', '');
                     }
-                },
+                }
             });
         
         $('#master_print_id').on('change', function() {
@@ -338,6 +339,7 @@ and open the template in the editor.
             $('#selectionlog').val(text);
             $('#selectionlog').text(text);
         });
+
             $('#jqxDateTimeInput').jqxDateTimeInput({ formatString: "dd-MM-yyyy"});
             var formatString = $('#jqxDateTimeInput').jqxDateTimeInput('formatString');
             $('#jqxDateTimeInput').on('valueChanged', function (event) {
@@ -356,10 +358,10 @@ and open the template in the editor.
         });
     </script>
 <script type="text/javascript">
-    document.forms['Adddocprintcreate'].code.focus();
+    /*document.forms['Adddocprintcreate'].code.focus();
     function set_focus() {
         document.forms['Adddocprintcreate'].code.focus();
-    }
+    }*/
    
     function checkinput() {
         var frm = window.document.Adddocprintcreate;

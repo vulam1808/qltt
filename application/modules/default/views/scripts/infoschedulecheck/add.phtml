@@ -14,157 +14,297 @@
     <div class="col-lg-12">
         <div class="panel panel-default">
             <div class="panel-body">
-                <form role="form" method="POST" name="AddSchedulecheck" onsubmit="return checkinput();">   
-                  <div class="form-group">
-                            <div class="row">
-                                <div class="col-lg-2">
-                                    <label>Phòng ban</label>
-                                </div>
-                              <div class="col-lg-4">
-                                      
-                                            <div id="dropDownButton">
-                                                <div style="border: none;" id="jqxTree">
-                                                    <ul>
-                                                   <?php echo GlobalLib::returntree($identity->sys_department_id) ;?>
-                                                      
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                       
-                                          <input class="form-control" type="hidden" name="sys_department_id" id="sys_department_id" value="">
-                                    </div>      
-                               
-                            </div>
-                        </div> 
-                    <div class="form-group">
-                                <div class="row">
-                                    <div class="col-lg-2">
-                                        <label>Kiểm tra theo lịch</label>
-                                    </div>
-                               <div class="col-lg-4">
-                                   <?php echo $this->scheduleHTML; ?>
-                                      <?php // echo GlobalLib::getCombo('info_schedule_id', 'info_schedule', 'id', 'name_schedule',$this->item->getInfo_Schedule_Id(), false, 'where sys_department_id=17') ?>                                       
-                                  </div>
-                                    
-                                </div>
-                            </div>
+                <!--<form role="form" method="POST" name="AddSchedulecheck" onsubmit="return checkinput();">-->
                      <div class="form-group">
-                                <div class="row">
-                                    <div class="col-lg-2">
-                                        <label>Tên doanh nghiệp</label>
-                                    </div>
-                                     <div class="col-lg-4">
-                                      <?php echo GlobalLib::getCombo('info_business_id', 'info_business', 'id', 'name', $this->item->getInfo_Business_Id(),false,'where created_by ='.$identity->id.'') ?>                                       
-                                  </div>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                   <div class="row">
-                                       <div class="col-lg-2">
-                                           <label>Ấn chỉ</label>
-                                       </div>
-                                       <div class="col-lg-4">
-                                             <?php echo GlobalLib::getCombo('master_print_id', 'master_print', 'id', 'code',0,false, 'where id in(select distinct master_print_id from doc_print_allocation where sys_department_id='.$identity->sys_department_id.' and status ="DOING" and is_delete ="0")', '', 'onchange="getPrintCreatWithMasterPrint1(\'' . $this->aConfig["site"]["url"] . '\')"') ?>                                       
-                                         </div>
+                         <div class="row">
+                             <div class="col-lg-2">
+                                 <label>Phòng ban</label>
+                             </div>
+                             <div class="col-lg-4">
+                                 <div id="dropDownButton">
+                                     <div style="border: none;" id="jqxTree">
+                                         <ul>
+                                             <?php echo GlobalLib::returntree($identity->sys_department_id) ;?>
 
-                                   </div>
-                            </div>
-                            
-<!--                      <div class="form-group">
-                            <div class="row">
-                                <div class="col-lg-2">
-                                    <label>Số cuốn</label>
-                                </div>
-                            <div class="col-lg-4">
-                                 <?php // echo $this->printcreatHTML;?>
-                                      <?php // echo GlobalLib::getCombo('doc_print_create_id', 'doc_print_allocation', 'id', 'doc_print_create_id',0,false, 'where master_print_id=0') ?>                                       
-                             <input class="form-control" type="hidden" name="doc_print_allocation_id" id="doc_print_allocation_id" value="">      
-                            </div>
-                            </div>
-                        </div> -->
+                                         </ul>
+                                     </div>
+                                 </div>
+
+                                 <input class="form-control" type="hidden" name="sys_department_id" id="sys_department_id" value="">
+                             </div>
+                         </div>
+                     </div>
                      <div class="form-group">
-                                   <div class="row">
-                                       <div class="col-lg-2">
-                                          <label>Serial</label>
-                                       </div>
-                                       <div class="col-lg-4">
-                                            <div id="abc"></div> 
-                                             <input class="form-control" type="hidden" name="doc_print_allocation_id" id="doc_print_allocation_id" value="">    
-                                            <input class="form-control" name="serial_check" id="serial_check" type="hidden">
-                                            <input class="form-control" name="serial" id="serial" type="hidden">
-                                            <input class="form-control" name="serial1" id="serial1" type="hidden">
-                                       </div>
-                                   </div>
+                        <div class="row">
+                            <div class="col-lg-2">
+                                <label>Kiểm tra theo lịch</label>
                             </div>
+                            <div class="col-lg-4">
+                                <?php echo $this->scheduleHTML; ?>
+                                <?php // echo GlobalLib::getCombo('info_schedule_id', 'info_schedule', 'id', 'name_schedule',$this->item->getInfo_Schedule_Id(), false, 'where sys_department_id=17') ?>
+                            </div>
+                        </div>
+                     </div>
+                     <div class="form-group">
+                         <div class="row">
+                             <div class="col-lg-2">
+                                 <label>Tên doanh nghiệp</label>
+                             </div>
+                             <div class="col-lg-4">
+                                 <?php echo GlobalLib::getCombo('info_business_id', 'info_business', 'id', 'name', $this->item->getInfo_Business_Id(),false,'where created_by ='.$identity->id.'') ?>
+                             </div>
+                         </div>
+                     </div>
+                     <div class="form-group">
+                        <div class="row">
+                            <div class="col-lg-2">
+                                <label>Ấn chỉ</label>
+                            </div>
+                            <div class="col-lg-4">
+                                <?php echo GlobalLib::getCombo('master_print_id', 'master_print', 'id', 'code',0,false, 'where id in(select distinct master_print_id from doc_print_allocation where sys_department_id='.$identity->sys_department_id.' and status ="DOING" and is_delete ="0")', '', 'onchange="getPrintCreatWithMasterPrint1(\'' . $this->aConfig["site"]["url"] . '\')"') ?>
+                            </div>
+
+                        </div>
+                     </div>
+                     <div class="form-group">
+                         <div class="row">
+                             <div class="col-lg-2">
+                                 <label>Serial</label>
+                             </div>
+                             <div class="col-lg-4">
+                                 <div id="abc"></div>
+                                 <input class="form-control" type="hidden" name="doc_print_allocation_id" id="doc_print_allocation_id" value="">
+                                 <input class="form-control" name="serial_check" id="serial_check" type="hidden">
+                                 <input class="form-control" name="serial" id="serial" type="hidden">
+                                 <input class="form-control" name="serial1" id="serial1" type="hidden">
+                             </div>
+                         </div>
+                     </div>
                             
                     
                       <div class="form-group">
-                                <div class="row">
-                                    <div class="col-lg-2">
-                                        <label>Ngày</label>
-                                    </div>
-                                    <div class="col-lg-7">
-                                        <div id="jqxWidget">
-                                            <div style="float: left;">
-                                                <div style="float: left; margin-top: 3px;" id="jqxDateTimeInput">
-                                                </div>
-                                            <div style='margin-left: 20px; float: left;'>
-                                                <div>
-                                                    <input type="hidden" id="date_check" name="date_check" value=" ">
-                                                </div>
-                                            </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                      
-<!--                      <div class="form-group">
-                                <div class="row">
-                                    <div class="col-lg-2">
-                                        <label>Nhân viên</label>
-                                    </div>   
-                                         <div class="col-lg-4">
-                                          <?php echo GlobalLib::getCombo('sys_user_id', 'sys_user', 'id', 'username',  $identity->id,'', 'where sys_department_id=0', '', '') ?>                                       
-                             
-                                         </div>
-                                    
-                                </div>
-                            </div>-->
-                        <div class="form-group">
-                                <div class="row">
-                                <div class="col-lg-2">
-                                    <label>Có vi phạm</label>
-                                </div>
-                               <div class="col-lg-2">
-                                     <input  type="checkbox" name="is_violations" id="is_violations" value="<?php echo $this->item->getIs_Violations();?>">
-                                </div> 
-                                </div>
-                            </div>
-                       <div class="form-group">
-                                <div class="row">
-                                <div class="col-lg-2">
-                                    <label>Ghi chú</label>
-                                </div>
-                               <div class="col-lg-4">
-                                    <textarea  name="comment" id="comment" type="text" class="form-control" cols="100" rows="5"><?php echo $this->item->getComment(); ?></textarea>    
-                                </div> 
-                                </div>
+                          <div class="row">
+                              <div class="col-lg-2">
+                                  <label>Ngày</label>
+                              </div>
+                              <div class="col-lg-7">
+                                  <div id="jqxWidget">
+                                      <div style="float: left;">
+                                          <div style="float: left; margin-top: 3px;" id="jqxDateTimeInput">
+                                          </div>
+                                          <div style='margin-left: 20px; float: left;'>
+                                              <div>
+                                                  <input type="hidden" id="date_check" name="date_check" value=" ">
+                                              </div>
+                                          </div>
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
                       </div>
+
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-lg-2">
+                                <label>Có vi phạm</label>
+                            </div>
+                            <div class="col-lg-7">
+                                <div id="jqxWidget">
+                                    <div style="float: left;">
+                                        <!--<input  type="checkbox" name="is_violations" id="is_violations" value="<?php echo $this->item->getIs_Violations();?>">-->
+                                        <div style='float: left' id='is_violations' name='is_violations'></div>
+                                        <input class="form-control" name="hdd_is_violations" id="hdd_is_violations" type="hidden">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-lg-2">
+                                <label>Ghi chú</label>
+                            </div>
+                            <div class="col-lg-4">
+                                <textarea  name="comment" id="comment" type="text" class="form-control" cols="100" rows="5"><?php echo $this->item->getComment(); ?></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="tblIsViolation" class="panel-body">
+                        <div class="table-reponsive">
+                            <div id="jqxgrid">
+
+                            </div>
+
+                            <div style="font-size: 13px; margin-top: 20px; font-family: Verdana, Geneva, 'DejaVu Sans', sans-serif;" id="eventLog"></div>
+                            <!-- popup item-->
+
+                        </div>
+                    </div>
                   
               
-                       <input id="selectionlog" style="display: none" name="selectionlog" /> 
-                       <div class="form-group">
-                           <!--<button type="button" name="bt" id="bt" class="btn btn-primary">Thêm mớifdf</button>-->
-                                <button type="submit" name="import" id="import" class="btn btn-primary">Thêm mới</button>
-                                <button type="reset" class="btn btn-default">Đặt lại</button>
-                       </div> 
+                    <input id="selectionlog" style="display: none" name="selectionlog" />
+                    <div class="form-group">
+                        <!--<button type="button" name="bt" id="bt" class="btn btn-primary">Thêm mớifdf</button>-->
+                        <button name="import" id="import" class="btn btn-primary">Thêm mới</button>
+                        <button type="reset" class="btn btn-default">Đặt lại</button>
+                    </div>
                     
-                </form>
+                <!--</form>-->
             </div>
         </div>
     </div>
 </div>
+
+<!-- form hành vi vi phạm -->
+<div style="visibility: hidden;" id="jqxWidget">
+    <div id="popupWindowItemsviolation" hidden="true">
+        <div>
+            <b>Hành vi vi phạm!</b>
+        </div>
+        <div>
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <div id="jqxgrid_itemsviolation">
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-10">
+                            <div class="form-group">
+                                <button   id="saveViolation" name = "saveViolation" class="btn btn-primary">Lưu</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- form Hình thức xử lí -->
+<div style="visibility: hidden;" id="jqxWidget">
+    <div id="popupWindowAmount" hidden="true">
+        <div>
+            <b>Nhập Số tiền phạt !</b>
+        </div>
+        <div>
+            <div class="panel-body">
+                <div class="row">
+
+                    <div class="form-group">
+
+                        <div class="row">
+                            <div class="col-lg-8">
+                                <input placeholder="Nhập số tiền phạt" type="text" class="form-control" id="amount" value=""/>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-3">
+                            <button class="btn btn-primary" name="submit" id="btn_SaveAmount">Lưu</button>
+                        </div></div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- form tich thu hàng hóa -->
+<div style="visibility: hidden;" id="jqxWidget">
+    <div id="popupWindowItems" hidden="true">
+        <div>
+            <b>Tạm giữ tang vật !</b>
+        </div>
+        <div>
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-lg-10">
+
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-lg-2">
+                                        <label>Tên tang vật(*)</label>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <?php echo GlobalLib::getComboSeclect('master_items_id', 'master_items'
+                                            , 'id', 'name', 0, false, '', '', '','Chọn tang vật');
+                                        ?>
+
+                                    </div>
+                                    <div class="col-lg-1"></div>
+                                    <div class="col-lg-2">
+                                        <label>Số biên lai tạm giữ tang vật(*)</label>
+                                    </div>
+
+                                    <div class="col-lg-3">
+                                        <input  placeholder="Nhập số biên lai ..." class="form-control" id="serial_handling" value="">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-lg-2">
+                                        <label>Số lượng tang vật bị tạm giữ(*)</label>
+                                    </div>
+                                    <div class="col-lg-2">
+                                        <input placeholder="Nhập số lượng tang vật ..." class="form-control" id="quantity_commodity" value="">
+                                    </div>
+                                    <div class="col-lg-1">
+                                        <?php echo GlobalLib::getComboSeclect('master_unit_id', 'master_unit'
+                                            , 'id', 'name', 0, false, '', '', '','Chọn đơn vị');
+                                        ?>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-lg-2">
+                                        <label>Hình thức xử lý(*)</label>
+                                    </div>
+
+                                    <div class="col-lg-3">
+                                        <?php echo  GlobalLib::getComboVersatilee('master_sanction_id', 'master_sanction', 'id', 'type,name',0,false,'','',"where code ='XLN_TT' and type='TamGiu'",'', 'Hình thức xử lý','-','');?>
+                                    </div>
+                                    <div class="col-lg-1"></div>
+                                    <div class="col-lg-2">
+
+                                    </div>
+
+                                    <div class="col-lg-3">
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <button   id="addItems" class="btn btn-primary">Thêm</button>
+                                <button  id="closeItems" class="btn btn-warning">Đóng</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div id="jqxgrid_items">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 <script>
     $('#bt').on('click',function(){
         alert($('#info_schedule_id').val());
@@ -254,8 +394,49 @@
                     echo "$('#sys_user_id').attr('disabled', true);";
               }
             ?>
-          
-            $("#dropDownButton").jqxDropDownButton({ width: 150, height: 25,theme: 'bootstrap'});
+
+          var editrow = -1;
+          var dataArray = new Array();
+
+          $("#tblIsViolation").hide();
+
+          var arraySave = function (field,value,row) {
+              //Kiểm tra có ton tai row trong dataArray
+              var valueRowId = $('#jqxgrid').jqxGrid('getrowid', row);
+              if(dataArray.hasOwnProperty(row))
+              {
+                  dataArray[row]["rowId"]=valueRowId;
+                  dataArray[row][field]=value;
+              }
+              else
+              {
+                  //Tạo key cho arrayData
+                  var data = {
+                      rowId: "",
+                      info_business_id: "",
+                      sanction_id: "",
+                      violation_id: "",
+                      amount: "",
+                      info_schedule_check: "",
+                      array_items_handling: "",
+                      array_print_handling: ""
+                  };
+                  dataArray[row] = data;
+                  dataArray[row]["rowId"]=valueRowId;
+                  dataArray[row][field]=value;
+              }
+          }
+
+          //Kiểm tra có ton tai row trong dataArray
+          var arrayLoad = function (field,row) {
+              if(dataArray.hasOwnProperty(row))
+              {
+                  return dataArray[row][field];
+              }
+              return '';
+          }
+
+          $("#dropDownButton").jqxDropDownButton({ width: 150, height: 25,theme: 'bootstrap'});
             $('#jqxTree').on('select', function (event) {
                 var args = event.args;
                 var item = $('#jqxTree').jqxTree('getItem', args.element);
@@ -338,8 +519,440 @@
             $('#doc_print_create_id').on('change', function (event) {
                 $('#doc_print_allocation_id').val($('#doc_print_create_id').val());
             });
-            
-        });
+
+
+
+          // Lan Duong
+
+          var sourceIsViolation = [
+              "Không có vi phạm",
+              "Vi phạm",
+              "Có dấu hiệu vi phạm"
+          ];
+          $("#is_violations").jqxComboBox({ source: sourceIsViolation,selectedIndex:0, width: '200px', height: '25px'});
+          $('#is_violations').bind('select', function (event) {
+              var args = event.args;
+              var item = $('#is_violations').jqxComboBox('getItem', args.index);
+              //alert('Selected: ' + args.index);
+              $("#hdd_is_violations").val(args.index);
+              if(args.index == 2) {
+                  $("#tblIsViolation").show();
+
+                  var rows = $('#jqxgrid').jqxGrid('getdisplayrows');
+                  if(rows.length == 0) {
+                      $("#jqxgrid").jqxGrid('addRow', null, {});
+                      // select the first row and clear the selection.
+                      $("#jqxgrid").jqxGrid('clearSelection');
+                  }
+              }
+              else
+                  $("#tblIsViolation").hide();
+          });
+
+
+          $("#jqxgrid").jqxGrid(
+              {
+                  width: '80%',
+                  editable: true,
+                  theme: 'bootstrap',
+                  showtoolbar: true,
+
+                  renderToolbar: function (toolBar) {
+                      var toTheme = function (className) {
+                          if (theme == "") return className;
+                          return className + " " + className + "-" + theme;
+                      }
+                      // appends buttons to the status bar.
+                      var container = $("<div style='overflow: hidden; position: relative; height: 20%; width: 80%;'></div>");
+                      var buttonTemplate = "<div style='float: left; padding: 3px; margin: 2px;'><div style='margin: 4px; width: 16px; height: 16px;'></div></div>";
+
+                      $("#jqxgrid").bind('cellbeginedit', function (event) {
+                          var column = $("#jqxgrid").jqxGrid('getcolumn', event.args.datafield);
+                          var row = event.args.rowindex;
+                          var value = $("#jqxgrid").jqxGrid('getcellvalue', row, 'violation');
+                          if((column.text == "Hành vi vi phạm")){
+                              editrow = row;
+                              violation_id = new Array();
+                              $('#popupWindowItemsviolation').jqxWindow({
+                                  showCollapseButton: true, isModal: true,theme: 'bootstrap',isModal: true,maxHeight: '50%', maxWidth: '80%',minHeight: '50%', minWidth: '80%',height: '50%', width: '80%',
+                                  initContent: function () {
+                                      $('#popupWindowItemsviolation').jqxWindow('focus');
+                                  }
+                              });
+                              $("#popupWindowItemsviolation").jqxWindow('open');
+                          }
+
+                      });
+                  },
+
+                  columns: [
+
+                      {
+                          text: 'Hành vi vi phạm', datafield: 'violation', width: '40%'
+                      },
+                      {
+                          text: 'Tịch thu tang vật',
+                          datafield: 'items',
+                          columntype: 'button',
+                          width: '40%',
+                          cellsrenderer: function () {
+                              return "Tang vật";
+                          },
+                          buttonclick: function (row) {
+                              editrow = row;
+                              dataItemsArray = arrayLoad('array_items_handling', editrow)
+                              if (!dataItemsArray || 0 === dataItemsArray.length) {
+                                  dataItemsArray = new Array();
+                              }
+                              //
+                              refreshDataItem(dataItemsArray);
+                              $('#popupWindowItems').jqxWindow({
+                                  showCollapseButton: true,
+                                  isModal: true,
+                                  theme: 'bootstrap',
+                                  maxHeight: '90%',
+                                  maxWidth: '70%',
+                                  minHeight: '90%',
+                                  minWidth: '70%',
+                                  height: '90%',
+                                  width: '70%',
+                                  initContent: function () {
+                                      $('#popupWindowItems').jqxWindow('focus');
+                                  }
+                              });
+                              $("#popupWindowItems").jqxWindow('open');
+                          }
+                      }
+
+                  ]
+              });
+
+          // Lấy dữ liệu HanhViViPham và thục hiện việc lưu trên mảng arraySave
+          var sourceItemViolation =
+          {
+              datatype: "json",
+              datafields:
+                  [
+                      { name: 'Idviolation',type:'int'},
+                      { name: 'codeviolation', type: 'string' },
+                      { name: 'nameviolation', type: 'string' },
+                      { name: 'decreeviolation', type: 'string' },
+                      { name: 'articleviolation', type: 'string' },
+                      { name: 'clauseviolation',type: 'string'}
+                  ],
+              url:"<?php echo $this->baseUrl().'/default/masterviolation/serviceviolation'?>"
+          };
+          var dataAdapter = new $.jqx.dataAdapter(sourceItemViolation, {
+              loadComplete: function () {
+              }
+          });
+          $("#jqxgrid_itemsviolation").jqxGrid(
+              {
+                  width: '100%',
+                  source: dataAdapter,
+                  theme: 'bootstrap',
+                  pageable: true,
+                  showfilterrow: true,
+                  filterable: true,
+                  autoheight: true,
+                  sortable: true,
+                  altrows: true,
+                  editable: true,
+                  enabletooltips: true,
+                  //  selectionmode: 'singlerow',
+                  ready: function()
+                  {
+                      // called when the Grid is loaded. Call methods or set properties here.
+                  },
+                  selectionmode: 'checkbox',
+                  // altrows: true,
+                  columnsResize: true,
+                  rendergridrows: function (params) {
+                      return params.data;
+                  },
+                  ready: function () {
+                      $("#jqxgrid_itemsviolation").jqxGrid('hideColumn', 'Idviolation');
+                  },
+                  rendertoolbar: function (toolbar) {
+                      var me = this; var p =0;
+                      var container = $("<div style='margin: 0px;'></div>");
+                      toolbar.append(container);
+                      container.append('<center><div id="t"></div></center>');
+                      $("#jqxgrid_itemsviolation").on('rowselect', function (event) {
+
+                          var selectedrowindex = $("#jqxgrid_itemsviolation").jqxGrid('getselectedrowindex');
+                          var row = $('#jqxgrid_itemsviolation').jqxGrid('getRowData', selectedrowindex);
+                          var valueViolation = $("#jqxgrid_itemsviolation").jqxGrid('getcellvalue', row, 'Idviolation');
+                          violation_id[p++]=valueViolation;
+                      });
+                      // display unselected row index.
+                      $("#jqxgrid_itemsviolation").on('rowunselect', function (event) {
+                          var vitri=-1;
+                          var valueViolation = $("#jqxgrid_itemsviolation").jqxGrid('getcellvalue', event.args.rowindex, 'Idviolation');
+                          for(var k =0;k<violation_id.length;k++){
+                              if(violation_id[k]==valueViolation){
+                                  vitri = k;
+                                  break;
+                              }
+                          }
+                          //xoa phan tu trong mang
+                          violation_id.splice(vitri, 1);p--;
+                          var arraytam = new Array();
+                          for(var l =0;l<violation_id.length;l++){
+                              if( violation_id[l]!= null){
+                                  arraytam = violation_id[l];
+                              }
+                          }
+                          violation_id = arraytam;
+
+                      });
+                  },
+                  columns: [
+                      { text: 'Tên hành vi vi pham',editable: false, dataField: 'nameviolation', width: '30%' },
+                      { text: 'id',editable: false, dataField: 'Idviolation', width: '20%' },
+                      { text: 'Nghị định', editable: false, dataField: 'decreeviolation', width: '25%' },
+                      { text: 'Điều', editable: false, dataField: 'articleviolation', width: '20%' },
+                      { text: 'Khoản', editable: false, dataField: 'clauseviolation', width: '20%' }
+                  ]
+          });
+
+          var violation_id = new Array();
+          $("#saveViolation").click(function () {
+              if(violation_id.length == 0)
+              {
+                  bootbox.alert("Vui lòng chọn hành vi vi phạm! ");
+                  return;
+              }
+              if (editrow >= 0) {
+                  var tamarray = new Array();var tt=0;
+                  for(var ii = 0;ii<violation_id.length;ii++){
+                      if(violation_id[ii]!= null){
+                          tamarray[tt++] = violation_id[ii];
+                      }
+                  }
+                  violation_id = tamarray;
+                  arraySave("violation_id",violation_id.toString(),editrow);
+                  var stringViolation;
+                  $.ajax({
+                      type:'post',
+                      url:'<?php echo $this->baseUrl()?>/default/masterviolation/nameviolation',
+                      data:{'data_id':violation_id},
+                      async:false,
+                      dataType:'json',
+                      success:function(data){
+                          stringViolation = data;
+                      }
+                  });
+                  $("#jqxgrid").jqxGrid('setcellvalue', editrow, 'violation', stringViolation);
+              }
+              $("#jqxgrid_itemsviolation").jqxGrid('clearselection');
+              $("#popupWindowItemsviolation").jqxWindow('close');
+          });
+
+
+          // Hang hoa bi tich thu
+          var dataItemsArray = new Array();
+          var arrayId = 0;
+          var generatedata = function () {
+              var valueItemId = $("#master_items_id option:selected").val();
+              var valueSerialHandling = $("#serial_handling").val();
+              var valueQuantity = $("#quantity_commodity").val();
+              var valueUnit = $("#master_unit_id option:selected").val();
+              var valueSanction = $("#master_sanction_id option:selected").val();
+              if(!valueItemId || valueItemId.length === 0 || valueItemId == 0 )
+              {
+                  bootbox.alert("Vui lòng chọn tang vật bị tịch thu! ");
+                  return false;
+              }
+              if(!valueSerialHandling || valueSerialHandling.length === 0 || valueSerialHandling == 0 )
+              {
+                  bootbox.alert("Vui lòng nhập số biên lai tịch thu tang vật! ");
+                  return false;
+              }
+              if(!valueQuantity || valueQuantity.length === 0 || valueQuantity == 0 )
+              {
+                  bootbox.alert("Vui lòng nhập số lượng tang vật bị tịch thu! ");
+                  return false;
+              }
+              if(!valueSanction || valueSanction.length === 0 || valueSanction == 0 )
+              {
+                  bootbox.alert("Vui lòng chọn hình thức xử lý! ");
+                  return false;
+              }
+              var text= $('#jqxDateTimeInput').jqxDateTimeInput('getText');
+              dataItemsArray.push({
+                  arrayId: arrayId++,
+                  master_items_id: valueItemId,
+                  master_items_name: $("#master_items_id option:selected").text(),
+                  serial_handling: valueSerialHandling ,
+                  quantity_commodity: valueQuantity,
+                  master_unit_id: valueUnit,
+                  master_unit_name:$("#master_unit_id option:selected").text(),
+                  master_sanction_id: valueSanction,
+                  master_sanction_name: $("#master_sanction_id option:selected").text(),
+                  date_handling: text,
+                  amountItem: $("#amountItem").val(),
+                  file_upload:  ""
+              });
+              return true;
+          }
+          $("#closeItems").click(function () {
+              $("#popupWindowItems").jqxWindow('close');
+          });
+          $('#popupWindowItems').on('close', function (event) {
+              if (editrow >= 0 && dataItemsArray.length > 0) {
+                  arraySave("array_items_handling",dataItemsArray,editrow);
+              }
+              dataItemsArray = new Array();
+          });
+          $("#addItems").click(function () {
+              if(generatedata())
+              {
+                  refreshDataItem(dataItemsArray);
+              }
+          });
+          var refreshDataItem = function (data) {
+              var source =
+              {
+                  datatype: "array",
+                  localdata: data,
+                  datafields:
+                      [
+                          { name: 'arrayId', type: 'int'},
+                          { name: 'master_items_id', type: 'string'},
+                          { name: 'master_items_name', type: 'string' },
+                          { name: 'serial_handling', type: 'string' },
+                          { name: 'quantity_commodity', type: 'string' },
+                          { name: 'master_unit_id', type: 'string' },
+                          { name: 'master_unit_name', type: 'string' },
+                          { name: 'master_sanction_id', type: 'string' },
+                          { name: 'master_sanction_name', type: 'string' },
+                          { name: 'date_handling', type: 'string' },
+                          { name: 'amountItem', type: 'string' },
+                          { name: 'file_upload', type: 'string' }
+                      ]
+              };
+              var dataAdapterItems = new $.jqx.dataAdapter(source);
+              $('#jqxgrid_items').jqxGrid('clear');
+              $("#jqxgrid_items").jqxGrid({ source: dataAdapterItems });
+          };
+          $("#jqxgrid_items").jqxGrid(
+              {
+                  width: '100%',
+                  editable: false,
+                  theme: 'bootstrap',
+                  showtoolbar: true,
+                  ready: function () {
+                      $("#jqxgrid_items").jqxGrid('hideColumn', 'arrayId');
+                  },
+                  renderToolbar: function(toolBar)
+                  {
+                      var toTheme = function (className) {
+                          if (theme == "") return className;
+                          return className + " " + className + "-" + theme;
+                      }
+                      // appends buttons to the status bar.
+                      var container = $("<div style='overflow: hidden; position: relative; height: 100%; width: 100%;'></div>");
+                      var buttonTemplate = "<div style='float: left; padding: 3px; margin: 2px;'><div style='margin: 4px; width: 16px; height: 16px;'></div></div>";
+                      var deleteButton = $(buttonTemplate);
+                      container.append(deleteButton);
+                      toolBar.append(container);
+                      deleteButton.jqxButton({ cursor: "pointer", disabled: false, enableDefault: false,  height: 25, width: 25 });
+                      deleteButton.find('div:first').addClass(toTheme('jqx-icon-delete'));
+                      deleteButton.jqxTooltip({ position: 'bottom', content: "Delete"});
+                      var rowIndex = null;
+                      $("#jqxgrid_items").on('rowselect', function (event)
+                      {
+                          rowIndex = event.args.rowindex;
+
+                      });
+                      deleteButton.click(function () {
+                          var valueArrayId = $('#jqxgrid_items').jqxGrid('getcellvalue', rowIndex, "arrayId");
+                          for(var i = dataItemsArray.length - 1; i >= 0; i--) {
+                              if(dataItemsArray[i]['arrayId'] === valueArrayId) {
+                                  //delete dataPrintArray[i];
+                                  dataItemsArray.splice(i, 1);
+                              }
+                          }
+                          var valueRowId = $('#jqxgrid_items').jqxGrid('getrowid', rowIndex);
+                          $("#jqxgrid_items").jqxGrid('deleterow', valueRowId);
+
+
+                      });
+                  },
+                  columns: [
+                      {
+                          text: 'arrayId', datafield: 'arrayId',displayfield: 'arrayId', width: '0%'
+
+                      },
+                      {
+                          text: 'Tên tang vật', datafield: 'master_items_id',displayfield: 'master_items_name', width: '25%'
+
+                      },
+                      {
+                          text: 'Số biên lai',editable: false, datafield: 'serial_handling', width: '15%'
+
+                      },
+                      {
+                          text: 'Số lượng',editable: true, datafield: 'quantity_commodity', width: '10%'
+
+                      },
+                      {
+                          text: 'Đơn vị',editable: true, datafield: 'master_unit_id',displayfield: 'master_unit_name', width: '10%'
+                      },
+                      {
+                          text: 'Hình thức xử lý',editable: true, datafield: 'master_sanction_id',displayfield: 'master_sanction_name', width: '15%'
+
+                      },
+                      {
+                          text: 'Ngày xử lý',editable: true, datafield: 'date_handling', width: '10%'
+                      },
+
+                  ]
+              });
+
+
+          $('#import').on('click',function(data){
+
+              /*if(dataArray.length == 0)
+              {
+                  return;
+              }*/
+              console.log('Mang');
+              console.log(dataArray);
+              //var test = $("#cobo_id").val();
+              //console.log(test);
+              $.ajax({
+                  type:'post',
+                  url:'<?php echo $this->baseUrl()?>/default/infoschedulecheck/servicesavehandling',
+                  data: {
+                      'data' : dataArray,
+                      'sys_department_id': <?php echo $identity->sys_department_id ?>,
+                      'sys_user_id': <?php echo $identity->id ?>,
+                      'info_schedule_id': $("#info_schedule_id").val(),
+                      'info_business_id': $("#info_business_id").val(),
+                      'master_print_id': $("#master_print_id").val(),
+                      'doc_print_allocation_id': $("#cobo_id").val(),
+                      'is_violations': $("#hdd_is_violations").val(),
+                      'comment': $("#comment").val(),
+                      'date_check': $('#jqxDateTimeInput').val()
+                  },
+                  dataType:'json',
+                  async:true,
+                  success:function(data){
+                      //alert(data[0].message);
+                      if(data[0].code==1){
+                          bootbox.alert(data[0].message);
+                          return false;
+                      } else {
+                          window.location=data[0].message;
+                      }
+                  }
+              });
+
+          });
+
+      });
     
 </script>
 <script>
@@ -404,10 +1017,7 @@
     });
 </script>
 <script type="text/javascript">
-    document.forms['AddSchedulecheck'].name_schedule.focus();
-    function set_focus() {
-        document.forms['AddSchedulecheck'].name_schedule.focus();
-    }
+
     function checkinput() {
         var frm = window.document.AddSchedulecheck;
        if (($('#sys_department_id').val() == "")) {

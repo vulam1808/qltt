@@ -667,8 +667,10 @@
                     $t = 1;
                 }  else if($items->getType_Business()=="HoKinhDoanh") {
                     $t = 2;
-                }  else {
+                }  else if($items->getType_Business()=="DoanhNghiepNgoaiDiaBan"){
                     $t = 3;
+                } else {
+                    $t = 4;
                 }
                 $menber[]=array(
                     'g'=> $t,

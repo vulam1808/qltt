@@ -119,66 +119,94 @@ and open the template in the editor.
                                             <div class="form-group">
                                                 <div class="row">
                                                     <div class="col-lg-2">
-                                                        <label>Trụ sở chính(*)</label>
+                                                        <?php if($this->type_business == 'PhuongTien'){ ?>
+                                                            <label>Chủ phương tiện(*)</label>
+                                                        <?php  } else { ?>
+                                                            <label>Trụ sở chính(*)</label>
+                                                        <?php  } ?>
                                                     </div>
-                                                    <div class="col-lg-3">                                                                                
-                                                        <input type="text" class="form-control" name="address_office" id="address_office" value="<?php echo $this->item->getAddress_Office(); ?>"> 
+                                                    <div class="col-lg-3">
+                                                        <input type="text" class="form-control" name="address_office" id="address_office" value="<?php echo $this->item->getAddress_Office(); ?>">
                                                     </div>
-						                          <div class="col-lg-2">
-                                                        <label>Trụ sở chính 2(*)</label>
+                                                    <div class="col-lg-2">
+                                                        <?php if($this->type_business == 'PhuongTien'){ ?>
+                                                            <label>Chủ phương tiện 2(*)</label>
+                                                        <?php  } else { ?>
+                                                            <label>Trụ sở chính 2(*)</label>
+                                                        <?php  } ?>
                                                     </div>
-                                                    <div class="col-lg-3">                                                                                
-                                                        <input type="text" class="form-control" name="address_office2" id="address_office2" value="<?php echo $this->item->getAddress_Office2(); ?>"> 
+                                                    <div class="col-lg-3">
+                                                        <input type="text" class="form-control" name="address_office2" id="address_office2" value="<?php echo $this->item->getAddress_Office2(); ?>">
                                                     </div>
-                                                    
+
                                                 </div>
-                                            </div>   
+                                            </div>
                                             <div class="form-group">
                                                 <div class="row">
-                                                    <div class="col-lg-2">                                                                                
-                                                         <label>Số điện thoại(*)</label>
-                                                    </div> 
-                                                    <div class="col-lg-3">                                                                                
+                                                    <div class="col-lg-2">
+                                                        <label>Số điện thoại(*)</label>
+                                                    </div>
+                                                    <div class="col-lg-3">
                                                         <input type="text" class="form-control" name="phone_business" id="phone_business" value="<?php echo $this->item->getPhone(); ?>">
                                                     </div>
-                                                    <div class="col-lg-2">                                                                                
-                                                         <label>Địa điểm SXKD 1</label>
-                                                    </div> 
-                                                    <div class="col-lg-3">                                                                                
+                                                    <div class="col-lg-2">
+                                                        <?php if($this->type_business == 'PhuongTien'){ ?>
+                                                            <label>Số nhà 1(*)</label>
+                                                        <?php  } else { ?>
+                                                            <label>Địa điểm SXKD 1</label>
+                                                        <?php  } ?>
+                                                    </div>
+                                                    <div class="col-lg-3">
                                                         <input type="text" class="form-control" name="address_produce" id="address_produce" value="<?php echo $this->item->getAddress_Produce(); ?>">
-                                                    </div>  
+                                                    </div>
                                                 </div>
-                                            </div>     
-                                             <div class="form-group">
+                                            </div>
+                                            <div class="form-group">
                                                 <div class="row">
-                                                    <div class="col-lg-2">                                                                                
-                                                         <label>Địa điểm KD khác</label>
-                                                    </div> 
-                                                    <div class="col-lg-3">                                                                                
+                                                    <div class="col-lg-2">
+                                                        <?php if($this->type_business == 'PhuongTien'){ ?>
+                                                            <label>Số nhà khác(*)</label>
+                                                        <?php  } else { ?>
+                                                            <label>Địa điểm SXKD khác</label>
+                                                        <?php  } ?>
+                                                    </div>
+                                                    <div class="col-lg-3">
                                                         <input type="text" class="form-control" name="address_branch" id="address_branch" value="<?php echo $this->item->getAddress_Branch(); ?>">
-                                                    </div> 
-                                                    <div class="col-lg-2">                                                                                
-                                                         <label>Địa điểm SXKD 2</label>
-                                                    </div> 
-                                                    <div class="col-lg-3">                                                                                
+                                                    </div>
+                                                    <div class="col-lg-2">
+                                                        <?php if($this->type_business == 'PhuongTien'){ ?>
+                                                            <label>Số nhà khác 2</label>
+                                                        <?php  } else { ?>
+                                                            <label>Địa điểm SXKD 2</label>
+                                                        <?php  } ?>
+                                                    </div>
+                                                    <div class="col-lg-3">
                                                         <input type="text" class="form-control" name="address_produce1" id="address_produce1" value="<?php echo $this->item->getAddress_Produce1(); ?>">
-                                                    </div> 
+                                                    </div>
                                                 </div>
-                                            </div>     
-                                             <div class="form-group">
+                                            </div>
+                                            <div class="form-group">
                                                 <div class="row">
-                                                    <div class="col-lg-2">                                                                                
-                                                         <label>Địa điểm SXKD 4</label>
-                                                    </div> 
-                                                    <div class="col-lg-3">                                                                                
+                                                    <div class="col-lg-2">
+                                                        <?php if($this->type_business == 'PhuongTien'){ ?>
+                                                            <label>Số nhà khác 4</label>
+                                                        <?php  } else { ?>
+                                                            <label>Địa điểm SXKD 4</label>
+                                                        <?php  } ?>
+                                                    </div>
+                                                    <div class="col-lg-3">
                                                         <input type="text" class="form-control" name="address_produce11" id="address_produce11" value="<?php echo $this->item->getAddress_Produce11(); ?>">
-                                                    </div> 
-                                                    <div class="col-lg-2">                                                                                
-                                                         <label>Địa điểm SXKD 3</label>
-                                                    </div> 
-                                                    <div class="col-lg-3">                                                                                
+                                                    </div>
+                                                    <div class="col-lg-2">
+                                                        <?php if($this->type_business == 'PhuongTien'){ ?>
+                                                            <label>Số nhà khác 3</label>
+                                                        <?php  } else { ?>
+                                                            <label>Địa điểm SXKD 3</label>
+                                                        <?php  } ?>
+                                                    </div>
+                                                    <div class="col-lg-3">
                                                         <input type="text" class="form-control" name="address_produce111" id="address_produce111" value="<?php echo $this->item->getAddress_Produce111(); ?>">
-                                                    </div> 
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -195,14 +223,18 @@ and open the template in the editor.
                                             <div class="form-group">
                                                 <div class="row">
                                                     <div class="col-lg-2">
-                                                        <label>Ngành nghề KD(*)</label>
+                                                        <?php if($this->type_business == 'PhuongTien'){ ?>
+                                                            <label>Nghề nghiệp</label>
+                                                        <?php  } else { ?>
+                                                            <label>Ngành nghề KD(*)</label>
+                                                        <?php  } ?>
                                                     </div>
-                                                    <div class="col-lg-3">                                                                                
-                                                        <input type="text" class="form-control" name="work_business" id="work_business" value="<?php echo $this->item->getWork_Business(); ?>"> 
+                                                    <div class="col-lg-3">
+                                                        <input type="text" class="form-control" name="work_business" id="work_business" value="<?php echo $this->item->getWork_Business(); ?>">
                                                     </div>
-                                                  
 
-                                                 </div>
+
+                                                </div>
                                             </div> 
                                              <div class="form-group">
                                                 <div class="row">

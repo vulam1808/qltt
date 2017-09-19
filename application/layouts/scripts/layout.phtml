@@ -226,7 +226,7 @@
                                 <?php // }?>
                             </ul>
                         </li>
-<?php // if($identity->admin_group_id==1){ ?>
+                    <?php // if($identity->admin_group_id==1){ ?>
                         <li>
                             <a href="#"><i class="fa fa-tasks fa-fw"></i> Quản Lý Kinh Doanh<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level collapse" aria-expanded="false">
@@ -236,8 +236,11 @@
                                 <li>
                                     <a href="<?php echo $this->baseUrl() ?>/default/infobusiness/list/type_business/HoKinhDoanh">Hộ kinh doanh</a>
                                 </li>
-                                 <li>
+                                <li>
                                     <a href="<?php echo $this->baseUrl() ?>/default/infobusiness/list/type_business/DoanhNghiepNgoaiDiaBan">Doanh nghiệp ngoài địa bàn</a>
+                                </li>
+                                <li>
+                                    <a href="<?php echo $this->baseUrl() ?>/default/infobusiness/list/type_business/PhuongTien">Phương tiện</a>
                                 </li>
                                                          
                             </ul>
@@ -281,6 +284,9 @@
                                 </li>
                                  <li>
                                     <a href="<?php echo $this->baseUrl() ?>/default/docitemshandling/listtt">Tịch thu tang vật</a>
+                                </li>
+                                <li>
+                                    <a href="<?php echo $this->baseUrl() ?>/default/docitemshandling/listitemreturn">Trả lại tang vật</a>
                                 </li>
                                  <li>
                                     <a href="<?php echo $this->baseUrl() ?>/default/printrecordsmanagement/index">Quản lý xử phạt</a>
@@ -394,23 +400,23 @@
         }
     </style>
      <script type="text/javascript">
-        
+
             $(document).ready(function () {
                 $("#jqxWidget1").css('visibility', 'visible');
 //                createElements();
 //                $('#window').jqxWindow('open');
-//                $('#window').jqxWindow('focus');  
+//                $('#window').jqxWindow('focus');
             });
-            function checkinputpass1() {        
+            function checkinputpass1() {
                 var frm1 = window.document.changepass;
                 if ($("#oldpassword1").val() == "") {
                     bootbox.alert("Vui lòng nhập mật khẩu!");
                     return false;
-                }        
+                }
                 if ($("#newpassword1").val() == "") {
                     bootbox.alert("Vui lòng nhập mật khẩu xác nhận!");
                     return false;
-                }        
+                }
                 if(frm1.renewpassword.value != frm1.newpassword.value )
                 {
                     bootbox.alert("Mật khẩu xác nhận không chính xác!");
@@ -437,31 +443,31 @@
                  var params = {
                                 id: <?php // echo $identity->id ?>,
                                 password: $("#newpassword1").val()
-                 }; 
-                 $.post("<?php // echo $this->baseUrl().'/default/sysuser/changepassword'?>", params, function(datas) {                            
+                 };
+                 $.post("<?php // echo $this->baseUrl().'/default/sysuser/changepassword'?>", params, function(datas) {
                         var items = eval(datas);
                         var jItem = items[0];
-                        if (jItem.html != '') 
+                        if (jItem.html != '')
                         {
 
                             window.location = jItem.html;
-                        } 
-                        else 
+                        }
+                        else
                         {
                             if (errorMessage != '' && errorMessage != null) {
                                 alert(errorMessage);
                             }
                         }
-                    }); 
+                    });
                 return true;
             }
             function addEventListeners() {
                 $('#showWindowButton1').mousedown(function () {
                     $('#window1').jqxWindow('open');
                     $('#window1').jqxWindow('focus');
-                });            
+                });
             }
-            function createElements() {           
+            function createElements() {
                 $('#window1').jqxWindow({
                     resizable: true,
                     isModal: true,
@@ -469,14 +475,14 @@
                     height: 500,
                     minWidth: 700,
                     minHeight: 500
-                }); 
+                });
             }
             $('#showWindowButton1').on('click',function(){
                 createElements();
                 $('#window1').jqxWindow('open');
-                $('#window1').jqxWindow('focus');  
+                $('#window1').jqxWindow('focus');
             });
-    </script> 
+    </script>
         <div class="row">
         <div class="col-lg-12">
         <div id="jqxgrid"></div>
@@ -523,18 +529,18 @@
                                                 </div>
 
                                             </div>
-                                        </div> 
+                                        </div>
                                         <div class="col-lg-12">
                                             <div class="form-group">
                                                 <div class="row">
                                                     <div class="col-lg-4">
                                                             <button type="submit" class="btn btn-primary">Thêm mới</button>
                                                     </div>
-                                                </div>    
+                                                </div>
                                             </div>
-                                        </div> 
+                                        </div>
                                      </form>
-                                    </div> 
+                                    </div>
                                 </div>
                             </div>
                         </div>

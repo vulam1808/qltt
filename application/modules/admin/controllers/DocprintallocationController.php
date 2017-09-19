@@ -307,7 +307,7 @@ class Admin_DocPrintAllocationController extends Zend_Controller_Action{
                        $serial_allocation = $serial_recovery;
                    }
                    
-                   $this->modelMapperDocPrintCreate->updatestatusDoc_Print_Create((int)$arrayprintcreate[0],"DOING");
+
                    //
                    $this->model->setMaster_Print_Id((int)$arraydocprintallocation[$i]['master_print_id']);
                    $this->model->setSys_Department_Id((int)$arraydocprintallocation[$i]['sys_department_id']);
@@ -322,6 +322,8 @@ class Admin_DocPrintAllocationController extends Zend_Controller_Action{
                    $this->model->setModified_By(GlobalLib::getLoginId());
                    $this->model->setIs_Delete(0);$this->model->setOrder(1);$this->model->setSerial_Recovery1($serial_allocation);
                    $this->modelMapper->save($this->model);
+
+                   $this->modelMapperDocPrintCreate->updatestatusDoc_Print_Create((int)$arrayprintcreate[0],"DOING");
                }  else {
                   
                    for($j=0;$j<count($arrayprintcreate);$j++){
@@ -329,7 +331,7 @@ class Admin_DocPrintAllocationController extends Zend_Controller_Action{
                    
                    $serial_recovery=$this->modelMapperDocPrintCreate->findidbyserialrecovery("id",(int)$arrayprintcreate[$j]);
                    $serial=$this->modelMapperDocPrintCreate->findidbyserialserial("id",(int)$arrayprintcreate[$j]);
-                   
+
                     $serial_allocation;
                    if($serial_recovery == null){
                        $serial_allocation = $serial;
@@ -338,7 +340,7 @@ class Admin_DocPrintAllocationController extends Zend_Controller_Action{
                    }
                    
                    //cap nhat trang thai cho bang doc_print_create
-                   $this->modelMapperDocPrintCreate->updatestatusDoc_Print_Create((int)$arrayprintcreate[$j],"DOING");
+
                    $this->model->setMaster_Print_Id((int)$arraydocprintallocation[$i]['master_print_id']);
                    $this->model->setSys_Department_Id((int)$arraydocprintallocation[$i]['sys_department_id']);
                    $this->model->setUser_Id((int)$arraydocprintallocation[$i]['sys_user_id']);
@@ -352,6 +354,8 @@ class Admin_DocPrintAllocationController extends Zend_Controller_Action{
                    $this->model->setStatus("DOING");
                    $this->model->setIs_Delete(0);$this->model->setOrder(1);$this->model->setSerial_Recovery1($serial_allocation);
                    $this->modelMapper->save($this->model);
+
+                   $this->modelMapperDocPrintCreate->updatestatusDoc_Print_Create((int)$arrayprintcreate[$j],"DOING");
                 }
             }
            }
