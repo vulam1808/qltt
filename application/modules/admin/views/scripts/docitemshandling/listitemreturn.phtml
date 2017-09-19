@@ -86,7 +86,7 @@
             var _selStatus = "TL_TG";
            
             function loadgrid(_grid,_status,_month,_year,_exel){
-            var url = "<?php echo $this->baseUrl()?>/default/docitemshandling/servicetangvattralai/status/"+_status+"/month/"+_month+"/year/"+_year;
+            var url = "<?php echo $this->baseUrl()?>/admin/docitemshandling/servicetangvattralai/status/"+_status+"/month/"+_month+"/year/"+_year;
 
             var source =
             {
@@ -110,7 +110,7 @@
             $("#excelExport").jqxButton();
             $("#excelExport").click(function () {
                 //$("#"+_grid).jqxGrid('exportdata', 'xls', _exel);
-                //return window.location = "<?php echo $this->baseUrl()?>/default/report/exporttangvattamgiu/status/"+_selStatus+"/month/"+_month+"/year/"+_year;
+                //return window.location = "<?php echo $this->baseUrl()?>/admin/report/exporttangvattamgiu/status/"+_selStatus+"/month/"+_month+"/year/"+_year;
             });
             $("#"+_grid).jqxGrid(
             {
@@ -159,7 +159,7 @@
     <script type="text/javascript">
         function jsdelete(id)
         {
-            $.get("<?php echo $this->baseUrl() ?>/default/infoschedule/confirmdelete/id/"+id,null,function(data){
+            $.get("<?php echo $this->baseUrl() ?>/admin/infoschedule/confirmdelete/id/"+id,null,function(data){
                 if(data>0)
                 {
                     bootbox.confirm("Hiện có quận huyện thuộc tỉnh thành này và quản trị viên quản lý tỉnh thành này. "
