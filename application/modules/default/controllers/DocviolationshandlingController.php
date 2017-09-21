@@ -837,16 +837,20 @@ class DocViolationsHandlingController extends Zend_Controller_Action{
  //mang lay ra danh sach serial_allocation
     public function arrayserialcheckkAction(){
         $this->_helper->layout->disableLayout();
-        if($this->getRequest()->isPost()){ 
-//            $idmasterprint = $this->_getParam("idmaster","4");
-//            $idsysdepartment = $this->_getParam("idsys","17");
+        if($this->getRequest()->isPost()){
             $arraydata = $_POST['data'];
             $idmasterprint =  $arraydata[0]['master_print_id'];
             $idsysdepartment = $arraydata[0]['sys_department_id'];
             $stringserialtam = $arraydata[0]['arrayserialtam'];
             $arrayserialtam = explode(",", $stringserialtam);
-            $k=0;$arraydocprintallocation = array();$arrayserialcheck = array();$arrayserialhanding = array();$tam = "";
-            $i=0;$arrayserial = array();$arrayserialdc = array();$arrayserialxp = array();
+            $k=0;
+            $arraydocprintallocation = array();
+            $arrayserialcheck = array();
+            $arrayserialhanding = array();
+            $tam = "";
+            $i=0;$arrayserial = array();
+            $arrayserialdc = array();
+            $arrayserialxp = array();
             foreach ($this->modelMapperdocprintallocation->arrayserial($idmasterprint,$idsysdepartment) as $items ) {            //
                     $serialtam = $items->getserial_recovery1();
                     $arraytam = explode("-", $serialtam);

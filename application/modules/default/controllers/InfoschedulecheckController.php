@@ -149,7 +149,12 @@ class InfoScheduleCheckController extends Zend_Controller_Action{
         try {
             if($this->getRequest()->isPost()) {
 
-                $data=  $_POST['data'];
+                $violation_id = "";
+
+                if(!empty($_POST['data'])) {
+                    $data = $_POST['data'];
+                    $violation_id = $data[0]['violation_id'];
+                }
 
                 if(isset($_POST["info_schedule_id"])){
                     $this->model->setInfo_Schedule_Id($_POST["info_schedule_id"]);
@@ -158,7 +163,6 @@ class InfoScheduleCheckController extends Zend_Controller_Action{
                     $this->model->setInfo_Business_Id($_POST["info_business_id"]);
                 }
 
-                $violation_id = $data[0]['violation_id'];
                 if(!empty($violation_id)){
                     $this->model->setMaster_Violation_Id($violation_id);
 
@@ -213,50 +217,47 @@ class InfoScheduleCheckController extends Zend_Controller_Action{
 
 
                 // Lưu dữ liệu vào bảng doc_item_handling
-                $array_items_handling = $data[0]['array_items_handling'];
-                if(!empty($array_items_handling))
-                {
-                    //$test = $array_items_handling[0]['serial_handling'];
-                    $test = $this->model->getIs_Violations();
-                    for($e = 0;$e < count($array_items_handling);$e++ )
-                    {
-                        $master_items_id = $array_items_handling[$e]['master_items_id'];
-                        if(empty($master_items_id))
-                        {
-                            continue;
-                        }
-                        $serial_handling = $array_items_handling[$e]['serial_handling'];
-                        $quantity_commodity = $array_items_handling[$e]['quantity_commodity'];
-                        $master_unit_id = $array_items_handling[$e]['master_unit_id'];
-                        if(empty($master_unit_id))
-                        {
-                            $master_unit_id = null;
-                        }
+                if(!empty($data)) {
+                    $array_items_handling = $data[0]['array_items_handling'];
+                    if (!empty($array_items_handling)) {
+                        //$test = $array_items_handling[0]['serial_handling'];
+                        $test = $this->model->getIs_Violations();
+                        for ($e = 0; $e < count($array_items_handling); $e++) {
+                            $master_items_id = $array_items_handling[$e]['master_items_id'];
+                            if (empty($master_items_id)) {
+                                continue;
+                            }
+                            $serial_handling = $array_items_handling[$e]['serial_handling'];
+                            $quantity_commodity = $array_items_handling[$e]['quantity_commodity'];
+                            $master_unit_id = $array_items_handling[$e]['master_unit_id'];
+                            if (empty($master_unit_id)) {
+                                $master_unit_id = null;
+                            }
 
-                        $master_sanction_id = $array_items_handling[$e]['master_sanction_id'];
-                        if(empty($master_sanction_id))
-                        {
-                            $master_sanction_id = null;
+                            $master_sanction_id = $array_items_handling[$e]['master_sanction_id'];
+                            if (empty($master_sanction_id)) {
+                                $master_sanction_id = null;
+                            }
+
+                            $date_handling = $array_items_handling[$e]['date_handling'];
+                            $date = GlobalLib::toMysqlDateString($date_handling);
+
+                            $this->modelDocItemsHandling = new Model_Doc_Items_Handling();
+                            $this->modelDocItemsHandling->setMaster_Items_Id($master_items_id);
+                            $this->modelDocItemsHandling->setMaster_Sanction_Id($master_sanction_id);
+                            $this->modelDocItemsHandling->setSerial_Handling($serial_handling);
+                            $this->modelDocItemsHandling->setQuantity_Commodity($quantity_commodity);
+                            $this->modelDocItemsHandling->setMaster_Unit_Id($master_unit_id);
+                            $this->modelDocItemsHandling->setDate_Handling($date);
+                            $this->modelDocItemsHandling->setAmount(0);
+                            $this->modelDocItemsHandling->setStatus(GlobalLib::getName('master_sanction', $master_sanction_id, 'code'));
+                            $this->modelDocItemsHandling->setCreated_Date(date("Y/m/d H:i:s"));
+                            $this->modelDocItemsHandling->setCreated_By($this->model->getStaff_Check());
+                            $this->modelDocItemsHandling->setModified_Date(date("Y/m/d H:i:s"));
+                            $this->modelDocItemsHandling->setModified_By($this->model->getStaff_Check());
+                            $this->modelDocItemsHandling->setInfo_Schedule_Check_Id($this->model->getId());
+                            $this->modelMapperDocItemsHandling->save($this->modelDocItemsHandling);
                         }
-
-                        $date_handling = $array_items_handling[$e]['date_handling'];
-                        $date = GlobalLib::toMysqlDateString($date_handling);
-
-                        $this->modelDocItemsHandling = new Model_Doc_Items_Handling();
-                        $this->modelDocItemsHandling->setMaster_Items_Id($master_items_id);
-                        $this->modelDocItemsHandling->setMaster_Sanction_Id($master_sanction_id);
-                        $this->modelDocItemsHandling->setSerial_Handling($serial_handling);
-                        $this->modelDocItemsHandling->setQuantity_Commodity($quantity_commodity);
-                        $this->modelDocItemsHandling->setMaster_Unit_Id($master_unit_id);
-                        $this->modelDocItemsHandling->setDate_Handling($date);
-                        $this->modelDocItemsHandling->setAmount(0);
-                        $this->modelDocItemsHandling->setStatus(GlobalLib::getName('master_sanction', $master_sanction_id, 'code'));
-                        $this->modelDocItemsHandling->setCreated_Date(date("Y/m/d H:i:s"));
-                        $this->modelDocItemsHandling->setCreated_By($this->model->getStaff_Check());
-                        $this->modelDocItemsHandling->setModified_Date(date("Y/m/d H:i:s"));
-                        $this->modelDocItemsHandling->setModified_By($this->model->getStaff_Check());
-                        $this->modelDocItemsHandling->setInfo_Schedule_Check_Id($this->model->getId());
-                        $this->modelMapperDocItemsHandling->save($this->modelDocItemsHandling);
                     }
                 }
 
@@ -375,9 +376,12 @@ class InfoScheduleCheckController extends Zend_Controller_Action{
             if ($this->getRequest()->isPost()) {
                 $data = $_POST['data'];
                 $id = $data[0]['info_schedule_check_id'];
-                $master_print_violation_id = $data[0]['master_print_violation_id'];
-                $serial_violation = $data[0]['serial_violation'];
                 $is_violations = $data[0]['is_violations'];
+                $amount = $data[0]['amount'];
+                $dateviolation = $data[0]['date_handling'];
+                $date_violation = GlobalLib::toMysqlDateString($dateviolation);
+                $array_print_handling = $data[0]['array_print_handling'];
+
                 $this->modelMapper->updateViolation($id, $is_violations);
                 if($is_violations == 0)
                     $this->modelMapperDocItemsHandling->updateSanction($id,'10','TL_TG');
@@ -394,10 +398,11 @@ class InfoScheduleCheckController extends Zend_Controller_Action{
                         $this->mdocviolatiohandling->setMaster_Sanctions_Id(GlobalLib::getItemInDocItemsHandlingByScheduleCheckID("doc_items_handling", $row->id, "master_sanction_id"));
                         $this->mdocviolatiohandling->setSys_Department_Id($row->sys_department_id);
                         $this->mdocviolatiohandling->setSys_User_id($row->staff_check);
-                        $this->mdocviolatiohandling->setDate_Violation(date("Y/m/d H:i:s"));
-                        $this->mdocviolatiohandling->setCreated_Date(date("Y/m/d H:i:s"));
+                        $this->mdocviolatiohandling->setDate_Violation($date_violation);
+                        $this->mdocviolatiohandling->setAmount($amount);
+                        $this->mdocviolatiohandling->setCreated_Date($date_violation);
                         $this->mdocviolatiohandling->setCreated_By($row->created_by);
-                        $this->mdocviolatiohandling->setModified_Date(date("Y/m/d H:i:s"));
+                        $this->mdocviolatiohandling->setModified_Date($date_violation);
                         $this->mdocviolatiohandling->setModified_By($row->modified_by);
                         $this->mdocviolatiohandling->setOrder($row->order);
                         $this->mdocviolatiohandling->setStatus($row->status);
@@ -410,20 +415,97 @@ class InfoScheduleCheckController extends Zend_Controller_Action{
                         $this->modelMapper->updateInfo_Schedule_Check($id,$idDocViolationsHandling);
 
                         // Tao du lieu cho bang doc_print_handling va luu
-                        $this->mDocPrintHandling = new Model_Doc_Print_Handling();
-                        $this->mDocPrintHandling->setMaster_Print_Id($master_print_violation_id);
-                        $this->mDocPrintHandling->setDoc_Print_Allocation_Id(GlobalLib::getDocPrintAllocationByMasterPrintID("doc_print_allocation", $master_print_violation_id, $row->sys_department_id, "id"));
-                        $this->mDocPrintHandling->setDoc_Violations_Handling_Id($idDocViolationsHandling);
-                        $this->mDocPrintHandling->setSerial_Handing($serial_violation);
-                        $this->mDocPrintHandling->setCreated_Date(date("Y/m/d H:i:s"));
-                        $this->mDocPrintHandling->setCreated_By($row->created_by);
-                        $this->mDocPrintHandling->setModified_Date(date("Y/m/d H:i:s"));
-                        $this->mDocPrintHandling->setModified_By($row->modified_by);
-                        $this->modelMapperDocPrintHandling->save($this->mDocPrintHandling);
+                        for($f = 0;$f < count($array_print_handling);$f++ ) {
+                            $master_print_id = $array_print_handling[$f]['master_print_id'];
+                            $print_allocation_id = $array_print_handling[$f]['print_allocation_id'];
+                            $serial = $array_print_handling[$f]['serialname'];
+
+                            if(empty($print_allocation_id) || empty($master_print_id))
+                            {
+                                continue;
+                            }
+
+                            $this->mDocPrintHandling = new Model_Doc_Print_Handling();
+                            $this->mDocPrintHandling->setMaster_Print_Id($master_print_id);
+                            $this->mDocPrintHandling->setDoc_Print_Allocation_Id($print_allocation_id);
+                            $this->mDocPrintHandling->setDoc_Violations_Handling_Id($idDocViolationsHandling);
+                            $this->mDocPrintHandling->setSerial_Handing($serial);
+                            $this->mDocPrintHandling->setCreated_Date($date_violation);
+                            $this->mDocPrintHandling->setCreated_By($row->created_by);
+                            $this->mDocPrintHandling->setModified_Date($date_violation);
+                            $this->mDocPrintHandling->setModified_By($row->modified_by);
+                            $this->modelMapperDocPrintHandling->save($this->mDocPrintHandling);
+                        }
+
+                        // Tao du lieu tang vat vi pham cho bang doc_item_violation va luu
+                        $array_items_violation = $data[0]['array_items_violation'];
+                        if (!empty($array_items_violation)) {
+                            for ($k = 0; $k < count($array_items_violation); $k++) {
+                                $master_items_id = $array_items_violation[$k]['master_items_id'];
+                                $master_sanction_id = $array_items_violation[$k]['master_sanction_id'];
+                                $doc_violations_handling_id = $idDocViolationsHandling;
+                                $serial_handling = $array_items_violation[$k]['serial_handling'];
+                                $quantity_commodity = $array_items_violation[$k]['quantity_commodity'];
+                                $master_unit_id = $array_items_violation[$k]['master_unit_id'];
+                                $date_handling = $array_items_violation[$k]['date_handling'];
+                                $datehandling = GlobalLib::toMysqlDateString($date_handling);
+                                $amount = $array_items_violation[$k]['amount'];
+
+                                $this->modelDocItemsHandling = new Model_Doc_Items_Handling();
+                                $this->modelDocItemsHandling->setMaster_Items_Id($master_items_id);
+                                $this->modelDocItemsHandling->setMaster_Sanction_Id($master_sanction_id);
+                                $this->modelDocItemsHandling->setDoc_Violations_Handling_Id($doc_violations_handling_id);
+                                $this->modelDocItemsHandling->setSerial_Handling($serial_handling);
+                                $this->modelDocItemsHandling->setQuantity_Commodity($quantity_commodity);
+                                $this->modelDocItemsHandling->setMaster_Unit_Id($master_unit_id);
+                                $this->modelDocItemsHandling->setDate_Handling($datehandling);
+                                $this->modelDocItemsHandling->setAmount($amount);
+                                $this->modelDocItemsHandling->setCreated_Date(date("Y/m/d H:i:s"));
+                                $this->modelDocItemsHandling->setCreated_By($row->staff_check);
+                                $this->modelDocItemsHandling->setModified_Date(date("Y/m/d H:i:s"));
+                                $this->modelDocItemsHandling->setModified_By($row->staff_check);
+                                $this->modelDocItemsHandling->setStatus(GlobalLib::getName('master_sanction', 3, 'code'));
+                                $this->modelDocItemsHandling->setInfo_Schedule_Check_Id($id);
+                                $this->modelMapperDocItemsHandling->save($this->modelDocItemsHandling);
+                            }
+                        }
+
+                        // Tao du lieu tang vat tra lai cho bang doc_item_violation va luu
+                        $array_items_return = $data[0]['array_items_return'];
+                        if (!empty($array_items_return)) {
+                            for ($m = 0; $m < count($array_items_return); $m++) {
+                                $master_items_id = $array_items_return[$m]['master_items_id'];
+                                $master_sanction_id = $array_items_return[$m]['master_sanction_id'];
+                                $doc_violations_handling_id = $idDocViolationsHandling;
+                                $serial_handling = $array_items_return[$m]['serial_handling'];
+                                $quantity_commodity = $array_items_violation[$m]['quantity_commodity'];
+                                $master_unit_id = $array_items_violation[$m]['master_unit_id'];
+                                $date_handling = $array_items_violation[$m]['date_handling'];
+                                $datehandling = GlobalLib::toMysqlDateString($date_handling);
+                                $amount = $array_items_violation[$m]['amount'];
+
+                                $this->modelDocItemsHandling = new Model_Doc_Items_Handling();
+                                $this->modelDocItemsHandling->setMaster_Items_Id($master_items_id);
+                                $this->modelDocItemsHandling->setMaster_Sanction_Id($master_sanction_id);
+                                //$this->modelDocItemsHandling->setDoc_Violations_Handling_Id($doc_violations_handling_id);
+                                $this->modelDocItemsHandling->setSerial_Handling($serial_handling);
+                                $this->modelDocItemsHandling->setQuantity_Commodity($quantity_commodity);
+                                $this->modelDocItemsHandling->setMaster_Unit_Id($master_unit_id);
+                                $this->modelDocItemsHandling->setDate_Handling($datehandling);
+                                $this->modelDocItemsHandling->setAmount($amount);
+                                $this->modelDocItemsHandling->setCreated_Date(date("Y/m/d H:i:s"));
+                                $this->modelDocItemsHandling->setCreated_By($row->staff_check);
+                                $this->modelDocItemsHandling->setModified_Date(date("Y/m/d H:i:s"));
+                                $this->modelDocItemsHandling->setModified_By($row->staff_check);
+                                $this->modelDocItemsHandling->setStatus(GlobalLib::getName('master_sanction', $master_sanction_id, 'code'));
+                                $this->modelDocItemsHandling->setInfo_Schedule_Check_Id($id);
+                                $this->modelMapperDocItemsHandling->save($this->modelDocItemsHandling);
+                            }
+                        }
 
                         // Cap nhat du lieu cho bang doc_items_handling
-                        $this->modelMapperDocItemsHandling->updateSanction($id,'3','XLN_TT');
-                        $this->modelMapperDocItemsHandling->updateDocViolationHandling($id,$idDocViolationsHandling);
+                        //$this->modelMapperDocItemsHandling->updateSanction($id,'3','XLN_TT');
+                        //$this->modelMapperDocItemsHandling->updateDocViolationHandling($id,$idDocViolationsHandling);
                     }
 
                 }

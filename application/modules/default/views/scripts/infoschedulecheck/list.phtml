@@ -1,8 +1,8 @@
 <?php $identity = Zend_Auth::getInstance()->getIdentity();
-               if(!empty($identity)){
+if(!empty($identity)){
 //                    $this->model->setSys_Department_Id($identity->sys_department_id);
 //                    $this->model->setSys_User_Id($identity->id);
-                }
+}
 ?>
 <div class="row">
     <div class="col-lg-12">
@@ -13,15 +13,15 @@
     <div class="col-lg-12">
         <div class="panel panel-default">
             <div class="panel-heading">
-                 <div class="row">
-                     <div class="col-lg-2" style="text-align:center;width: 9%;padding-right: 0px;">
-                         <a  href="<?php echo $this->baseUrl().'/default/infoschedulecheck/add/'?>">
-                             <button type="button" class="btn btn-success btn-action"><i class="fa fa-plus fa-2x"></i>
-                             </button></br>
-                             <span >Thêm Mới</span>
-                         </a>
-                     </div>                     
-                 </div>
+                <div class="row">
+                    <div class="col-lg-2" style="text-align:center;width: 9%;padding-right: 0px;">
+                        <a  href="<?php echo $this->baseUrl().'/default/infoschedulecheck/add/'?>">
+                            <button type="button" class="btn btn-success btn-action"><i class="fa fa-plus fa-2x"></i>
+                            </button></br>
+                            <span >Thêm Mới</span>
+                        </a>
+                    </div>
+                </div>
             </div>
             <div class="panel-body">
 
@@ -41,7 +41,7 @@
                     </div>
                 </div>
 
-             </div>
+            </div>
         </div>
     </div>
 
@@ -58,43 +58,58 @@
                 <div class="row">
 
                     <div class="form-group">
-
                         <div class="row">
                             <div class="col-lg-8">
                                 <div id='popupviolations' name='popupviolations' style='float: left'></div>
                             </div>
                         </div>
-
                     </div>
 
                     <div id="iddocprintserialviolation" class="form-group">
-                        <div class="row">
-                            <div class="col-lg-2">
-                                <label>Ấn chỉ:</label>
-                            </div>
-                            <div class="col-lg-4">
-                                <?php echo GlobalLib::getCombo('master_print_id', 'master_print', 'id', 'code',0,false, 'where id in(select distinct master_print_id from doc_print_allocation where sys_department_id='.$identity->sys_department_id.' and status ="DOING" and is_delete ="0")', '', 'onchange="getPrintCreatWithMasterPrint1(\'' . $this->aConfig["site"]["url"] . '\')"') ?>
+
+                        <div>
+                            <b>Ngày xử lý:</b>
+                        </div>
+                        <div class="panel-body">
+                            <div id='jqxDateTimeInput'>
                             </div>
                         </div>
 
-                        <div class="row">
-                            <div class="col-lg-2">
-                                <label>Serial:</label>
-                            </div>
-                            <div class="col-lg-4">
-                                <div id="abc"></div>
-                                <input class="form-control" type="hidden" name="doc_print_allocation_id" id="doc_print_allocation_id" value="">
-                                <input class="form-control" name="serial_check" id="serial_check" type="hidden">
-                                <input class="form-control" name="serial" id="serial" type="hidden">
-                                <input class="form-control" name="serial1" id="serial1" type="hidden">
+                        <div>
+                            <b>Ấn chỉ xử lý:</b>
+                        </div>
+                        <div>
+                            <div class="panel-body">
+                                <div id="jqxgrid_print">
+                                </div>
                             </div>
                         </div>
+
+                        <div>
+                            <b>Danh sách tang vật:</b>
+                        </div>
+                        <div>
+                            <div class="panel-body">
+                                <div id="jqxgrid_items"></div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <b>Nhập số tiền phạt:</b>
+                        </div>
+                        <div class="row">
+                            <div class="panel-body">
+                                <input id="amount" type="text" value="0" width="150"/>
+                            </div>
+                        </div>
+
                     </div>
 
                     <div class="row">
                         <div class="col-lg-3">
                             <button class="btn btn-primary" name="btn_Update" id="btn_Update">Cập nhật</button>
-                        </div></div>
+                        </div>
+                    </div>
 
                 </div>
             </div>
@@ -102,664 +117,764 @@
     </div>
 </div>
 
-<script type="text/javascript">
-    $('#jqxTabs').jqxTabs({ width:'100%'});
-        //$(document).ready(function () {
-            /*var _selTypeBusiness = 1;
-            $('#jqxTabs').on('selected', function (event) {
-                var clickedItem = event.args.item;
-                if (clickedItem == 1) {
-                    _selTypeBusiness = 1;
-                }
-                else if (clickedItem == 2) {
-                    _selTypeBusiness = 2;
-                }
-            });
-
-            var source =
-            {
-                dataType: "json",
-                dataFields: [
-                    { name: 'id', type: 'int' },
-                    { name: 'info_schedule_id', type: 'string' },
-                    { name: 'info_business_id', type: 'string' },
-                    { name: 'doc_print_create_id', type: 'string' },
-                    { name: 'master_print_id', type: 'string' },
-                    { name: 'serial_check', type: 'string' },
-                    { name: 'staff_check', type: 'string' },
-                    { name: 'date_check', type: 'string' },
-                    { name: 'sys_department_id', type: 'string' },
-                    { name: 'doc_violations_handling_id', type: 'string' },
-                    { name: 'comment', type: 'int' }
-                ],
-                url:"<?php echo $this->baseUrl()?>/default/infoschedulecheck/service/sys_department_id/"+<?php $identity->sys_department_id ?>"/type_violations/1",
-                sortcolumn: 'id',
-                sortdirection: 'DESC'
-            };
-            var sourceVP =
-            {
-                dataType: "json",
-                dataFields: [
-                    { name: 'id', type: 'int' },
-                    { name: 'info_schedule_id', type: 'string' },
-                    { name: 'info_business_id', type: 'string' },
-                    { name: 'doc_print_create_id', type: 'string' },
-                    { name: 'master_print_id', type: 'string' },
-                    { name: 'serial_check', type: 'string' },
-                    { name: 'staff_check', type: 'string' },
-                    { name: 'date_check', type: 'string' },
-                    { name: 'sys_department_id', type: 'string' },
-                    { name: 'doc_violations_handling_id', type: 'string' },
-                    { name: 'comment', type: 'int' }
-                ],
-                url:"<?php echo $this->baseUrl()?>/default/infoschedulecheck/service/sys_department_id/"+<?php $identity->sys_department_id ?>"/type_violations/2",
-                sortcolumn: 'id',
-                sortdirection: 'DESC'
-            };
-
-
-            var initrowdetail = function(index, parentElement, gridElement, datarecord){
-                    var panelBody = null;
-                        panelBody = $($(parentElement).children()[0]);
-                        panelBody.html('<div class="col-md-12" style="margin-top:10px; height:300px; overflow-y:scroll;">'
-                                       +'<div id="jqxgrid2" ></div>'
-                                       +'</div>');
-             var source2 =
-                {
-                dataType: "json",
-                dataFields: [
-                    { name: 'id', type: 'int' },
-                    { name: 'address_business', type: 'string' } ,
-                    { name: 'master_violation_id', type: 'string' } ,
-                    { name: 'master_sanction_id', type: 'string' } ,
-                    { name: 'sys_department_id', type: 'string' } ,
-                    { name: 'amount', type: 'string' } ,
-
-                ],
-                url:"<?php echo $this->baseUrl().'/default/docviolationshandling/serviceinfoschedulecheck/id/'?>"+datarecord.doc_violations_handling_id,
-                sortcolumn: 'id',
-                sortdirection: 'DESC'
-                };
-                 var dataAdapter2 = new $.jqx.dataAdapter(source2);
-                  $("#jqxgrid2").jqxGrid(
-                    {
-                    width: '100%',
-                    theme: 'bootstrap',
-                    source: dataAdapter2,
-                    rowdetails: true,
-                    filterable: true,
-                    autoheight: true,
-                    columnsResize: true,
-                     ready: function (param) {
-                        },
-                    columns: [
-                    { text: 'id', dataField: 'id',align: "center", width: 0,hidden:true },
-                    {  text: 'Số TT', sortable: false, filterable: false, editable: false,
-                     groupable: false, draggable: false, resizable: false,
-                     datafield: '', columntype: 'number', width: '5%',
-                     cellsrenderer: function (row, column, value) {
-                          return "<div style='margin:7px;'>" + (value + 1) + "</div>";
-                      }
-                    },
-                    { text: 'Địa chỉ', dataField:'address_business',align: "center", width: '15%' },
-                    { text: 'Hành vi vi phạm', dataField:'master_violation_id',align: "center", width: '25%' },
-                    { text: 'Hình thức xử lý', dataField:'master_sanction_id',align: "center", width: '15%' },
-                    { text: 'Đội xử lý', dataField:'sys_department_id',align: "center", width: '20%' },
-                    { text: 'Số tiền', dataField:'amount',align: "center", width: '15%' },
-                        ]
-                     });
-                };
-            var dataAdapter = new $.jqx.dataAdapter(source);
-            $("#jqxgrid").jqxGrid(
-            {
-                width: '100%',
-                source: dataAdapter,
-                theme: 'bootstrap',
-                rowdetails: true,
-                pageable: true,
-                showfilterrow: true,
-                filterable: true,
-                autoheight: true,
-                sortable: true,
-                altrows: true,
-                enabletooltips: true,
-                selectionmode: 'multiplecellsadvanced',
-                columnsResize: true,
-                rendergridrows: function (params) {
-                    return params.data;
-                },
-                rowdetailstemplate: { rowdetails: '<div class="col-md-12" style="margin-top:10px; height:280px; overflow-y:scroll;"><div class="panel panel-default">'
-                                                    +'<div class="panel-heading"><div class="panel-title"><strong>Danh sách kiểm tra</strong></div></div>'
-                                                    +'<div class="panel-body">'
-                                                    +'</div>'
-                                                +'</div></div>'
-                    , rowdetailsheight: 300},
-                ready: function () {
-                    $("#jqxgrid").jqxGrid('hideColumn', 'id');
-                },
-                initrowdetails: initrowdetail,
-                columns: [
-                    { text: 'id', dataField: 'id',align: "center", width: '0%' },
-                    {  text: 'Số TT', sortable: false, filterable: false, editable: false,
-                        groupable: false, draggable: false, resizable: false,
-                        datafield: '', columntype: 'number',align: "center", width: '5%',
-                        cellsrenderer: function (row, column, value) {
-                          return "<div style='margin:7px;'>" + (value + 1) + "</div>";
-                        }
-                    },
-                    { text: 'Tên doanh nghiệp', dataField: 'info_business_id',align: "center", width: '15%' },
-                    { text: 'Tên lịch', dataField: 'info_schedule_id',align: "center", width: '10%' },
-                    { text: 'Ấn chỉ', dataField: 'master_print_id',align: "center", width: '10%' },
-                    { text: 'Số cuốn', dataField: 'doc_print_create_id',align: "center", width: '5%' },
-                    { text: 'Người thực hiện', dataField: 'staff_check',align: "center", width: '15%' },
-                    { text: 'Serial', dataField: 'serial_check',align: "center", width: '10%' },
-                    { text: 'Ngày', dataField: 'date_check',align: "center", width: '10%' },
-                    {text: 'Xóa',filtertype: 'none', cellsalign: 'right', align: "center", columnType: 'none', editable: false, sortable: false, dataField: null, cellsrenderer: function (row) {
-                          editrow = row;
-                          var dataRecord = $("#jqxgrid").jqxGrid('getrowdata',editrow);
-                          var url= "<div style='overflow: hidden; text-overflow: ellipsis; padding-bottom: 2px; text-align: center; margin-right: 2px; margin-left: 4px; margin-top: 4px;'><a class='fa fa-trash-o fa-lg'";
-                          url = url + "href='#' onclick='return jsdelete("+dataRecord.id+")'></a></div>";
-                          return url;
-                      }
-                     },
-                    {text: 'Sửa',filtertype: 'none', cellsalign: 'right', align: "center", columnType: 'none', editable: false, sortable: false, dataField: null, cellsrenderer: function (row) {
-                          editrow = row;
-                          var dataRecord = $("#jqxgrid").jqxGrid('getrowdata',editrow);
-                          var url= "<div style='overflow: hidden; text-overflow: ellipsis; padding-bottom: 2px; text-align: center; margin-right: 2px; margin-left: 4px; margin-top: 4px;'><a class='fa fa-edit fa-lg'";
-                          url = url + "href='<?php echo $this->baseUrl() ?>/default/infoschedulecheck/edit/id/"+dataRecord.id+"'></a></div>"
-                          return url;
-                      }
-                          }
-                        ]
-            });
-
-            // Lan Duong
-            var dataAdapterVP = new $.jqx.dataAdapter(sourceVP);
-            $("#jqxgrid1").jqxGrid({
-                width: '100%',
-                source: dataAdapterVP,
-                theme: 'bootstrap',
-                rowdetails: false,
-                pageable: true,
-                showfilterrow: true,
-                filterable: true,
-                autoheight: true,
-                sortable: true,
-                altrows: true,
-                enabletooltips: true,
-                selectionmode: 'multiplecellsadvanced',
-                columnsResize: true,
-                rendergridrows: function (params) {
-                    return params.data;
-                },
-                ready: function () {
-                    $("#jqxgrid1").jqxGrid('hideColumn', 'id');
-                },
-                columns:
-                    [
-                        { text: 'id', dataField: 'id',align: "center", width: '0%' },
-                        {
-                            text: 'Số TT', sortable: false, filterable: false, editable: false,
-                            groupable: false, draggable: false, resizable: false,
-                            datafield: '', columntype: 'number',align: "center", width: '5%',
-                            cellsrenderer: function (row, column, value) {
-                                return "<div style='margin:7px;'>" + (value + 1) + "</div>";
-                            }
-                        },
-                        { text: 'Tên doanh nghiệp', dataField: 'info_business_id',align: "center", width: '15%' },
-                        { text: 'Tên lịch', dataField: 'info_schedule_id',align: "center", width: '10%' },
-                        { text: 'Ấn chỉ', dataField: 'master_print_id',align: "center", width: '10%' },
-                        { text: 'Số cuốn', dataField: 'doc_print_create_id',align: "center", width: '5%' },
-                        { text: 'Người thực hiện', dataField: 'staff_check',align: "center", width: '15%' },
-                        { text: 'Serial', dataField: 'serial_check',align: "center", width: '10%' },
-                        { text: 'Ngày', dataField: 'date_check',align: "center", width: '10%' },
-                        {
-                            text: 'Xóa',filtertype: 'none', cellsalign: 'right', align: "center", columnType: 'none', editable: false, sortable: false, dataField: null, cellsrenderer: function (row) {
-                            editrow = row;
-                            var dataRecord = $("#jqxgrid1").jqxGrid('getrowdata',editrow);
-                            var url= "<div style='overflow: hidden; text-overflow: ellipsis; padding-bottom: 2px; text-align: center; margin-right: 2px; margin-left: 4px; margin-top: 4px;'><a class='fa fa-trash-o fa-lg'";
-                            url = url + "href='#' onclick='return jsdelete("+dataRecord.id+")'></a></div>";
-                            return url;
-                        }
-                        },
-                        {
-                            text: 'Sửa',filtertype: 'none', cellsalign: 'right', align: "center", columnType: 'none', editable: false, sortable: false, dataField: null, cellsrenderer: function (row) {
-                            editrow = row;
-                            var dataRecord = $("#jqxgrid1").jqxGrid('getrowdata',editrow);
-                            var url= "<div style='overflow: hidden; text-overflow: ellipsis; padding-bottom: 2px; text-align: center; margin-right: 2px; margin-left: 4px; margin-top: 4px;'><a class='fa fa-edit fa-lg'";
-                            url = url + "href='<?php echo $this->baseUrl() ?>/default/infoschedulecheck/edit/id/"+dataRecord.id+"'></a></div>"
-                            return url;
-                        }
-                        }
-                    ]
-
-            });*/
-        //});
-
-    </script>
-
-<script>
-
-</script>
 
 <script type="text/javascript">
 
-    $(document).ready(function () {
+$(document).ready(function () {
+    $('#jqxTabs').jqxTabs({width: '100%'});
 
-        $("#iddocprintserialviolation").hide();
+    $("#jqxDateTimeInput").jqxDateTimeInput({width: '10%', height: '30px',formatString: "dd-MM-yyyy"});
 
-        var dataArray = new Array();
-        var arraySave = function (field,value,row) {
-            //Kiểm tra có ton tai row trong dataArray
-            var valueRowId = $('#jqxgrid2').jqxGrid('getrowid', row);
-            if(dataArray.hasOwnProperty(row))
-            {
-                dataArray[row]["rowId"]=valueRowId;
-                dataArray[row][field]=value;
+    $("#iddocprintserialviolation").hide();
+
+    var editrow = -1;
+    var dataArray = new Array();
+    var arraySave = function (field,value,row) {
+        //Kiểm tra có ton tai row trong dataArray
+        var valueRowId = $('#jqxgrid2').jqxGrid('getrowid', row);
+        if(dataArray.hasOwnProperty(row))
+        {
+            dataArray[row]["rowId"]=valueRowId;
+            dataArray[row][field]=value;
+        }
+        else
+        {
+            //Tạo key cho arrayData
+            var data = {
+                rowId: "",
+                info_schedule_check_id: "",
+                amount: "",
+                is_violations: "",
+                date_handling: "",
+                array_items_violation: "",
+                array_items_return: "",
+                array_print_handling: ""
+            };
+            dataArray[row] = data;
+            dataArray[row]["rowId"]=valueRowId;
+            dataArray[row][field]=value;
+        }
+    }
+
+    var sourcepopupViolation = [
+        "Không có vi phạm",
+        "Vi phạm"
+    ];
+    $("#popupviolations").jqxComboBox({ source: sourcepopupViolation,width: '200px', height: '25px'});
+    $('#popupviolations').on('change', function (event) {
+        var args = event.args;
+        if(args.index == 0)
+            $("#iddocprintserialviolation").hide();
+        else
+            $("#iddocprintserialviolation").show();
+        arraySave("is_violations",args.index,0);
+    });
+
+    $('#master_print_id').on('change',function(){
+
+        var dataarray = new Array();
+        var defaultserial;
+        $department_id = <?php echo $identity->sys_department_id ?>;
+
+        dataarray[0]={master_print_id:$('#master_print_id').val(),sys_department_id:$department_id,defaultserial:0};
+        console.log(dataarray[0]);
+        var combobox = new Array();
+        $.ajax({
+            type:'post',
+            url:'<?php echo $this->baseUrl()?>/default/docviolationshandling/arrayserialcheck',
+            data:{'data':dataarray},
+            async:false,
+            dataType:'json',
+            success:function(data){
+                combobox = data;
             }
-            else
-            {
-                //Tạo key cho arrayData
-                var data = {
-                    rowId: "",
-                    info_schedule_check_id: "",
-                    master_print_violation_id: "",
-                    serial_violation: "",
-                    is_violations: ""
-                };
-                dataArray[row] = data;
-                dataArray[row]["rowId"]=valueRowId;
-                dataArray[row][field]=value;
+        });
+
+        $('#abc').html(combobox);
+        $('#cobo_id').multiselect({
+            maxHeight: '100',
+            enableFiltering: true,
+            onChange: function(option, checked) {
+                if (checked) {
+                    orderCount++;
+                    $(option).data('order', orderCount);
+                }
+                else {
+                    $(option).data('order', '');
+                }
             }
+        });
+    });
+
+    var _selTypeBusiness = 1;
+    $('#jqxTabs').on('selected', function (event) {
+        var clickedItem = event.args.item;
+        if (clickedItem == 1) {
+            _selTypeBusiness = 1;
+        }
+        else if (clickedItem == 2) {
+            _selTypeBusiness = 2;
+        }
+    });
+
+    var dataPrintArray = new Array();
+    var dataItemsViolationArray = new Array();
+    var dataItemsReturnArray = new Array();
+    $("#btn_Update").click(function () {
+
+        var _dateHandling= $('#jqxDateTimeInput').jqxDateTimeInput('getText');
+        arraySave("date_handling",_dateHandling,0);
+
+        $('#popupviolations').bind('select', function (event) {
+            var args = event.args;
+        });
+
+        if(dataPrintArray.length == 0)
+        {
+            bootbox.alert("Vui lòng chọn serial ấn chỉ! ");
+            return;
+        }
+        if (editrow >= 0) {
+            arraySave("array_print_handling",dataPrintArray,0);
         }
 
-        var sourcepopupViolation = [
-            "Không có vi phạm",
-            "Vi phạm"
-        ];
-        $("#popupviolations").jqxComboBox({ source: sourcepopupViolation,width: '200px', height: '25px'});
-        $('#popupviolations').on('change', function (event) {
-            var args = event.args;
-            if(args.index == 0)
-                $("#iddocprintserialviolation").hide();
-            else
-                $("#iddocprintserialviolation").show();
+        var rows = $('#jqxgrid_items').jqxGrid('getrows');
+        for(var i = 0; i < rows.length; i++){
+            var row = rows[i];
+            var totalQuantity = parseInt(row.quantity_commodity);
+            var quantityviolation = parseInt(row.quantity_violation);
+            var quantityreturn = parseInt(row.quantity_return);
+            if(quantityviolation < 0){
+                bootbox.alert("Số lượng tịch thu phải >= 0! ");
+                return;
+            }
+            if(quantityviolation > totalQuantity){
+                bootbox.alert("Số lượng tịch thu phải nhỏ hơn số lượng tạm giữ");
+                return;
+            }
+            if(quantityreturn < 0){
+                bootbox.alert("Số lượng trả lại phải >= 0! ");
+                return;
+            }
+            if(quantityreturn > totalQuantity){
+                bootbox.alert("Số lượng trả lại nhỏ hơn số lượng tạm giữ");
+                return;
+            }
+            var totalItemViolation = quantityviolation + quantityreturn;
+            if(totalQuantity < totalItemViolation){
+                bootbox.alert("Tổng số lượng tịch thu/trả về phải nhỏ hơn số lượng tạm giữ");
+                return;
+            }
 
-        });
+        }
+        for (var k = 0; k < rows.length; k++) {
+            var _num = 1;
+            var row = rows[k];
+            for (var n = 0; n < 2; n++){
+                if(n == 0) {
+                    if(row.quantity_violation > 0) {
+                        dataItemsViolationArray.push({
+                            id: _num,
+                            master_items_id: row.master_items_id,
+                            master_sanction_id: 1,
+                            doc_violations_handling_id: row.doc_violations_handling_id,
+                            serial_handling: row.serial_handling,
+                            quantity_commodity: row.quantity_violation,
+                            master_unit_id: row.master_unit_id,
+                            date_handling: _dateHandling,
+                            amount: row.amount,
+                            file_upload: row.file_upload,
+                            created_date: row.created_date,
+                            created_by: row.created_by,
+                            modified_date: row.modified_date,
+                            modified_by: row.modified_by,
+                            order: row.order,
+                            status: 'TT_TT',
+                            comment: row.comment,
+                            is_delete: row.is_delete
+                        });
+                        arraySave("array_items_violation", dataItemsViolationArray, 0);
+                    }
+                }
+                else {
+                    if(row.quantity_return > 0) {
+                        dataItemsReturnArray.push({
+                            id: _num,
+                            master_items_id: row.master_items_id,
+                            master_sanction_id: 10,
+                            doc_violations_handling_id: row.doc_violations_handling_id,
+                            serial_handling: row.serial_handling,
+                            quantity_commodity: row.quantity_return,
+                            master_unit_id: row.master_unit_id,
+                            date_handling: _dateHandling,
+                            amount: row.amount,
+                            file_upload: row.file_upload,
+                            created_date: row.created_date,
+                            created_by: row.created_by,
+                            modified_date: row.modified_date,
+                            modified_by: row.modified_by,
+                            order: row.order,
+                            status: 'TL_TG',
+                            comment: row.comment,
+                            is_delete: row.is_delete
+                        });
+                        arraySave("array_items_return", dataItemsReturnArray, 0);
+                    }
+                }
+                _num++;
+            }
+        }
+        var inputAmount = $('#amount').val();
+        arraySave("amount",inputAmount,0);
 
-        $('#master_print_id').on('change',function(){
-
-            var dataarray = new Array();
-            var defaultserial;
-            $department_id = <?php echo $identity->sys_department_id ?>;
-
-            dataarray[0]={master_print_id:$('#master_print_id').val(),sys_department_id:$department_id,defaultserial:0};
-            console.log(dataarray[0]);
-            var combobox = new Array();
-            $.ajax({
-                 type:'post',
-                 url:'<?php echo $this->baseUrl()?>/default/docviolationshandling/arrayserialcheck',
-                 data:{'data':dataarray},
-                 async:false,
-                 dataType:'json',
-                 success:function(data){
-                 combobox = data;
+        console.log('Mang');
+        console.log(dataArray);
+        $.ajax({
+         type:'post',
+         url:'<?php echo $this->baseUrl()?>/default/infoschedulecheck/updateviolation',
+         data: {
+            'data' : dataArray
+         },
+         dataType:'json',
+         async:true,
+         success:function(data){
+             if(data[0].code==1){
+                 bootbox.alert(data[0].message);
+                 return false;
              }
-             });
+             else {
+                //alert(data[0].value);
+                window.location=data[0].message;
+             }
+         }
+         });
+    });
 
-            $('#abc').html(combobox);
-            $('#cobo_id').multiselect({
-                maxHeight: '100',
-                enableFiltering: true,
-                onChange: function(option, checked) {
-                    if (checked) {
-                        orderCount++;
-                        $(option).data('order', orderCount);
-                    }
-                    else {
-                        $(option).data('order', '');
-                    }
-                }
-            });
-        });
+    loadingGrid("jqxgrid1","1");
+    loadingGrid("jqxgrid2","2");
 
-        var _selTypeBusiness = 1;
-        $('#jqxTabs').on('selected', function (event) {
-            var clickedItem = event.args.item;
-            if (clickedItem == 1) {
-                _selTypeBusiness = 1;
-            }
-            else if (clickedItem == 2) {
-                _selTypeBusiness = 2;
-            }
-        });
+    function loadingGrid(_grid,_type_is_violations) {
+        var url = "<?php echo $this->baseUrl()?>/default/infoschedulecheck/service/sys_department_id/" + <?php $identity->sys_department_id ?>"/type_violations/" + _type_is_violations;;
 
-        $("#btn_Update").click(function () {
-            $('#popupviolations').bind('select', function (event) {
-                var args = event.args;
-                alert(args.index);
-
-            });
-            arraySave("master_print_violation_id",$('#master_print_id').val(),0);
-            arraySave("serial_violation", $("#cobo_id").val(),0);
-            arraySave("is_violations",args.index,0);
-            console.log(dataArray);
-            $.ajax({
-                type:'post',
-                url:'<?php echo $this->baseUrl()?>/default/infoschedulecheck/updateviolation',
-                data: {
-                    'data' : dataArray
-                },
-                dataType:'json',
-                async:true,
-                success:function(data){
-                    if(data[0].code==1){
-                        bootbox.alert(data[0].message);
-                        return false;
-                    } else {
-                        //alert(data[0].message)
-                        window.location=data[0].message;
-                    }
-                }
-            });
-        });
-
-        loadingGrid("jqxgrid1","1");
-        loadingGrid("jqxgrid2","2");
-
-        function loadingGrid(_grid,_type_is_violations) {
-            var url = "<?php echo $this->baseUrl()?>/default/infoschedulecheck/service/sys_department_id/" + <?php $identity->sys_department_id ?>"/type_violations/" + _type_is_violations;;
-
-            var arrays = new Array();
-            arrays[0] = {name: 'id', type: 'int'};
-            arrays[1] = {name: 'info_schedule_id', type: 'string'};
-            arrays[2] = {name: 'info_business_name', type: 'string'};
-            arrays[3] = {name: 'doc_print_create_schedule_check_id', type: 'string'};
-            arrays[4] = {name: 'master_print_schedule_check_id', type: 'string'};
-            arrays[5] = {name: 'serial_schedule_check', type: 'string'};
-            arrays[6] = {name: 'doc_print_create_violation_id', type: 'string'};
-            arrays[7] = {name: 'master_print_violation_id', type: 'string'};
-            arrays[8] = {name: 'serial_violation_check', type: 'string'};
-            arrays[9] = {name: 'staff_check', type: 'string'};
-            arrays[10] = {name: 'date_check', type: 'string'};
-            arrays[11] = {name: 'sys_department_id', type: 'string'};
-            arrays[12] = {name: 'doc_violations_handling_id', type: 'string'};
-            arrays[13] = {name: 'comment', type: 'string'};
-            arrays[14] = {name: 'info_business_id', type: 'int'};
-            arrays[15] = {name: 'info_business_office', type: 'string'};
-            arrays[16] = {name: 'info_business_work', type: 'string'};
-            var source =
-            {
-                datatype: "json",
-                datafields: arrays,
-                url: url
-            };
-
-            var dataAdapter = new $.jqx.dataAdapter(source);
-            var array = new Array();
-            array[0] = {text: 'id', dataField: 'id', align: "center", width: '0%', hidden: true};
-            array[1] = {
-                text: 'Số TT', sortable: false, filterable: false, editable: false,
-                groupable: false, draggable: false, resizable: false,
-                datafield: '', columntype: 'number', align: "center", width: '5%',
-                cellsrenderer: function (row, column, value) {
-                    return "<div style='margin:7px;'>" + (value + 1) + "</div>";
-                }
-            };
-            array[2] = {text: 'Tên doanh nghiệp', dataField: 'info_business_name', align: "center", width: '15%'};
-            array[3] = {text: 'Tên lịch', dataField: 'info_schedule_id', align: "center", width: '10%'};
-            array[4] = {text: 'Ấn chỉ', dataField: 'master_print_id', align: "center", width: '10%'};
-            array[5] = {text: 'Số cuốn', dataField: 'doc_print_create_id', align: "center", width: '5%'};
-            array[6] = {text: 'Người thực hiện', dataField: 'staff_check', align: "center", width: '15%'};
-            array[7] = {text: 'Serial', dataField: 'serial_check', align: "center", width: '10%'};
-            array[8] = {text: 'Ngày', dataField: 'date_check', align: "center", width: '10%'};
-            /*array[9] = {
-                text: 'Xóa',
-                filtertype: 'none',
-                cellsalign: 'right',
-                align: "center",
-                columnType: 'none',
-                editable: false,
-                sortable: false,
-                dataField: null,
-                cellsrenderer: function (row) {
-                    editrow = row;
-                    var dataRecord = $("#" + _grid).jqxGrid('getrowdata', editrow);
-                    var url = "<div style='overflow: hidden; text-overflow: ellipsis; padding-bottom: 2px; text-align: center; margin-right: 2px; margin-left: 4px; margin-top: 4px;'><a class='fa fa-trash-o fa-lg'";
-                    url = url + "href='#' onclick='return jsdelete(" + dataRecord.id + ")'></a></div>";
-                    return url;
-                }
-            };*/
-            array[10] = {
-                text: 'Tình trạng',
-                align: 'center',
-                datafield: 'items',
-                columntype: 'button',
-                width: '15%',
-                cellsrenderer: function () {
-                    return "Đang chờ xử lí";
-                },
-                buttonclick: function (row) {
-                    dataArray = new Array();
-                    $('#popupWindow').jqxWindow({
-                        showCollapseButton: true,theme: 'bootstrap',isModal: true,maxHeight: '30%', maxWidth: '40%',minHeight: '30%', minWidth: '40%',height: '30%', width: '40%',
-                        initContent: function () {
-                            $('#popupWindow').jqxWindow('focus');
-                        }
-                    });
-                    $("#popupWindow").jqxWindow('open');
-                    var dataRecord = $("#" + _grid).jqxGrid('getrowdata', row);
-                    arraySave("info_schedule_check_id",dataRecord.id,row);
-                }
-            };
-
-            var array1 = new Array();
-            array1[0] = {text: 'id', dataField: 'id', align: "center", width: '0%', hidden: true};
-            array1[1] = {
-                text: 'Số TT', sortable: false, filterable: false, editable: false,
-                groupable: false, draggable: false, resizable: false,
-                datafield: '', columntype: 'number', align: "center", width: '5%',
-                cellsrenderer: function (row, column, value) {
-                    return "<div style='margin:7px;'>" + (value + 1) + "</div>";
-                }
-            };
-            array1[2] = {text: 'Tên doanh nghiệp', dataField: 'info_business_name', align: "center", width: '15%'};
-            array1[3] = {text: 'Tên lịch', dataField: 'info_schedule_id', align: "center", width: '10%'};
-            array1[4] = {text: 'Người thực hiện', dataField: 'staff_check', align: "center", width: '15%'};
-            array1[5] = {text: 'Ấn chỉ kiểm tra', dataField: 'master_print_schedule_check_id', align: "center", width: '10%'};
-            //array1[6] = {text: 'Số cuốn', dataField: 'doc_print_create_schedule_check_id', align: "center", width: '5%'};
-            array1[7] = {text: 'Serial', dataField: 'serial_schedule_check', align: "center", width: '10%'};
-            array1[8] = {text: 'Ấn chỉ vi phạm', dataField: 'master_print_violation_id', align: "center", width: '10%'};
-            //array1[9] = {text: 'Số cuốn', dataField: 'doc_print_create_violation_id', align: "center", width: '5%'};
-            array1[10] = {text: 'Serial', dataField: 'serial_violation_check', align: "center", width: '10%'};
-            array1[11] = {text: 'Ngày', dataField: 'date_check', align: "center", width: '10%'};
-            array1[12] = {
-                text: 'Xóa',
-                filtertype: 'none',
-                cellsalign: 'right',
-                align: "center",
-                columnType: 'none',
-                editable: false,
-                sortable: false,
-                dataField: null,
-                cellsrenderer: function (row) {
-                    editrow = row;
-                    var dataRecord = $("#" + _grid).jqxGrid('getrowdata', editrow);
-                    var url = "<div style='overflow: hidden; text-overflow: ellipsis; padding-bottom: 2px; text-align: center; margin-right: 2px; margin-left: 4px; margin-top: 4px;'><a class='fa fa-trash-o fa-lg'";
-                    url = url + "href='#' onclick='return jsdelete(" + dataRecord.id + ")'></a></div>";
-                    return url;
-                }
-            };
-            array1[13] = {
-                text: 'Sửa',
-                filtertype: 'none',
-                cellsalign: 'right',
-                align: "center",
-                columnType: 'none',
-                editable: false,
-                sortable: false,
-                dataField: null,
-                cellsrenderer: function (row) {
-                     editrow = row;
-                     var dataRecord = $("#" + _grid).jqxGrid('getrowdata', editrow);
-                     var url = "<div style='overflow: hidden; text-overflow: ellipsis; padding-bottom: 2px; text-align: center; margin-right: 2px; margin-left: 4px; margin-top: 4px;'><a class='fa fa-edit fa-lg'";
-                     url = url + "href='<?php echo $this->baseUrl() ?>/default/infoschedulecheck/edit/id/" + dataRecord.id + "'></a></div>"
-                     return url;
-                }
-            };
-
-            $("#" + _grid).jqxGrid({
-                width: '100%',
-                source: dataAdapter,
-                theme: 'bootstrap',
-                rowdetails: true,
-                pageable: true,
-                showfilterrow: true,
-                filterable: true,
-                autoheight: true,
-                sortable: true,
-                altrows: true,
-                enabletooltips: true,
-                selectionmode: 'multiplecellsadvanced',
-                columnsResize: true,
-                rendergridrows: function (params) {
-                    return params.data;
-                },
-                rowdetailstemplate: {
-                    rowdetails: '<div class="col-md-12" style="margin-top:10px; height:280px; overflow-y:scroll;"><div class="panel panel-default">'
-                        +'<div class="panel-heading"><div class="panel-title"><strong>Thông tin kiểm tra</strong></div></div>'
-                        +'<div class="panel-body">'
-                        +'</div>'
-                        +'</div></div>'
-                    ,
-                    rowdetailsheight: 300
-                },
-                ready: function (param) {
-                },
-                initrowdetails: function(index, parentElement, gridElement, datarecord){
-                    var divDetail = $($(parentElement).children()[0]);
-                    var panel = $(divDetail.children()[0]);
-                    var panelBody = $(panel.children()[1]);
-
-                    $.getJSON('<?php echo $this->baseUrl().'/default/infobusiness/findbusinessbyid/id/'?>'+datarecord.info_business_id,{},function(result){
-
-                        if(_type_is_violations == 2) {
-                            $.getJSON('<?php echo $this->baseUrl().'/default/infoschedulecheck/getdocitemhanding/info_schedule_check_id/'?>' + datarecord.id, {}, function (result2) {
-
-                                //alert(result2[0].name);
-                                var tamgiuHtml = "";
-                                if (result2 != 0) {
-                                    tamgiuHtml += '<table class="table table-bordered table-hover">'
-                                    + '<tr style="background:#f5f5f5"><td>Tang vật tạm giữ</td><td>Hình thức xử lý</td><td>Số biên lai</td></tr>';
-
-                                    for (var i = 0; i < result2.length; i++) {
-                                        tamgiuHtml +=
-                                            '<tr>'
-                                            + '<td>' + result2[i].name + '</td>'
-                                            + '<td>' + result2[i].sanction + '</td>'
-                                            + '<td>' + result2[i].serial + '</td>'
-                                            + '</tr>';
-                                    }
-                                    tamgiuHtml += '<tr>'
-                                    + '</tr>'
-                                    + '</table>';
-                                }
-                                else {
-                                    ///khong co hang hoa tạm giữ
-                                    tamgiuHtml += '<table class="table table-bordered table-hover">'
-                                    + '<tr style="background:#f5f5f5"><td>Tịch thu tang vật</td><td>Hình thức xử lý</td><td>Số biên lai</td></tr>';
-                                    tamgiuHtml += '</table>';
-                                }
-
-                                panelBody.html(
-                                    '<div class ="col-md-12">'
-                                    + '<div class ="row">'
-                                    + '<div class ="col-md-3"><strong>[Thông tin doanh nghiệp]</strong></div>'
-                                    + '</div>'
-                                    + '<div class ="row">'
-                                    + '<div class ="col-md-3">Tên doanh nghiệp:</div>'
-                                    + '<div class ="col-md-9">' + datarecord.info_business_name + '</div>'
-                                    + '</div>'
-                                    + '<div class ="row">'
-                                    + '<div class ="col-md-3">Trụ sở chính:</div>'
-                                    + '<div class ="col-md-9">' + datarecord.info_business_office + '</div>'
-                                    + '</div>'
-                                    + '<div class ="row">'
-                                    + '<div class ="col-md-3">Ngành nghề kinh doanh:</div>'
-                                    + '<div class ="col-md-9">' + datarecord.info_business_work + '</div>'
-                                    + '</div>'
-                                    + '<div class="row">'
-                                    + '<div class="col-md-3"><strong>[Thông tin khác]</strong></div>'
-                                    + '<div class="col-md-9">' + tamgiuHtml + '</div>'
-                                    + '</div>'
-                                    + '</div>'
-                                );
-
-                            });
-                        }
-                        else {
-                            $.getJSON('<?php echo $this->baseUrl().'/default/docviolationshandling/serviceinfoschedulecheck/id/'?>'+datarecord.doc_violations_handling_id, {}, function (result2) {
-                                var tichthuHtml = "";
-                                alert(result2.length);
-                                if (result2 != 0) {
-                                    tichthuHtml += '<table class="table table-bordered table-hover">'
-                                    + '<tr style="background:#f5f5f5"><td>Tang vật tịch thu</td><td>Hình thức xử lý</td><td>Số biên lai</td></tr>';
-
-                                    for (var i = 0; i < result2.length; i++) {
-                                        tichthuHtml +=
-                                            '<tr>'
-                                            + '<td>' + result2[i].doc_items_handling + '</td>'
-                                            + '<td>' + result2[i].master_sanction_id + '</td>'
-                                            + '<td>' + result2[i].serial + '</td>'
-                                            + '</tr>';
-                                    }
-                                    tichthuHtml += '<tr>'
-                                    + '</tr>'
-                                    + '</table>';
-                                }
-                                else {
-                                    ///khong co hang hoa tạm giữ
-                                    tichthuHtml += '<table class="table table-bordered table-hover">'
-                                    + '<tr style="background:#f5f5f5"><td>Tịch thu tang vật</td><td>Hình thức xử lý</td><td>Số biên lai</td></tr>';
-                                    tichthuHtml += '</table>';
-                                }
-
-                                panelBody.html(
-                                    '<div class ="col-md-12">'
-                                    + '<div class ="row">'
-                                    + '<div class ="col-md-3"><strong>[Thông tin doanh nghiệp]</strong></div>'
-                                    + '</div>'
-                                    + '<div class ="row">'
-                                    + '<div class ="col-md-3">Tên doanh nghiệp:</div>'
-                                    + '<div class ="col-md-9">' + datarecord.info_business_name + '</div>'
-                                    + '</div>'
-                                    + '<div class ="row">'
-                                    + '<div class ="col-md-3">Trụ sở chính:</div>'
-                                    + '<div class ="col-md-9">' + datarecord.info_business_office + '</div>'
-                                    + '</div>'
-                                    + '<div class ="row">'
-                                    + '<div class ="col-md-3">Ngành nghề kinh doanh:</div>'
-                                    + '<div class ="col-md-9">' + datarecord.info_business_work + '</div>'
-                                    + '</div>'
-                                    + '<div class="row">'
-                                    + '<div class="col-md-3"><strong>[Thông tin khác]</strong></div>'
-                                    + '<div class="col-md-9">' + tichthuHtml + '</div>'
-                                    + '</div>'
-                                    + '</div>'
-                                );
-                            });
-                        }
-
-
-                    });
-
-                },
-                columns: _type_is_violations == 1 ? array1 : array
-            });
+        var arrays = new Array();
+        arrays[0] = {name: 'id', type: 'int'};
+        arrays[1] = {name: 'info_schedule_id', type: 'string'};
+        arrays[2] = {name: 'info_business_name', type: 'string'};
+        arrays[3] = {name: 'doc_print_create_schedule_check_id', type: 'string'};
+        arrays[4] = {name: 'master_print_schedule_check_id', type: 'string'};
+        arrays[5] = {name: 'serial_schedule_check', type: 'string'};
+        arrays[6] = {name: 'doc_print_create_violation_id', type: 'string'};
+        arrays[7] = {name: 'master_print_violation_id', type: 'string'};
+        arrays[8] = {name: 'serial_violation_check', type: 'string'};
+        arrays[9] = {name: 'staff_check', type: 'string'};
+        arrays[10] = {name: 'date_check', type: 'string'};
+        arrays[11] = {name: 'sys_department_id', type: 'string'};
+        arrays[12] = {name: 'doc_violations_handling_id', type: 'string'};
+        arrays[13] = {name: 'comment', type: 'string'};
+        arrays[14] = {name: 'info_business_id', type: 'int'};
+        arrays[15] = {name: 'info_business_office', type: 'string'};
+        arrays[16] = {name: 'info_business_work', type: 'string'};
+        var source =
+        {
+            datatype: "json",
+            datafields: arrays,
+            url: url
         };
 
+        var dataAdapter = new $.jqx.dataAdapter(source);
+        var array = new Array();
+        array[0] = {text: 'id', dataField: 'id', align: "center", width: '0%', hidden: true};
+        array[1] = {
+            text: 'Số TT', sortable: false, filterable: false, editable: false,
+            groupable: false, draggable: false, resizable: false,
+            datafield: '', columntype: 'number', align: "center", width: '5%',
+            cellsrenderer: function (row, column, value) {
+                return "<div style='margin:7px;'>" + (value + 1) + "</div>";
+            }
+        };
+        array[2] = {text: 'Tên doanh nghiệp', dataField: 'info_business_name', align: "center", width: '15%'};
+        array[3] = {text: 'Tên lịch', dataField: 'info_schedule_id', align: "center", width: '10%'};
+        array[4] = {text: 'Ấn chỉ', dataField: 'master_print_id', align: "center", width: '10%'};
+        array[5] = {text: 'Số cuốn', dataField: 'doc_print_create_id', align: "center", width: '5%'};
+        array[6] = {text: 'Người thực hiện', dataField: 'staff_check', align: "center", width: '15%'};
+        array[7] = {text: 'Serial', dataField: 'serial_check', align: "center", width: '10%'};
+        array[8] = {text: 'Ngày', dataField: 'date_check', align: "center", width: '10%'};
+        /*array[9] = {
+         text: 'Xóa',
+         filtertype: 'none',
+         cellsalign: 'right',
+         align: "center",
+         columnType: 'none',
+         editable: false,
+         sortable: false,
+         dataField: null,
+         cellsrenderer: function (row) {
+         editrow = row;
+         var dataRecord = $("#" + _grid).jqxGrid('getrowdata', editrow);
+         var url = "<div style='overflow: hidden; text-overflow: ellipsis; padding-bottom: 2px; text-align: center; margin-right: 2px; margin-left: 4px; margin-top: 4px;'><a class='fa fa-trash-o fa-lg'";
+         url = url + "href='#' onclick='return jsdelete(" + dataRecord.id + ")'></a></div>";
+         return url;
+         }
+         };*/
+        array[10] = {
+            text: 'Tình trạng',
+            align: 'center',
+            datafield: 'items',
+            columntype: 'button',
+            width: '15%',
+            cellsrenderer: function () {
+                return "Đang chờ xử lí";
+            },
+            buttonclick: function (row) {
+                dataArray = new Array();
+                $('#popupWindow').jqxWindow({
+                    showCollapseButton: true,theme: 'bootstrap',isModal: true,maxHeight: '70%', maxWidth: '90%',minHeight: '70%', minWidth: '90%',height: '70%', width: '90%',
+                    initContent: function () {
+                        $('#popupWindow').jqxWindow('focus');
+                    }
+                });
+                $("#popupWindow").jqxWindow('open');
+                var dataRecord = $("#" + _grid).jqxGrid('getrowdata', row);
+                loadserialprint();
+                loaditemhandling(dataRecord.id);
+                arraySave("info_schedule_check_id",dataRecord.id,row);
+            }
+        };
 
-    });
+        var array1 = new Array();
+        array1[0] = {text: 'id', dataField: 'id', align: "center", width: '0%', hidden: true};
+        array1[1] = {
+            text: 'Số TT', sortable: false, filterable: false, editable: false,
+            groupable: false, draggable: false, resizable: false,
+            datafield: '', columntype: 'number', align: "center", width: '5%',
+            cellsrenderer: function (row, column, value) {
+                return "<div style='margin:7px;'>" + (value + 1) + "</div>";
+            }
+        };
+        array1[2] = {text: 'Tên doanh nghiệp', dataField: 'info_business_name', align: "center", width: '15%'};
+        array1[3] = {text: 'Tên lịch', dataField: 'info_schedule_id', align: "center", width: '10%'};
+        array1[4] = {text: 'Người thực hiện', dataField: 'staff_check', align: "center", width: '15%'};
+        array1[5] = {text: 'Ấn chỉ kiểm tra', dataField: 'master_print_schedule_check_id', align: "center", width: '10%'};
+        //array1[6] = {text: 'Số cuốn', dataField: 'doc_print_create_schedule_check_id', align: "center", width: '5%'};
+        array1[7] = {text: 'Serial', dataField: 'serial_schedule_check', align: "center", width: '10%'};
+        array1[8] = {text: 'Ấn chỉ vi phạm', dataField: 'master_print_violation_id', align: "center", width: '10%'};
+        //array1[9] = {text: 'Số cuốn', dataField: 'doc_print_create_violation_id', align: "center", width: '5%'};
+        array1[10] = {text: 'Serial', dataField: 'serial_violation_check', align: "center", width: '10%'};
+        array1[11] = {text: 'Ngày', dataField: 'date_check', align: "center", width: '10%'};
+        array1[12] = {
+            text: 'Xóa',
+            filtertype: 'none',
+            cellsalign: 'right',
+            align: "center",
+            columnType: 'none',
+            editable: false,
+            sortable: false,
+            dataField: null,
+            cellsrenderer: function (row) {
+                editrow = row;
+                var dataRecord = $("#" + _grid).jqxGrid('getrowdata', editrow);
+                var url = "<div style='overflow: hidden; text-overflow: ellipsis; padding-bottom: 2px; text-align: center; margin-right: 2px; margin-left: 4px; margin-top: 4px;'><a class='fa fa-trash-o fa-lg'";
+                url = url + "href='#' onclick='return jsdelete(" + dataRecord.id + ")'></a></div>";
+                return url;
+            }
+        };
+        array1[13] = {
+            text: 'Sửa',
+            filtertype: 'none',
+            cellsalign: 'right',
+            align: "center",
+            columnType: 'none',
+            editable: false,
+            sortable: false,
+            dataField: null,
+            cellsrenderer: function (row) {
+                editrow = row;
+                var dataRecord = $("#" + _grid).jqxGrid('getrowdata', editrow);
+                var url = "<div style='overflow: hidden; text-overflow: ellipsis; padding-bottom: 2px; text-align: center; margin-right: 2px; margin-left: 4px; margin-top: 4px;'><a class='fa fa-edit fa-lg'";
+                url = url + "href='<?php echo $this->baseUrl() ?>/default/infoschedulecheck/edit/id/" + dataRecord.id + "'></a></div>"
+                return url;
+            }
+        };
+
+        $("#" + _grid).jqxGrid({
+            width: '100%',
+            source: dataAdapter,
+            theme: 'bootstrap',
+            rowdetails: true,
+            pageable: true,
+            showfilterrow: true,
+            filterable: true,
+            autoheight: true,
+            sortable: true,
+            altrows: true,
+            enabletooltips: true,
+            selectionmode: 'multiplecellsadvanced',
+            columnsResize: true,
+            rendergridrows: function (params) {
+                return params.data;
+            },
+            rowdetailstemplate: {
+                rowdetails: '<div class="col-md-12" style="margin-top:10px; height:280px; overflow-y:scroll;"><div class="panel panel-default">'
+                +'<div class="panel-heading"><div class="panel-title"><strong>Thông tin kiểm tra</strong></div></div>'
+                +'<div class="panel-body">'
+                +'</div>'
+                +'</div></div>'
+                ,
+                rowdetailsheight: 300
+            },
+            ready: function (param) {
+            },
+            initrowdetails: function(index, parentElement, gridElement, datarecord){
+                var divDetail = $($(parentElement).children()[0]);
+                var panel = $(divDetail.children()[0]);
+                var panelBody = $(panel.children()[1]);
+
+                $.getJSON('<?php echo $this->baseUrl().'/default/infobusiness/findbusinessbyid/id/'?>'+datarecord.info_business_id,{},function(result){
+
+                    if(_type_is_violations == 2) {
+                        $.getJSON('<?php echo $this->baseUrl().'/default/infoschedulecheck/getdocitemhanding/info_schedule_check_id/'?>' + datarecord.id, {}, function (result2) {
+
+                            //alert(result2[0].name);
+                            var tamgiuHtml = "";
+                            if (result2 != 0) {
+                                tamgiuHtml += '<table class="table table-bordered table-hover">'
+                                + '<tr style="background:#f5f5f5"><td>Tang vật tạm giữ</td><td>Hình thức xử lý</td><td>Số biên lai</td></tr>';
+
+                                for (var i = 0; i < result2.length; i++) {
+                                    tamgiuHtml +=
+                                        '<tr>'
+                                        + '<td>' + result2[i].name + '</td>'
+                                        + '<td>' + result2[i].sanction + '</td>'
+                                        + '<td>' + result2[i].serial + '</td>'
+                                        + '</tr>';
+                                }
+                                tamgiuHtml += '<tr>'
+                                + '</tr>'
+                                + '</table>';
+                            }
+                            else {
+                                ///khong co hang hoa tạm giữ
+                                tamgiuHtml += '<table class="table table-bordered table-hover">'
+                                + '<tr style="background:#f5f5f5"><td>Tịch thu tang vật</td><td>Hình thức xử lý</td><td>Số biên lai</td></tr>';
+                                tamgiuHtml += '</table>';
+                            }
+
+                            panelBody.html(
+                                '<div class ="col-md-12">'
+                                + '<div class ="row">'
+                                + '<div class ="col-md-3"><strong>[Thông tin doanh nghiệp]</strong></div>'
+                                + '</div>'
+                                + '<div class ="row">'
+                                + '<div class ="col-md-3">Tên doanh nghiệp:</div>'
+                                + '<div class ="col-md-9">' + datarecord.info_business_name + '</div>'
+                                + '</div>'
+                                + '<div class ="row">'
+                                + '<div class ="col-md-3">Trụ sở chính:</div>'
+                                + '<div class ="col-md-9">' + datarecord.info_business_office + '</div>'
+                                + '</div>'
+                                + '<div class ="row">'
+                                + '<div class ="col-md-3">Ngành nghề kinh doanh:</div>'
+                                + '<div class ="col-md-9">' + datarecord.info_business_work + '</div>'
+                                + '</div>'
+                                + '<div class="row">'
+                                + '<div class="col-md-3"><strong>[Thông tin khác]</strong></div>'
+                                + '<div class="col-md-9">' + tamgiuHtml + '</div>'
+                                + '</div>'
+                                + '</div>'
+                            );
+
+                        });
+                    }
+                    else {
+                        $.getJSON('<?php echo $this->baseUrl().'/default/docviolationshandling/serviceinfoschedulecheck/id/'?>'+datarecord.doc_violations_handling_id, {}, function (result2) {
+                            var tichthuHtml = "";
+                            alert(result2.length);
+                            if (result2 != 0) {
+                                tichthuHtml += '<table class="table table-bordered table-hover">'
+                                + '<tr style="background:#f5f5f5"><td>Tang vật tịch thu</td><td>Hình thức xử lý</td><td>Số biên lai</td></tr>';
+
+                                for (var i = 0; i < result2.length; i++) {
+                                    tichthuHtml +=
+                                        '<tr>'
+                                        + '<td>' + result2[i].doc_items_handling + '</td>'
+                                        + '<td>' + result2[i].master_sanction_id + '</td>'
+                                        + '<td>' + result2[i].serial + '</td>'
+                                        + '</tr>';
+                                }
+                                tichthuHtml += '<tr>'
+                                + '</tr>'
+                                + '</table>';
+                            }
+                            else {
+                                ///khong co hang hoa tạm giữ
+                                tichthuHtml += '<table class="table table-bordered table-hover">'
+                                + '<tr style="background:#f5f5f5"><td>Tịch thu tang vật</td><td>Hình thức xử lý</td><td>Số biên lai</td></tr>';
+                                tichthuHtml += '</table>';
+                            }
+
+                            panelBody.html(
+                                '<div class ="col-md-12">'
+                                + '<div class ="row">'
+                                + '<div class ="col-md-3"><strong>[Thông tin doanh nghiệp]</strong></div>'
+                                + '</div>'
+                                + '<div class ="row">'
+                                + '<div class ="col-md-3">Tên doanh nghiệp:</div>'
+                                + '<div class ="col-md-9">' + datarecord.info_business_name + '</div>'
+                                + '</div>'
+                                + '<div class ="row">'
+                                + '<div class ="col-md-3">Trụ sở chính:</div>'
+                                + '<div class ="col-md-9">' + datarecord.info_business_office + '</div>'
+                                + '</div>'
+                                + '<div class ="row">'
+                                + '<div class ="col-md-3">Ngành nghề kinh doanh:</div>'
+                                + '<div class ="col-md-9">' + datarecord.info_business_work + '</div>'
+                                + '</div>'
+                                + '<div class="row">'
+                                + '<div class="col-md-3"><strong>[Thông tin khác]</strong></div>'
+                                + '<div class="col-md-9">' + tichthuHtml + '</div>'
+                                + '</div>'
+                                + '</div>'
+                            );
+                        });
+                    }
+
+
+                });
+
+            },
+            columns: _type_is_violations == 1 ? array1 : array
+        });
+    };
+
+
+    function loadserialprint(){
+        $department_id = <?php echo $identity->sys_department_id ?>;
+        var sourcePrint =
+        {
+            datatype: "json",
+            datafields:
+                [
+                    {name: 'print_allocation_id',type:'int'},
+                    {name: 'master_print_id',type:'int'},
+                    {name: 'name_print',type:'string'},
+                    {name: 'serial', type:'string'}
+                ],
+
+            url:"<?php echo $this->baseUrl().'/default/docviolationshandling/secviceserialdepartmentmasterprint/id/'?>"+$department_id,//+sys_department_id,
+            //sortcolumn: 'order',
+            sortdirection: 'asc'
+        };
+        var dataAdapter2 = new $.jqx.dataAdapter(sourcePrint,{ uniqueDataFields: ['master_print_id'] });
+
+        var getSourcePrintSerial = function (value,row,valueallocation_id) {
+            var data = new Array();
+            var dataarray = new Array();
+            var defaultserial;
+            //mang serial co trong bang tam theo an chi
+            var arrayserialtam = array_serial_master_id(value);
+            dataarray[0]={master_print_id:value,sys_department_id:$department_id,defaultserial:0,arrayserialtam:arrayserialtam.toString()};
+            var combobox = new Array();
+            $.ajax({
+                type:'post',
+                url:'<?php echo $this->baseUrl()?>/default/docviolationshandling/arrayserialcheckk',
+                data:{'data':dataarray},
+                async:false,
+                dataType:'json',
+                success:function(data){
+                    //alert('11111');
+                    combobox = data;
+                }
+            });
+            for(var j =0;j<combobox.length;j++){
+                data.push({serialname : combobox[j] , printallocation: valueallocation_id});
+            }
+            return data;
+        };
+
+        $("#jqxgrid_print").jqxGrid(
+            {
+                width: '100%',
+                source: dataAdapter2,
+                theme: 'bootstrap',
+                selectionmode: 'singlecell',
+                editable: true,
+                ready: function () {
+                    $("#jqxgrid_print").jqxGrid('hideColumn', 'print_allocation_id');
+                },
+                columns: [
+                    { text: 'id_allocation',editable: false, dataField: 'print_allocation_id',displayfield: 'print_allocation_id', width: '0' },
+                    { text: 'Tên ấn chỉ',editable: false, dataField: 'master_print_id',displayfield: 'name_print', width: '80%' },
+                    { text: 'Serial xử phạt',editable: true, dataField: 'serialname',displayfield: 'serialname', width: '20%', columntype: 'custom',
+                        createeditor: function (row, cellvalue, editor, cellText, width, height) {
+                            var valuePrint = $("#jqxgrid_print").jqxGrid('getcellvalue', row, 'master_print_id');
+                            var valueallocation_id = $("#jqxgrid_print").jqxGrid('getcellvalue', row, 'print_allocation_id');
+                            editor.jqxComboBox({ source: getSourcePrintSerial(valuePrint,row,valueallocation_id), width: width, height: height, displayMember: 'serialname', valueMember: 'printallocation',
+                                placeHolder: "Chọn serial:"})
+                        },
+                        geteditorvalue: function (row, cellvalue, editor) {
+                            // return the editor's value.
+                            var valuePrint = $("#jqxgrid_print").jqxGrid('getcellvalue', row, 'master_print_id');
+                            for(var i = dataPrintArray.length - 1; i >= 0; i--) {
+                                if(dataPrintArray[i]['master_print_id'] === valuePrint) {
+                                    //delete dataPrintArray[i];
+                                    dataPrintArray.splice(i, 1);
+                                }
+                            }
+
+                            var items = editor.jqxComboBox('getSelectedItem');
+                            if (items == null )
+                            {
+                                return "";
+                            }
+                            var checkedItems = items.label;
+                            dataPrintArray.push({
+                                master_print_id: valuePrint,
+                                print_allocation_id:items.value,
+                                serialname: items.label
+
+                            });
+                            return checkedItems;
+                        }
+                    }
+
+                ]
+            });
+    }
+
+    function loaditemhandling($info_schedule_check_id) {
+        var sourceItemHandling =
+        {
+            datatype: "json",
+            datafields:
+                [
+                    { name: 'id', type: 'int'},
+                    { name: 'master_items_id', type: 'string'},
+                    { name: 'master_items_name', type: 'string' },
+                    { name: 'master_sanction_id', type: 'string'},
+                    { name: 'master_sanction_name', type: 'string' },
+                    { name: 'doc_violations_handling_id', type: 'string'},
+                    { name: 'serial_handling', type: 'string' },
+                    { name: 'quantity_commodity', type: 'string' },
+                    { name: 'quantity_violation', type: 'string' },
+                    { name: 'quantity_return', type: 'string' },
+                    { name: 'master_unit_id', type: 'string' },
+                    { name: 'master_unit_name', type: 'string' },
+                    { name: 'date_handling', type: 'string' },
+                    { name: 'amount', type: 'string' },
+                    { name: 'file_upload', type: 'string' },
+                    { name: 'created_date', type: 'string' },
+                    { name: 'created_by', type: 'string' },
+                    { name: 'modified_date', type: 'string' },
+                    { name: 'modified_by', type: 'string' },
+                    { name: 'order', type: 'string' },
+                    { name: 'status', type: 'string' },
+                    { name: 'comment', type: 'string' },
+                    { name: 'is_delete', type: 'string' }
+                ],
+            url: "<?php echo $this->baseUrl().'/default/docitemshandling/getitemsbyinfoschedulecheckid/info_schedule_check_id/'?>" + $info_schedule_check_id,//+sys_department_id,
+            sortdirection: 'asc'
+        };
+        var dataAdapterItemHandling = new $.jqx.dataAdapter(sourceItemHandling, {uniqueDataFields: ['id']});
+
+        console.log('dataAdapterItemHandling');
+        console.log(dataAdapterItemHandling);
+        $("#jqxgrid_items").jqxGrid({
+            width: '100%',
+            height: '100',
+            theme: 'bootstrap',
+            source: dataAdapterItemHandling,
+            editable: true,
+            selectionmode: 'singlecell',
+            columns: [
+                {
+                    text: 'Id', datafield: 'id',displayfield: 'id', width: '0%', hidden: true
+
+                },
+                {
+                    text: 'Tên tang vật', datafield: 'master_items_id',displayfield: 'master_items_name', width: '25%'
+
+                },
+                {
+                    text: 'Hình thức xử lý',editable: true, datafield: 'master_sanction_id',displayfield: 'master_sanction_name', width: '15%', hidden: true
+
+                },
+                {
+                    text: 'Vi phạm',editable: true, datafield: 'doc_violations_handling_id',displayfield: 'doc_violations_handling_id', width: '15%', hidden: true
+
+                },
+                {
+                    text: 'Số biên lai',editable: false, datafield: 'serial_handling', width: '15%', hidden: true
+
+                },
+                {
+                    text: 'Đơn vị tính',editable: true, datafield: 'master_unit_id',displayfield: 'master_unit_name', width: '10%'
+                },
+                {
+                    text: 'Số lượng tạm giữ',editable: true, datafield: 'quantity_commodity', width: '10%'
+                },
+                {
+                    text: 'Số lượng tịch thu',editable: true, datafield: 'quantity_violation', width: '10%'
+
+                },
+                {
+                    text: 'Số lượng trả lại',editable: true,  datafield: 'quantity_return', width: '10%'
+
+                },
+                {
+                    text: 'Ngày xử lý',editable: true, datafield: 'date_handling', width: '10%', hidden: true
+                },
+
+                {
+                    text: 'amount',editable: true, datafield: 'amount', width: '10%', hidden: true
+                },
+                {
+                    text: 'file_upload',editable: true, datafield: 'file_upload', width: '10%', hidden: true
+                },
+                {
+                    text: 'created_date',editable: true, datafield: 'created_date', width: '10%', hidden: true
+                },
+                {
+                    text: 'created_by',editable: true, datafield: 'created_by', width: '10%', hidden: true
+                },
+                {
+                    text: 'modified_date',editable: true, datafield: 'modified_date', width: '10%', hidden: true
+                },
+                {
+                    text: 'modified_by',editable: true, datafield: 'modified_by', width: '10%', hidden: true
+                },
+                {
+                    text: 'order',editable: true, datafield: 'order', width: '10%', hidden: true
+                },
+                {
+                    text: 'status',editable: true, datafield: 'status', width: '10%', hidden: true
+                },
+                {
+                    text: 'comment',editable: true, datafield: 'comment', width: '10%', hidden: true
+                },
+                {
+                    text: 'is_delete',editable: true, datafield: 'is_delete', width: '10%', hidden: true
+                }
+            ]
+
+        });
+
+    }
+
+    //ham lay serial theo ma an chi co trong bang tam
+    var array_serial_master_id = function (masterprint_id){
+        var arrayserialmasterid = new Array();var j=0;
+        for(var i = 0;i< dataArray.length -1 ; i++){
+            for(var jj =0;jj<dataArray[i]['array_print_handling'].length;jj++){
+                if(dataArray[i]['array_print_handling'][jj].master_print_id == masterprint_id){
+                    arrayserialmasterid[j++] = dataArray[i]['array_print_handling'][jj].serialname;
+                }
+            }
+        }
+        return arrayserialmasterid;
+    }
+
+
+});
 </script>
 
 <script type="text/javascript">

@@ -185,5 +185,37 @@ class DocItemsHandlingController extends Zend_Controller_Action{
         echo json_encode($menber);
         exit();
     }
+
+    public function getitemsbyinfoschedulecheckidAction(){
+        $info_schedule_check_id = $this->_getParam("info_schedule_check_id","");
+        foreach ($this->modelMapper->fetchItemByInfoScheduleCheckID($info_schedule_check_id) as $items ){
+            $member[] = array(
+                'id' => $items->getId(),
+                'master_items_id'=> $items->getMaster_Items_Id(),
+                'master_items_name'=> GlobalLib::getName("master_items",$items->getMaster_Items_Id(),"name"),
+                'master_sanction_id'=> $items->getMaster_Sanction_Id(),
+                'master_sanction_name'=>  GlobalLib::getName("master_sanction",$items->getMaster_Sanction_Id(),"name"),
+                'info_schedule_check_id'=> $items->getInfo_Schedule_Check_Id(),
+                'serial_handling'=>$items->getSerial_Handling(),
+                'quantity_commodity'=>$items->getQuantity_Commodity(),
+                'quantity_violation'=>0,
+                'quantity_return'=>0,
+                'master_unit_id'=>$items->getMaster_Unit_Id(),
+                'master_unit_name'=>GlobalLib::getName("master_unit",$items->getMaster_Unit_Id(),"name"),
+                'date_handling'=>GlobalLib::viewDate($items->getDate_Handling()),
+                'amount'=>$items->getAmount(),
+                'file_upload'=>$items->getFile_Upload(),
+                'created_date'=>$items->getCreated_Date(),
+                'created_by'=>$items->getCreated_By(),
+                'modified_date'=>$items->getModified_Date(),
+                'modified_by'=>$items->getModified_By(),
+                'order'=>$items->getOrder(),
+                'status'=>$items->getStatus(),
+                'comment'=>$items->getComment()
+            );
+        }
+        echo json_encode($member);
+        exit();
+    }
 }
 

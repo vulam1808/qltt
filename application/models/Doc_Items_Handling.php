@@ -224,5 +224,37 @@ class Model_Doc_Items_HandlingMapper extends Model_Doc_Items_HandlingMapperBase{
         }
         return $result;
     }
-    
+
+    public function fetchItemByInfoScheduleCheckID($info_schedule_check_id){
+        $db = Zend_Db_Table::getDefaultAdapter();
+        $select = "select * from doc_items_handling where info_schedule_check_id=".$info_schedule_check_id;
+        $stmt=$db->query($select);
+        $rows = $stmt->fetchAll(PDO::FETCH_CLASS);
+        $stmt->closeCursor();
+        $entries = array();
+        foreach ($rows as $row){
+            $entry = new Model_Doc_Items_Handling();
+            $entry->setId($row->id)
+                ->setId($row->id)
+                ->setMaster_Items_Id($row->master_items_id)
+                ->setMaster_Sanction_Id($row->master_sanction_id)
+                ->setDoc_Violations_Handling_id($row->doc_violations_handling_id)
+                ->setSerial_Handling($row->serial_handling)
+                ->setQuantity_Commodity($row->quantity_commodity)
+                ->setMaster_Unit_Id($row->master_unit_id)
+                ->setDate_Handling($row->date_handling)
+                ->setAmount($row->amount)
+                ->setFile_Upload($row->file_upload)
+                ->setCreated_Date($row->created_date)
+                ->setCreated_By($row->created_by)
+                ->setModified_Date($row->modified_date)
+                ->setModified_By($row->modified_by)
+                ->setOrder($row->order)
+                ->setStatus($row->status)
+                ->setComment($row->comment)
+                ->setIs_Delete($row->is_delete);
+            $entries[]=$entry;
+        }
+        return $entries;
+    }
 }

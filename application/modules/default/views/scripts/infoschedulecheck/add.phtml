@@ -362,7 +362,7 @@
                     else {
                         $(option).data('order', '');
                     }
-                },
+                }
             });
         
         $('#cobo_id').on('change', function() {
@@ -966,7 +966,7 @@
     $('#master_print_id').on('change',function(){
          var dataarray = new Array();var defaultserial;
         
-                    dataarray[0]={master_print_id:$('#master_print_id').val(),sys_department_id:$('#sys_department_id').val(),defaultserial:0};
+                dataarray[0]={master_print_id:$('#master_print_id').val(),sys_department_id:$('#sys_department_id').val(),defaultserial:0};
                 var combobox = new Array();
                 $.ajax({
                     type:'post',
@@ -979,6 +979,7 @@
                     }
                 });
 //                alert(combobox);
+                var orderCount = 0;
                 $('#abc').html(combobox);
                 $('#cobo_id').multiselect({
                        maxHeight: '300',
@@ -992,7 +993,7 @@
                            else {
                                $(option).data('order', '');
                            }
-                       },
+                       }
                    });
 
                $('#cobo_id').on('change', function() {
@@ -1062,6 +1063,8 @@
 </script>-->
 <script type="text/javascript">
         $(document).ready(function () {
+
+            var orderCount = 0;
             $('#a').hide();
              $('#cobo_id').multiselect({
                 maxHeight: '300',
