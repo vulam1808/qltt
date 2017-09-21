@@ -270,9 +270,11 @@ $(document).ready(function () {
         for (var k = 0; k < rows.length; k++) {
             var _num = 1;
             var row = rows[k];
+            var quantityviolation = parseInt(row.quantity_violation);
+            var quantityreturn = parseInt(row.quantity_return);
             for (var n = 0; n < 2; n++){
                 if(n == 0) {
-                    if(row.quantity_violation > 0) {
+                    if(quantityviolation > 0) {
                         dataItemsViolationArray.push({
                             id: _num,
                             master_items_id: row.master_items_id,
@@ -297,7 +299,7 @@ $(document).ready(function () {
                     }
                 }
                 else {
-                    if(row.quantity_return > 0) {
+                    if(quantityreturn > 0) {
                         dataItemsReturnArray.push({
                             id: _num,
                             master_items_id: row.master_items_id,
