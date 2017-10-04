@@ -750,6 +750,27 @@ class GlobalLib{
 
     }
 
+    public static function getSerialViolationFromDocPrinthandlingByViolationID($tableName, $valueColumn1, $textColumn){
+        if(empty($valueColumn1))
+        {
+            return '';
+        }
+
+
+        $db = Zend_Db_Table::getDefaultAdapter();
+        $query = 'SELECT '.$valueColumn1.','.$textColumn . ' from ' . $tableName . ' where doc_violations_handling_id='. $valueColumn1;
+        $stmt = $db->query($query);
+        $items = $stmt->fetchAll(); //PDO::FETCH_CLASS);
+        $stmt->closeCursor();
+        $results = array();
+        foreach ($items as $item) {
+            $results[$item[$valueColumn1]] = $item[$textColumn];
+            return $results[$valueColumn1];
+        }
+        return '';
+
+    }
+
     //
     public static function getName1($tableName, $valueColumn, $textColumn){
         if(empty($valueColumn))

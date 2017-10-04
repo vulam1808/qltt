@@ -619,7 +619,7 @@ class InfoScheduleCheckController extends Zend_Controller_Action{
                 'serial_schedule_check'=>$items->getSerial_Check(),
                 'master_print_violation_id'=> GlobalLib::getName("master_print",GlobalLib::getName("doc_print_allocation",$items->getDoc_Print_Allocation_Id(),"master_print_id"),"code"),
                 'doc_print_create_violation_id'=> GlobalLib::getName("doc_print_create",GlobalLib::getName("doc_print_allocation",$items->getDoc_Print_Allocation_Id(),"doc_print_create_id"),"coefficient"),
-                'serial_violation_check'=>GlobalLib::getName("doc_print_allocation",$items->getDoc_Print_Allocation_Id(),"serial_recovery1"),
+                'serial_violation_check'=>GlobalLib::getSerialViolationFromDocPrinthandlingByViolationID("doc_print_handling",$items->getDoc_Violations_Handling_Id(),"serial_handing"),
                 'staff_check'=>  GlobalLib::getName('sys_user',$items->getStaff_Check(),'first_name').' '.GlobalLib::getName('sys_user',$items->getStaff_Check(),'last_name'),
                 'date_check'=>  GlobalLib::viewDate($items->getDate_Check()),
                 'sys_department_id'=>  GlobalLib::getName('sys_department', $items->getSys_Department_Id(), 'name'),

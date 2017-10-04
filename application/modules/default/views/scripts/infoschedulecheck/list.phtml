@@ -168,13 +168,18 @@ $(document).ready(function () {
         "Không có vi phạm",
         "Vi phạm"
     ];
+    var statusViolation = 0;
     $("#popupviolations").jqxComboBox({ source: sourcepopupViolation,width: '200px', height: '25px'});
     $('#popupviolations').on('change', function (event) {
         var args = event.args;
-        if(args.index == 0)
+        if (args.index == 0) {
             $("#iddocprintserialviolation").hide();
-        else
+            statusViolation = 0;
+        }
+        else {
             $("#iddocprintserialviolation").show();
+            statusViolation = 1;
+        }
         arraySave("is_violations",args.index,0);
     });
 
@@ -233,135 +238,156 @@ $(document).ready(function () {
     var dataItemsViolationArray = new Array();
     var dataItemsReturnArray = new Array();
     $("#btn_Update").click(function () {
+        if(statusViolation == 1) {
+            var _dateHandling = $('#jqxDateTimeInput').jqxDateTimeInput('getText');
+            arraySave("date_handling", _dateHandling, 0);
 
-        var _dateHandling= $('#jqxDateTimeInput').jqxDateTimeInput('getText');
-        arraySave("date_handling",_dateHandling,0);
+            $('#popupviolations').bind('select', function (event) {
+                var args = event.args;
+            });
 
-        $('#popupviolations').bind('select', function (event) {
-            var args = event.args;
-        });
-
-        if(dataPrintArray.length == 0)
-        {
-            bootbox.alert("Vui lòng chọn serial ấn chỉ! ");
-            return;
-        }
-        if (editrow >= 0) {
-            arraySave("array_print_handling",dataPrintArray,0);
-        }
-
-        var rows = $('#jqxgrid_items').jqxGrid('getrows');
-        for(var i = 0; i < rows.length; i++){
-            var row = rows[i];
-            var totalQuantity = parseInt(row.quantity_commodity);
-            var quantityviolation = parseInt(row.quantity_violation);
-            var quantityreturn = parseInt(row.quantity_return);
-            if(quantityviolation < 0){
-                bootbox.alert("Số lượng tịch thu phải >= 0! ");
+            if (dataPrintArray.length == 0) {
+                bootbox.alert("Vui lòng chọn serial ấn chỉ! ");
                 return;
             }
-            if(quantityviolation > totalQuantity){
-                bootbox.alert("Số lượng tịch thu phải nhỏ hơn số lượng tạm giữ");
-                return;
-            }
-            if(quantityreturn < 0){
-                bootbox.alert("Số lượng trả lại phải >= 0! ");
-                return;
-            }
-            if(quantityreturn > totalQuantity){
-                bootbox.alert("Số lượng trả lại nhỏ hơn số lượng tạm giữ");
-                return;
-            }
-            var totalItemViolation = quantityviolation + quantityreturn;
-            if(totalQuantity < totalItemViolation){
-                bootbox.alert("Tổng số lượng tịch thu/trả về phải nhỏ hơn số lượng tạm giữ");
-                return;
+            if (editrow >= 0) {
+                arraySave("array_print_handling", dataPrintArray, 0);
             }
 
-        }
-        for (var k = 0; k < rows.length; k++) {
-            var _num = 1;
-            var row = rows[k];
-            var quantityviolation = parseInt(row.quantity_violation);
-            var quantityreturn = parseInt(row.quantity_return);
-            for (var n = 0; n < 2; n++){
-                if(n == 0) {
-                    if(quantityviolation > 0) {
-                        dataItemsViolationArray.push({
-                            id: _num,
-                            master_items_id: row.master_items_id,
-                            master_sanction_id: 1,
-                            doc_violations_handling_id: row.doc_violations_handling_id,
-                            serial_handling: row.serial_handling,
-                            quantity_commodity: row.quantity_violation,
-                            master_unit_id: row.master_unit_id,
-                            date_handling: _dateHandling,
-                            amount: row.amount,
-                            file_upload: row.file_upload,
-                            created_date: row.created_date,
-                            created_by: row.created_by,
-                            modified_date: row.modified_date,
-                            modified_by: row.modified_by,
-                            order: row.order,
-                            status: 'TT_TT',
-                            comment: row.comment,
-                            is_delete: row.is_delete
-                        });
-                        arraySave("array_items_violation", dataItemsViolationArray, 0);
+            var rows = $('#jqxgrid_items').jqxGrid('getrows');
+            for (var i = 0; i < rows.length; i++) {
+                var row = rows[i];
+                var totalQuantity = parseInt(row.quantity_commodity);
+                var quantityviolation = parseInt(row.quantity_violation);
+                var quantityreturn = parseInt(row.quantity_return);
+                if (quantityviolation < 0) {
+                    bootbox.alert("Số lượng tịch thu phải >= 0! ");
+                    return;
+                }
+                if (quantityviolation > totalQuantity) {
+                    bootbox.alert("Số lượng tịch thu phải nhỏ hơn số lượng tạm giữ");
+                    return;
+                }
+                if (quantityreturn < 0) {
+                    bootbox.alert("Số lượng trả lại phải >= 0! ");
+                    return;
+                }
+                if (quantityreturn > totalQuantity) {
+                    bootbox.alert("Số lượng trả lại nhỏ hơn số lượng tạm giữ");
+                    return;
+                }
+                var totalItemViolation = quantityviolation + quantityreturn;
+                if (totalQuantity < totalItemViolation) {
+                    bootbox.alert("Tổng số lượng tịch thu/trả về phải nhỏ hơn số lượng tạm giữ");
+                    return;
+                }
+
+            }
+            for (var k = 0; k < rows.length; k++) {
+                var _num = 1;
+                var row = rows[k];
+                var quantityviolation = parseInt(row.quantity_violation);
+                var quantityreturn = parseInt(row.quantity_return);
+                for (var n = 0; n < 2; n++) {
+                    if (n == 0) {
+                        if (quantityviolation > 0) {
+                            dataItemsViolationArray.push({
+                                id: _num,
+                                master_items_id: row.master_items_id,
+                                master_sanction_id: 1,
+                                doc_violations_handling_id: row.doc_violations_handling_id,
+                                serial_handling: row.serial_handling,
+                                quantity_commodity: row.quantity_violation,
+                                master_unit_id: row.master_unit_id,
+                                date_handling: _dateHandling,
+                                amount: row.amount,
+                                file_upload: row.file_upload,
+                                created_date: row.created_date,
+                                created_by: row.created_by,
+                                modified_date: row.modified_date,
+                                modified_by: row.modified_by,
+                                order: row.order,
+                                status: 'TT_TT',
+                                comment: row.comment,
+                                is_delete: row.is_delete
+                            });
+                            arraySave("array_items_violation", dataItemsViolationArray, 0);
+                        }
+                    }
+                    else {
+                        if (quantityreturn > 0) {
+                            dataItemsReturnArray.push({
+                                id: _num,
+                                master_items_id: row.master_items_id,
+                                master_sanction_id: 10,
+                                doc_violations_handling_id: row.doc_violations_handling_id,
+                                serial_handling: row.serial_handling,
+                                quantity_commodity: row.quantity_return,
+                                master_unit_id: row.master_unit_id,
+                                date_handling: _dateHandling,
+                                amount: row.amount,
+                                file_upload: row.file_upload,
+                                created_date: row.created_date,
+                                created_by: row.created_by,
+                                modified_date: row.modified_date,
+                                modified_by: row.modified_by,
+                                order: row.order,
+                                status: 'TL_TG',
+                                comment: row.comment,
+                                is_delete: row.is_delete
+                            });
+                            arraySave("array_items_return", dataItemsReturnArray, 0);
+                        }
+                    }
+                    _num++;
+                }
+            }
+            var inputAmount = $('#amount').val();
+            arraySave("amount", inputAmount, 0);
+
+            console.log('Mang');
+            console.log(dataArray);
+            $.ajax({
+                type: 'post',
+                url: '<?php echo $this->baseUrl()?>/default/infoschedulecheck/updateviolation',
+                data: {
+                    'data': dataArray
+                },
+                dataType: 'json',
+                async: true,
+                success: function (data) {
+                    if (data[0].code == 1) {
+                        bootbox.alert(data[0].message);
+                        return false;
+                    }
+                    else {
+                        //alert(data[0].value);
+                        window.location = data[0].message;
                     }
                 }
-                else {
-                    if(quantityreturn > 0) {
-                        dataItemsReturnArray.push({
-                            id: _num,
-                            master_items_id: row.master_items_id,
-                            master_sanction_id: 10,
-                            doc_violations_handling_id: row.doc_violations_handling_id,
-                            serial_handling: row.serial_handling,
-                            quantity_commodity: row.quantity_return,
-                            master_unit_id: row.master_unit_id,
-                            date_handling: _dateHandling,
-                            amount: row.amount,
-                            file_upload: row.file_upload,
-                            created_date: row.created_date,
-                            created_by: row.created_by,
-                            modified_date: row.modified_date,
-                            modified_by: row.modified_by,
-                            order: row.order,
-                            status: 'TL_TG',
-                            comment: row.comment,
-                            is_delete: row.is_delete
-                        });
-                        arraySave("array_items_return", dataItemsReturnArray, 0);
+            });
+        }
+        else {
+            $.ajax({
+                type: 'post',
+                url: '<?php echo $this->baseUrl()?>/default/infoschedulecheck/updateviolation',
+                data: {
+                    'data': dataArray
+                },
+                dataType: 'json',
+                async: true,
+                success: function (data) {
+                    if (data[0].code == 1) {
+                        bootbox.alert(data[0].message);
+                        return false;
+                    }
+                    else {
+                        //alert(data[0].value);
+                        window.location = data[0].message;
                     }
                 }
-                _num++;
-            }
+            });
         }
-        var inputAmount = $('#amount').val();
-        arraySave("amount",inputAmount,0);
-
-        console.log('Mang');
-        console.log(dataArray);
-        $.ajax({
-         type:'post',
-         url:'<?php echo $this->baseUrl()?>/default/infoschedulecheck/updateviolation',
-         data: {
-            'data' : dataArray
-         },
-         dataType:'json',
-         async:true,
-         success:function(data){
-             if(data[0].code==1){
-                 bootbox.alert(data[0].message);
-                 return false;
-             }
-             else {
-                //alert(data[0].value);
-                window.location=data[0].message;
-             }
-         }
-         });
     });
 
     loadingGrid("jqxgrid1","1");
