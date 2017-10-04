@@ -138,6 +138,7 @@ class DocItemsHandlingController extends Zend_Controller_Action{
                 'serial_handling'=>$items->getSerial_Handling(),
                 'quantity_commodity'=>$items->getQuantity_Commodity(),
                 'master_unit_id'=>$items->getMaster_Unit_Id(),
+                'master_unit_name'=>GlobalLib::getName("master_unit",$items->getMaster_Unit_Id(),"name"),
                 'date_handling'=>  GlobalLib::viewDate($items->getDate_Handling()),
                 'amount'=>$items->getAmount(),
                 'file_upload'=>$items->getFile_Upload(),               

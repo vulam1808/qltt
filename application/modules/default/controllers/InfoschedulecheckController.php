@@ -476,13 +476,13 @@ class InfoScheduleCheckController extends Zend_Controller_Action{
                             for ($m = 0; $m < count($array_items_return); $m++) {
                                 $master_items_id = $array_items_return[$m]['master_items_id'];
                                 $master_sanction_id = $array_items_return[$m]['master_sanction_id'];
-                                $doc_violations_handling_id = $idDocViolationsHandling;
+                                //$doc_violations_handling_id = $idDocViolationsHandling;
                                 $serial_handling = $array_items_return[$m]['serial_handling'];
-                                $quantity_commodity = $array_items_violation[$m]['quantity_commodity'];
-                                $master_unit_id = $array_items_violation[$m]['master_unit_id'];
-                                $date_handling = $array_items_violation[$m]['date_handling'];
+                                $quantity_commodity = $array_items_return[$m]['quantity_commodity'];
+                                $master_unit_id = $array_items_return[$m]['master_unit_id'];
+                                $date_handling = $array_items_return[$m]['date_handling'];
                                 $datehandling = GlobalLib::toMysqlDateString($date_handling);
-                                $amount = $array_items_violation[$m]['amount'];
+                                $amount = $array_items_return[$m]['amount'];
 
                                 $this->modelDocItemsHandling = new Model_Doc_Items_Handling();
                                 $this->modelDocItemsHandling->setMaster_Items_Id($master_items_id);
@@ -615,6 +615,7 @@ class InfoScheduleCheckController extends Zend_Controller_Action{
                 'info_business_work'=>  GlobalLib::getName("info_business",$items->getInfo_Business_Id(),"work_business"),
                 'master_print_schedule_check_id'=> GlobalLib::getName("master_print",$items->getDoc_Print_Allocation_Id(),"code"),
                 'doc_print_create_schedule_check_id'=> GlobalLib::getName("doc_print_create",$items->getDoc_Print_Allocation_Id(),"coefficient"),
+                'doc_print_allocation_schedule_check_id'=> GlobalLib::getName("master_print",$items->getDoc_Print_Allocation_Id(),"code"),
                 'serial_schedule_check'=>$items->getSerial_Check(),
                 'master_print_violation_id'=> GlobalLib::getName("master_print",GlobalLib::getName("doc_print_allocation",$items->getDoc_Print_Allocation_Id(),"master_print_id"),"code"),
                 'doc_print_create_violation_id'=> GlobalLib::getName("doc_print_create",GlobalLib::getName("doc_print_allocation",$items->getDoc_Print_Allocation_Id(),"doc_print_create_id"),"coefficient"),

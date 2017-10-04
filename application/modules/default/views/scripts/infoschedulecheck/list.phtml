@@ -45,6 +45,14 @@ if(!empty($identity)){
         </div>
     </div>
 
+    <div class="col-lg-12">
+        <div class="form-group">
+            <div class="row">
+                <input type="button" value="Xuất Excel" id='excelExport' class="btn btn-primary" />
+            </div>
+        </div>
+    </div>
+
 </div>
 
 <!-- form Hình thức xử lí -->
@@ -209,12 +217,16 @@ $(document).ready(function () {
     var _selTypeBusiness = 1;
     $('#jqxTabs').on('selected', function (event) {
         var clickedItem = event.args.item;
-        if (clickedItem == 1) {
+        if (clickedItem == 0) {
             _selTypeBusiness = 1;
         }
-        else if (clickedItem == 2) {
+        else if (clickedItem == 1) {
             _selTypeBusiness = 2;
         }
+    });
+    $("#excelExport").click(function () {
+        //$("#"+_grid).jqxGrid('exportdata', 'xls', _exel);
+        return window.location = "<?php echo $this->baseUrl()?>/default/report/exportdanhsachcodauhieuvp/sys_department_id/" + <?php $identity->sys_department_id ?>"/type_violations/" + _selTypeBusiness;
     });
 
     var dataPrintArray = new Array();
@@ -356,7 +368,8 @@ $(document).ready(function () {
     loadingGrid("jqxgrid2","2");
 
     function loadingGrid(_grid,_type_is_violations) {
-        var url = "<?php echo $this->baseUrl()?>/default/infoschedulecheck/service/sys_department_id/" + <?php $identity->sys_department_id ?>"/type_violations/" + _type_is_violations;;
+
+        var url = "<?php echo $this->baseUrl()?>/default/infoschedulecheck/service/sys_department_id/" + <?php $identity->sys_department_id ?>"/type_violations/" + _type_is_violations;
 
         var arrays = new Array();
         arrays[0] = {name: 'id', type: 'int'};
@@ -376,6 +389,7 @@ $(document).ready(function () {
         arrays[14] = {name: 'info_business_id', type: 'int'};
         arrays[15] = {name: 'info_business_office', type: 'string'};
         arrays[16] = {name: 'info_business_work', type: 'string'};
+        arrays[17] = {name: 'doc_print_allocation_schedule_check_id', type: 'string'};
         var source =
         {
             datatype: "json",
@@ -394,12 +408,11 @@ $(document).ready(function () {
                 return "<div style='margin:7px;'>" + (value + 1) + "</div>";
             }
         };
-        array[2] = {text: 'Tên doanh nghiệp', dataField: 'info_business_name', align: "center", width: '15%'};
+        array[2] = {text: 'Tên doanh nghiệp', dataField: 'info_business_name', align: "center", width: '25%'};
         array[3] = {text: 'Tên lịch', dataField: 'info_schedule_id', align: "center", width: '10%'};
-        array[4] = {text: 'Ấn chỉ', dataField: 'master_print_id', align: "center", width: '10%'};
-        array[5] = {text: 'Số cuốn', dataField: 'doc_print_create_id', align: "center", width: '5%'};
-        array[6] = {text: 'Người thực hiện', dataField: 'staff_check', align: "center", width: '15%'};
-        array[7] = {text: 'Serial', dataField: 'serial_check', align: "center", width: '10%'};
+        array[4] = {text: 'Ấn chỉ', dataField: 'doc_print_allocation_schedule_check_id', align: "center", width: '10%'};
+        array[6] = {text: 'Serial', dataField: 'serial_schedule_check', align: "center", width: '10%'};
+        array[7] = {text: 'Người thực hiện', dataField: 'staff_check', align: "center", width: '15%'};
         array[8] = {text: 'Ngày', dataField: 'date_check', align: "center", width: '10%'};
         /*array[9] = {
          text: 'Xóa',

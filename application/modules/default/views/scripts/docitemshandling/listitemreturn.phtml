@@ -41,7 +41,7 @@
 <div class="col-lg-12">
     <div class="form-group">
         <div class="row">
-            <input type="button" value="Export to Excel" id='excelExport' class="btn btn-primary" />
+            <input type="button" value="Xuất Excel" id='excelExport' class="btn btn-primary" />
         </div>
     </div>
 </div>
@@ -111,7 +111,7 @@
             $("#excelExport").jqxButton();
             $("#excelExport").click(function () {
                 //$("#"+_grid).jqxGrid('exportdata', 'xls', _exel);
-                //return window.location = "<?php echo $this->baseUrl()?>/default/report/exporttangvattamgiu/status/"+_selStatus+"/month/"+_month+"/year/"+_year;
+                return window.location = "<?php echo $this->baseUrl()?>/default/report/exportdanhsachtangvattralai/status/"+_selStatus+"/month/"+_month+"/year/"+_year;
             });
             $("#"+_grid).jqxGrid(
             {
@@ -142,13 +142,13 @@
                           return "<div style='margin:7px;'>" + (value + 1) + "</div>";
                       }
                     },
-                    { text: 'Tên hàng hóa', dataField: 'master_items_id',align: "center", width: '10%' },
+                    { text: 'Tên hàng hóa', dataField: 'master_items_id',align: "center", width: '16%' },
                     { text: 'Đối tượng', dataField: 'info_schedule_check_id',align: "center", width: '25%' },
                     { text: 'Biên lai tạm giữ', dataField: 'serial_handling',align: "center", width: '10%' },
                     { text: 'Số lượng', dataField: 'quantity_commodity',align: "center", width: '9%' },
                     { text: 'Đơn vị tính', dataField: 'master_unit_name',align: "center", width: '9%' },
                     { text: 'Ngày trả lại', dataField: 'date_handling',align: "center", width: '10%' },
-                    { text: 'Số tiền', dataField: 'amount',align: "center", width: '9%' },
+                    //{ text: 'Số tiền', dataField: 'amount',align: "center", width: '9%' },
                     { text: 'Trạng thái', dataField: 'master_sanction_id',align: "center", width: '16%' },
 
                 ]

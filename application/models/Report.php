@@ -748,4 +748,137 @@ class Model_ReportMapper extends Model_ReportMapperBase{
         }
         return $i;
     }
+
+    public function fetchDanhSachTangVatCoDauHieuVP($sys_department_id, $type_violations)
+    {
+        $db = Zend_Db_Table::getDefaultAdapter();
+        if ($sys_department_id == null) {
+            if($type_violations == 1)
+                $select = "select * from info_schedule_check where is_violations in (0,1,3)";
+            else
+                $select = "select * from info_schedule_check where is_violations=2";
+        }
+        else {
+            if($type_violations == 1)
+                $select="select * from info_schedule_check where sys_department_id ='".$sys_department_id."' and is_violations in (0,1,3)";
+            else
+                $select="select * from info_schedule_check where sys_department_id ='".$sys_department_id."' and is_violations=2";
+        }
+        $stmt=$db->query($select);
+        $rows = $stmt->fetchAll(PDO::FETCH_CLASS);
+        $stmt->closeCursor();
+        $entries = array();
+        foreach ($rows as $row){
+            $array=array(
+                'id'=>$row->id,
+                'info_schedule_id'=>$row->info_schedule_id,
+                'info_business_id'=>$row->info_business_id,
+                'doc_print_allocation_id'=>$row->doc_print_allocation_id,
+                'serial_check'=>$row->serial_check,
+                'staff_check'=>$row->staff_check,
+                'date_check'=>$row->date_check,
+                'sys_department_id'=>$row->sys_department_id,
+                'created_date'=>$row->created_date,
+                'created_by'=>$row->created_by,
+                'modified_date'=>$row->modified_date,
+                'serial_check'=>$row->serial_check,
+                'modified_by'=>$row->modified_by,
+                'order'=>$row->order,
+                'status'=>$row->status,
+                'comment'=>$row->comment,
+                'doc_violations_handling_id'=>$row->doc_violations_handling_id,
+                'is_delete'=>$row->is_delete
+            );
+            array_push($entries,$array);
+        }
+        return $entries;
+    }
+
+    public function fetchRowCountDanhSachTangVatCoDauHieuVP($sys_department_id, $type_violations)
+    {
+        $db = Zend_Db_Table::getDefaultAdapter();
+        if ($sys_department_id == null) {
+            if($type_violations == 1)
+                $select = "select * from info_schedule_check where is_violations in (0,1,3)";
+            else
+                $select = "select * from info_schedule_check where is_violations=2";
+        }
+        else {
+            if($type_violations == 1)
+                $select="select * from info_schedule_check where sys_department_id ='".$sys_department_id."' and is_violations in (0,1,3)";
+            else
+                $select="select * from info_schedule_check where sys_department_id ='".$sys_department_id."' and is_violations=2";
+        }
+        $stmt=$db->query($select);
+        $rows = $stmt->fetchAll(PDO::FETCH_CLASS);
+        $stmt->closeCursor();
+        $entries = array();
+        $i = 0;
+        foreach ($rows as $row){
+            $i++;
+        }
+        return $i;
+    }
+
+    public function fetchDSTangVatTraLai($status,$month,$year,$sys_department_id = null){
+        $db = Zend_Db_Table::getDefaultAdapter();
+        $select="select t1.*,t2.sys_department_id from doc_items_handling as t1 inner join info_schedule_check as t2
+                    on t1.info_schedule_check_id =  t2.id and t2.sys_department_id = '$sys_department_id'
+                     where t1.is_delete ='0' and month(t1.modified_date)='".$month."' and year(t1.modified_date)='".$year."' and t1.status='".$status."' ";
+        if($sys_department_id===NULL)
+        {
+            $select="select * from doc_items_handling where is_delete ='0' and month(modified_date)='".$month."' and year(modified_date)='".$year."' and status='".$status."'";
+        }
+
+        $stmt=$db->query($select);
+        $rows = $stmt->fetchAll(PDO::FETCH_CLASS);
+        $stmt->closeCursor();
+        $entries = array();
+        foreach ($rows as $row){
+            $array=array(
+                'id'=>$row->id,
+                'master_items_id'=>$row->master_items_id,
+                'master_sanction_id'=>$row->master_sanction_id,
+                'doc_violations_handling_id'=>$row->doc_violations_handling_id,
+                'serial_handling'=>$row->serial_handling,
+                'quantity_commodity'=>$row->quantity_commodity,
+                'master_unit_id'=>$row->master_unit_id,
+                'date_handling'=>$row->date_handling,
+                'amount'=>$row->amount,
+                'file_upload'=>$row->file_upload,
+                'created_date'=>$row->created_date,
+                'created_by'=>$row->created_by,
+                'modified_date'=>$row->modified_date,
+                'modified_by'=>$row->modified_by,
+                'order'=>$row->order,
+                'status'=>$row->status,
+                'comment'=>$row->comment,
+                'is_delete'=>$row->is_delete,
+                'info_schedule_check_id'=>$row->info_schedule_check_id
+            );
+            array_push($entries,$array);
+        }
+        return $entries;
+    }
+
+    public function fetchRowCountDSTangVatTraLai($status,$month,$year,$sys_department_id = null)
+    {
+        $db = Zend_Db_Table::getDefaultAdapter();
+        $select="select t1.*,t2.sys_department_id from doc_items_handling as t1 inner join info_schedule_check as t2
+                    on t1.info_schedule_check_id =  t2.id and t2.sys_department_id = '$sys_department_id'
+                     where t1.is_delete ='0' and month(t1.modified_date)='".$month."' and year(t1.modified_date)='".$year."' and t1.status='".$status."' ";
+        if($sys_department_id===NULL)
+        {
+            $select="select * from doc_items_handling where is_delete ='0' and month(modified_date)='".$month."' and year(modified_date)='".$year."' and status='".$status."'";
+        }
+        $stmt=$db->query($select);
+        $rows = $stmt->fetchAll(PDO::FETCH_CLASS);
+        $stmt->closeCursor();
+        $entries = array();
+        $i = 0;
+        foreach ($rows as $row){
+            $i++;
+        }
+        return $i;
+    }
 }
